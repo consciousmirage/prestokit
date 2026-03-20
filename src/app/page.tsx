@@ -172,7 +172,7 @@ export default function Home() {
           className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[600px] w-[900px] -translate-x-1/2 -translate-y-1/3 rounded-full bg-primary/5 blur-[120px]"
         />
 
-        <div className="mx-auto max-w-5xl px-6 pb-24 pt-28 text-center sm:pt-36 lg:pt-44">
+        <div className="mx-auto max-w-5xl px-6 pb-16 pt-16 text-center sm:pt-20 lg:pt-24">
           {/* Badge */}
           <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-brand-border bg-brand-card/60 px-4 py-1.5 text-sm backdrop-blur-sm">
             <span className="inline-block h-1.5 w-1.5 rounded-full bg-accent animate-pulse-glow" />
@@ -220,10 +220,7 @@ export default function Home() {
             </Link>
           </div>
 
-          {/* Social proof teaser */}
-          <p className="mt-12 text-sm text-muted-dark">
-            Trusted by 1,000+ freelancers, startups, and small businesses
-          </p>
+          {/* Social proof — add back once we have real numbers */}
         </div>
       </section>
 
