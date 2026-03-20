@@ -52,7 +52,6 @@ const tools: Tool[] = [
     description:
       "Generate professional receipts for transactions and record-keeping.",
     href: "/tools/receipt-maker",
-    comingSoon: true,
   },
   {
     name: "Estimate Builder",
@@ -60,7 +59,6 @@ const tools: Tool[] = [
     description:
       "Build detailed project estimates and quotes for your clients.",
     href: "/tools/estimate-builder",
-    comingSoon: true,
   },
   {
     name: "Pay Stub Creator",
@@ -68,7 +66,6 @@ const tools: Tool[] = [
     description:
       "Create pay stubs for employees and contractors in minutes.",
     href: "/tools/pay-stub-creator",
-    comingSoon: true,
   },
 ];
 

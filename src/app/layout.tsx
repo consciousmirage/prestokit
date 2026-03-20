@@ -10,7 +10,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "PrestoKit — Free Business Tools That Just Work",
+  metadataBase: new URL("https://prestokit.com"),
+  title: {
+    template: "%s | PrestoKit",
+    default: "PrestoKit — Free Business Tools That Just Work",
+  },
   description:
     "Free instant business tools — no signup, no credit card. Invoice generator, QR codes, email signatures, profit calculators, and more. Professional results in seconds.",
   keywords: [
@@ -20,8 +24,14 @@ export const metadata: Metadata = {
     "email signature creator",
     "business name generator",
     "profit margin calculator",
+    "receipt maker",
+    "estimate builder",
+    "pay stub creator",
     "free tools",
     "no signup",
+    "small business",
+    "freelancer tools",
+    "online tools",
   ],
   openGraph: {
     title: "PrestoKit — Free Business Tools That Just Work",
@@ -29,15 +39,30 @@ export const metadata: Metadata = {
       "Free instant business tools — no signup, no credit card. Professional results in seconds.",
     url: "https://prestokit.com",
     siteName: "PrestoKit",
+    locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "PrestoKit — Free Business Tools That Just Work",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "PrestoKit — Free Business Tools That Just Work",
     description:
       "Free instant business tools — no signup, no credit card. Professional results in seconds.",
+    images: ["/og-image.png"],
   },
-  metadataBase: new URL("https://prestokit.com"),
+  alternates: {
+    canonical: "https://prestokit.com",
+  },
+  verification: {
+    google: "",
+  },
 };
 
 const navLinks = [
