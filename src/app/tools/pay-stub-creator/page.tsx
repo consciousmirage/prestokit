@@ -3,6 +3,42 @@
 import { useState, useCallback, useRef } from "react";
 
 /* ------------------------------------------------------------------ */
+/*  FAQ Accordion Item                                                 */
+/* ------------------------------------------------------------------ */
+
+function FAQItem({ question, answer }: { question: string; answer: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="border border-white/5 rounded-xl overflow-hidden">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-[#1a1a26]/60 transition-colors"
+      >
+        <span className="text-[#e0e0ea] font-medium text-sm sm:text-base pr-4">
+          {question}
+        </span>
+        <svg
+          className={`w-5 h-5 shrink-0 text-[#7c6cf0] transition-transform duration-200 ${
+            open ? "rotate-180" : ""
+          }`}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      {open && (
+        <div className="px-6 pb-5 text-sm text-[#a0a0b8] leading-relaxed">
+          {answer}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /*  Types                                                              */
 /* ------------------------------------------------------------------ */
 
@@ -1119,6 +1155,200 @@ export default function PayStubCreatorPage() {
             </div>
           </div>
         </main>
+
+        {/* ==================== HOW IT WORKS ==================== */}
+        <section className="mx-auto max-w-7xl px-4 pt-16 pb-0">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8 text-center">
+            How It <span className="text-[#7c6cf0]">Works</span>
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            {[
+              {
+                step: "1",
+                title: "Enter Employer & Employee Info",
+                desc: "Fill in the company name, address, and EIN alongside the employee's name, ID, and address. Set the pay period dates and pay date.",
+              },
+              {
+                step: "2",
+                title: "Add Earnings & Deductions",
+                desc: "Choose hourly or salary pay, enter regular and overtime hours, bonuses, and commissions. Set federal, state, Social Security, Medicare, and other deduction rates.",
+              },
+              {
+                step: "3",
+                title: "Download Your Pay Stub",
+                desc: "Review the live preview showing gross pay, itemized deductions, and net pay. Download as a PDF to distribute to employees or keep for your records.",
+              },
+            ].map((item) => (
+              <div
+                key={item.step}
+                className="rounded-2xl border border-white/5 bg-[#1a1a26] p-6 text-center"
+              >
+                <div className="w-10 h-10 rounded-full bg-[#7c6cf0]/20 border border-[#7c6cf0]/40 flex items-center justify-center text-[#9d90f5] font-bold text-lg mx-auto mb-4">
+                  {item.step}
+                </div>
+                <h3 className="text-white font-semibold text-base mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ==================== FAQ SECTION ==================== */}
+        <section className="mx-auto max-w-7xl px-4 pt-16 pb-0">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8 text-center">
+            Frequently Asked <span className="text-[#7c6cf0]">Questions</span>
+          </h2>
+          <div className="space-y-3 max-w-3xl mx-auto">
+            <FAQItem
+              question="What information must be on a pay stub?"
+              answer="A pay stub should include the employer's name, address, and EIN (Employer Identification Number), the employee's name and identifying information, the pay period start and end dates, the pay date, a breakdown of gross earnings (regular pay, overtime, bonuses, commissions), an itemized list of all deductions (federal tax, state tax, Social Security, Medicare, health insurance, retirement contributions), the net pay amount, and year-to-date totals. While federal law does not mandate pay stubs, most states require employers to provide a written or electronic statement of earnings and deductions each pay period. Requirements vary by state, so check your local labor laws."
+            />
+            <FAQItem
+              question="Is it legal to create my own pay stubs?"
+              answer="Yes, it is legal to create your own pay stubs as a business owner or employer, provided the information on them is accurate and truthful. Many small businesses, sole proprietors, and self-employed individuals generate their own pay stubs for record-keeping, loan applications, and rental agreements. However, creating fake or fraudulent pay stubs with false information -- such as inflated income or fictitious employers -- is illegal and constitutes fraud. This can result in criminal charges, fines, and imprisonment. Always ensure your pay stubs accurately reflect actual earnings, deductions, and employment information. Our tool is designed to help legitimate businesses create accurate, professional pay stubs."
+            />
+            <FAQItem
+              question="What's the difference between gross and net pay?"
+              answer="Gross pay is the total amount of money an employee earns before any deductions are taken out. It includes regular wages or salary, overtime pay, bonuses, commissions, and any other compensation. Net pay (also called 'take-home pay') is the amount the employee actually receives after all deductions have been subtracted from gross pay. Deductions include federal income tax, state income tax, Social Security (FICA), Medicare, health insurance premiums, retirement contributions (like 401k), and any other withholdings. For example, if an employee's gross pay is $5,000 and total deductions are $1,500, their net pay is $3,500. Understanding both numbers is essential for budgeting, tax planning, and ensuring payroll accuracy."
+            />
+            <FAQItem
+              question="What are standard payroll deductions?"
+              answer="Standard payroll deductions fall into two categories: mandatory and voluntary. Mandatory deductions include federal income tax (varies by tax bracket, typically 10-37%), state income tax (varies by state, 0-13.3%), Social Security tax (6.2% of wages up to the annual wage base), Medicare tax (1.45%, plus an additional 0.9% on wages over $200,000), and any local or city taxes. Voluntary deductions may include health, dental, and vision insurance premiums, 401(k) or other retirement plan contributions, Health Savings Account (HSA) contributions, life insurance premiums, union dues, and flexible spending account (FSA) contributions. Employers also pay a matching portion of Social Security and Medicare taxes, which do not appear on the employee's stub."
+            />
+            <FAQItem
+              question="How do I calculate overtime pay?"
+              answer="Under the Fair Labor Standards Act (FLSA), overtime pay is calculated at 1.5 times the employee's regular hourly rate for all hours worked over 40 in a single workweek. This is commonly called 'time and a half.' For example, if an employee earns $20 per hour and works 48 hours in a week, they receive $20/hour for the first 40 hours ($800) and $30/hour (1.5 times $20) for the 8 overtime hours ($240), for a total of $1,040. Some states have additional overtime rules -- California, for instance, requires overtime pay for hours worked over 8 in a single day. Certain employees may be exempt from overtime requirements based on their job duties and salary level. Our pay stub creator has separate fields for regular and overtime hours and rates to make this calculation easy."
+            />
+            <FAQItem
+              question="Do independent contractors need pay stubs?"
+              answer="Independent contractors (1099 workers) are not legally required to receive pay stubs because they are not employees. They are paid for their services, typically via invoices, and do not have taxes withheld from their payments. However, many independent contractors choose to create pay stubs or earnings statements for their own records. This documentation can be useful for tracking income, applying for loans or mortgages (lenders often require proof of income), renting apartments, and organizing tax filing. If you are a freelancer or self-employed, creating your own pay stubs can help you stay organized and present income documentation when needed."
+            />
+            <FAQItem
+              question="What is year-to-date (YTD) on a pay stub?"
+              answer="Year-to-date (YTD) on a pay stub shows the cumulative totals of your earnings and deductions from January 1st of the current year through the current pay period. YTD figures typically include YTD gross earnings (total income earned so far this year), YTD deductions (total taxes and other withholdings paid so far), and YTD net pay (total take-home pay received so far). YTD information is important for several reasons: it helps you track progress toward tax bracket thresholds, monitor Social Security wage base limits ($168,600 for 2024), verify W-2 accuracy at year-end, and plan financially throughout the year. If your last pay stub of the year shows different YTD numbers than your W-2, you should contact your employer's payroll department to resolve the discrepancy."
+            />
+          </div>
+        </section>
+
+        {/* ==================== RELATED TOOLS ==================== */}
+        <section className="mx-auto max-w-7xl px-4 pt-16 pb-20">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8 text-center">
+            Related <span className="text-[#7c6cf0]">Tools</span>
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              {
+                title: "Invoice Generator",
+                desc: "Create professional invoices for clients with itemized charges, payment terms, and tax.",
+                href: "/tools/invoice-generator",
+              },
+              {
+                title: "Profit Margin Calculator",
+                desc: "Calculate margins, markups, and break-even points to ensure your business stays profitable.",
+                href: "/tools/profit-margin-calculator",
+              },
+              {
+                title: "Receipt Maker",
+                desc: "Generate receipts for transactions and payments. Perfect for cash sales and record-keeping.",
+                href: "/tools/receipt-maker",
+              },
+              {
+                title: "Estimate Builder",
+                desc: "Build professional project estimates and quotes to send to prospective clients.",
+                href: "/tools/estimate-builder",
+              },
+            ].map((tool) => (
+              <a
+                key={tool.href}
+                href={tool.href}
+                className="group rounded-2xl border border-white/5 bg-[#1a1a26] p-6 hover:border-[#7c6cf0]/40 hover:shadow-[0_0_24px_rgba(124,108,240,0.08)] transition-all"
+              >
+                <h3 className="text-white font-semibold text-base mb-2 group-hover:text-[#9d90f5] transition-colors">
+                  {tool.title}
+                </h3>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  {tool.desc}
+                </p>
+                <span className="inline-block mt-3 text-xs text-[#7c6cf0] font-medium">
+                  Try it free &rarr;
+                </span>
+              </a>
+            ))}
+          </div>
+        </section>
+
+        {/* ==================== FAQ SCHEMA (JSON-LD) ==================== */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: [
+                {
+                  "@type": "Question",
+                  name: "What information must be on a pay stub?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "A pay stub should include employer name, address, and EIN, employee name and ID, pay period dates, pay date, gross earnings breakdown, itemized deductions (federal tax, state tax, Social Security, Medicare, insurance, retirement), net pay, and year-to-date totals. Most states require employers to provide these statements each pay period.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "Is it legal to create my own pay stubs?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Yes, it is legal for business owners and self-employed individuals to create pay stubs with accurate information. However, creating fake or fraudulent pay stubs with false information is illegal and constitutes fraud, which can result in criminal charges.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "What's the difference between gross and net pay?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Gross pay is total earnings before deductions (wages, overtime, bonuses, commissions). Net pay is take-home pay after all deductions (taxes, insurance, retirement). For example, $5,000 gross pay minus $1,500 in deductions equals $3,500 net pay.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "What are standard payroll deductions?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Mandatory deductions include federal income tax (10-37%), state income tax (0-13.3%), Social Security (6.2%), and Medicare (1.45%). Voluntary deductions may include health insurance, 401(k) contributions, HSA, life insurance, union dues, and FSA contributions.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "How do I calculate overtime pay?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Under the FLSA, overtime is 1.5 times the regular hourly rate for hours over 40 per week. If someone earns $20/hour and works 48 hours, they get $20 for the first 40 hours and $30/hour for the 8 overtime hours. Some states like California also require daily overtime.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "Do independent contractors need pay stubs?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Independent contractors are not legally required to receive pay stubs since they are not employees. However, many contractors create their own earnings statements for income tracking, loan applications, rental agreements, and tax filing organization.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "What is year-to-date (YTD) on a pay stub?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "YTD shows cumulative earnings and deductions from January 1st through the current pay period. It includes YTD gross earnings, YTD deductions, and YTD net pay. YTD helps track tax brackets, Social Security limits, and verify W-2 accuracy at year-end.",
+                  },
+                },
+              ],
+            }),
+          }}
+        />
       </div>
     </>
   );

@@ -3,6 +3,42 @@
 import { useState, useCallback, useRef } from "react";
 
 /* ------------------------------------------------------------------ */
+/*  FAQ Accordion Item                                                 */
+/* ------------------------------------------------------------------ */
+
+function FAQItem({ question, answer }: { question: string; answer: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="border border-white/5 rounded-xl overflow-hidden">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-[#1a1a26]/60 transition-colors"
+      >
+        <span className="text-[#e0e0ea] font-medium text-sm sm:text-base pr-4">
+          {question}
+        </span>
+        <svg
+          className={`w-5 h-5 shrink-0 text-[#7c6cf0] transition-transform duration-200 ${
+            open ? "rotate-180" : ""
+          }`}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      {open && (
+        <div className="px-6 pb-5 text-sm text-[#a0a0b8] leading-relaxed">
+          {answer}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /*  Types                                                              */
 /* ------------------------------------------------------------------ */
 
@@ -859,6 +895,183 @@ export default function EstimateBuilderPage() {
             </div>
           </div>
         </main>
+
+        {/* ==================== HOW IT WORKS ==================== */}
+        <section className="mx-auto max-w-7xl px-4 pt-16 pb-0">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8 text-center">
+            How It <span className="text-[#7c6cf0]">Works</span>
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            {[
+              {
+                step: "1",
+                title: "Add Business & Client Info",
+                desc: "Enter your business details and your client's information. Set the estimate number, date, and validity period for a professional, trackable document.",
+              },
+              {
+                step: "2",
+                title: "Build Your Line Items",
+                desc: "Add each service or deliverable with a description, quantity, and rate. Include tax, discounts, terms, and project scope to create a comprehensive estimate.",
+              },
+              {
+                step: "3",
+                title: "Preview & Download",
+                desc: "Watch your estimate come together in the live preview. When it looks right, download as a PDF to email to your client or print for your records.",
+              },
+            ].map((item) => (
+              <div
+                key={item.step}
+                className="rounded-2xl border border-white/5 bg-[#1a1a26] p-6 text-center"
+              >
+                <div className="w-10 h-10 rounded-full bg-[#7c6cf0]/20 border border-[#7c6cf0]/40 flex items-center justify-center text-[#9d90f5] font-bold text-lg mx-auto mb-4">
+                  {item.step}
+                </div>
+                <h3 className="text-white font-semibold text-base mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ==================== FAQ SECTION ==================== */}
+        <section className="mx-auto max-w-7xl px-4 pt-16 pb-0">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8 text-center">
+            Frequently Asked <span className="text-[#7c6cf0]">Questions</span>
+          </h2>
+          <div className="space-y-3 max-w-3xl mx-auto">
+            <FAQItem
+              question="What's the difference between an estimate and a quote?"
+              answer="An estimate is an approximate calculation of the expected cost of a project or service. It is understood that the final price may vary based on actual work performed, materials used, or unforeseen circumstances. A quote (or quotation) is a fixed price offer that the provider agrees to honor for a specified period. Once a client accepts a quote, the price is typically locked in and cannot change unless the scope of work changes. Use an estimate when the full scope is uncertain, and a quote when you can confidently predict the total cost. Many businesses start with an estimate and convert it to a formal quote once the project details are finalized."
+            />
+            <FAQItem
+              question="How do I write a professional project estimate?"
+              answer="A professional estimate should include several key components: your business name and contact information, the client's details, a unique estimate number, the date of issue and expiration date, a clear project title and description, a detailed breakdown of line items with quantities and rates, subtotals, applicable taxes and discounts, the total estimated cost, payment terms and conditions, and any assumptions or exclusions. The more specific and transparent your estimate is, the more trust you build with the client. Avoid vague descriptions like 'design work' -- instead, break it down into specific deliverables like 'homepage design,' 'mobile responsive layout,' and 'two rounds of revisions.' This clarity protects both you and your client."
+            />
+            <FAQItem
+              question="Should estimates include tax?"
+              answer="Yes, it is best practice to include tax in your estimates so clients know the full expected cost upfront. If you are required to collect sales tax on your services or products, show it as a separate line item below the subtotal. This transparency helps avoid surprises when the final invoice arrives. If you are unsure whether your service is taxable, consult with an accountant or check your state's tax authority guidelines. Some services like professional consulting may be exempt from sales tax in certain states, while tangible goods are almost always taxable. Including tax on estimates also helps you budget and forecast revenue more accurately."
+            />
+            <FAQItem
+              question="How long should an estimate be valid?"
+              answer="Most business estimates are valid for 30 days, though this can vary depending on the industry and project type. For projects with volatile material costs (like construction), a shorter validity of 14-15 days may be appropriate. For stable service-based projects, 30-60 days is common. Always clearly state the expiration date on your estimate. After the validity period expires, you reserve the right to adjust pricing based on current costs. Including a validity period creates urgency for the client to make a decision and protects you from being locked into prices that may have changed. Our estimate builder includes a 'Valid Until' field that defaults to 30 days from the creation date."
+            />
+            <FAQItem
+              question="What happens if the project costs more than the estimate?"
+              answer="Since an estimate is an approximation (not a fixed price), the final cost may differ from the estimated amount. If you realize during a project that costs will exceed the estimate, the professional approach is to notify the client as soon as possible, explain the reasons for the increase (additional scope, unforeseen complications, material price changes), provide a revised estimate for their approval before proceeding, and document the changes in writing. Most clients understand that estimates can change, especially for complex projects. The key is communication -- surprises at the end of a project damage trust and relationships. To protect yourself, include a clause in your terms stating that the estimate is subject to change and that significant variations will be communicated promptly."
+            />
+            <FAQItem
+              question="How detailed should a project estimate be?"
+              answer="The level of detail in your estimate should match the complexity and value of the project. For smaller projects under $1,000, a simple estimate with a few line items may suffice. For larger projects, a more detailed breakdown is expected and beneficial. As a rule of thumb, break your estimate into enough line items that the client can understand what they are paying for, but not so many that the document becomes overwhelming. Group related tasks into logical categories (like 'Design Phase,' 'Development Phase,' 'Testing Phase') and provide brief descriptions for each line item. Include assumptions and exclusions to set clear boundaries. A well-detailed estimate demonstrates professionalism, sets expectations, and reduces the likelihood of scope creep and disputes later in the project."
+            />
+          </div>
+        </section>
+
+        {/* ==================== RELATED TOOLS ==================== */}
+        <section className="mx-auto max-w-7xl px-4 pt-16 pb-20">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8 text-center">
+            Related <span className="text-[#7c6cf0]">Tools</span>
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[
+              {
+                title: "Invoice Generator",
+                desc: "Convert your estimates into professional invoices. Add payment terms and send to clients instantly.",
+                href: "/tools/invoice-generator",
+              },
+              {
+                title: "Profit Margin Calculator",
+                desc: "Make sure your estimates are profitable. Calculate margins, markups, and break-even points.",
+                href: "/tools/profit-margin-calculator",
+              },
+              {
+                title: "Receipt Maker",
+                desc: "Generate receipts for completed projects and payments received from your clients.",
+                href: "/tools/receipt-maker",
+              },
+            ].map((tool) => (
+              <a
+                key={tool.href}
+                href={tool.href}
+                className="group rounded-2xl border border-white/5 bg-[#1a1a26] p-6 hover:border-[#7c6cf0]/40 hover:shadow-[0_0_24px_rgba(124,108,240,0.08)] transition-all"
+              >
+                <h3 className="text-white font-semibold text-base mb-2 group-hover:text-[#9d90f5] transition-colors">
+                  {tool.title}
+                </h3>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  {tool.desc}
+                </p>
+                <span className="inline-block mt-3 text-xs text-[#7c6cf0] font-medium">
+                  Try it free &rarr;
+                </span>
+              </a>
+            ))}
+          </div>
+        </section>
+
+        {/* ==================== FAQ SCHEMA (JSON-LD) ==================== */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: [
+                {
+                  "@type": "Question",
+                  name: "What's the difference between an estimate and a quote?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "An estimate is an approximate cost calculation where the final price may vary. A quote is a fixed price offer that the provider agrees to honor for a specified period. Use an estimate when scope is uncertain, and a quote when you can confidently predict the total cost.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "How do I write a professional project estimate?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Include your business and client details, a unique estimate number, date and expiration, project description, detailed line items with quantities and rates, taxes and discounts, total cost, payment terms, and assumptions or exclusions. Break deliverables into specific items for clarity.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "Should estimates include tax?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Yes, include tax as a separate line item so clients know the full expected cost upfront. This avoids surprises on the final invoice. Check your state's tax authority guidelines for whether your specific services are taxable.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "How long should an estimate be valid?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Most estimates are valid for 30 days. For projects with volatile material costs, 14-15 days may be appropriate. For stable services, 30-60 days is common. Always clearly state the expiration date to create urgency and protect against price changes.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "What happens if the project costs more than the estimate?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Notify the client as soon as possible, explain the reasons for the increase, provide a revised estimate for approval, and document changes in writing. Include a clause in your terms stating the estimate is subject to change.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "How detailed should a project estimate be?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Detail should match project complexity. For projects under $1,000, a few line items may suffice. For larger projects, group tasks into categories with descriptions. Include assumptions and exclusions to set clear boundaries and prevent scope creep.",
+                  },
+                },
+              ],
+            }),
+          }}
+        />
       </div>
     </>
   );

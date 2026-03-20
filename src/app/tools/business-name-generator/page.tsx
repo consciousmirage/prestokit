@@ -3,6 +3,72 @@
 import { useState, useCallback } from "react";
 
 /* ------------------------------------------------------------------ */
+/*  FAQ Data                                                           */
+/* ------------------------------------------------------------------ */
+
+const BIZ_NAME_FAQS = [
+  {
+    q: "How do I choose a good business name?",
+    a: "A good business name is memorable, easy to spell and pronounce, and gives some sense of what your business does or stands for. Start by brainstorming keywords related to your industry, values, and target audience. Test your top choices with friends and potential customers. Check that the name is not already trademarked or in use by another business in your industry. Finally, make sure a matching domain name and social media handles are available.",
+  },
+  {
+    q: "Should I check if the domain is available for my business name?",
+    a: "Absolutely. In today's digital world, your domain name is your online storefront. Before committing to a business name, check if the .com domain (and relevant extensions like .io or .co) is available. Our generator includes a \"Domain\" button on each name card that checks availability on Namecheap instantly. If the exact .com is taken, consider adding a word like \"get,\" \"try,\" or \"hello\" before your name, or explore alternative extensions.",
+  },
+  {
+    q: "Can I trademark a business name?",
+    a: "Yes, you can and should trademark your business name to protect your brand. In the United States, you can register a trademark with the USPTO (United States Patent and Trademark Office). Before filing, search the USPTO trademark database (TESS) to make sure your desired name is not already registered in your industry. Trademark registration gives you legal protection nationwide and the exclusive right to use the name in your business category. The process typically costs $250-$350 per class of goods or services.",
+  },
+  {
+    q: "What makes a business name memorable?",
+    a: "Memorable business names tend to share several traits: they are short (ideally 1-2 words), they have a pleasant sound or rhythm, they evoke an emotion or image, and they are unique enough to stand out. Think of names like Spotify, Airbnb, Canva, or Stripe — they are all easy to say, easy to remember, and distinctive. Alliteration (PayPal), made-up words (Kodak), and unexpected combinations (YouTube) are all effective techniques for creating sticky names.",
+  },
+  {
+    q: "Should my business name describe what I do?",
+    a: "It depends on your strategy. Descriptive names (like General Motors or The Home Depot) immediately communicate what the business does, which can help with initial marketing. Abstract or invented names (like Apple, Nike, or Google) are more unique and versatile — they allow your brand to evolve without being limited by the name. For startups, a slightly descriptive name can help with early SEO and customer understanding, while an abstract name gives you more long-term flexibility.",
+  },
+  {
+    q: "How long should a business name be?",
+    a: "Shorter is generally better. The ideal business name is 1-2 words and under 10 characters total. Short names are easier to remember, spell, type into a browser, and fit on business cards and signage. However, some successful businesses have longer names (Berkshire Hathaway, Under Armour) that work because they have strong brand recognition. Our generator lets you choose between Short (1 word), Medium (1-2 words), and Long (2-3 words) to match your preference.",
+  },
+  {
+    q: "How do I check if a business name is already taken?",
+    a: "There are several things to check: (1) Search your state's Secretary of State business registry to see if the name is registered. (2) Search the USPTO trademark database for federal trademarks. (3) Do a Google search to see if anyone else is using the name. (4) Check domain availability for the .com and other relevant extensions. (5) Search social media platforms for existing accounts with that name. Our generator helps with domain checking, but make sure to complete all five steps before finalizing your choice.",
+  },
+  {
+    q: "Is this business name generator free?",
+    a: "Yes, the PrestoKit Business Name Generator is 100% free with no limits, no account required, and no hidden fees. Generate as many names as you want, save your favorites, check domain availability, and copy names to your clipboard — all at no cost. The generator runs entirely in your browser, so your ideas and keywords stay private.",
+  },
+];
+
+const RELATED_TOOLS_BIZ = [
+  {
+    name: "Invoice Generator",
+    description: "Create and download professional PDF invoices for free.",
+    href: "/tools/invoice-generator",
+    icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z",
+  },
+  {
+    name: "Email Signature Creator",
+    description: "Design professional HTML email signatures for Gmail and Outlook.",
+    href: "/tools/email-signature-creator",
+    icon: "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
+  },
+  {
+    name: "QR Code Generator",
+    description: "Create custom QR codes for URLs, WiFi, email, and more.",
+    href: "/tools/qr-code-generator",
+    icon: "M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z",
+  },
+  {
+    name: "Profit Margin Calculator",
+    description: "Calculate profit margins, markups, and break-even points.",
+    href: "/tools/profit-margin-calculator",
+    icon: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
+  },
+];
+
+/* ------------------------------------------------------------------ */
 /*  Constants                                                          */
 /* ------------------------------------------------------------------ */
 
@@ -544,7 +610,163 @@ export default function BusinessNameGeneratorPage() {
             </section>
           )}
         </div>
+
+        {/* ============================== HOW IT WORKS ============================== */}
+        <section className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16">
+          <h2 className="text-2xl font-bold text-center mb-2">How It Works</h2>
+          <p className="text-[#8888a0] text-center mb-12 max-w-xl mx-auto">
+            Find the perfect business name in three simple steps.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                step: "1",
+                title: "Enter Keywords",
+                desc: "Type in words that describe your business, product, or brand personality. Separate multiple keywords with commas for more diverse results.",
+              },
+              {
+                step: "2",
+                title: "Set Preferences",
+                desc: "Choose your industry, preferred naming style (Modern, Classic, Playful, etc.), and desired name length to fine-tune the generated names.",
+              },
+              {
+                step: "3",
+                title: "Pick Your Favorite",
+                desc: "Browse the generated names, save your favorites with the heart icon, check domain availability, and copy the winner to your clipboard.",
+              },
+            ].map((item) => (
+              <div
+                key={item.step}
+                className="relative rounded-2xl border border-[#1e1e2e] bg-[#1a1a26] p-6 text-center"
+              >
+                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#7c6cf0]/15 text-[#7c6cf0] text-xl font-bold">
+                  {item.step}
+                </div>
+                <h3 className="text-lg font-semibold text-white mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-[#8888a0] text-sm leading-relaxed">
+                  {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ============================== FAQ SECTION ============================== */}
+        <section className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-16">
+          <h2 className="text-2xl font-bold text-center mb-2">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-[#8888a0] text-center mb-10 max-w-xl mx-auto">
+            Everything you need to know about naming your business.
+          </p>
+          <div className="space-y-3">
+            {BIZ_NAME_FAQS.map((faq, i) => (
+              <BizFAQItem key={i} question={faq.q} answer={faq.a} />
+            ))}
+          </div>
+        </section>
+
+        {/* ============================== RELATED TOOLS ============================== */}
+        <section className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16 border-t border-[#1e1e2e]">
+          <h2 className="text-2xl font-bold text-center mb-2">
+            Related Tools
+          </h2>
+          <p className="text-[#8888a0] text-center mb-10">
+            More free business tools to help you get things done.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {RELATED_TOOLS_BIZ.map((tool) => (
+              <a
+                key={tool.name}
+                href={tool.href}
+                className="group rounded-2xl border border-[#1e1e2e] bg-[#1a1a26] p-5 hover:border-[#7c6cf0]/40 transition-all duration-200 hover:shadow-[0_0_30px_rgba(124,108,240,0.08)]"
+              >
+                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#7c6cf0]/10">
+                  <svg
+                    className="h-5 w-5 text-[#7c6cf0]"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={1.5}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d={tool.icon}
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-sm font-semibold text-white group-hover:text-[#7c6cf0] transition-colors">
+                  {tool.name}
+                </h3>
+                <p className="text-xs text-[#555566] mt-1">{tool.description}</p>
+              </a>
+            ))}
+          </div>
+        </section>
       </main>
+
+      {/* ============================== FAQ SCHEMA (JSON-LD) ============================== */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: BIZ_NAME_FAQS.map((faq) => ({
+              "@type": "Question",
+              name: faq.q,
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: faq.a,
+              },
+            })),
+          }),
+        }}
+      />
     </>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  FAQ Accordion Item                                                 */
+/* ------------------------------------------------------------------ */
+
+function BizFAQItem({ question, answer }: { question: string; answer: string }) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="rounded-xl border border-[#1e1e2e] bg-[#1a1a26] overflow-hidden">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between p-5 text-left hover:bg-[#1e1e2e] transition-colors"
+      >
+        <span className="text-sm font-medium text-[#c0c0d0] pr-4">
+          {question}
+        </span>
+        <svg
+          className={`w-5 h-5 text-[#555566] flex-shrink-0 transition-transform duration-200 ${
+            open ? "rotate-180" : ""
+          }`}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19 9l-7 7-7-7"
+          />
+        </svg>
+      </button>
+      {open && (
+        <div className="px-5 pb-5 text-sm text-[#8888a0] leading-relaxed">
+          {answer}
+        </div>
+      )}
+    </div>
   );
 }

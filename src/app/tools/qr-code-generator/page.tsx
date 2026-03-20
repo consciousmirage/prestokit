@@ -2,6 +2,72 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 
+/* ------------------------------------------------------------------ */
+/*  FAQ Data                                                           */
+/* ------------------------------------------------------------------ */
+
+const QR_FAQS = [
+  {
+    q: "What is a QR code and how does it work?",
+    a: "A QR (Quick Response) code is a two-dimensional barcode that stores information in a pattern of black and white squares. When you scan a QR code with your smartphone camera or a QR reader app, it decodes the pattern and performs an action — like opening a website, composing an email, or connecting to WiFi. QR codes were invented in 1994 by a Japanese automotive company and have since become a universal standard for quickly sharing information.",
+  },
+  {
+    q: "What types of data can a QR code contain?",
+    a: "QR codes can store several types of data including URLs (website links), plain text, email addresses with pre-filled subjects and body text, phone numbers for quick dialing, WiFi credentials for instant network connection, geographic coordinates, calendar events, and vCard contact information. Our generator supports URL, text, email, phone, and WiFi types — covering the most common business use cases.",
+  },
+  {
+    q: "Do QR codes expire?",
+    a: "Static QR codes — like the ones created with this generator — never expire. The data is encoded directly into the pattern itself, so it works as long as the QR code image exists and remains scannable. However, if your QR code points to a URL, the link itself could stop working if the website goes down or the page is moved. Dynamic QR codes (offered by paid services) can be edited after creation but may expire if the service is discontinued.",
+  },
+  {
+    q: "What size should my QR code be for printing?",
+    a: "The minimum recommended size for a printed QR code is 2 cm x 2 cm (about 0.8 inches) for close-range scanning like business cards or product labels. For posters or signs that will be scanned from a distance, use a larger size — a good rule of thumb is 1 cm of QR code width for every 10 cm of scanning distance. For our generator, the \"Large\" (500px) option works well for print, while \"Medium\" (300px) is fine for digital use.",
+  },
+  {
+    q: "Can I customize the colors of my QR code?",
+    a: "Yes, our QR code generator lets you customize both the foreground (dark modules) and background colors. However, for reliable scanning, maintain high contrast between the two colors. Dark foreground on a light background works best. Avoid using very light foreground colors or very dark background colors, as this can make the code difficult or impossible to scan. Always test your customized QR code before printing.",
+  },
+  {
+    q: "Are QR codes free to create and use?",
+    a: "Yes, creating and using QR codes is completely free. The QR code standard is open and not patented for common use. Our generator creates static QR codes at no cost, with no watermarks, no account required, and no limits on how many you can create. You can use these QR codes for any purpose — business cards, marketing materials, product packaging, restaurant menus, event tickets, and more.",
+  },
+  {
+    q: "How do I test if my QR code works?",
+    a: "After generating your QR code, test it by opening the camera app on your smartphone and pointing it at the QR code on your screen. Most modern phones (iPhone and Android) have built-in QR code scanning. If your phone does not automatically detect it, try a free QR reader app. Test from different distances and angles to make sure it scans reliably. Always test before printing a large batch of materials.",
+  },
+  {
+    q: "Can I use QR codes on business cards and marketing materials?",
+    a: "Absolutely. QR codes are widely used on business cards (linking to your website, LinkedIn, or digital vCard), brochures, flyers, posters, product packaging, restaurant menus, and trade show materials. They bridge the gap between physical and digital, making it easy for people to access your information with a quick scan. Use a QR code that links to a mobile-friendly page for the best user experience.",
+  },
+];
+
+const RELATED_TOOLS_QR = [
+  {
+    name: "Email Signature Creator",
+    description: "Design professional HTML email signatures for Gmail and Outlook.",
+    href: "/tools/email-signature-creator",
+    icon: "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
+  },
+  {
+    name: "Business Name Generator",
+    description: "Generate creative business name ideas for your startup or brand.",
+    href: "/tools/business-name-generator",
+    icon: "M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z",
+  },
+  {
+    name: "Invoice Generator",
+    description: "Create and download professional PDF invoices for free.",
+    href: "/tools/invoice-generator",
+    icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z",
+  },
+  {
+    name: "Receipt Maker",
+    description: "Generate professional receipts for completed transactions.",
+    href: "/tools/receipt-maker",
+    icon: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2",
+  },
+];
+
 type QRType = "url" | "text" | "email" | "phone" | "wifi";
 type QRSize = "small" | "medium" | "large";
 type WifiEncryption = "WPA" | "WEP" | "nopass";
@@ -398,6 +464,162 @@ export default function QRCodeGeneratorPage() {
           </div>
         </div>
       </div>
+
+      {/* ============================== HOW IT WORKS ============================== */}
+      <section className="max-w-5xl mx-auto px-4 py-16">
+        <h2 className="text-2xl font-bold text-center mb-2">How It Works</h2>
+        <p className="text-muted text-center mb-12 max-w-xl mx-auto">
+          Generate a custom QR code in three easy steps — completely free.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {[
+            {
+              step: "1",
+              title: "Choose Your Type",
+              desc: "Select what kind of QR code you need — URL, text, email, phone number, or WiFi credentials.",
+            },
+            {
+              step: "2",
+              title: "Enter Your Content",
+              desc: "Type in your data and customize the colors and size. Watch the preview update in real-time as you make changes.",
+            },
+            {
+              step: "3",
+              title: "Download or Copy",
+              desc: "Download your QR code as a high-quality PNG image or copy it directly to your clipboard for instant use.",
+            },
+          ].map((item) => (
+            <div
+              key={item.step}
+              className="relative rounded-2xl border border-brand-border bg-brand-card p-6 text-center"
+            >
+              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/15 text-primary text-xl font-bold">
+                {item.step}
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-2">
+                {item.title}
+              </h3>
+              <p className="text-muted text-sm leading-relaxed">
+                {item.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ============================== FAQ SECTION ============================== */}
+      <section className="max-w-3xl mx-auto px-4 py-16">
+        <h2 className="text-2xl font-bold text-center mb-2">
+          Frequently Asked Questions
+        </h2>
+        <p className="text-muted text-center mb-10 max-w-xl mx-auto">
+          Everything you need to know about creating and using QR codes.
+        </p>
+        <div className="space-y-3">
+          {QR_FAQS.map((faq, i) => (
+            <QRFAQItem key={i} question={faq.q} answer={faq.a} />
+          ))}
+        </div>
+      </section>
+
+      {/* ============================== RELATED TOOLS ============================== */}
+      <section className="max-w-5xl mx-auto px-4 py-16 border-t border-brand-border">
+        <h2 className="text-2xl font-bold text-center mb-2">
+          Related Tools
+        </h2>
+        <p className="text-muted text-center mb-10">
+          More free business tools to help you get things done.
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {RELATED_TOOLS_QR.map((tool) => (
+            <a
+              key={tool.name}
+              href={tool.href}
+              className="group rounded-2xl border border-brand-border bg-brand-card p-5 hover:border-primary/40 transition-all duration-200 hover:shadow-[0_0_30px_rgba(124,108,240,0.08)]"
+            >
+              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10">
+                <svg
+                  className="h-5 w-5 text-primary"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={1.5}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d={tool.icon}
+                  />
+                </svg>
+              </div>
+              <h3 className="text-sm font-semibold text-white group-hover:text-primary transition-colors">
+                {tool.name}
+              </h3>
+              <p className="text-xs text-muted-dark mt-1">{tool.description}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      {/* ============================== FAQ SCHEMA (JSON-LD) ============================== */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: QR_FAQS.map((faq) => ({
+              "@type": "Question",
+              name: faq.q,
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: faq.a,
+              },
+            })),
+          }),
+        }}
+      />
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  FAQ Accordion Item                                                 */
+/* ------------------------------------------------------------------ */
+
+function QRFAQItem({ question, answer }: { question: string; answer: string }) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="rounded-xl border border-brand-border bg-brand-card overflow-hidden">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between p-5 text-left hover:bg-brand-card-hover transition-colors"
+      >
+        <span className="text-sm font-medium text-muted-light pr-4">
+          {question}
+        </span>
+        <svg
+          className={`w-5 h-5 text-muted-dark flex-shrink-0 transition-transform duration-200 ${
+            open ? "rotate-180" : ""
+          }`}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19 9l-7 7-7-7"
+          />
+        </svg>
+      </button>
+      {open && (
+        <div className="px-5 pb-5 text-sm text-muted leading-relaxed">
+          {answer}
+        </div>
+      )}
     </div>
   );
 }

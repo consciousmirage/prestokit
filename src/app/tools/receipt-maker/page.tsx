@@ -3,6 +3,42 @@
 import { useState, useCallback, useRef } from "react";
 
 /* ------------------------------------------------------------------ */
+/*  FAQ Accordion Item                                                 */
+/* ------------------------------------------------------------------ */
+
+function FAQItem({ question, answer }: { question: string; answer: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="border border-white/5 rounded-xl overflow-hidden">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-[#1a1a26]/60 transition-colors"
+      >
+        <span className="text-[#e0e0ea] font-medium text-sm sm:text-base pr-4">
+          {question}
+        </span>
+        <svg
+          className={`w-5 h-5 shrink-0 text-[#7c6cf0] transition-transform duration-200 ${
+            open ? "rotate-180" : ""
+          }`}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      {open && (
+        <div className="px-6 pb-5 text-sm text-[#a0a0b8] leading-relaxed">
+          {answer}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /*  Types                                                              */
 /* ------------------------------------------------------------------ */
 
@@ -620,6 +656,183 @@ export default function ReceiptMakerPage() {
             </div>
           </div>
         </main>
+
+        {/* ==================== HOW IT WORKS ==================== */}
+        <section className="mx-auto max-w-7xl px-4 pt-16 pb-0">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8 text-center">
+            How It <span className="text-[#7c6cf0]">Works</span>
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            {[
+              {
+                step: "1",
+                title: "Enter Your Details",
+                desc: "Fill in your business name, address, and contact information. Add the receipt date, number, and payment method for a complete record.",
+              },
+              {
+                step: "2",
+                title: "Add Line Items",
+                desc: "List each product or service with its description, quantity, and price. Add as many items as you need -- the totals calculate automatically.",
+              },
+              {
+                step: "3",
+                title: "Download Your Receipt",
+                desc: "Preview your receipt in real time on the right side. When it looks good, click Download PDF to save a professional receipt instantly.",
+              },
+            ].map((item) => (
+              <div
+                key={item.step}
+                className="rounded-2xl border border-white/5 bg-[#1a1a26] p-6 text-center"
+              >
+                <div className="w-10 h-10 rounded-full bg-[#7c6cf0]/20 border border-[#7c6cf0]/40 flex items-center justify-center text-[#9d90f5] font-bold text-lg mx-auto mb-4">
+                  {item.step}
+                </div>
+                <h3 className="text-white font-semibold text-base mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ==================== FAQ SECTION ==================== */}
+        <section className="mx-auto max-w-7xl px-4 pt-16 pb-0">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8 text-center">
+            Frequently Asked <span className="text-[#7c6cf0]">Questions</span>
+          </h2>
+          <div className="space-y-3 max-w-3xl mx-auto">
+            <FAQItem
+              question="What information is required on a receipt?"
+              answer="A complete receipt should include the business name and contact information, the date of the transaction, a unique receipt number, a description of each item or service purchased, the quantity and price of each item, the subtotal, any applicable tax, the total amount paid, and the payment method used. While requirements vary by jurisdiction, including all of these elements ensures your receipt is professional, legally compliant, and useful for both your records and your customer's. Some states also require the business address and tax identification number to be printed on receipts."
+            />
+            <FAQItem
+              question="What's the difference between a receipt and an invoice?"
+              answer="A receipt and an invoice serve different purposes in a transaction. An invoice is sent before or at the time of a transaction to request payment -- it says 'you owe this amount.' A receipt is issued after payment has been received -- it says 'payment was received for this amount.' Invoices typically include payment terms, due dates, and payment instructions, while receipts confirm that the transaction is complete. In short, an invoice requests money, and a receipt confirms it was paid. Both are important business documents, but they are used at different stages of the payment process."
+            />
+            <FAQItem
+              question="Do I need to provide receipts for my business?"
+              answer="In most jurisdictions, businesses are legally required to provide receipts for transactions, especially those involving sales tax. Even where it is not strictly mandatory, providing receipts is considered best practice for several reasons: it builds customer trust, creates a paper trail for accounting and tax purposes, helps resolve disputes, and demonstrates professionalism. For tax deductions, both you and your customers need receipts as proof of business expenses. The IRS and most tax authorities require documentation for any business expense deduction. Digital receipts are generally accepted and are becoming the standard in modern business."
+            />
+            <FAQItem
+              question="Can I create a receipt for a cash payment?"
+              answer="Yes, you can and should create receipts for cash payments. In fact, cash transactions are where receipts are most important because there is no automatic digital record like there is with credit card or bank transfer payments. A cash receipt serves as the only proof that the transaction occurred. When creating a receipt for a cash payment, simply select 'Cash' as the payment method. Make sure to include the date, amount, and a description of what was purchased. Both you and the customer should keep a copy. This is especially important for your bookkeeping and tax records."
+            />
+            <FAQItem
+              question="How long should I keep business receipts?"
+              answer="The IRS recommends keeping business receipts and financial records for at least three years from the date you file your tax return, though some situations require longer retention. If you file a claim for a loss from worthless securities or bad debt deduction, keep records for seven years. If you underreport income by more than 25%, the IRS has six years to audit. For property records, keep documentation until the period of limitations expires for the year you dispose of the property. As a practical rule of thumb, many accountants recommend keeping all business receipts for at least seven years to be safe. Digital storage makes this much easier than physical filing."
+            />
+            <FAQItem
+              question="Is a digital receipt legally valid?"
+              answer="Yes, digital receipts are legally valid in the United States and most countries worldwide. The Electronic Signatures in Global and National Commerce (ESIGN) Act and the Uniform Electronic Transactions Act (UETA) establish that electronic records and signatures carry the same legal weight as their paper counterparts. Digital receipts are accepted by the IRS for tax documentation purposes, by courts as evidence of transactions, and by banks and financial institutions. In fact, digital receipts offer advantages over paper receipts: they do not fade over time (unlike thermal paper receipts), they are easier to organize and search, and they can be backed up to prevent loss."
+            />
+          </div>
+        </section>
+
+        {/* ==================== RELATED TOOLS ==================== */}
+        <section className="mx-auto max-w-7xl px-4 pt-16 pb-20">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8 text-center">
+            Related <span className="text-[#7c6cf0]">Tools</span>
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[
+              {
+                title: "Invoice Generator",
+                desc: "Create and download professional invoices with line items, taxes, and payment terms.",
+                href: "/tools/invoice-generator",
+              },
+              {
+                title: "Estimate Builder",
+                desc: "Build detailed project estimates and quotes to win more clients and close more deals.",
+                href: "/tools/estimate-builder",
+              },
+              {
+                title: "Profit Margin Calculator",
+                desc: "Calculate profit margins, markups, and break-even points to price your products right.",
+                href: "/tools/profit-margin-calculator",
+              },
+            ].map((tool) => (
+              <a
+                key={tool.href}
+                href={tool.href}
+                className="group rounded-2xl border border-white/5 bg-[#1a1a26] p-6 hover:border-[#7c6cf0]/40 hover:shadow-[0_0_24px_rgba(124,108,240,0.08)] transition-all"
+              >
+                <h3 className="text-white font-semibold text-base mb-2 group-hover:text-[#9d90f5] transition-colors">
+                  {tool.title}
+                </h3>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  {tool.desc}
+                </p>
+                <span className="inline-block mt-3 text-xs text-[#7c6cf0] font-medium">
+                  Try it free &rarr;
+                </span>
+              </a>
+            ))}
+          </div>
+        </section>
+
+        {/* ==================== FAQ SCHEMA (JSON-LD) ==================== */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: [
+                {
+                  "@type": "Question",
+                  name: "What information is required on a receipt?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "A complete receipt should include the business name and contact information, the date of the transaction, a unique receipt number, a description of each item or service, quantity and price, subtotal, tax, total amount paid, and payment method. Some states also require the business address and tax identification number.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "What's the difference between a receipt and an invoice?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "An invoice is sent before or at the time of a transaction to request payment. A receipt is issued after payment has been received to confirm the transaction is complete. An invoice requests money; a receipt confirms it was paid.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "Do I need to provide receipts for my business?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "In most jurisdictions, businesses are legally required to provide receipts, especially for transactions involving sales tax. Receipts build customer trust, create a paper trail for accounting, help resolve disputes, and are required by the IRS for business expense deductions.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "Can I create a receipt for a cash payment?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Yes, you can and should create receipts for cash payments. Cash transactions are where receipts are most important because there is no automatic digital record. A cash receipt serves as the only proof the transaction occurred.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "How long should I keep business receipts?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "The IRS recommends keeping business receipts for at least three years from your tax filing date. Some situations require seven years. Many accountants recommend keeping all receipts for seven years to be safe. Digital storage makes this much easier.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "Is a digital receipt legally valid?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Yes, digital receipts are legally valid under the ESIGN Act and UETA. They are accepted by the IRS, courts, and financial institutions. Digital receipts offer advantages: they don't fade, are easier to organize, and can be backed up.",
+                  },
+                },
+              ],
+            }),
+          }}
+        />
       </div>
     </>
   );

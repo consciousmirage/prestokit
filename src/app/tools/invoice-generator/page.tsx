@@ -3,6 +3,72 @@
 import { useState, useCallback, useRef } from "react";
 
 /* ------------------------------------------------------------------ */
+/*  FAQ Data for SEO section                                           */
+/* ------------------------------------------------------------------ */
+
+const INVOICE_FAQS = [
+  {
+    q: "What should be included on a professional invoice?",
+    a: "A professional invoice should include your business name and contact information, the client's name and address, a unique invoice number, the invoice date and due date, an itemized list of products or services with quantities and rates, subtotal, any applicable taxes and discounts, the total amount due, accepted payment methods, and payment terms. Including all of these details reduces confusion and helps ensure you get paid on time.",
+  },
+  {
+    q: "How do I calculate sales tax on an invoice?",
+    a: "To calculate sales tax, multiply the taxable subtotal by your local tax rate. For example, if your subtotal is $1,000 and your sales tax rate is 8.25%, the tax amount is $1,000 x 0.0825 = $82.50. Different states, counties, and cities may have different tax rates, and some products or services may be tax-exempt. Our invoice generator lets you enter your tax rate and automatically calculates the amount for you.",
+  },
+  {
+    q: "What is the difference between an invoice and a receipt?",
+    a: "An invoice is a request for payment sent before or at the time of delivery, while a receipt is a confirmation of payment already made. Invoices include payment terms and due dates, while receipts confirm the transaction amount and date of payment. In short: an invoice says \"please pay this amount,\" and a receipt says \"thank you, payment received.\" Both are important financial documents for bookkeeping.",
+  },
+  {
+    q: "Is this invoice generator really free?",
+    a: "Yes, the PrestoKit invoice generator is 100% free with no hidden fees, no watermarks, and no account required. Everything runs directly in your browser, which means your data never touches our servers. You can create and download as many invoices as you need at no cost.",
+  },
+  {
+    q: "Can I customize the invoice with my logo?",
+    a: "The current version of our invoice generator creates clean, professional invoices with your business details. We are actively working on adding logo upload and additional template customization features. In the meantime, you can download the PDF and add your logo using any PDF editor or by pasting it into a document editor before sending.",
+  },
+  {
+    q: "What file format does the invoice download as?",
+    a: "When you click \"Download PDF,\" the invoice opens your browser's print dialog, which lets you save it as a PDF file. This is the most universally accepted format for invoices because PDFs maintain their formatting across all devices and operating systems. You can then email the PDF directly to your client or upload it to your invoicing system.",
+  },
+  {
+    q: "How do I send an invoice to a client?",
+    a: "After downloading your invoice as a PDF, you can send it via email as an attachment with a professional message summarizing the amount due and payment deadline. You can also share it through cloud storage links (Google Drive, Dropbox), messaging apps, or even print and mail a physical copy. Most clients prefer receiving invoices via email for quick processing.",
+  },
+  {
+    q: "What payment terms should I include on my invoice?",
+    a: "Common payment terms include Net 30 (payment due within 30 days), Net 15 (within 15 days), and Due on Receipt (immediate payment). For new clients, shorter payment terms reduce risk. You might also consider offering a small early-payment discount (e.g., 2% off if paid within 10 days) to encourage faster payment. Always clearly state your accepted payment methods, such as bank transfer, credit card, or PayPal.",
+  },
+];
+
+const RELATED_TOOLS_INVOICE = [
+  {
+    name: "Receipt Maker",
+    description: "Generate professional receipts for completed transactions.",
+    href: "/tools/receipt-maker",
+    icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z",
+  },
+  {
+    name: "Estimate Builder",
+    description: "Create detailed project estimates and proposals for clients.",
+    href: "/tools/estimate-builder",
+    icon: "M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z",
+  },
+  {
+    name: "Pay Stub Creator",
+    description: "Generate professional pay stubs for employees and contractors.",
+    href: "/tools/pay-stub-creator",
+    icon: "M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z",
+  },
+  {
+    name: "Profit Margin Calculator",
+    description: "Calculate profit margins, markups, and break-even points.",
+    href: "/tools/profit-margin-calculator",
+    icon: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
+  },
+];
+
+/* ------------------------------------------------------------------ */
 /*  Types                                                              */
 /* ------------------------------------------------------------------ */
 
@@ -721,7 +787,163 @@ export default function InvoiceGeneratorPage() {
             </div>
           </div>
         </main>
+
+        {/* ============================== HOW IT WORKS ============================== */}
+        <section className="mx-auto max-w-7xl px-4 py-16">
+          <h2 className="text-2xl font-bold text-center mb-2">How It Works</h2>
+          <p className="text-gray-400 text-center mb-12 max-w-xl mx-auto">
+            Create a professional invoice in three simple steps — no account needed.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                step: "1",
+                title: "Enter Your Details",
+                desc: "Fill in your business information, client details, and invoice specifics like date and payment terms.",
+              },
+              {
+                step: "2",
+                title: "Add Line Items",
+                desc: "List your products or services with quantities and rates. Add tax and discounts as needed — totals calculate automatically.",
+              },
+              {
+                step: "3",
+                title: "Download Your Invoice",
+                desc: "Preview your invoice in real-time, then click Download PDF to save it. Send it to your client via email or print it.",
+              },
+            ].map((item) => (
+              <div
+                key={item.step}
+                className="relative rounded-2xl border border-white/5 bg-[#1a1a26] p-6 text-center"
+              >
+                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#7c6cf0]/15 text-[#7c6cf0] text-xl font-bold">
+                  {item.step}
+                </div>
+                <h3 className="text-lg font-semibold text-white mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ============================== FAQ SECTION ============================== */}
+        <section className="mx-auto max-w-3xl px-4 py-16">
+          <h2 className="text-2xl font-bold text-center mb-2">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-gray-400 text-center mb-10 max-w-xl mx-auto">
+            Everything you need to know about creating invoices with PrestoKit.
+          </p>
+          <div className="space-y-3">
+            {INVOICE_FAQS.map((faq, i) => (
+              <FAQItem key={i} question={faq.q} answer={faq.a} />
+            ))}
+          </div>
+        </section>
+
+        {/* ============================== RELATED TOOLS ============================== */}
+        <section className="mx-auto max-w-7xl px-4 py-16 border-t border-white/5">
+          <h2 className="text-2xl font-bold text-center mb-2">
+            Related Tools
+          </h2>
+          <p className="text-gray-400 text-center mb-10">
+            More free business tools to help you get things done.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {RELATED_TOOLS_INVOICE.map((tool) => (
+              <a
+                key={tool.name}
+                href={tool.href}
+                className="group rounded-2xl border border-white/5 bg-[#1a1a26] p-5 hover:border-[#7c6cf0]/40 transition-all duration-200 hover:shadow-[0_0_30px_rgba(124,108,240,0.08)]"
+              >
+                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#7c6cf0]/10">
+                  <svg
+                    className="h-5 w-5 text-[#7c6cf0]"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={1.5}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d={tool.icon}
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-sm font-semibold text-white group-hover:text-[#7c6cf0] transition-colors">
+                  {tool.name}
+                </h3>
+                <p className="text-xs text-gray-500 mt-1">{tool.description}</p>
+              </a>
+            ))}
+          </div>
+        </section>
       </div>
+
+      {/* ============================== FAQ SCHEMA (JSON-LD) ============================== */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: INVOICE_FAQS.map((faq) => ({
+              "@type": "Question",
+              name: faq.q,
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: faq.a,
+              },
+            })),
+          }),
+        }}
+      />
     </>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  FAQ Accordion Item                                                 */
+/* ------------------------------------------------------------------ */
+
+function FAQItem({ question, answer }: { question: string; answer: string }) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="rounded-xl border border-white/5 bg-[#1a1a26] overflow-hidden">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between p-5 text-left hover:bg-[#1e1e2e] transition-colors"
+      >
+        <span className="text-sm font-medium text-gray-200 pr-4">
+          {question}
+        </span>
+        <svg
+          className={`w-5 h-5 text-gray-500 flex-shrink-0 transition-transform duration-200 ${
+            open ? "rotate-180" : ""
+          }`}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19 9l-7 7-7-7"
+          />
+        </svg>
+      </button>
+      {open && (
+        <div className="px-5 pb-5 text-sm text-gray-400 leading-relaxed">
+          {answer}
+        </div>
+      )}
+    </div>
   );
 }

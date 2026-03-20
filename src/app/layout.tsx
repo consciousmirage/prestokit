@@ -150,7 +150,7 @@ export default function RootLayout({
         {/* ─── Footer ─── */}
         <footer className="border-t border-brand-border bg-brand-darker">
           <div className="mx-auto max-w-7xl px-6 py-12">
-            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
               {/* Brand */}
               <div className="sm:col-span-2 lg:col-span-1">
                 <Link href="/" className="flex items-center gap-2.5">
@@ -177,7 +177,7 @@ export default function RootLayout({
                 </p>
               </div>
 
-              {/* Tools */}
+              {/* Tools — Column 1 */}
               <div>
                 <h4 className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted-dark">
                   Tools
@@ -188,7 +188,34 @@ export default function RootLayout({
                     ["QR Code Generator", "/tools/qr-code-generator"],
                     ["Email Signature", "/tools/email-signature-creator"],
                     ["Business Name Gen", "/tools/business-name-generator"],
+                  ].map(([name, href]) => (
+                    <li key={href}>
+                      <Link
+                        href={href}
+                        className="text-sm text-muted transition-colors hover:text-white"
+                      >
+                        {name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Tools — Column 2 */}
+              <div>
+                <h4 className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted-dark">
+                  More Tools
+                </h4>
+                <ul className="space-y-2">
+                  {[
                     ["Profit Calculator", "/tools/profit-margin-calculator"],
+                    ["Receipt Maker", "/tools/receipt-maker"],
+                    ["Estimate Builder", "/tools/estimate-builder"],
+                    ["Pay Stub Creator", "/tools/pay-stub-creator"],
+                    ["Password Generator", "/tools/password-generator"],
+                    ["Word Counter", "/tools/word-counter"],
+                    ["Lorem Ipsum", "/tools/lorem-ipsum-generator"],
+                    ["Percentage Calc", "/tools/percentage-calculator"],
                   ].map(([name, href]) => (
                     <li key={href}>
                       <Link
@@ -211,6 +238,7 @@ export default function RootLayout({
                   {[
                     ["About", "/#why"],
                     ["Pro", "/#pro"],
+                    ["Request a Tool", "mailto:hello@prestokit.com?subject=Tool%20Request"],
                     ["Contact", "mailto:hello@prestokit.com"],
                   ].map(([name, href]) => (
                     <li key={href}>
@@ -253,6 +281,12 @@ export default function RootLayout({
               <p className="text-xs text-muted-dark">
                 &copy; {new Date().getFullYear()} PrestoKit. All rights
                 reserved.
+              </p>
+              <p className="text-xs text-muted-dark">
+                Built by{" "}
+                <span className="text-muted transition-colors hover:text-white">
+                  Conscious Mirage
+                </span>
               </p>
               <div className="flex items-center gap-4">
                 <a

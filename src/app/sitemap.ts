@@ -11,6 +11,10 @@ const toolPages = [
   "/tools/receipt-maker",
   "/tools/estimate-builder",
   "/tools/pay-stub-creator",
+  "/tools/password-generator",
+  "/tools/word-counter",
+  "/tools/lorem-ipsum-generator",
+  "/tools/percentage-calculator",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

@@ -3,6 +3,42 @@
 import { useState, useMemo } from "react";
 
 /* ------------------------------------------------------------------ */
+/*  FAQ Accordion Item                                                 */
+/* ------------------------------------------------------------------ */
+
+function FAQItem({ question, answer }: { question: string; answer: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="border border-[#1e1e2e] rounded-xl overflow-hidden">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-[#1a1a26]/60 transition-colors"
+      >
+        <span className="text-[#e0e0ea] font-medium text-sm sm:text-base pr-4">
+          {question}
+        </span>
+        <svg
+          className={`w-5 h-5 shrink-0 text-[#7c6cf0] transition-transform duration-200 ${
+            open ? "rotate-180" : ""
+          }`}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      {open && (
+        <div className="px-6 pb-5 text-sm text-[#a0a0b8] leading-relaxed">
+          {answer}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /*  Types                                                              */
 /* ------------------------------------------------------------------ */
 
@@ -636,6 +672,183 @@ export default function ProfitMarginCalculatorPage() {
               </p>
             </div>
           </div>
+
+          {/* ==================== HOW IT WORKS ==================== */}
+          <section className="mt-16">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8 text-center">
+              How It <span className="text-[#9d90f5]">Works</span>
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+              {[
+                {
+                  step: "1",
+                  title: "Choose Your Calculation",
+                  desc: "Select from four modes: standard margin, markup, target margin, or break-even analysis. Pick the one that matches the numbers you already have.",
+                },
+                {
+                  step: "2",
+                  title: "Enter Your Numbers",
+                  desc: "Type in your cost price, selling price, markup percentage, or fixed costs. Results update in real time as you type -- no buttons to click.",
+                },
+                {
+                  step: "3",
+                  title: "Get Instant Results",
+                  desc: "See your profit margin, markup percentage, profit amount, and visual cost-vs-profit breakdown instantly. Use the insights to price with confidence.",
+                },
+              ].map((item) => (
+                <div
+                  key={item.step}
+                  className="rounded-2xl border border-[#1e1e2e] bg-[#12121a]/60 backdrop-blur-sm p-6 text-center"
+                >
+                  <div className="w-10 h-10 rounded-full bg-[#7c6cf0]/20 border border-[#7c6cf0]/40 flex items-center justify-center text-[#9d90f5] font-bold text-lg mx-auto mb-4">
+                    {item.step}
+                  </div>
+                  <h3 className="text-white font-semibold text-base mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-[#8888a0] text-sm leading-relaxed">
+                    {item.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* ==================== FAQ SECTION ==================== */}
+          <section className="mt-16">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8 text-center">
+              Frequently Asked <span className="text-[#9d90f5]">Questions</span>
+            </h2>
+            <div className="space-y-3 max-w-3xl mx-auto">
+              <FAQItem
+                question="What is profit margin and how is it calculated?"
+                answer="Profit margin is the percentage of revenue that remains as profit after all costs are subtracted. It is calculated by dividing the profit (selling price minus cost) by the selling price, then multiplying by 100. For example, if you sell a product for $100 and it costs you $60, your profit is $40 and your profit margin is 40%. Profit margin is one of the most important metrics for any business because it tells you how efficiently you are turning revenue into actual profit. A higher margin means more of every dollar you earn stays in your pocket."
+              />
+              <FAQItem
+                question="What's the difference between profit margin and markup?"
+                answer="Profit margin and markup both measure profitability, but they use different bases for the calculation. Margin is calculated as a percentage of the selling price, while markup is calculated as a percentage of the cost. For example, if a product costs $50 and sells for $100, the profit is $50. The margin is 50% (50/100), but the markup is 100% (50/50). This distinction matters because a 50% markup does not equal a 50% margin. Many pricing mistakes happen when business owners confuse the two. As a rule of thumb, markup will always be a higher number than margin for the same product."
+              />
+              <FAQItem
+                question="What is a good profit margin for a small business?"
+                answer="A 'good' profit margin varies significantly by industry. As a general guide, a net profit margin of 10% is considered average, 20% is considered good, and 5% or below is considered low. However, grocery stores and restaurants often operate on margins as thin as 1-3%, while software companies can achieve margins of 50-80%. Service-based businesses like consulting typically have higher margins (30-50%) because they have lower cost of goods sold. The key is to benchmark against your specific industry and focus on improving your margin over time rather than comparing across industries."
+              />
+              <FAQItem
+                question="How do I calculate my break-even point?"
+                answer="Your break-even point is the number of units you need to sell to cover all of your costs -- both fixed and variable. The formula is: Break-Even Units = Fixed Costs / (Selling Price Per Unit - Variable Cost Per Unit). Fixed costs are expenses that stay the same regardless of sales volume, like rent, salaries, and insurance. Variable costs change with production volume, like materials and shipping. For example, if your fixed costs are $10,000 per month, your product sells for $50, and your variable cost per unit is $20, your break-even point is 334 units ($10,000 / $30). You can calculate this instantly using the Break-Even mode above."
+              />
+              <FAQItem
+                question="What's the difference between gross and net profit margin?"
+                answer="Gross profit margin only accounts for the direct costs of producing or purchasing your product (cost of goods sold). Net profit margin accounts for all expenses including operating costs, taxes, interest, depreciation, and every other business expense. Gross margin tells you how efficiently you produce or source your products, while net margin tells you how profitable your entire business is after everything is paid. For example, a business might have a 60% gross margin but only a 15% net margin after accounting for rent, payroll, marketing, and other overhead. Both metrics are important -- gross margin helps you price products correctly, while net margin shows your true bottom line."
+              />
+              <FAQItem
+                question="How can I improve my profit margins?"
+                answer="There are several proven strategies to improve profit margins. First, increase your prices -- even a small price increase can have a significant impact on margins since it goes straight to profit. Second, reduce your cost of goods sold by negotiating with suppliers, buying in bulk, or finding more affordable alternatives. Third, cut unnecessary overhead expenses like unused subscriptions, redundant tools, or inefficient processes. Fourth, focus on selling higher-margin products or services -- not all products are equally profitable. Fifth, improve operational efficiency by automating repetitive tasks and streamlining workflows. Sixth, reduce customer acquisition costs by focusing on retention and referrals. The best approach is to combine several of these strategies for compounding improvement."
+              />
+            </div>
+          </section>
+
+          {/* ==================== RELATED TOOLS ==================== */}
+          <section className="mt-16">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8 text-center">
+              Related <span className="text-[#9d90f5]">Tools</span>
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {[
+                {
+                  title: "Invoice Generator",
+                  desc: "Create professional invoices for free. Add line items, tax, and download as PDF.",
+                  href: "/tools/invoice-generator",
+                },
+                {
+                  title: "Estimate Builder",
+                  desc: "Build detailed project estimates and quotes to send to clients in seconds.",
+                  href: "/tools/estimate-builder",
+                },
+                {
+                  title: "Receipt Maker",
+                  desc: "Generate clean, professional receipts for any transaction. Print or save as PDF.",
+                  href: "/tools/receipt-maker",
+                },
+              ].map((tool) => (
+                <a
+                  key={tool.href}
+                  href={tool.href}
+                  className="group rounded-2xl border border-[#1e1e2e] bg-[#12121a]/60 backdrop-blur-sm p-6 hover:border-[#7c6cf0]/40 hover:shadow-[0_0_24px_rgba(124,108,240,0.08)] transition-all"
+                >
+                  <h3 className="text-white font-semibold text-base mb-2 group-hover:text-[#9d90f5] transition-colors">
+                    {tool.title}
+                  </h3>
+                  <p className="text-[#8888a0] text-sm leading-relaxed">
+                    {tool.desc}
+                  </p>
+                  <span className="inline-block mt-3 text-xs text-[#7c6cf0] font-medium">
+                    Try it free &rarr;
+                  </span>
+                </a>
+              ))}
+            </div>
+          </section>
+
+          {/* ==================== FAQ SCHEMA (JSON-LD) ==================== */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                mainEntity: [
+                  {
+                    "@type": "Question",
+                    name: "What is profit margin and how is it calculated?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "Profit margin is the percentage of revenue that remains as profit after all costs are subtracted. It is calculated by dividing the profit (selling price minus cost) by the selling price, then multiplying by 100. For example, if you sell a product for $100 and it costs you $60, your profit is $40 and your profit margin is 40%.",
+                    },
+                  },
+                  {
+                    "@type": "Question",
+                    name: "What's the difference between profit margin and markup?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "Margin is calculated as a percentage of the selling price, while markup is calculated as a percentage of the cost. For example, if a product costs $50 and sells for $100, the margin is 50% (50/100), but the markup is 100% (50/50). Markup will always be a higher number than margin for the same product.",
+                    },
+                  },
+                  {
+                    "@type": "Question",
+                    name: "What is a good profit margin for a small business?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "A net profit margin of 10% is considered average, 20% is good, and 5% or below is low. However, it varies by industry. Grocery stores operate on 1-3% margins, while software companies can achieve 50-80%. Service businesses typically have 30-50% margins.",
+                    },
+                  },
+                  {
+                    "@type": "Question",
+                    name: "How do I calculate my break-even point?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "Break-Even Units = Fixed Costs / (Selling Price Per Unit - Variable Cost Per Unit). For example, if fixed costs are $10,000/month, selling price is $50, and variable cost is $20 per unit, break-even is 334 units ($10,000 / $30).",
+                    },
+                  },
+                  {
+                    "@type": "Question",
+                    name: "What's the difference between gross and net profit margin?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "Gross profit margin only accounts for direct production costs (COGS). Net profit margin accounts for all expenses including operating costs, taxes, interest, and overhead. A business might have a 60% gross margin but only 15% net margin after all expenses.",
+                    },
+                  },
+                  {
+                    "@type": "Question",
+                    name: "How can I improve my profit margins?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "Key strategies include: increasing prices, reducing cost of goods sold through supplier negotiation, cutting overhead expenses, focusing on higher-margin products, improving operational efficiency, and reducing customer acquisition costs through retention and referrals.",
+                    },
+                  },
+                ],
+              }),
+            }}
+          />
         </div>
       </main>
     </>

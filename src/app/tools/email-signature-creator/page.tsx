@@ -2,6 +2,72 @@
 
 import { useState, useRef, useCallback } from "react";
 
+/* ------------------------------------------------------------------ */
+/*  FAQ Data                                                           */
+/* ------------------------------------------------------------------ */
+
+const EMAIL_SIG_FAQS = [
+  {
+    q: "How do I add an email signature in Gmail?",
+    a: 'To add your email signature in Gmail: (1) Click "Copy to Clipboard" above to copy your signature. (2) Open Gmail and click the gear icon, then "See all settings." (3) Scroll down to the "Signature" section. (4) Click "Create new" to add a signature name. (5) Click inside the editor and paste your signature with Ctrl+V (or Cmd+V on Mac). (6) Scroll to the bottom and click "Save Changes." Your signature will now appear automatically on new emails and replies.',
+  },
+  {
+    q: "What should I include in a professional email signature?",
+    a: "A professional email signature should include your full name, job title, and company name at minimum. Beyond that, add your email address, phone number, and company website. Social media links (LinkedIn especially) are valuable for networking. Keep it concise — 3-5 lines of contact info is ideal. Avoid inspirational quotes, excessive colors, or large images, which can look unprofessional and cause formatting issues across different email clients.",
+  },
+  {
+    q: "How do I add an image or logo to my email signature?",
+    a: "Our signature generator supports profile photos and company logos via URL. To use an image: (1) Upload your photo or logo to a permanent hosting service (like your company website, Imgur, or Google Drive with public sharing). (2) Copy the direct image URL. (3) Paste it into the \"Profile Image URL\" or \"Company Logo URL\" field in our generator. The image will be embedded in your signature HTML. Important: use a hosted URL, not a local file path, so the image displays for all recipients.",
+  },
+  {
+    q: "Why is my email signature not formatting correctly?",
+    a: "Email signature formatting issues usually stem from a few common causes: (1) The email client modified the HTML when pasting — try using \"Copy to Clipboard\" (rich text) rather than \"Copy HTML Code.\" (2) The receiving email client doesn't support certain HTML/CSS features — our templates use table-based layouts specifically for maximum compatibility. (3) The image URLs are broken or inaccessible. If issues persist, try the Compact template which has the simplest formatting and works everywhere.",
+  },
+  {
+    q: "Can I have different signatures for different email accounts?",
+    a: "Yes, most email clients support multiple signatures. In Gmail, you can create several signatures and assign different ones to different email aliases or accounts. In Outlook, go to Signature settings to create and manage multiple signatures. You can even set different default signatures for new messages versus replies. Use our generator to create different versions — for example, a detailed Professional signature for clients and a Compact one for internal emails.",
+  },
+  {
+    q: "What size should my email signature be?",
+    a: "Keep your email signature under 650 pixels wide (the standard email width) and under 150 pixels tall for optimal display. Profile images should be 60-80 pixels in diameter, and company logos should be under 200 pixels wide and 50 pixels tall. Total file size of all images should stay under 50KB for fast loading. Our templates are designed within these guidelines to ensure your signature looks great and loads quickly across all email clients.",
+  },
+  {
+    q: "Do email signatures work on mobile devices?",
+    a: "Yes, our email signatures are built with responsive, table-based HTML that works on both desktop and mobile email clients. Once you set up your signature in Gmail, Outlook, or Apple Mail, it will appear on emails sent from your phone automatically. However, note that some mobile email clients may slightly adjust the layout. Test by sending yourself a test email and viewing it on your phone before using it in production.",
+  },
+  {
+    q: "Is this email signature generator free to use?",
+    a: "Yes, the PrestoKit Email Signature Creator is completely free with no limits, no watermarks, and no account required. You can create as many signatures as you need, switch between all four templates, customize colors, and copy the result instantly. Everything runs in your browser — your personal information is never sent to or stored on our servers.",
+  },
+];
+
+const RELATED_TOOLS_EMAIL = [
+  {
+    name: "QR Code Generator",
+    description: "Create custom QR codes for URLs, WiFi, email, and more.",
+    href: "/tools/qr-code-generator",
+    icon: "M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z",
+  },
+  {
+    name: "Business Name Generator",
+    description: "Generate creative business name ideas for your startup or brand.",
+    href: "/tools/business-name-generator",
+    icon: "M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z",
+  },
+  {
+    name: "Invoice Generator",
+    description: "Create and download professional PDF invoices for free.",
+    href: "/tools/invoice-generator",
+    icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z",
+  },
+  {
+    name: "Profit Margin Calculator",
+    description: "Calculate profit margins, markups, and break-even points.",
+    href: "/tools/profit-margin-calculator",
+    icon: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
+  },
+];
+
 type Template = "professional" | "modern" | "creative" | "compact";
 
 interface SignatureData {
@@ -512,6 +578,162 @@ export default function EmailSignatureCreatorPage() {
           </div>
         </div>
       </div>
+
+      {/* ============================== HOW IT WORKS ============================== */}
+      <section className="max-w-5xl mx-auto px-4 py-16">
+        <h2 className="text-2xl font-bold text-center mb-2">How It Works</h2>
+        <p className="text-muted text-center mb-12 max-w-xl mx-auto">
+          Create a professional email signature in three simple steps.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {[
+            {
+              step: "1",
+              title: "Enter Your Info",
+              desc: "Fill in your name, title, contact details, and social links. Add a profile photo or company logo URL if you have one.",
+            },
+            {
+              step: "2",
+              title: "Pick a Template",
+              desc: "Choose from four professionally designed templates — Professional, Modern, Creative, or Compact. Customize the accent color to match your brand.",
+            },
+            {
+              step: "3",
+              title: "Copy & Paste",
+              desc: "Click \"Copy to Clipboard\" and paste your signature directly into Gmail, Outlook, or Apple Mail. It takes less than a minute to set up.",
+            },
+          ].map((item) => (
+            <div
+              key={item.step}
+              className="relative rounded-2xl border border-brand-border bg-brand-card p-6 text-center"
+            >
+              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/15 text-primary text-xl font-bold">
+                {item.step}
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-2">
+                {item.title}
+              </h3>
+              <p className="text-muted text-sm leading-relaxed">
+                {item.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ============================== FAQ SECTION ============================== */}
+      <section className="max-w-3xl mx-auto px-4 py-16">
+        <h2 className="text-2xl font-bold text-center mb-2">
+          Frequently Asked Questions
+        </h2>
+        <p className="text-muted text-center mb-10 max-w-xl mx-auto">
+          Common questions about creating and using email signatures.
+        </p>
+        <div className="space-y-3">
+          {EMAIL_SIG_FAQS.map((faq, i) => (
+            <EmailFAQItem key={i} question={faq.q} answer={faq.a} />
+          ))}
+        </div>
+      </section>
+
+      {/* ============================== RELATED TOOLS ============================== */}
+      <section className="max-w-5xl mx-auto px-4 py-16 border-t border-brand-border">
+        <h2 className="text-2xl font-bold text-center mb-2">
+          Related Tools
+        </h2>
+        <p className="text-muted text-center mb-10">
+          More free business tools to help you get things done.
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {RELATED_TOOLS_EMAIL.map((tool) => (
+            <a
+              key={tool.name}
+              href={tool.href}
+              className="group rounded-2xl border border-brand-border bg-brand-card p-5 hover:border-primary/40 transition-all duration-200 hover:shadow-[0_0_30px_rgba(124,108,240,0.08)]"
+            >
+              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10">
+                <svg
+                  className="h-5 w-5 text-primary"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={1.5}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d={tool.icon}
+                  />
+                </svg>
+              </div>
+              <h3 className="text-sm font-semibold text-white group-hover:text-primary transition-colors">
+                {tool.name}
+              </h3>
+              <p className="text-xs text-muted-dark mt-1">{tool.description}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      {/* ============================== FAQ SCHEMA (JSON-LD) ============================== */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: EMAIL_SIG_FAQS.map((faq) => ({
+              "@type": "Question",
+              name: faq.q,
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: faq.a,
+              },
+            })),
+          }),
+        }}
+      />
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  FAQ Accordion Item                                                 */
+/* ------------------------------------------------------------------ */
+
+function EmailFAQItem({ question, answer }: { question: string; answer: string }) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="rounded-xl border border-brand-border bg-brand-card overflow-hidden">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between p-5 text-left hover:bg-brand-card-hover transition-colors"
+      >
+        <span className="text-sm font-medium text-muted-light pr-4">
+          {question}
+        </span>
+        <svg
+          className={`w-5 h-5 text-muted-dark flex-shrink-0 transition-transform duration-200 ${
+            open ? "rotate-180" : ""
+          }`}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19 9l-7 7-7-7"
+          />
+        </svg>
+      </button>
+      {open && (
+        <div className="px-5 pb-5 text-sm text-muted leading-relaxed">
+          {answer}
+        </div>
+      )}
     </div>
   );
 }

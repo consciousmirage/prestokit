@@ -49,6 +49,8 @@ const config: Config = {
         "fade-in": "fadeIn 0.6s ease-out forwards",
         "slide-up": "slideUp 0.6s ease-out forwards",
         "pulse-glow": "pulseGlow 3s ease-in-out infinite",
+        "hero-glow": "heroGlow 6s ease-in-out infinite",
+        "hero-glow-alt": "heroGlowAlt 8s ease-in-out infinite",
       },
       keyframes: {
         fadeIn: {
@@ -62,6 +64,14 @@ const config: Config = {
         pulseGlow: {
           "0%, 100%": { opacity: "0.4" },
           "50%": { opacity: "1" },
+        },
+        heroGlow: {
+          "0%, 100%": { opacity: "0.4", transform: "translate(-50%, -33%) scale(1)" },
+          "50%": { opacity: "0.7", transform: "translate(-50%, -33%) scale(1.1)" },
+        },
+        heroGlowAlt: {
+          "0%, 100%": { opacity: "0.3", transform: "scale(1)" },
+          "50%": { opacity: "0.6", transform: "scale(1.15)" },
         },
       },
     },
