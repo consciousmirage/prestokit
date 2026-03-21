@@ -70,6 +70,7 @@ const navLinks = [
   { label: "Resources", href: "/products" },
   { label: "Why PrestoKit?", href: "/#why" },
   { label: "Pro", href: "/pro" },
+  { label: "Account", href: "/account" },
 ];
 
 export default function RootLayout({

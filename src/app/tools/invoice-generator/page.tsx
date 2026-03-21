@@ -233,8 +233,8 @@ export default function InvoiceGeneratorPage() {
   const handlePrint = useCallback(async () => {
     const element = document.getElementById("invoice-print-area");
     if (!element) return;
-    // @ts-expect-error html2pdf.js has no types
-    const html2pdf = (await import("html2pdf.js")).default;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const html2pdf = (await import("html2pdf.js" as any)).default;
     const invoiceNum = data.invoiceNumber || "invoice";
     html2pdf()
       .set({
