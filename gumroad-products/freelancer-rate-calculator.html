@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Freelancer Rate Calculator & Pricing Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+  :root {
+    --ink: #0f172a;
+    --body: #334155;
+    --muted: #64748b;
+    --light: #94a3b8;
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --border: #e2e8f0;
+    --primary: #4f46e5;
+    --primary-hover: #4338ca;
+    --primary-light: #eef2ff;
+    --green: #059669;
+    --green-light: #ecfdf5;
+    --amber: #d97706;
+    --amber-light: #fffbeb;
+    --rose: #e11d48;
+    --rose-light: #fff1f2;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--body);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 30px 20px;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 30%, #4f46e5 100%);
+    padding: 70px 50px;
+    border-radius: 24px;
+    color: white;
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px;
+    right: -80px;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(129,140,248,0.2) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero p {
+    font-size: 17px;
+    color: rgba(255,255,255,0.7);
+    max-width: 560px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── CALCULATOR ─── */
+  .calc-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 48px;
+    margin-bottom: 32px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+
+  .calc-card h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .calc-card .subtitle {
+    font-size: 15px;
+    color: var(--muted);
+    margin-bottom: 36px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .input-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+
+  .input-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .input-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  .input-group .hint {
+    font-size: 12px;
+    color: var(--light);
+    margin-bottom: 8px;
+  }
+
+  .input-group input, .input-group select {
+    height: 48px;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 0 16px;
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    color: var(--ink);
+    transition: border-color 0.2s;
+    background: white;
+  }
+
+  .input-group input:focus, .input-group select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-light);
+  }
+
+  .calc-button {
+    width: 100%;
+    height: 56px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.3px;
+  }
+
+  .calc-button:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(79,70,229,0.3);
+  }
+
+  /* ─── RESULTS ─── */
+  .results {
+    display: none;
+    margin-top: 36px;
+    padding-top: 36px;
+    border-top: 2px solid var(--border);
+  }
+
+  .results.show { display: block; }
+
+  .results h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 24px;
+  }
+
+  .result-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+
+  .result-card {
+    padding: 24px;
+    border-radius: 16px;
+    text-align: center;
+  }
+
+  .result-card.primary {
+    background: var(--primary-light);
+    border: 2px solid #c7d2fe;
+  }
+
+  .result-card.green {
+    background: var(--green-light);
+    border: 2px solid #a7f3d0;
+  }
+
+  .result-card.amber {
+    background: var(--amber-light);
+    border: 2px solid #fde68a;
+  }
+
+  .result-card .result-label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .result-card .result-value {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .result-card .result-note {
+    font-size: 12px;
+    color: var(--light);
+    margin-top: 4px;
+  }
+
+  .breakdown-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 14px;
+  }
+
+  .breakdown-table tr {
+    border-bottom: 1px solid #f1f5f9;
+  }
+
+  .breakdown-table td {
+    padding: 12px 0;
+  }
+
+  .breakdown-table td:last-child {
+    text-align: right;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .breakdown-table .total-row {
+    border-top: 2px solid var(--ink);
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  .breakdown-table .total-row td {
+    padding-top: 16px;
+    color: var(--primary);
+  }
+
+  /* ─── GUIDE SECTIONS ─── */
+  .guide-section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 40px 44px;
+    margin-bottom: 24px;
+  }
+
+  .guide-section .section-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+  }
+
+  .guide-section h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .guide-section .section-intro {
+    font-size: 15px;
+    color: var(--muted);
+    margin-bottom: 28px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .guide-section h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 28px 0 12px;
+  }
+
+  .guide-section h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 20px 0 8px;
+  }
+
+  .guide-section p {
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+
+  .guide-section ul, .guide-section ol {
+    padding-left: 24px;
+    margin-bottom: 16px;
+  }
+
+  .guide-section li {
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+
+  /* ─── BENCHMARK TABLE ─── */
+  .benchmark-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 13px;
+  }
+
+  .benchmark-table thead th {
+    background: var(--bg);
+    padding: 12px 14px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    border-bottom: 2px solid var(--border);
+  }
+
+  .benchmark-table tbody td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #f1f5f9;
+    color: var(--body);
+  }
+
+  .benchmark-table tbody tr:hover {
+    background: var(--bg);
+  }
+
+  /* ─── SCRIPT BOXES ─── */
+  .script-box {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin: 16px 0;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  .script-box .script-label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--primary);
+    margin-bottom: 8px;
+  }
+
+  .script-box em { color: var(--muted); font-style: italic; }
+
+  /* ─── TIP BOX ─── */
+  .tip-box {
+    padding: 20px 24px;
+    border-radius: 14px;
+    margin: 20px 0;
+    font-size: 14px;
+  }
+
+  .tip-box.indigo { background: var(--primary-light); border-left: 4px solid var(--primary); }
+  .tip-box.green { background: var(--green-light); border-left: 4px solid var(--green); }
+  .tip-box.amber { background: var(--amber-light); border-left: 4px solid var(--amber); }
+  .tip-box.rose { background: var(--rose-light); border-left: 4px solid var(--rose); }
+
+  .tip-box strong {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--ink);
+  }
+
+  /* ─── PRICING MODELS ─── */
+  .model-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 20px 0;
+  }
+
+  .model-card {
+    padding: 24px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+  }
+
+  .model-card h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0 0 6px;
+  }
+
+  .model-card .pros { color: var(--green); font-size: 13px; }
+  .model-card .cons { color: var(--rose); font-size: 13px; }
+  .model-card p { font-size: 13px; margin-bottom: 8px; }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--light);
+    font-size: 13px;
+  }
+
+  @media (max-width: 640px) {
+    .input-grid, .result-grid, .model-grid { grid-template-columns: 1fr; }
+    .hero { padding: 40px 24px; }
+    .hero h1 { font-size: 30px; }
+    .calc-card { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="badge">Calculator + Guide</div>
+    <h1>Freelancer Rate Calculator<br>& Pricing Guide</h1>
+    <p>Stop undercharging. Calculate your true rate, then master the art of pricing with confidence.</p>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       INTERACTIVE CALCULATOR
+  ═══════════════════════════════════════ -->
+  <div class="calc-card">
+    <h2>Calculate Your Hourly Rate</h2>
+    <p class="subtitle">Fill in the fields below. The calculator will show you the minimum hourly rate you need to charge to hit your income goals.</p>
+
+    <div class="input-grid">
+      <div class="input-group">
+        <label>Desired Annual Income (Take-Home)</label>
+        <div class="hint">What you want to actually put in your pocket after everything</div>
+        <input type="number" id="annualIncome" placeholder="e.g., 80000" value="80000">
+      </div>
+
+      <div class="input-group">
+        <label>Annual Business Expenses</label>
+        <div class="hint">Software, tools, office, internet, supplies, education, etc.</div>
+        <input type="number" id="annualExpenses" placeholder="e.g., 12000" value="12000">
+      </div>
+
+      <div class="input-group">
+        <label>Tax Rate (%)</label>
+        <div class="hint">Self-employment + income tax (most freelancers: 25-35%)</div>
+        <input type="number" id="taxRate" placeholder="e.g., 30" value="30">
+      </div>
+
+      <div class="input-group">
+        <label>Vacation + Sick Days Per Year</label>
+        <div class="hint">Be honest! Include holidays, sick days, personal days</div>
+        <input type="number" id="vacationDays" placeholder="e.g., 25" value="25">
+      </div>
+
+      <div class="input-group">
+        <label>Hours Worked Per Day</label>
+        <div class="hint">Your total working hours (not just client hours)</div>
+        <input type="number" id="hoursPerDay" placeholder="e.g., 8" value="8">
+      </div>
+
+      <div class="input-group">
+        <label>% of Time That's Billable</label>
+        <div class="hint">Admin, marketing, invoicing = non-billable (typically 50-70%)</div>
+        <input type="number" id="billablePercent" placeholder="e.g., 60" value="60">
+      </div>
+    </div>
+
+    <button class="calc-button" onclick="calculateRate()">Calculate My Rate</button>
+
+    <div class="results" id="results">
+      <h3>Your Rate Breakdown</h3>
+
+      <div class="result-grid">
+        <div class="result-card primary">
+          <div class="result-label">Minimum Hourly Rate</div>
+          <div class="result-value" id="hourlyRate">$0</div>
+          <div class="result-note">The lowest you should charge</div>
+        </div>
+        <div class="result-card green">
+          <div class="result-label">Recommended Rate</div>
+          <div class="result-value" id="recommendedRate">$0</div>
+          <div class="result-note">With 20% profit margin</div>
+        </div>
+        <div class="result-card amber">
+          <div class="result-label">Premium Rate</div>
+          <div class="result-value" id="premiumRate">$0</div>
+          <div class="result-note">For expert-level positioning</div>
+        </div>
+      </div>
+
+      <table class="breakdown-table">
+        <tr>
+          <td>Desired take-home income</td>
+          <td id="bd-income">$0</td>
+        </tr>
+        <tr>
+          <td>+ Business expenses</td>
+          <td id="bd-expenses">$0</td>
+        </tr>
+        <tr>
+          <td>+ Self-employment taxes (<span id="bd-tax-pct">0</span>%)</td>
+          <td id="bd-taxes">$0</td>
+        </tr>
+        <tr class="total-row">
+          <td>Total you need to earn</td>
+          <td id="bd-total">$0</td>
+        </tr>
+      </table>
+
+      <table class="breakdown-table">
+        <tr>
+          <td>Working days per year (52 weeks x 5 days)</td>
+          <td>260 days</td>
+        </tr>
+        <tr>
+          <td>- Vacation, sick, & holidays</td>
+          <td id="bd-vacation">0 days</td>
+        </tr>
+        <tr>
+          <td>= Actual working days</td>
+          <td id="bd-workdays">0 days</td>
+        </tr>
+        <tr>
+          <td>x Hours per day x Billable %</td>
+          <td id="bd-billhours">0 hrs</td>
+        </tr>
+        <tr class="total-row">
+          <td>Total billable hours per year</td>
+          <td id="bd-totalhours">0 hrs</td>
+        </tr>
+      </table>
+
+      <div class="tip-box indigo">
+        <strong>What this means:</strong>
+        <span id="interpretation">Loading...</span>
+      </div>
+
+      <h3 style="margin-top:28px;">Quick Reference: Project Pricing</h3>
+      <table class="breakdown-table">
+        <tr>
+          <td>Half-day rate (4 hours)</td>
+          <td id="halfday">$0</td>
+        </tr>
+        <tr>
+          <td>Full-day rate (8 hours)</td>
+          <td id="fullday">$0</td>
+        </tr>
+        <tr>
+          <td>Weekly rate (5 days)</td>
+          <td id="weekly">$0</td>
+        </tr>
+        <tr>
+          <td>Monthly retainer (80 billable hours)</td>
+          <td id="monthly">$0</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       PRICING MODELS
+  ═══════════════════════════════════════ -->
+  <div class="guide-section">
+    <div class="section-badge" style="background: var(--primary-light); color: var(--primary);">Part 1</div>
+    <h2>Pricing Models Explained</h2>
+    <p class="section-intro">There's no single right way to price. Here are the most common models, when to use each, and how to structure them.</p>
+
+    <div class="model-grid">
+      <div class="model-card">
+        <h4>Hourly Pricing</h4>
+        <p>Bill by the hour. Simple and transparent.</p>
+        <p class="pros">+ Easy to calculate, fair for exploratory work</p>
+        <p class="cons">- Punishes efficiency, caps your income, clients watch the clock</p>
+        <p><strong>Best for:</strong> Consulting, ongoing support, early-stage freelancers</p>
+      </div>
+      <div class="model-card">
+        <h4>Project-Based Pricing</h4>
+        <p>Flat fee for a defined deliverable.</p>
+        <p class="pros">+ Rewards efficiency, predictable for clients, higher perceived value</p>
+        <p class="cons">- Scope creep risk, hard to estimate early on</p>
+        <p><strong>Best for:</strong> Design, development, writing, clear-scope projects</p>
+      </div>
+      <div class="model-card">
+        <h4>Value-Based Pricing</h4>
+        <p>Price based on the ROI you deliver.</p>
+        <p class="pros">+ Highest earning potential, aligns incentives</p>
+        <p class="cons">- Requires confidence & proof, harder to sell initially</p>
+        <p><strong>Best for:</strong> Marketing, strategy, sales optimization, consulting</p>
+      </div>
+      <div class="model-card">
+        <h4>Retainer / Subscription</h4>
+        <p>Monthly fee for ongoing access/work.</p>
+        <p class="pros">+ Predictable income, long-term relationships, compounding revenue</p>
+        <p class="cons">- Can become a trap if scope isn't defined</p>
+        <p><strong>Best for:</strong> Social media management, maintenance, ongoing advisory</p>
+      </div>
+    </div>
+
+    <div class="tip-box green">
+      <strong>The Progression Path:</strong>
+      Most successful freelancers evolve from Hourly (beginner) to Project-Based (intermediate) to Value-Based (expert). Start where you're comfortable, but always be moving toward value-based pricing.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       INDUSTRY BENCHMARKS
+  ═══════════════════════════════════════ -->
+  <div class="guide-section">
+    <div class="section-badge" style="background: var(--green-light); color: var(--green);">Part 2</div>
+    <h2>Industry Rate Benchmarks</h2>
+    <p class="section-intro">Where do you stand? These ranges represent US-based freelancers in 2024-2025. Your rate should reflect your experience, niche, and results.</p>
+
+    <table class="benchmark-table">
+      <thead>
+        <tr>
+          <th>Freelance Specialty</th>
+          <th>Beginner</th>
+          <th>Mid-Level</th>
+          <th>Expert</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Graphic Design</strong></td><td>$35-60/hr</td><td>$60-100/hr</td><td>$100-200+/hr</td></tr>
+        <tr><td><strong>Web Design</strong></td><td>$50-75/hr</td><td>$75-150/hr</td><td>$150-300+/hr</td></tr>
+        <tr><td><strong>Web Development</strong></td><td>$60-100/hr</td><td>$100-175/hr</td><td>$175-350+/hr</td></tr>
+        <tr><td><strong>Copywriting</strong></td><td>$40-75/hr</td><td>$75-150/hr</td><td>$150-350+/hr</td></tr>
+        <tr><td><strong>Content Writing</strong></td><td>$25-50/hr</td><td>$50-100/hr</td><td>$100-200+/hr</td></tr>
+        <tr><td><strong>Social Media Management</strong></td><td>$25-50/hr</td><td>$50-100/hr</td><td>$100-200+/hr</td></tr>
+        <tr><td><strong>SEO / SEM</strong></td><td>$50-80/hr</td><td>$80-150/hr</td><td>$150-300+/hr</td></tr>
+        <tr><td><strong>Video Production</strong></td><td>$50-100/hr</td><td>$100-200/hr</td><td>$200-500+/hr</td></tr>
+        <tr><td><strong>Photography</strong></td><td>$50-100/hr</td><td>$100-250/hr</td><td>$250-500+/hr</td></tr>
+        <tr><td><strong>Business Consulting</strong></td><td>$75-125/hr</td><td>$125-250/hr</td><td>$250-500+/hr</td></tr>
+        <tr><td><strong>Marketing Strategy</strong></td><td>$60-100/hr</td><td>$100-200/hr</td><td>$200-400+/hr</td></tr>
+        <tr><td><strong>UX/UI Design</strong></td><td>$50-85/hr</td><td>$85-165/hr</td><td>$165-300+/hr</td></tr>
+        <tr><td><strong>Bookkeeping / Accounting</strong></td><td>$30-55/hr</td><td>$55-100/hr</td><td>$100-200+/hr</td></tr>
+        <tr><td><strong>Virtual Assistant</strong></td><td>$15-30/hr</td><td>$30-60/hr</td><td>$60-100+/hr</td></tr>
+      </tbody>
+    </table>
+
+    <div class="tip-box amber">
+      <strong>Important:</strong>
+      These are hourly equivalents. If you're project-based, your effective hourly rate should be higher than these benchmarks because you're absorbing more risk and delivering more value.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       RAISING YOUR RATES
+  ═══════════════════════════════════════ -->
+  <div class="guide-section">
+    <div class="section-badge" style="background: var(--amber-light); color: var(--amber);">Part 3</div>
+    <h2>How to Raise Your Rates</h2>
+    <p class="section-intro">Scripts, strategies, and frameworks for confidently increasing your prices without losing clients.</p>
+
+    <h3>When to Raise Your Rates</h3>
+    <ul>
+      <li><strong>You're booked solid</strong> — if you can't take on new work, your price is too low</li>
+      <li><strong>Everyone says yes</strong> — if no one pushes back on pricing, you're underpriced</li>
+      <li><strong>You've improved</strong> — new skills, certifications, case studies, or results</li>
+      <li><strong>It's been 6-12 months</strong> — annual rate increases are standard practice</li>
+      <li><strong>Your costs have increased</strong> — inflation, tools, taxes</li>
+      <li><strong>You're resentful</strong> — if you dread client work, pricing is usually the root cause</li>
+    </ul>
+
+    <h3>The 5 Strategies for Raising Rates</h3>
+
+    <h4>Strategy 1: New Clients at New Rates</h4>
+    <p>Easiest approach. Keep existing clients at current rates, quote all new clients at your new rate. Over time, your average rate rises naturally.</p>
+
+    <h4>Strategy 2: The Grandfather Transition</h4>
+    <p>Give existing clients 30-60 days notice. Let them keep the old rate for 1-2 more months, then transition to the new rate.</p>
+
+    <h4>Strategy 3: Add Value, Then Raise</h4>
+    <p>Add something new to your offering (faster delivery, extra revisions, monthly report, bonus deliverable), then increase the price. The raise feels justified because they're getting more.</p>
+
+    <h4>Strategy 4: Repackage Your Offer</h4>
+    <p>Instead of raising the hourly rate, switch to project-based pricing at a higher total. Clients focus on outcomes, not hours.</p>
+
+    <h4>Strategy 5: The "Premium Tier" Addition</h4>
+    <p>Keep your current offer AND add a premium version at a higher price. Some clients will upgrade; others stay where they are. Revenue increases either way.</p>
+
+    <h3>Rate Increase Scripts</h3>
+
+    <div class="script-box">
+      <div class="script-label">Script 1: The Annual Increase (Email)</div>
+      <p>"Hi [Client Name],</p>
+      <p>I wanted to give you advance notice that starting [date — 30+ days from now], my rates will be adjusting to $[new rate] per [hour/project/month]. This reflects [increased demand for my services / additional certifications I've earned / the enhanced results I'm delivering / industry-standard annual adjustment].</p>
+      <p>I've genuinely loved working with you on [specific project/achievement], and I'm committed to continuing to deliver exceptional results.</p>
+      <p>If you have any questions, I'm happy to chat. Thank you for your continued trust in my work.</p>
+      <p>[Your Name]"</p>
+    </div>
+
+    <div class="script-box">
+      <div class="script-label">Script 2: The Value-First Approach (Email)</div>
+      <p>"Hi [Client Name],</p>
+      <p>I've been reflecting on the results we've achieved together: [specific result 1], [specific result 2], and [specific result 3]. I'm proud of what we've built.</p>
+      <p>To continue delivering this level of work — and to invest in [new tools / continued education / expanded capabilities] — I'll be updating my pricing to $[new rate] effective [date].</p>
+      <p>For you as an existing client, I'd like to offer [sweetener: one extra month at current rate / a small bonus / priority scheduling].</p>
+      <p>Let me know if you'd like to discuss. I'm excited about what's ahead for [their project].</p>
+      <p>[Your Name]"</p>
+    </div>
+
+    <div class="script-box">
+      <div class="script-label">Script 3: The In-Person / Call Version</div>
+      <p>"I wanted to talk about our working arrangement. Over the past [time], we've accomplished [result], and I've invested significantly in [skills/tools/capabilities]. As I continue to grow my practice, I'm adjusting my rates to $[new rate] starting [date]. I wanted to give you plenty of notice and talk through how we can keep this partnership working well. What are your thoughts?"</p>
+      <p><em>Then: be silent and let them respond. Don't fill the silence with justifications.</em></p>
+    </div>
+
+    <h3>Handling Pushback</h3>
+
+    <div class="script-box">
+      <div class="script-label">If They Say: "That's too expensive"</div>
+      <p>"I understand. My pricing reflects [the results I deliver / the quality of work / the investment I've made in my skills]. I'd be happy to adjust the scope to fit your budget — perhaps we could [smaller scope option]. But I'm not able to adjust the rate itself, as it's consistent across all my clients."</p>
+    </div>
+
+    <div class="script-box">
+      <div class="script-label">If They Say: "We found someone cheaper"</div>
+      <p>"I appreciate you sharing that. There will always be lower-priced options — and some of them might be great. What I can tell you is that my rate reflects [X years of experience, specific results, reliability, and the fact that I deliver on time every time]. If cost is the primary factor, I understand. But if results and quality matter, I'm confident in the value I provide."</p>
+    </div>
+
+    <div class="script-box">
+      <div class="script-label">If They Ask for a Discount</div>
+      <p>"I keep my pricing consistent for all clients, so I'm not able to offer a discount on the rate. However, I can [offer a slight scope adjustment / offer a retainer for a lower effective rate / offer a longer-term commitment at a small discount]. What would be most helpful for you?"</p>
+    </div>
+
+    <div class="tip-box rose">
+      <strong>The #1 Rule of Pricing:</strong>
+      If you raise your rates and lose a client, you now have time to find a client who will pay your new rate. You cannot grow your business by keeping every client at old rates. Some client turnover during a rate increase is healthy and expected.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       PRICING PSYCHOLOGY
+  ═══════════════════════════════════════ -->
+  <div class="guide-section">
+    <div class="section-badge" style="background: var(--rose-light); color: var(--rose);">Part 4</div>
+    <h2>Pricing Psychology & Tactics</h2>
+    <p class="section-intro">Small tweaks to how you present pricing can dramatically change how clients perceive and respond to it.</p>
+
+    <h3>1. Anchoring</h3>
+    <p>Always present your highest-priced option first. When a client sees a $10,000 option before a $5,000 option, the $5,000 feels like a deal. Without the anchor, it feels expensive.</p>
+
+    <h3>2. The Rule of Three</h3>
+    <p>Offer three tiers: Basic, Standard, Premium. Most people choose the middle option. Make your preferred (most profitable) option the middle tier.</p>
+
+    <h3>3. Price Presentation</h3>
+    <ul>
+      <li><strong>Remove the dollar sign</strong> on proposals — "5,000" feels less painful than "$5,000"</li>
+      <li><strong>Use round numbers for premium</strong> — $5,000 feels more premium than $4,997</li>
+      <li><strong>Break it down</strong> — "$417/month" feels smaller than "$5,000/project"</li>
+      <li><strong>Compare to alternatives</strong> — "Less than the cost of a full-time hire at $60K/year"</li>
+    </ul>
+
+    <h3>4. The Confidence Tax</h3>
+    <p>People pay more for confidence. If you present your price with hesitation ("so, um, my rate is... $75 an hour... if that works for you?"), you've already lost. State your price clearly and stop talking. Confidence is worth a 20-30% premium.</p>
+
+    <h3>5. Frame the Value, Not the Cost</h3>
+    <ul>
+      <li>Instead of: "My rate is $150/hour" say "The investment for this project is $3,000, and based on similar projects, clients typically see a [X]x return within [timeframe]."</li>
+      <li>Instead of: "This costs $2,000" say "For a $2,000 investment, you'll receive [deliverable] that will [specific outcome]."</li>
+    </ul>
+
+    <h3>6. Payment Terms That Help You</h3>
+    <ul>
+      <li><strong>50/50:</strong> 50% upfront, 50% on delivery (most common)</li>
+      <li><strong>100% upfront:</strong> Offer a 5-10% discount for full payment upfront (improves cash flow)</li>
+      <li><strong>Milestone payments:</strong> 40/30/30 split at project milestones (best for large projects)</li>
+      <li><strong>Retainer + overage:</strong> Monthly retainer for a set scope; additional work at hourly rate</li>
+    </ul>
+
+    <div class="tip-box green">
+      <strong>Your Next Step:</strong>
+      Use the calculator above to find your minimum rate. Then look at the benchmarks. Your actual rate should be at or above the benchmark for your experience level. If you're below, it's time to raise your prices. You have the scripts. You have the strategies. Go do it.
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>Freelancer Rate Calculator & Pricing Guide &mdash; Created by PrestoKit</p>
+  </div>
+
+</div>
+
+<script>
+function calculateRate() {
+  const income = parseFloat(document.getElementById('annualIncome').value) || 0;
+  const expenses = parseFloat(document.getElementById('annualExpenses').value) || 0;
+  const taxRate = parseFloat(document.getElementById('taxRate').value) || 0;
+  const vacDays = parseFloat(document.getElementById('vacationDays').value) || 0;
+  const hoursDay = parseFloat(document.getElementById('hoursPerDay').value) || 0;
+  const billPct = parseFloat(document.getElementById('billablePercent').value) || 0;
+
+  // Calculate total needed (income + expenses, then gross up for taxes)
+  const preTotal = income + expenses;
+  const grossNeeded = preTotal / (1 - taxRate / 100);
+  const taxes = grossNeeded - preTotal;
+
+  // Calculate billable hours
+  const workDays = 260 - vacDays;
+  const totalHoursPerDay = hoursDay * (billPct / 100);
+  const billableHours = workDays * totalHoursPerDay;
+
+  // Calculate rates
+  const hourly = grossNeeded / billableHours;
+  const recommended = hourly * 1.2;
+  const premium = hourly * 1.5;
+
+  // Format currency
+  const fmt = (n) => '$' + Math.round(n).toLocaleString();
+
+  // Display results
+  document.getElementById('hourlyRate').textContent = fmt(hourly);
+  document.getElementById('recommendedRate').textContent = fmt(recommended);
+  document.getElementById('premiumRate').textContent = fmt(premium);
+
+  document.getElementById('bd-income').textContent = fmt(income);
+  document.getElementById('bd-expenses').textContent = fmt(expenses);
+  document.getElementById('bd-tax-pct').textContent = taxRate;
+  document.getElementById('bd-taxes').textContent = fmt(taxes);
+  document.getElementById('bd-total').textContent = fmt(grossNeeded);
+
+  document.getElementById('bd-vacation').textContent = vacDays + ' days';
+  document.getElementById('bd-workdays').textContent = workDays + ' days';
+  document.getElementById('bd-billhours').textContent = hoursDay + ' hrs x ' + billPct + '%';
+  document.getElementById('bd-totalhours').textContent = Math.round(billableHours).toLocaleString() + ' hrs';
+
+  document.getElementById('halfday').textContent = fmt(recommended * 4);
+  document.getElementById('fullday').textContent = fmt(recommended * 8);
+  document.getElementById('weekly').textContent = fmt(recommended * 8 * 5);
+  document.getElementById('monthly').textContent = fmt(recommended * 80);
+
+  document.getElementById('interpretation').textContent =
+    'To take home ' + fmt(income) + ' per year after ' + fmt(expenses) + ' in expenses and ' +
+    taxRate + '% taxes, you need to earn ' + fmt(grossNeeded) + ' gross. With ' +
+    Math.round(billableHours) + ' billable hours per year, your minimum rate is ' + fmt(hourly) +
+    '/hour. We recommend charging ' + fmt(recommended) + '/hour (the 20% buffer covers slow months, ' +
+    'unexpected expenses, and profit). For project pricing, multiply your recommended rate by estimated hours and add 15-20% for scope contingency.';
+
+  document.getElementById('results').classList.add('show');
+  document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+</body>
+</html>

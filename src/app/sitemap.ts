@@ -15,6 +15,10 @@ const toolPages = [
   "/tools/word-counter",
   "/tools/lorem-ipsum-generator",
   "/tools/percentage-calculator",
+  "/tools/text-case-converter",
+  "/tools/color-palette-generator",
+  "/tools/json-formatter",
+  "/tools/markdown-to-html",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

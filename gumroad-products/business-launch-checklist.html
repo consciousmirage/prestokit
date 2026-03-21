@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Launch Checklist — The Complete Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  :root {
+    --bg: #fafbfc;
+    --card: #ffffff;
+    --ink: #0f172a;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --green: #10b981;
+    --green-bg: #ecfdf5;
+    --blue: #3b82f6;
+    --blue-bg: #eff6ff;
+    --purple: #8b5cf6;
+    --purple-bg: #f5f3ff;
+    --orange: #f59e0b;
+    --orange-bg: #fffbeb;
+    --rose: #f43f5e;
+    --rose-bg: #fff1f2;
+    --teal: #14b8a6;
+    --teal-bg: #f0fdfa;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  @media print {
+    body { background: white; }
+    .no-print { display: none !important; }
+    .phase { break-inside: avoid; page-break-inside: avoid; }
+    .checklist-item { break-inside: avoid; }
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px;
+  }
+
+  /* ─── HEADER ─── */
+  .header {
+    text-align: center;
+    padding: 60px 40px;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+    color: white;
+    border-radius: 24px;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -10%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(16,185,129,0.1) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .header h1 {
+    font-size: 40px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .header p {
+    font-size: 17px;
+    color: #94a3b8;
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .header .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #cbd5e1;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── PROGRESS BAR ─── */
+  .progress-bar {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px 32px;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .progress-bar .label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .progress-track {
+    flex: 1;
+    height: 8px;
+    background: #f1f5f9;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--green), var(--teal));
+    border-radius: 4px;
+    transition: width 0.3s ease;
+  }
+
+  .progress-count {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--green);
+    white-space: nowrap;
+    min-width: 60px;
+    text-align: right;
+  }
+
+  /* ─── PHASES ─── */
+  .phase {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+
+  .phase-header {
+    padding: 28px 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .phase-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+
+  .phase-header h2 {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+
+  .phase-header .phase-count {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 400;
+    margin-top: 2px;
+  }
+
+  .phase-header .phase-tag {
+    margin-left: auto;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+
+  /* Color themes */
+  .phase-legal .phase-icon { background: var(--blue-bg); color: var(--blue); }
+  .phase-legal .phase-tag { background: var(--blue-bg); color: var(--blue); }
+
+  .phase-finance .phase-icon { background: var(--green-bg); color: var(--green); }
+  .phase-finance .phase-tag { background: var(--green-bg); color: var(--green); }
+
+  .phase-brand .phase-icon { background: var(--purple-bg); color: var(--purple); }
+  .phase-brand .phase-tag { background: var(--purple-bg); color: var(--purple); }
+
+  .phase-marketing .phase-icon { background: var(--orange-bg); color: var(--orange); }
+  .phase-marketing .phase-tag { background: var(--orange-bg); color: var(--orange); }
+
+  .phase-operations .phase-icon { background: var(--rose-bg); color: var(--rose); }
+  .phase-operations .phase-tag { background: var(--rose-bg); color: var(--rose); }
+
+  .phase-launch .phase-icon { background: var(--teal-bg); color: var(--teal); }
+  .phase-launch .phase-tag { background: var(--teal-bg); color: var(--teal); }
+
+  /* ─── SECTIONS ─── */
+  .section {
+    padding: 24px 32px;
+    border-bottom: 1px solid #f8fafc;
+  }
+
+  .section:last-child { border-bottom: none; }
+
+  .section-title {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed var(--border);
+  }
+
+  /* ─── CHECKLIST ITEMS ─── */
+  .checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 10px 0;
+  }
+
+  .checklist-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    accent-color: var(--green);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .checklist-item .item-text {
+    font-size: 14px;
+    color: #374151;
+    line-height: 1.6;
+  }
+
+  .checklist-item .item-text strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .checklist-item .item-hint {
+    display: block;
+    font-size: 12px;
+    color: #94a3b8;
+    margin-top: 2px;
+  }
+
+  .checklist-item:hover {
+    background: #fafbfc;
+    margin: 0 -8px;
+    padding: 10px 8px;
+    border-radius: 8px;
+  }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .footer a {
+    color: var(--blue);
+    text-decoration: none;
+  }
+
+  /* ─── INSTRUCTIONS BOX ─── */
+  .instructions-box {
+    background: var(--blue-bg);
+    border: 1px solid #bfdbfe;
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin-bottom: 32px;
+  }
+
+  .instructions-box h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--blue);
+    margin-bottom: 8px;
+  }
+
+  .instructions-box p {
+    font-size: 14px;
+    color: #1e40af;
+    line-height: 1.7;
+  }
+
+  .instructions-box ul {
+    margin-top: 8px;
+    padding-left: 20px;
+  }
+
+  .instructions-box li {
+    font-size: 14px;
+    color: #1e40af;
+    margin-bottom: 4px;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="badge">120+ Action Items</div>
+    <h1>Business Launch Checklist</h1>
+    <p>Everything you need to go from idea to open for business. Check off each item as you complete it.</p>
+  </div>
+
+  <!-- INSTRUCTIONS -->
+  <div class="instructions-box no-print">
+    <h3>How to Use This Checklist</h3>
+    <p>Work through each phase in order. Click the checkboxes as you complete items. To save as a printable PDF:</p>
+    <ul>
+      <li><strong>Print:</strong> File &rarr; Print &rarr; Save as PDF</li>
+      <li><strong>Manual tracking:</strong> Print it out and check boxes with a pen</li>
+      <li>Items with hints (in gray below the task) provide extra context</li>
+    </ul>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-bar no-print">
+    <div class="label">Progress</div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-count" id="progressCount">0 / 120</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       PHASE 1: LEGAL & STRUCTURE
+  ═══════════════════════════════════════ -->
+  <div class="phase phase-legal">
+    <div class="phase-header">
+      <div class="phase-icon">&#9878;</div>
+      <div>
+        <h2>Phase 1: Legal & Business Structure</h2>
+        <div class="phase-count">Lay the legal foundation first</div>
+      </div>
+      <div class="phase-tag">Weeks 1-2</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Business Entity</div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Choose your business structure</strong> (sole proprietor, LLC, S-Corp, C-Corp)<span class="item-hint">LLC is most common for small businesses — protects personal assets</span></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Register your business name</strong> with your state's Secretary of State<span class="item-hint">Check availability at your state's SOS website before filing</span></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>File Articles of Organization</strong> (for LLC) or Articles of Incorporation<span class="item-hint">Typical cost: $50-$500 depending on state</span></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Get your EIN</strong> (Employer Identification Number) from the IRS<span class="item-hint">Free at IRS.gov — takes 5 minutes online</span></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Draft an Operating Agreement</strong> (LLC) or Corporate Bylaws</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Register as a foreign entity</strong> if operating in multiple states</div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Licenses & Permits</div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Research required federal licenses</strong> for your industry<span class="item-hint">SBA.gov has a license/permit lookup tool by state and industry</span></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Get state business license(s)</strong></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Get local/city business license</strong><span class="item-hint">Contact your city clerk's office or check the city website</span></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Apply for professional/occupational licenses</strong> if required</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Register for a sales tax permit</strong> if selling taxable goods/services</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Obtain zoning permits</strong> if operating from a physical location</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Get a home occupation permit</strong> if running business from home</div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Legal Protection</div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>File for trademark</strong> on your business name and logo<span class="item-hint">Search USPTO.gov first to ensure your name isn't taken</span></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Create standard client/customer contracts</strong> or Terms of Service</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Draft a Privacy Policy</strong> (required if you collect any customer data)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Create a Terms & Conditions page</strong> for your website</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Get general liability insurance</strong><span class="item-hint">Even online businesses should have E&O (Errors & Omissions) insurance</span></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Get professional liability insurance</strong> if offering services</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Set up a registered agent</strong> if required in your state</div></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       PHASE 2: FINANCES
+  ═══════════════════════════════════════ -->
+  <div class="phase phase-finance">
+    <div class="phase-header">
+      <div class="phase-icon">&#36;</div>
+      <div>
+        <h2>Phase 2: Finances & Accounting</h2>
+        <div class="phase-count">Set up your money systems</div>
+      </div>
+      <div class="phase-tag">Weeks 2-3</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Banking</div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Open a business checking account</strong><span class="item-hint">Never mix personal and business finances — this protects your LLC status</span></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Open a business savings account</strong> (for taxes and emergency fund)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Get a business credit card</strong><span class="item-hint">Builds business credit and earns rewards on business expenses</span></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Set up business PayPal or Stripe account</strong> for online payments</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Apply for a business line of credit</strong> (even if you don't need it yet)</div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Accounting & Bookkeeping</div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Choose accounting software</strong> (QuickBooks, Wave, FreshBooks, Xero)<span class="item-hint">Wave is free and great for startups; QuickBooks is the industry standard</span></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Set up chart of accounts</strong> (income categories, expense categories)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Create invoice templates</strong> with your branding</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Set up expense tracking system</strong> (receipt scanning, categorization)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Establish a bookkeeping routine</strong> (weekly or monthly)<span class="item-hint">Set a recurring calendar reminder — don't let it pile up</span></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Find a CPA or tax professional</strong><span class="item-hint">Do this now, not at tax time — a good CPA saves you money all year</span></div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Pricing & Revenue</div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Research competitor pricing</strong> for benchmarking</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Calculate your costs</strong> (fixed costs, variable costs, overhead)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Set your pricing strategy</strong> (cost-plus, value-based, competitive)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Create your pricing page / rate sheet</strong></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Determine your break-even point</strong></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Set quarterly tax payment reminders</strong> (15th of Apr, Jun, Sep, Jan)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Create a simple financial forecast</strong> (12-month revenue and expense projections)</div></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       PHASE 3: BRAND & IDENTITY
+  ═══════════════════════════════════════ -->
+  <div class="phase phase-brand">
+    <div class="phase-header">
+      <div class="phase-icon">&#9733;</div>
+      <div>
+        <h2>Phase 3: Brand & Online Presence</h2>
+        <div class="phase-count">Build your brand and get online</div>
+      </div>
+      <div class="phase-tag">Weeks 3-5</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Brand Identity</div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Finalize your business name</strong> (check domain, trademark, and social handle availability)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Write your mission statement</strong> (1-2 sentences)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Define your brand values</strong> (3-5 core values)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Identify your target audience</strong> (create 1-2 customer personas)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Define your brand voice and tone</strong></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Write your elevator pitch</strong> (30-second version)<span class="item-hint">Template: "I help [audience] achieve [outcome] through [method]"</span></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Write your brand story</strong> (the why behind your business)</div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Visual Identity</div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Design your logo</strong> (primary, secondary, and icon versions)<span class="item-hint">Canva, Fiverr, or 99designs are affordable options</span></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Choose your brand color palette</strong> (primary, secondary, accent colors)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Select brand fonts</strong> (heading font + body font)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Create a brand style guide</strong> (even a simple 1-pager helps)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Design business cards</strong></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Create branded templates</strong> (email signature, letterhead, social media templates)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Get professional headshots / brand photography</strong></div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Website</div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Purchase your domain name</strong><span class="item-hint">Get .com if possible. Also grab common misspellings</span></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Choose your website platform</strong> (WordPress, Squarespace, Shopify, Wix)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Set up web hosting</strong> (if not included with your platform)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Build your homepage</strong> with clear value proposition</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Create your About page</strong> (your story, credentials, photos)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Create Services/Products page(s)</strong> with pricing</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Create Contact page</strong> with contact form</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Set up Google Analytics</strong> for traffic tracking</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Set up SSL certificate</strong> (https — usually free with hosting)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Make sure site is mobile-responsive</strong></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Add Privacy Policy and Terms of Service pages</strong></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Set up your business email</strong> (you@yourdomain.com)<span class="item-hint">Google Workspace ($6/mo) or Zoho Mail (free) are great options</span></div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Social Media</div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Claim your business name</strong> on all major platforms (even if you won't use them all)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Set up Instagram business profile</strong> with optimized bio</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Set up Facebook business page</strong></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Set up LinkedIn company page</strong> (and optimize personal profile)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Set up TikTok business account</strong> (if relevant)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Choose 2-3 primary platforms</strong> to focus on<span class="item-hint">Better to be great on 2 platforms than mediocre on 5</span></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Create a link-in-bio page</strong> (Linktree, Stan Store, or custom)</div></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       PHASE 4: MARKETING
+  ═══════════════════════════════════════ -->
+  <div class="phase phase-marketing">
+    <div class="phase-header">
+      <div class="phase-icon">&#9889;</div>
+      <div>
+        <h2>Phase 4: Marketing & Customer Acquisition</h2>
+        <div class="phase-count">Get your first customers</div>
+      </div>
+      <div class="phase-tag">Weeks 5-7</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Marketing Strategy</div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Define your unique selling proposition</strong> (what makes you different)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Research your competitors</strong> (pricing, messaging, channels, strengths, weaknesses)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Identify your top 3 marketing channels</strong><span class="item-hint">Go where your customers already are. Don't spread too thin</span></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Set marketing goals</strong> (specific, measurable, time-bound)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Determine your marketing budget</strong> (even if it's $0 to start)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Create a marketing calendar</strong> for your first 90 days</div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Content Marketing</div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Define your content pillars</strong> (3-5 topic categories you'll create content about)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Create a content calendar</strong> (what to post, where, and when)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Write 3-5 blog posts</strong> before launch for SEO<span class="item-hint">Target "how to" and "what is" keywords related to your business</span></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Create 2 weeks of social media content</strong> in advance</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Create a lead magnet</strong> (free download, quiz, checklist, etc.)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Set up your email marketing platform</strong> (Mailchimp, ConvertKit, etc.)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Create a welcome email sequence</strong> (3-5 emails for new subscribers)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Create opt-in forms</strong> on your website for email capture</div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Local & SEO Marketing</div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Set up Google Business Profile</strong> (critical for local businesses)<span class="item-hint">This is free and makes you appear in Google Maps results</span></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Get listed on Yelp</strong></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>List on industry-specific directories</strong></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Do basic SEO optimization</strong> on all website pages (title tags, meta descriptions, headers)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Submit your sitemap to Google Search Console</strong></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Research 20-30 target keywords</strong> for your business</div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Paid Advertising</div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Set up Facebook/Instagram Ads Manager</strong></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Install Facebook Pixel</strong> on your website</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Set up Google Ads account</strong></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Plan a small test ad budget</strong> ($5-10/day to start)<span class="item-hint">Start with one platform, one campaign. Don't spread budget thin</span></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Create ad creatives</strong> (images, copy, headlines)</div></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       PHASE 5: OPERATIONS
+  ═══════════════════════════════════════ -->
+  <div class="phase phase-operations">
+    <div class="phase-header">
+      <div class="phase-icon">&#9881;</div>
+      <div>
+        <h2>Phase 5: Operations & Systems</h2>
+        <div class="phase-count">Build the machine that runs your business</div>
+      </div>
+      <div class="phase-tag">Weeks 6-8</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Tools & Software</div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Set up project management tool</strong> (Notion, Asana, Trello, ClickUp)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Set up CRM</strong> (customer relationship management) — even a spreadsheet to start<span class="item-hint">HubSpot CRM is free and powerful enough for most small businesses</span></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Set up scheduling tool</strong> (Calendly, Acuity) for meetings/calls</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Set up cloud storage</strong> (Google Drive, Dropbox) for file organization</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Set up communication tools</strong> (Slack, Google Workspace)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Set up password manager</strong> (LastPass, 1Password) for security</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Set up backup system</strong> for all important files and data</div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Processes & SOPs</div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Document your sales process</strong> (inquiry &rarr; proposal &rarr; close &rarr; onboard)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Document your service delivery process</strong> or order fulfillment</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Create a client onboarding checklist</strong></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Create a client offboarding process</strong></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Set up a customer feedback collection system</strong></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Create templates for proposals, contracts, and invoices</strong></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Document your daily/weekly business routines</strong></div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Team (If Applicable)</div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Identify roles you need to fill</strong> (now vs. later)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Write job descriptions</strong> for roles you'll hire for</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Set up payroll system</strong> (Gusto, ADP) if hiring employees</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Create an employee handbook</strong> (even if just a few pages)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Set up contractor agreement templates</strong> if using freelancers<span class="item-hint">Always get a signed contract before work begins</span></div></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       PHASE 6: LAUNCH
+  ═══════════════════════════════════════ -->
+  <div class="phase phase-launch">
+    <div class="phase-header">
+      <div class="phase-icon">&#9889;</div>
+      <div>
+        <h2>Phase 6: Pre-Launch & Launch Day</h2>
+        <div class="phase-count">Go time — open for business</div>
+      </div>
+      <div class="phase-tag">Week 8+</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Pre-Launch (1-2 Weeks Before)</div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Test your entire purchase/booking flow</strong> from start to finish</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Proofread all website copy</strong></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Test all website forms, links, and buttons</strong></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Test your payment processing</strong> (run a test transaction)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Test your email sequences</strong> (subscribe to your own list)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Create a launch announcement post / email</strong></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Tell friends and family about your launch</strong></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Set up analytics tracking</strong> to measure launch performance</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Prepare a launch-day social media schedule</strong></div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Launch Day</div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Publish your launch announcement</strong> across all channels</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Send launch email to your list</strong></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Post on all social media platforms</strong></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Personally message 20+ people</strong> who might be interested or might share</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Monitor everything closely</strong> (website uptime, payment processing, emails)</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Respond quickly to all inquiries</strong></div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Post-Launch (First 30 Days)</div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Collect feedback from your first customers</strong></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Ask for reviews and testimonials</strong></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Review your analytics</strong> — what's working, what's not</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Adjust your marketing based on early data</strong></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Set up a referral ask</strong> from happy customers</div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Establish your ongoing weekly routine</strong></div></div>
+      <div class="checklist-item"><input type="checkbox"><div class="item-text"><strong>Celebrate your launch!</strong> You did it.<span class="item-hint">Seriously — take a moment to acknowledge what you've built</span></div></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>Business Launch Checklist &mdash; Created by PrestoKit</p>
+    <p style="margin-top:4px;">Print this page (File &rarr; Print &rarr; Save as PDF) for a permanent copy.</p>
+  </div>
+
+</div>
+
+<script>
+  // Progress tracking
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  const progressFill = document.getElementById('progressFill');
+  const progressCount = document.getElementById('progressCount');
+  const total = checkboxes.length;
+
+  function updateProgress() {
+    const checked = document.querySelectorAll('input[type="checkbox"]:checked').length;
+    const pct = Math.round((checked / total) * 100);
+    progressFill.style.width = pct + '%';
+    progressCount.textContent = checked + ' / ' + total;
+  }
+
+  checkboxes.forEach(cb => cb.addEventListener('change', updateProgress));
+  updateProgress();
+</script>
+</body>
+</html>

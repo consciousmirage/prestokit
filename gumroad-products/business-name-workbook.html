@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Ultimate Business Name Workbook</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+
+  :root {
+    --ink: #111827;
+    --body: #374151;
+    --muted: #6b7280;
+    --light-muted: #9ca3af;
+    --bg: #f9fafb;
+    --card: #ffffff;
+    --border: #e5e7eb;
+    --primary: #7c3aed;
+    --primary-light: #ede9fe;
+    --secondary: #0ea5e9;
+    --secondary-light: #e0f2fe;
+    --accent: #f59e0b;
+    --accent-light: #fef3c7;
+    --rose: #f43f5e;
+    --rose-light: #ffe4e6;
+    --emerald: #10b981;
+    --emerald-light: #d1fae5;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--body);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  @media print {
+    body { background: white; font-size: 11pt; }
+    .container { max-width: 100%; padding: 0 20px; }
+    .section { break-inside: avoid; page-break-inside: avoid; }
+    .hero { padding: 40px 30px; }
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 30px 20px;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: linear-gradient(135deg, #1e1b4b 0%, #4c1d95 40%, #7c3aed 100%);
+    color: white;
+    padding: 70px 50px;
+    border-radius: 24px;
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(251,191,36,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 6px 18px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 44px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero p {
+    font-size: 17px;
+    color: rgba(255,255,255,0.7);
+    max-width: 550px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── TABLE OF CONTENTS ─── */
+  .toc {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px 40px;
+    margin-bottom: 40px;
+  }
+
+  .toc h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--ink);
+  }
+
+  .toc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .toc-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    transition: background 0.2s;
+    font-size: 14px;
+    color: var(--body);
+    text-decoration: none;
+  }
+
+  .toc-item:hover { background: var(--bg); }
+
+  .toc-number {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    background: var(--primary-light);
+    color: var(--primary);
+    flex-shrink: 0;
+  }
+
+  /* ─── SECTIONS ─── */
+  .section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 40px 44px;
+    margin-bottom: 28px;
+  }
+
+  .section-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+  }
+
+  .section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .section .section-intro {
+    font-size: 15px;
+    color: var(--muted);
+    margin-bottom: 28px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 28px 0 12px;
+  }
+
+  .section h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 20px 0 8px;
+  }
+
+  .section p {
+    font-size: 14px;
+    margin-bottom: 12px;
+    line-height: 1.8;
+  }
+
+  .section ul, .section ol {
+    padding-left: 24px;
+    margin-bottom: 16px;
+  }
+
+  .section li {
+    font-size: 14px;
+    margin-bottom: 6px;
+    line-height: 1.7;
+  }
+
+  /* ─── FORMULA CARDS ─── */
+  .formula-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+
+  .formula-card .formula-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 4px;
+  }
+
+  .formula-card .formula-pattern {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 6px;
+    font-family: 'Inter', monospace;
+  }
+
+  .formula-card .formula-examples {
+    font-size: 13px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* ─── WORD GRIDS ─── */
+  .word-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .word-tag {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    text-align: center;
+    color: var(--body);
+  }
+
+  /* ─── SCORE TABLE ─── */
+  .score-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 14px;
+  }
+
+  .score-table thead th {
+    background: var(--bg);
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    border-bottom: 2px solid var(--border);
+  }
+
+  .score-table thead th:last-child { text-align: center; }
+
+  .score-table tbody td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #f3f4f6;
+    color: var(--body);
+  }
+
+  .score-table tbody td:last-child {
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .score-table .score-input {
+    width: 50px;
+    height: 32px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* ─── WORKSPACE ─── */
+  .workspace {
+    background: var(--bg);
+    border: 2px dashed var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    margin: 20px 0;
+  }
+
+  .workspace h4 {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  .write-line {
+    border-bottom: 1px solid #d1d5db;
+    height: 36px;
+    margin-bottom: 8px;
+  }
+
+  /* ─── EXAMPLE BREAKDOWN ─── */
+  .example-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 16px 0;
+  }
+
+  .example-item {
+    padding: 14px 18px;
+    background: var(--bg);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+
+  .example-item .name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+
+  .example-item .breakdown {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* ─── TIP BOX ─── */
+  .tip-box {
+    padding: 20px 24px;
+    border-radius: 14px;
+    margin: 20px 0;
+    font-size: 14px;
+  }
+
+  .tip-box.purple { background: var(--primary-light); border-left: 4px solid var(--primary); }
+  .tip-box.blue { background: var(--secondary-light); border-left: 4px solid var(--secondary); }
+  .tip-box.amber { background: var(--accent-light); border-left: 4px solid var(--accent); }
+  .tip-box.rose { background: var(--rose-light); border-left: 4px solid var(--rose); }
+  .tip-box.green { background: var(--emerald-light); border-left: 4px solid var(--emerald); }
+
+  .tip-box strong {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--ink);
+  }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--light-muted);
+    font-size: 13px;
+  }
+
+  /* ─── SUFFIX TABLE ─── */
+  .suffix-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 16px 0;
+  }
+
+  .suffix-box {
+    padding: 16px 20px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+
+  .suffix-box .industry {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .suffix-box .words {
+    font-size: 13px;
+    color: var(--body);
+    line-height: 1.8;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="badge">Naming Workbook</div>
+    <h1>The Ultimate Business<br>Name Workbook</h1>
+    <p>Frameworks, formulas, and tools to find the perfect name for your business. Stop overthinking. Start creating.</p>
+  </div>
+
+  <!-- TABLE OF CONTENTS -->
+  <div class="toc">
+    <h2>What's Inside</h2>
+    <div class="toc-grid">
+      <a class="toc-item" href="#s1"><div class="toc-number">1</div> Brainstorming Frameworks</a>
+      <a class="toc-item" href="#s2"><div class="toc-number">2</div> Naming Formulas</a>
+      <a class="toc-item" href="#s3"><div class="toc-number">3</div> 200+ Power Words</a>
+      <a class="toc-item" href="#s4"><div class="toc-number">4</div> Industry Suffix Lists</a>
+      <a class="toc-item" href="#s5"><div class="toc-number">5</div> Name Scoring Rubric</a>
+      <a class="toc-item" href="#s6"><div class="toc-number">6</div> Domain & Social Checking</a>
+      <a class="toc-item" href="#s7"><div class="toc-number">7</div> Trademark Basics</a>
+      <a class="toc-item" href="#s8"><div class="toc-number">8</div> 50 Name Breakdowns</a>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       SECTION 1: BRAINSTORMING FRAMEWORKS
+  ═══════════════════════════════════════ -->
+  <div class="section" id="s1">
+    <div class="section-badge" style="background: var(--primary-light); color: var(--primary);">Section 1</div>
+    <h2>Brainstorming Frameworks</h2>
+    <p class="section-intro">Seven proven approaches to generate dozens of name candidates. Don't filter yourself during brainstorming — write everything down, then evaluate later.</p>
+
+    <h3>Framework 1: The Mind Map Method</h3>
+    <p>Write your core product/service in the center, then branch out in these directions:</p>
+    <ol>
+      <li><strong>What you do</strong> — verbs, actions, processes</li>
+      <li><strong>Who you serve</strong> — audience, demographics, identities</li>
+      <li><strong>How you make them feel</strong> — emotions, aspirations, outcomes</li>
+      <li><strong>Your values</strong> — principles, beliefs, culture</li>
+      <li><strong>Metaphors</strong> — what is your business like? (an anchor? a lighthouse? a rocket?)</li>
+    </ol>
+
+    <div class="workspace">
+      <h4>Your Mind Map Space</h4>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+      <div class="write-line"></div>
+    </div>
+
+    <h3>Framework 2: The Word Mashup</h3>
+    <p>Combine two relevant words into one new word. This is how many iconic brands were born.</p>
+    <ul>
+      <li>Write 20 words related to your business in Column A</li>
+      <li>Write 20 words related to the feeling/outcome in Column B</li>
+      <li>Combine beginnings of Column A words with endings of Column B words</li>
+    </ul>
+    <p><strong>Examples:</strong> Pinterest (Pin + Interest), Instagram (Instant + Telegram), Groupon (Group + Coupon), Microsoft (Microcomputer + Software)</p>
+
+    <h3>Framework 3: The Foreign Language Method</h3>
+    <p>Translate your key concept words into Latin, Greek, Italian, French, Japanese, or Hawaiian. These often sound sophisticated and are more likely to have available domains.</p>
+    <p><strong>Free tools:</strong> Google Translate, WordHippo, Etymonline.com</p>
+    <p><strong>Examples:</strong> Volvo (Latin: "I roll"), Lego (Danish: "play well"), Audi (Latin: "hear/listen")</p>
+
+    <h3>Framework 4: The Acronym Builder</h3>
+    <p>Write a phrase that describes your mission, then use the first letters to create a name.</p>
+    <p><strong>Examples:</strong> IKEA (Ingvar Kamprad Elmtaryd Agunnaryd), ESPN (Entertainment and Sports Programming Network), ASOS (As Seen On Screen)</p>
+
+    <h3>Framework 5: The Modifier + Noun Formula</h3>
+    <p>Pair an unexpected adjective or modifier with a common noun. The contrast creates memorability.</p>
+    <p><strong>Examples:</strong> Red Bull, Blue Apron, Honest Tea, Liquid Death, Kind Bar, Brave Browser</p>
+
+    <h3>Framework 6: The Origin Story Method</h3>
+    <p>Draw from personal history: founder's name, hometown, street you grew up on, a meaningful place, date, or memory.</p>
+    <p><strong>Examples:</strong> Adidas (Adi Dassler), Mercedes (founder's daughter), Burton (Jake Burton), Versace (Gianni Versace)</p>
+
+    <h3>Framework 7: The Invented Word Approach</h3>
+    <p>Create a brand-new word that sounds right for your brand. Focus on how it sounds, looks, and feels.</p>
+    <ul>
+      <li><strong>Soft sounds</strong> (L, M, S, F) = gentle, elegant, premium</li>
+      <li><strong>Hard sounds</strong> (K, T, X, Z) = bold, energetic, tech</li>
+      <li><strong>Short (1-2 syllables)</strong> = punchy, modern, memorable</li>
+      <li><strong>Longer (3+ syllables)</strong> = sophisticated, established, premium</li>
+    </ul>
+    <p><strong>Examples:</strong> Kodak, Xerox, Hulu, Etsy, Spotify, Zillow</p>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       SECTION 2: NAMING FORMULAS
+  ═══════════════════════════════════════ -->
+  <div class="section" id="s2">
+    <div class="section-badge" style="background: var(--secondary-light); color: var(--secondary);">Section 2</div>
+    <h2>12 Proven Naming Formulas</h2>
+    <p class="section-intro">Plug your words into these formulas to generate name options quickly. Each formula includes the pattern and real-world examples.</p>
+
+    <div class="formula-card">
+      <div class="formula-name">Formula 1: [Adjective] + [Noun]</div>
+      <div class="formula-pattern">[Descriptor] + [Thing]</div>
+      <div class="formula-examples">Examples: Bright Side, Clear Voice, True Grit, Whole Foods, Pure Barre, Fresh Market</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Formula 2: [Verb] + [Noun]</div>
+      <div class="formula-pattern">[Action] + [Object]</div>
+      <div class="formula-examples">Examples: SurveyMonkey, Snapchat, GoFundMe, StitchFix, DoorDash, Kickstarter</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Formula 3: [Word] + [ly/fy/ify/io/ly]</div>
+      <div class="formula-pattern">[Root Word] + [Tech Suffix]</div>
+      <div class="formula-examples">Examples: Spotify, Shopify, Grammarly, Calendly, Notion, Figma</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Formula 4: [Two Words Combined]</div>
+      <div class="formula-pattern">[Word A Part] + [Word B Part]</div>
+      <div class="formula-examples">Examples: Instagram, Pinterest, Groupon, Wikipedia, Brandfolder</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Formula 5: [Name] + ['s / & / Co.]</div>
+      <div class="formula-pattern">[Founder/Character Name] + [Possessive/Suffix]</div>
+      <div class="formula-examples">Examples: Wendy's, Ben & Jerry's, Warby Parker, Harry's, Trader Joe's</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Formula 6: [The] + [Noun]</div>
+      <div class="formula-pattern">The + [Bold Noun]</div>
+      <div class="formula-examples">Examples: The North Face, The Ordinary, The Knot, The Muse, The Hustle</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Formula 7: [Metaphor or Symbol]</div>
+      <div class="formula-pattern">[Object that represents your brand quality]</div>
+      <div class="formula-examples">Examples: Amazon (vast), Apple (simple), Puma (fast), Jaguar (powerful), Dove (gentle)</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Formula 8: [Misspelling / Alternate Spelling]</div>
+      <div class="formula-pattern">[Common Word] with creative spelling</div>
+      <div class="formula-examples">Examples: Lyft, Tumblr, Fiverr, Digg, Reddit, Flickr</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Formula 9: [Location / Place]</div>
+      <div class="formula-pattern">[Geographic reference]</div>
+      <div class="formula-examples">Examples: Patagonia, North Face, Brooklyn Industries, Silicon Slopes, Aspen Clean</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Formula 10: [Alliteration]</div>
+      <div class="formula-pattern">[Same Starting Sound] + [Same Starting Sound]</div>
+      <div class="formula-examples">Examples: Coca-Cola, Krispy Kreme, PayPal, TikTok, Best Buy, Dunkin' Donuts</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Formula 11: [Abstract / Invented Word]</div>
+      <div class="formula-pattern">[New word that sounds/feels right]</div>
+      <div class="formula-examples">Examples: Kodak, Xerox, Hulu, Vimeo, Roku, Zillow, Etsy</div>
+    </div>
+
+    <div class="formula-card">
+      <div class="formula-name">Formula 12: [Industry Word] + [Unexpected Twist]</div>
+      <div class="formula-pattern">[Expected term] + [Surprising modifier]</div>
+      <div class="formula-examples">Examples: Liquid Death (water), Bulletproof (coffee), Death Wish (coffee), Honest (diapers)</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       SECTION 3: 200+ POWER WORDS
+  ═══════════════════════════════════════ -->
+  <div class="section" id="s3">
+    <div class="section-badge" style="background: var(--accent-light); color: var(--accent);">Section 3</div>
+    <h2>200+ Power Words for Business Names</h2>
+    <p class="section-intro">Mix and match these words with the formulas above. Organized by the feeling they evoke. Circle or highlight the ones that resonate with your brand.</p>
+
+    <h3>Strength & Confidence</h3>
+    <div class="word-grid">
+      <div class="word-tag">Apex</div><div class="word-tag">Bold</div><div class="word-tag">Titan</div><div class="word-tag">Core</div>
+      <div class="word-tag">Peak</div><div class="word-tag">Iron</div><div class="word-tag">Valor</div><div class="word-tag">Prime</div>
+      <div class="word-tag">Atlas</div><div class="word-tag">Force</div><div class="word-tag">Shield</div><div class="word-tag">Forge</div>
+      <div class="word-tag">Vanguard</div><div class="word-tag">Pinnacle</div><div class="word-tag">Crown</div><div class="word-tag">Anchor</div>
+      <div class="word-tag">Ridge</div><div class="word-tag">Summit</div><div class="word-tag">Stone</div><div class="word-tag">Steel</div>
+    </div>
+
+    <h3>Innovation & Technology</h3>
+    <div class="word-grid">
+      <div class="word-tag">Spark</div><div class="word-tag">Flux</div><div class="word-tag">Nova</div><div class="word-tag">Pulse</div>
+      <div class="word-tag">Sync</div><div class="word-tag">Pixel</div><div class="word-tag">Orbit</div><div class="word-tag">Cipher</div>
+      <div class="word-tag">Quantum</div><div class="word-tag">Neon</div><div class="word-tag">Prism</div><div class="word-tag">Vector</div>
+      <div class="word-tag">Arc</div><div class="word-tag">Grid</div><div class="word-tag">Circuit</div><div class="word-tag">Signal</div>
+      <div class="word-tag">Node</div><div class="word-tag">Helix</div><div class="word-tag">Dash</div><div class="word-tag">Byte</div>
+    </div>
+
+    <h3>Growth & Movement</h3>
+    <div class="word-grid">
+      <div class="word-tag">Rise</div><div class="word-tag">Leap</div><div class="word-tag">Bloom</div><div class="word-tag">Swift</div>
+      <div class="word-tag">Thrive</div><div class="word-tag">Surge</div><div class="word-tag">Sprout</div><div class="word-tag">Climb</div>
+      <div class="word-tag">Launch</div><div class="word-tag">Ascend</div><div class="word-tag">Drift</div><div class="word-tag">Evolve</div>
+      <div class="word-tag">Venture</div><div class="word-tag">Stride</div><div class="word-tag">Elevate</div><div class="word-tag">Propel</div>
+      <div class="word-tag">Momentum</div><div class="word-tag">Scale</div><div class="word-tag">Amplify</div><div class="word-tag">Ignite</div>
+    </div>
+
+    <h3>Trust & Reliability</h3>
+    <div class="word-grid">
+      <div class="word-tag">True</div><div class="word-tag">Haven</div><div class="word-tag">Trust</div><div class="word-tag">Solid</div>
+      <div class="word-tag">Steady</div><div class="word-tag">Harbor</div><div class="word-tag">Sure</div><div class="word-tag">Proven</div>
+      <div class="word-tag">Honest</div><div class="word-tag">Base</div><div class="word-tag">Keystone</div><div class="word-tag">Guard</div>
+      <div class="word-tag">Compass</div><div class="word-tag">Pillar</div><div class="word-tag">Beacon</div><div class="word-tag">Sound</div>
+      <div class="word-tag">Clear</div><div class="word-tag">Oak</div><div class="word-tag">Heritage</div><div class="word-tag">Bond</div>
+    </div>
+
+    <h3>Creativity & Expression</h3>
+    <div class="word-grid">
+      <div class="word-tag">Muse</div><div class="word-tag">Canvas</div><div class="word-tag">Fable</div><div class="word-tag">Mosaic</div>
+      <div class="word-tag">Palette</div><div class="word-tag">Story</div><div class="word-tag">Verse</div><div class="word-tag">Hue</div>
+      <div class="word-tag">Loom</div><div class="word-tag">Sketch</div><div class="word-tag">Echo</div><div class="word-tag">Craft</div>
+      <div class="word-tag">Prism</div><div class="word-tag">Woven</div><div class="word-tag">Thread</div><div class="word-tag">Glow</div>
+      <div class="word-tag">Aura</div><div class="word-tag">Form</div><div class="word-tag">Dream</div><div class="word-tag">Vision</div>
+    </div>
+
+    <h3>Nature & Elements</h3>
+    <div class="word-grid">
+      <div class="word-tag">Cedar</div><div class="word-tag">Ember</div><div class="word-tag">River</div><div class="word-tag">Dawn</div>
+      <div class="word-tag">Terra</div><div class="word-tag">Coral</div><div class="word-tag">Sage</div><div class="word-tag">Frost</div>
+      <div class="word-tag">Willow</div><div class="word-tag">Stone</div><div class="word-tag">Bay</div><div class="word-tag">Dune</div>
+      <div class="word-tag">Leaf</div><div class="word-tag">Moss</div><div class="word-tag">Birch</div><div class="word-tag">Wave</div>
+      <div class="word-tag">Storm</div><div class="word-tag">Meadow</div><div class="word-tag">Luna</div><div class="word-tag">Flint</div>
+    </div>
+
+    <h3>Premium & Luxury</h3>
+    <div class="word-grid">
+      <div class="word-tag">Luxe</div><div class="word-tag">Velvet</div><div class="word-tag">Gilt</div><div class="word-tag">Sterling</div>
+      <div class="word-tag">Crest</div><div class="word-tag">Noble</div><div class="word-tag">Ivory</div><div class="word-tag">Regal</div>
+      <div class="word-tag">Onyx</div><div class="word-tag">Opulent</div><div class="word-tag">Aureate</div><div class="word-tag">Silk</div>
+      <div class="word-tag">Bespoke</div><div class="word-tag">Maison</div><div class="word-tag">Atelier</div><div class="word-tag">Estate</div>
+      <div class="word-tag">Prestige</div><div class="word-tag">Heritage</div><div class="word-tag">Monarch</div><div class="word-tag">Curated</div>
+    </div>
+
+    <h3>Community & Connection</h3>
+    <div class="word-grid">
+      <div class="word-tag">Gather</div><div class="word-tag">Hive</div><div class="word-tag">Circle</div><div class="word-tag">Tribe</div>
+      <div class="word-tag">Union</div><div class="word-tag">Nest</div><div class="word-tag">Hub</div><div class="word-tag">Commons</div>
+      <div class="word-tag">Bridge</div><div class="word-tag">Link</div><div class="word-tag">Collective</div><div class="word-tag">Rally</div>
+      <div class="word-tag">Together</div><div class="word-tag">Crew</div><div class="word-tag">Village</div><div class="word-tag">Kindred</div>
+      <div class="word-tag">Guild</div><div class="word-tag">Flock</div><div class="word-tag">Harbor</div><div class="word-tag">Roots</div>
+    </div>
+
+    <h3>Speed & Simplicity</h3>
+    <div class="word-grid">
+      <div class="word-tag">Snap</div><div class="word-tag">Zip</div><div class="word-tag">Flash</div><div class="word-tag">Breeze</div>
+      <div class="word-tag">Crisp</div><div class="word-tag">Quick</div><div class="word-tag">Lean</div><div class="word-tag">Simple</div>
+      <div class="word-tag">Sharp</div><div class="word-tag">Swift</div><div class="word-tag">Agile</div><div class="word-tag">Nimble</div>
+      <div class="word-tag">Rapid</div><div class="word-tag">Fresh</div><div class="word-tag">Light</div><div class="word-tag">Bright</div>
+      <div class="word-tag">Pure</div><div class="word-tag">Sleek</div><div class="word-tag">Minimal</div><div class="word-tag">Ease</div>
+    </div>
+
+    <h3>Transformation & Impact</h3>
+    <div class="word-grid">
+      <div class="word-tag">Catalyst</div><div class="word-tag">Shift</div><div class="word-tag">Impact</div><div class="word-tag">Transform</div>
+      <div class="word-tag">Pivot</div><div class="word-tag">Awaken</div><div class="word-tag">Renew</div><div class="word-tag">Unlock</div>
+      <div class="word-tag">Break</div><div class="word-tag">Disrupt</div><div class="word-tag">Revive</div><div class="word-tag">Empower</div>
+      <div class="word-tag">Activate</div><div class="word-tag">Redefine</div><div class="word-tag">Pioneer</div><div class="word-tag">Reinvent</div>
+      <div class="word-tag">Restore</div><div class="word-tag">Liberate</div><div class="word-tag">Transcend</div><div class="word-tag">Breakthrough</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       SECTION 4: INDUSTRY SUFFIX LISTS
+  ═══════════════════════════════════════ -->
+  <div class="section" id="s4">
+    <div class="section-badge" style="background: var(--emerald-light); color: var(--emerald);">Section 4</div>
+    <h2>Industry-Specific Suffix & Word Lists</h2>
+    <p class="section-intro">Common words and suffixes that work well for specific industries. Mix these with the power words above.</p>
+
+    <div class="suffix-grid">
+      <div class="suffix-box">
+        <div class="industry">Tech / SaaS</div>
+        <div class="words">-ly, -ify, -io, -hub, -stack, -base, -flow, -sync, -lab, -cloud, -ware, -bit, -dock, -pad, -kit, -spot</div>
+      </div>
+      <div class="suffix-box">
+        <div class="industry">Health & Wellness</div>
+        <div class="words">-well, -vita, -pure, -zen, -glow, -bloom, -balance, -root, -nourish, -whole, -care, -life, -mind, -body</div>
+      </div>
+      <div class="suffix-box">
+        <div class="industry">Food & Beverage</div>
+        <div class="words">-kitchen, -table, -harvest, -feast, -bite, -brew, -toast, -sip, -gather, -pantry, -spoon, -plate, -roast</div>
+      </div>
+      <div class="suffix-box">
+        <div class="industry">Creative / Design</div>
+        <div class="words">-studio, -lab, -works, -craft, -house, -press, -made, -ink, -pixel, -type, -co, -creative, -atelier</div>
+      </div>
+      <div class="suffix-box">
+        <div class="industry">Finance / Consulting</div>
+        <div class="words">-capital, -advisory, -partners, -group, -ventures, -solutions, -strategic, -global, -trust, -bridge, -path</div>
+      </div>
+      <div class="suffix-box">
+        <div class="industry">Fitness / Sports</div>
+        <div class="words">-fit, -strong, -athletic, -performance, -peak, -power, -movement, -training, -edge, -force, -iron, -grind</div>
+      </div>
+      <div class="suffix-box">
+        <div class="industry">Beauty / Fashion</div>
+        <div class="words">-beauty, -glow, -luxe, -cosmetics, -collective, -style, -thread, -label, -wear, -bloom, -skin, -silk, -maison</div>
+      </div>
+      <div class="suffix-box">
+        <div class="industry">Education / Coaching</div>
+        <div class="words">-academy, -institute, -learning, -mentor, -mastery, -school, -path, -mind, -growth, -elevate, -skill, -guild</div>
+      </div>
+      <div class="suffix-box">
+        <div class="industry">Real Estate</div>
+        <div class="words">-homes, -realty, -property, -estates, -living, -land, -nest, -dwelling, -haven, -place, -key, -door</div>
+      </div>
+      <div class="suffix-box">
+        <div class="industry">E-Commerce / Retail</div>
+        <div class="words">-shop, -store, -market, -supply, -goods, -box, -cart, -trade, -depot, -vault, -exchange, -outpost</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       SECTION 5: SCORING RUBRIC
+  ═══════════════════════════════════════ -->
+  <div class="section" id="s5">
+    <div class="section-badge" style="background: var(--rose-light); color: var(--rose);">Section 5</div>
+    <h2>Name Scoring Rubric</h2>
+    <p class="section-intro">Score your top name candidates on each criterion below (1-10 scale). A great business name scores 65+ out of 100. Use this to compare your top 3-5 options objectively.</p>
+
+    <table class="score-table">
+      <thead>
+        <tr>
+          <th style="width:30%">Criteria</th>
+          <th>What to Evaluate</th>
+          <th style="width:15%">Score (1-10)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Memorability</strong></td>
+          <td>Can someone remember it after hearing it once? Is it catchy?</td>
+          <td><input class="score-input" type="text" placeholder="__"></td>
+        </tr>
+        <tr>
+          <td><strong>Pronounceability</strong></td>
+          <td>Can people say it correctly on the first try? No confusion?</td>
+          <td><input class="score-input" type="text" placeholder="__"></td>
+        </tr>
+        <tr>
+          <td><strong>Spellability</strong></td>
+          <td>Can people spell it after hearing it? Will they find your website?</td>
+          <td><input class="score-input" type="text" placeholder="__"></td>
+        </tr>
+        <tr>
+          <td><strong>Meaning / Relevance</strong></td>
+          <td>Does it connect to what you do, who you serve, or your brand values?</td>
+          <td><input class="score-input" type="text" placeholder="__"></td>
+        </tr>
+        <tr>
+          <td><strong>Uniqueness</strong></td>
+          <td>Is it distinct from competitors? Does it stand out in your industry?</td>
+          <td><input class="score-input" type="text" placeholder="__"></td>
+        </tr>
+        <tr>
+          <td><strong>Emotional Appeal</strong></td>
+          <td>Does it evoke the right feeling? Does it resonate with your audience?</td>
+          <td><input class="score-input" type="text" placeholder="__"></td>
+        </tr>
+        <tr>
+          <td><strong>Scalability</strong></td>
+          <td>Will it still work if you expand products, services, or markets?</td>
+          <td><input class="score-input" type="text" placeholder="__"></td>
+        </tr>
+        <tr>
+          <td><strong>Domain Available</strong></td>
+          <td>Is the .com (or suitable alternative) available or affordable?</td>
+          <td><input class="score-input" type="text" placeholder="__"></td>
+        </tr>
+        <tr>
+          <td><strong>Social Handles</strong></td>
+          <td>Is the name available (or close) on key social media platforms?</td>
+          <td><input class="score-input" type="text" placeholder="__"></td>
+        </tr>
+        <tr>
+          <td><strong>Visual Potential</strong></td>
+          <td>Can you imagine it as a logo? Does it look good in text form?</td>
+          <td><input class="score-input" type="text" placeholder="__"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="tip-box purple">
+      <strong>How to use this rubric:</strong>
+      Print multiple copies — one for each name candidate. Score honestly (don't inflate scores for names you're emotionally attached to). Ask 3-5 trusted people to score each name independently, then average the results. The highest-scoring name is usually the right choice.
+    </div>
+
+    <div class="workspace">
+      <h4>Score Summary</h4>
+      <p style="font-size:14px; margin-bottom:12px;">Name 1: _________________ Total Score: ____ / 100</p>
+      <p style="font-size:14px; margin-bottom:12px;">Name 2: _________________ Total Score: ____ / 100</p>
+      <p style="font-size:14px; margin-bottom:12px;">Name 3: _________________ Total Score: ____ / 100</p>
+      <p style="font-size:14px; margin-bottom:12px;">Name 4: _________________ Total Score: ____ / 100</p>
+      <p style="font-size:14px;">Name 5: _________________ Total Score: ____ / 100</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       SECTION 6: DOMAIN & SOCIAL CHECKING
+  ═══════════════════════════════════════ -->
+  <div class="section" id="s6">
+    <div class="section-badge" style="background: var(--secondary-light); color: var(--secondary);">Section 6</div>
+    <h2>Domain & Social Media Checking Guide</h2>
+    <p class="section-intro">Your name is only good if you can actually use it online. Follow this checklist for every name candidate.</p>
+
+    <h3>Domain Name Checklist</h3>
+    <ol>
+      <li><strong>Check .com availability</strong> at Namecheap.com or GoDaddy.com</li>
+      <li><strong>If .com is taken:</strong> Check if it's for sale (often at Afternic or Sedo) and what the asking price is</li>
+      <li><strong>Alternative extensions to consider:</strong> .co, .io, .so, .shop, .studio, .agency, .design — but .com is always preferred</li>
+      <li><strong>Avoid hyphens and numbers</strong> in domains — people will forget them</li>
+      <li><strong>Check for typo domains</strong> — buy common misspellings if you can afford it</li>
+      <li><strong>Google the domain</strong> to see if it was previously used (check Archive.org Wayback Machine)</li>
+    </ol>
+
+    <h3>Social Media Handle Checklist</h3>
+    <p>Check availability on all platforms even if you won't use them all immediately. Claim them now to protect your brand.</p>
+    <ol>
+      <li><strong>Namechk.com</strong> — checks username availability across 50+ platforms at once</li>
+      <li><strong>Instagram</strong> — search directly in the app</li>
+      <li><strong>TikTok</strong> — search directly in the app</li>
+      <li><strong>Twitter/X</strong> — search directly on the platform</li>
+      <li><strong>Facebook</strong> — try to create a Page with the name</li>
+      <li><strong>LinkedIn</strong> — create a Company Page</li>
+      <li><strong>YouTube</strong> — search for the channel name</li>
+    </ol>
+
+    <div class="tip-box blue">
+      <strong>Handle Strategy:</strong>
+      If the exact handle isn't available, try: get[name], [name]hq, [name]official, try[name], hello[name], or the[name]. Pick one variation and use it consistently across ALL platforms.
+    </div>
+
+    <h3>Email Address Checklist</h3>
+    <ul>
+      <li>Can you get hello@[name].com or similar?</li>
+      <li>Is the domain clean with no spam history? (Check at MXToolbox.com)</li>
+      <li>Set up Google Workspace or similar for professional email</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       SECTION 7: TRADEMARK BASICS
+  ═══════════════════════════════════════ -->
+  <div class="section" id="s7">
+    <div class="section-badge" style="background: var(--accent-light); color: var(--accent);">Section 7</div>
+    <h2>Trademark Basics</h2>
+    <p class="section-intro">Protect your name legally. This is not legal advice — consult a trademark attorney for formal guidance. But here's what every business owner should know.</p>
+
+    <h3>Step 1: Search Before You Commit</h3>
+    <ul>
+      <li><strong>USPTO TESS Search</strong> (tmsearch.uspto.gov) — search the U.S. trademark database for free</li>
+      <li><strong>Google the name</strong> + your industry to find unregistered common-law trademarks</li>
+      <li><strong>Check state trademark databases</strong> (varies by state)</li>
+      <li><strong>Search business entity databases</strong> in your state's Secretary of State website</li>
+    </ul>
+
+    <h3>Step 2: Understand Trademark Strength</h3>
+    <p>Trademarks are ranked by strength (strongest to weakest):</p>
+    <ol>
+      <li><strong>Fanciful</strong> — Invented words (strongest): Kodak, Xerox, Exxon</li>
+      <li><strong>Arbitrary</strong> — Real words, unrelated meaning: Apple (computers), Amazon (retail)</li>
+      <li><strong>Suggestive</strong> — Hints at qualities: Netflix, Airbus, Pinterest</li>
+      <li><strong>Descriptive</strong> — Describes the business (hard to protect): "Quick Print," "Best Pizza"</li>
+      <li><strong>Generic</strong> — Cannot be trademarked: "Computer Store," "Pizza Place"</li>
+    </ol>
+
+    <div class="tip-box amber">
+      <strong>Key Insight:</strong>
+      Aim for Fanciful, Arbitrary, or Suggestive names. They're easiest to trademark and hardest for competitors to challenge. Descriptive names are difficult and expensive to protect.
+    </div>
+
+    <h3>Step 3: File Your Trademark</h3>
+    <ul>
+      <li><strong>Cost:</strong> $250-$350 per class to file with the USPTO</li>
+      <li><strong>Timeline:</strong> 8-12 months for approval</li>
+      <li><strong>DIY vs. Attorney:</strong> You can file yourself, but an attorney reduces the risk of rejection (typical cost: $500-$1,500 in addition to filing fees)</li>
+      <li><strong>Use TM immediately:</strong> You can use the TM symbol as soon as you start using the name in commerce. The (R) symbol is only after official registration.</li>
+    </ul>
+
+    <h3>Common Trademark Mistakes to Avoid</h3>
+    <ul>
+      <li>Not searching before committing to a name</li>
+      <li>Choosing a descriptive name that can't be protected</li>
+      <li>Assuming a domain purchase = trademark rights (it doesn't)</li>
+      <li>Ignoring businesses in other states with the same name</li>
+      <li>Waiting too long to file — someone else might file first</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       SECTION 8: 50 NAME BREAKDOWNS
+  ═══════════════════════════════════════ -->
+  <div class="section" id="s8">
+    <div class="section-badge" style="background: var(--primary-light); color: var(--primary);">Section 8</div>
+    <h2>50 Iconic Business Name Breakdowns</h2>
+    <p class="section-intro">Learn from the best. Each breakdown shows the naming strategy, why it works, and what you can steal for your own business.</p>
+
+    <div class="example-grid">
+      <div class="example-item"><div class="name">Apple</div><div class="breakdown">Arbitrary. Familiar word, zero tech association. Stands out by being simple in a jargon-heavy industry.</div></div>
+      <div class="example-item"><div class="name">Nike</div><div class="breakdown">Named after Greek goddess of victory. Mythological reference adds depth and aspiration.</div></div>
+      <div class="example-item"><div class="name">Spotify</div><div class="breakdown">Invented word. "Spot" + suffix "-ify" implies finding/identifying. Easy to say, spell, remember.</div></div>
+      <div class="example-item"><div class="name">Airbnb</div><div class="breakdown">Abbreviation: Air Bed & Breakfast. Describes the origin story. Evolved beyond the literal meaning.</div></div>
+      <div class="example-item"><div class="name">Patagonia</div><div class="breakdown">Geographic. Evokes adventure, wilderness, and the untamed outdoors. Perfect for outdoor brand.</div></div>
+      <div class="example-item"><div class="name">Stripe</div><div class="breakdown">Simple noun. Clean, minimal, suggests lines of code. Matches their clean brand aesthetic.</div></div>
+      <div class="example-item"><div class="name">Slack</div><div class="breakdown">Acronym: Searchable Log of All Conversation & Knowledge. Also implies ease and relaxation.</div></div>
+      <div class="example-item"><div class="name">Canva</div><div class="breakdown">Modified word: Canvas. Shortened for simplicity. Suggests creative space and artistry.</div></div>
+      <div class="example-item"><div class="name">Warby Parker</div><div class="breakdown">Compound of two fictional character names. Sounds like a real person — approachable and classic.</div></div>
+      <div class="example-item"><div class="name">Glossier</div><div class="breakdown">Modified adjective: Glossy + -ier suffix. Evokes shine and beauty. Easy to pronounce.</div></div>
+      <div class="example-item"><div class="name">Shopify</div><div class="breakdown">Shop + -ify suffix. Clear meaning: "make shopping happen." Formula: verb + tech suffix.</div></div>
+      <div class="example-item"><div class="name">Notion</div><div class="breakdown">Real word meaning idea or concept. Suggests thinking, planning, creativity. Broad enough to scale.</div></div>
+      <div class="example-item"><div class="name">Liquid Death</div><div class="breakdown">Shock value. Two words that don't belong together. Impossible to ignore. Disrupts the water category.</div></div>
+      <div class="example-item"><div class="name">Headspace</div><div class="breakdown">Compound word. "Space in your head." Perfectly describes what meditation gives you.</div></div>
+      <div class="example-item"><div class="name">Dollar Shave Club</div><div class="breakdown">Descriptive but memorable. Tells you the price, product, and community in three words.</div></div>
+      <div class="example-item"><div class="name">Lululemon</div><div class="breakdown">Invented word. Alliterative (L-L-L). Fun to say. No inherent meaning — pure brand building.</div></div>
+      <div class="example-item"><div class="name">Peloton</div><div class="breakdown">Real word from cycling: the main group of riders. Suggests community and movement.</div></div>
+      <div class="example-item"><div class="name">Allbirds</div><div class="breakdown">Compound: All + Birds. Suggests natural, light, free. Matches their eco-friendly positioning.</div></div>
+      <div class="example-item"><div class="name">Figma</div><div class="breakdown">Invented. Short, punchy, tech-sounding. Possibly from "figure" or "figment." Two syllables, easy recall.</div></div>
+      <div class="example-item"><div class="name">Calm</div><div class="breakdown">Single real word. The emotion you want. Bold in its simplicity. Hard to get the domain, but powerful.</div></div>
+      <div class="example-item"><div class="name">Mailchimp</div><div class="breakdown">Compound: Mail + Chimp. Functional (email) + fun (chimp). The contrast creates personality.</div></div>
+      <div class="example-item"><div class="name">Bumble</div><div class="breakdown">Real word (what bees do). Suggests buzzing, activity, community. Warm and approachable.</div></div>
+      <div class="example-item"><div class="name">Airtable</div><div class="breakdown">Compound: Air + Table. Suggests light, airy, cloud-based data tables. Descriptive yet fresh.</div></div>
+      <div class="example-item"><div class="name">Oatly</div><div class="breakdown">Oat + -ly suffix. Tells you the ingredient. Playful and modern. Their brand voice does the rest.</div></div>
+      <div class="example-item"><div class="name">The Ordinary</div><div class="breakdown">"The" + adjective. Deliberately humble in a flashy industry. Contrarian positioning in the name itself.</div></div>
+      <div class="example-item"><div class="name">Hims & Hers</div><div class="breakdown">Pronoun play. Inclusive, clear audience targeting. Simple, human, no jargon.</div></div>
+      <div class="example-item"><div class="name">Robinhood</div><div class="breakdown">Legendary character who gave to the poor. Implies democratizing finance. Loaded with meaning.</div></div>
+      <div class="example-item"><div class="name">Asana</div><div class="breakdown">Sanskrit for "seat" or yoga pose. Suggests focus, balance, calm productivity. Cultural depth.</div></div>
+      <div class="example-item"><div class="name">Basecamp</div><div class="breakdown">Real compound word. Where expeditions begin. Suggests starting point, foundation, simplicity.</div></div>
+      <div class="example-item"><div class="name">Drift</div><div class="breakdown">Single word: movement, conversation, flow. Suggests natural engagement. Short and memorable.</div></div>
+      <div class="example-item"><div class="name">Sweetgreen</div><div class="breakdown">Compound: Sweet + Green. Two positive sensory words. Tells you it's tasty and healthy.</div></div>
+      <div class="example-item"><div class="name">Etsy</div><div class="breakdown">Invented. The founder wanted a nonsense word. Short, unique, easy to trademark globally.</div></div>
+      <div class="example-item"><div class="name">Grammarly</div><div class="breakdown">Grammar + -ly suffix. Descriptive but elevated with the suffix. Tells you exactly what it does.</div></div>
+      <div class="example-item"><div class="name">Hubspot</div><div class="breakdown">Hub (center) + Spot (place). A place that's the center of everything. Perfect for an all-in-one platform.</div></div>
+      <div class="example-item"><div class="name">Calendly</div><div class="breakdown">Calendar + -ly suffix. Clear, functional, friendly. The suffix makes a boring word feel modern.</div></div>
+      <div class="example-item"><div class="name">Uber</div><div class="breakdown">German prefix meaning "above" or "super." Short, strong, implies superiority. One word, global recognition.</div></div>
+      <div class="example-item"><div class="name">Casper</div><div class="breakdown">The friendly ghost. Suggests comfort, sleep, approachability. Unexpected for a mattress brand.</div></div>
+      <div class="example-item"><div class="name">Duolingo</div><div class="breakdown">Duo (two) + Lingo (language). Tells you it's about learning languages. Playful and descriptive.</div></div>
+      <div class="example-item"><div class="name">Zendesk</div><div class="breakdown">Zen (calm) + Desk (workspace). Suggests calm customer service. Combines feeling with function.</div></div>
+      <div class="example-item"><div class="name">Trello</div><div class="breakdown">Inspired by "trellis" (support structure). Suggests organization and growth. Easy, two syllables.</div></div>
+      <div class="example-item"><div class="name">Fenty</div><div class="breakdown">Founder's surname (Rihanna — Robyn Rihanna Fenty). Personal, unique, impossible to confuse.</div></div>
+      <div class="example-item"><div class="name">Hinge</div><div class="breakdown">Real word: the part that connects. "Designed to be deleted" — the hinge that opens the door to love.</div></div>
+      <div class="example-item"><div class="name">Loom</div><div class="breakdown">Real word: a weaving tool. Suggests creating, threading ideas together. Also a play on "loom large."</div></div>
+      <div class="example-item"><div class="name">Squarespace</div><div class="breakdown">Square (clean, structured) + Space (your own area). Suggests organized, designed, online territory.</div></div>
+      <div class="example-item"><div class="name">Postmates</div><div class="breakdown">Post (mail, delivery) + Mates (friends). Suggests friendly delivery. Casual and approachable.</div></div>
+      <div class="example-item"><div class="name">Compass</div><div class="breakdown">Navigation tool. Suggests direction, guidance, finding your way. Perfect for real estate.</div></div>
+      <div class="example-item"><div class="name">Twilio</div><div class="breakdown">Invented, inspired by "twilight." Short, tech-sounding, easy to spell. No baggage, pure brand.</div></div>
+      <div class="example-item"><div class="name">Chime</div><div class="breakdown">Simple, pleasant sound. Suggests notification, arrival, positivity. One syllable, instantly memorable.</div></div>
+      <div class="example-item"><div class="name">Away</div><div class="breakdown">Single word: travel, escape, adventure. Three letters. Impossibly simple. Luggage brand that owns a feeling.</div></div>
+      <div class="example-item"><div class="name">Athletic Greens</div><div class="breakdown">Adjective + Noun. Tells you who it's for and what it is. Descriptive but aspirational.</div></div>
+    </div>
+
+    <div class="tip-box green">
+      <strong>Pattern to Notice:</strong>
+      The most successful names tend to be 1-3 syllables, easy to spell, and either clearly descriptive OR completely abstract. The middle ground (vaguely suggestive but not clear) is the weakest zone. Pick a lane and commit.
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>The Ultimate Business Name Workbook &mdash; Created by PrestoKit</p>
+    <p style="margin-top:6px;">Print, fill in, and find your perfect business name.</p>
+  </div>
+
+</div>
+
+</body>
+</html>

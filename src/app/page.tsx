@@ -109,6 +109,38 @@ const tools: Tool[] = [
     href: "/tools/percentage-calculator",
     color: "#80d8ff",
   },
+  {
+    name: "Text Case Converter",
+    icon: "\uD83D\uDD24",
+    description:
+      "Convert text between UPPER, lower, Title, camelCase, snake_case, and more.",
+    href: "/tools/text-case-converter",
+    color: "#b388ff",
+  },
+  {
+    name: "Color Palette Generator",
+    icon: "\uD83C\uDFA8",
+    description:
+      "Generate beautiful color palettes with harmony modes and CSS export.",
+    href: "/tools/color-palette-generator",
+    color: "#ff6e40",
+  },
+  {
+    name: "JSON Formatter",
+    icon: "\uD83D\uDCC4",
+    description:
+      "Format, validate, and minify JSON with syntax highlighting.",
+    href: "/tools/json-formatter",
+    color: "#40c4ff",
+  },
+  {
+    name: "Markdown to HTML",
+    icon: "\u2B07\uFE0F",
+    description:
+      "Convert Markdown to HTML with live preview and instant copy.",
+    href: "/tools/markdown-to-html",
+    color: "#69f0ae",
+  },
 ];
 
 const valueProps = [
@@ -248,7 +280,7 @@ export default function Home() {
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
               </span>
               <span className="text-muted-light">
-                <span className="font-semibold text-white">12</span> free tools
+                <span className="font-semibold text-white">16</span> free tools
                 &mdash; zero signup
               </span>
             </div>
@@ -303,7 +335,7 @@ export default function Home() {
                 <span>{tools.length} Tools</span>
               </div>
               <h2 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                12 Free Tools, Zero Signup
+                16 Free Tools, Zero Signup
               </h2>
               <p className="mx-auto mt-3 max-w-2xl text-muted-light">
                 Professional-grade business tools, completely free. Pick one and
