@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
+import PromoBar from "@/components/PromoBar";
 
 /* ------------------------------------------------------------------ */
 /*  FAQ Data                                                           */
@@ -464,6 +465,12 @@ export default function QRCodeGeneratorPage() {
           </div>
         </div>
       </div>
+
+      {/* ============================== PROMO BANNER ============================== */}
+      <PromoBar
+        type="pro"
+        dismissKey="qr-pro"
+      />
 
       {/* ============================== HOW IT WORKS ============================== */}
       <section className="max-w-5xl mx-auto px-4 py-16">

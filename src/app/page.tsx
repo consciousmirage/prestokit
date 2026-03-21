@@ -205,6 +205,38 @@ const tools: Tool[] = [
     href: "/tools/random-number-generator",
     color: "#ce93d8",
   },
+  {
+    name: "Invoice Templates",
+    icon: "\uD83D\uDCC3",
+    description:
+      "Browse 10 professional invoice template designs. Pick your style.",
+    href: "/tools/invoice-templates",
+    color: "#90a4ae",
+  },
+  {
+    name: "Contract Generator",
+    icon: "\uD83D\uDCDD",
+    description:
+      "Generate freelance contracts, NDAs, and service agreements instantly.",
+    href: "/tools/contract-generator",
+    color: "#a1887f",
+  },
+  {
+    name: "Time Zone Converter",
+    icon: "\uD83C\uDF0D",
+    description:
+      "Convert times between 22 time zones. Compare up to 4 zones at once.",
+    href: "/tools/timezone-converter",
+    color: "#4dd0e1",
+  },
+  {
+    name: "ROI Calculator",
+    icon: "\uD83D\uDCC8",
+    description:
+      "Calculate return on investment, compound growth, and marketing ROI.",
+    href: "/tools/roi-calculator",
+    color: "#81c784",
+  },
 ];
 
 const valueProps = [
@@ -344,7 +376,7 @@ export default function Home() {
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
               </span>
               <span className="text-muted-light">
-                <span className="font-semibold text-white">24</span> free tools
+                <span className="font-semibold text-white">28</span> free tools
                 &mdash; zero signup
               </span>
             </div>
@@ -399,7 +431,7 @@ export default function Home() {
                 <span>{tools.length} Tools</span>
               </div>
               <h2 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                24 Free Tools, Zero Signup
+                28 Free Tools, Zero Signup
               </h2>
               <p className="mx-auto mt-3 max-w-2xl text-muted-light">
                 Professional-grade business tools, completely free. Pick one and
@@ -469,7 +501,7 @@ export default function Home() {
               />
 
               <div className="relative">
-                <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary-light">
+                <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-4 py-1.5 text-sm font-medium text-accent">
                   <svg
                     width="14"
                     height="14"
@@ -478,7 +510,7 @@ export default function Home() {
                   >
                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                   </svg>
-                  Coming Soon
+                  Now Available
                 </div>
 
                 <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
@@ -529,12 +561,12 @@ export default function Home() {
                     </span>
                     <span className="text-muted">/mo</span>
                   </div>
-                  <button
-                    disabled
-                    className="rounded-xl bg-primary/20 px-6 py-3 text-sm font-semibold text-primary-light transition-colors cursor-not-allowed"
+                  <Link
+                    href="/pro"
+                    className="rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-primary/20 transition-all hover:bg-primary-light hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5"
                   >
-                    Join the Waitlist (Coming Soon)
-                  </button>
+                    Subscribe to Pro &mdash; $9/mo
+                  </Link>
                 </div>
               </div>
             </div>

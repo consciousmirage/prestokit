@@ -35,6 +35,10 @@ const toolPages = [
   "/tools/bmi-calculator",
   "/tools/salary-calculator",
   "/tools/random-number-generator",
+  "/tools/invoice-templates",
+  "/tools/contract-generator",
+  "/tools/timezone-converter",
+  "/tools/roi-calculator",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

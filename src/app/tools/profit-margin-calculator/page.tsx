@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import PromoBar from "@/components/PromoBar";
 
 /* ------------------------------------------------------------------ */
 /*  FAQ Accordion Item                                                 */
@@ -671,6 +672,24 @@ export default function ProfitMarginCalculatorPage() {
                 profit, different percentages.
               </p>
             </div>
+          </div>
+
+          {/* ==================== PROMO BANNERS ==================== */}
+          <div className="mt-10">
+            <PromoBar
+              type="gumroad"
+              dismissKey="profit-margin-gumroad"
+              product={{
+                name: "Freelancer Pricing Calculator",
+                price: "$9",
+                description: "Spreadsheet tool that calculates your ideal hourly rate, project pricing, and profit margins based on your expenses and income goals.",
+                url: "https://consciousmirage.gumroad.com/l/freelancer-pricing-calculator",
+              }}
+            />
+            <PromoBar
+              type="pro"
+              dismissKey="profit-margin-pro"
+            />
           </div>
 
           {/* ==================== HOW IT WORKS ==================== */}

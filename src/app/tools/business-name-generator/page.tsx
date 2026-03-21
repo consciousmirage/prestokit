@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import PromoBar from "@/components/PromoBar";
 
 /* ------------------------------------------------------------------ */
 /*  FAQ Data                                                           */
@@ -609,6 +610,24 @@ export default function BusinessNameGeneratorPage() {
               </div>
             </section>
           )}
+        </div>
+
+        {/* ============================== PROMO BANNERS ============================== */}
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <PromoBar
+            type="gumroad"
+            dismissKey="bizname-gumroad"
+            product={{
+              name: "Business Launch Checklist",
+              price: "$5",
+              description: "Step-by-step checklist covering LLC formation, branding, domain setup, social media, and everything you need to launch your business the right way.",
+              url: "https://consciousmirage.gumroad.com/l/business-launch-checklist",
+            }}
+          />
+          <PromoBar
+            type="pro"
+            dismissKey="bizname-pro"
+          />
         </div>
 
         {/* ============================== HOW IT WORKS ============================== */}

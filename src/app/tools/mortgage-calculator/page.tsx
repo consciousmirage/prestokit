@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import PromoBar from "@/components/PromoBar";
 
 /* ------------------------------------------------------------------ */
 /*  FAQ Accordion                                                      */
@@ -606,6 +607,14 @@ export default function MortgageCalculatorPage() {
               )}
             </>
           )}
+
+          {/* ==================== PROMO BANNER ==================== */}
+          <div className="mt-10">
+            <PromoBar
+              type="pro"
+              dismissKey="mortgage-pro"
+            />
+          </div>
 
           {/* How It Works */}
           <div className="mt-16 mb-16">

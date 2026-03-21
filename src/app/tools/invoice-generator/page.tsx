@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback, useRef } from "react";
+import PromoBar from "@/components/PromoBar";
 
 /* ------------------------------------------------------------------ */
 /*  FAQ Data for SEO section                                           */
@@ -787,6 +788,22 @@ export default function InvoiceGeneratorPage() {
             </div>
           </div>
         </main>
+
+        {/* ============================== PROMO BANNERS ============================== */}
+        <PromoBar
+          type="gumroad"
+          dismissKey="invoice-gumroad"
+          product={{
+            name: "50 Email Templates Bundle",
+            price: "$12",
+            description: "Professional email templates for invoicing, follow-ups, payment reminders, and client communication. Copy, paste, and send.",
+            url: "https://consciousmirage.gumroad.com/l/email-templates-bundle",
+          }}
+        />
+        <PromoBar
+          type="pro"
+          dismissKey="invoice-pro"
+        />
 
         {/* ============================== HOW IT WORKS ============================== */}
         <section className="mx-auto max-w-7xl px-4 py-16">

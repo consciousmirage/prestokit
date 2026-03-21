@@ -68,7 +68,7 @@ export const metadata: Metadata = {
 const navLinks = [
   { label: "Tools", href: "/#tools" },
   { label: "Why PrestoKit?", href: "/#why" },
-  { label: "Pro", href: "/#pro" },
+  { label: "Pro", href: "/pro" },
 ];
 
 export default function RootLayout({
@@ -237,7 +237,7 @@ export default function RootLayout({
                 <ul className="space-y-2">
                   {[
                     ["About", "/#why"],
-                    ["Pro", "/#pro"],
+                    ["Pro", "/pro"],
                     ["Request a Tool", "mailto:hello@prestokit.com?subject=Tool%20Request"],
                     ["Contact", "mailto:hello@prestokit.com"],
                   ].map(([name, href]) => (

@@ -203,6 +203,46 @@ const tools: Tool[] = [
     category: "Text Tools",
     tags: ["word count", "character count", "reading time", "writing"],
   },
+  {
+    name: "Invoice Templates",
+    icon: "\uD83D\uDCC3",
+    description:
+      "Browse 10 professionally designed invoice templates. Preview, customize, and download as PDF.",
+    href: "/tools/invoice-templates",
+    color: "#448aff",
+    category: "Business Documents",
+    tags: ["invoice template", "invoice design", "PDF template", "billing"],
+  },
+  {
+    name: "Contract Generator",
+    icon: "\uD83D\uDCDD",
+    description:
+      "Generate business contracts from professional templates. Freelance, NDA, contractor, and service agreements.",
+    href: "/tools/contract-generator",
+    color: "#ff6e40",
+    category: "Business Documents",
+    tags: ["contract", "agreement", "NDA", "freelance", "legal"],
+  },
+  {
+    name: "Time Zone Converter",
+    icon: "\uD83C\uDF0D",
+    description:
+      "Convert times between time zones instantly. Compare up to 4 zones at once with DST support.",
+    href: "/tools/timezone-converter",
+    color: "#40c4ff",
+    category: "Calculators",
+    tags: ["timezone", "time zone", "convert", "world clock", "international"],
+  },
+  {
+    name: "ROI Calculator",
+    icon: "\uD83D\uDCC8",
+    description:
+      "Calculate return on investment. Simple ROI, compound growth, and marketing ROI with ROAS.",
+    href: "/tools/roi-calculator",
+    color: "#00e676",
+    category: "Calculators",
+    tags: ["ROI", "return on investment", "ROAS", "marketing", "investment"],
+  },
 ];
 
 /* ──────────────────── JSON-LD ──────────────────── */

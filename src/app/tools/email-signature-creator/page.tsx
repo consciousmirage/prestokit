@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useCallback } from "react";
+import PromoBar from "@/components/PromoBar";
 
 /* ------------------------------------------------------------------ */
 /*  FAQ Data                                                           */
@@ -578,6 +579,22 @@ export default function EmailSignatureCreatorPage() {
           </div>
         </div>
       </div>
+
+      {/* ============================== PROMO BANNERS ============================== */}
+      <PromoBar
+        type="gumroad"
+        dismissKey="email-sig-gumroad"
+        product={{
+          name: "100 ChatGPT Prompts for Business",
+          price: "$7",
+          description: "Ready-to-use prompts for emails, marketing copy, social media, customer service, and more. Save hours every week.",
+          url: "https://consciousmirage.gumroad.com/l/chatgpt-prompts-business",
+        }}
+      />
+      <PromoBar
+        type="pro"
+        dismissKey="email-sig-pro"
+      />
 
       {/* ============================== HOW IT WORKS ============================== */}
       <section className="max-w-5xl mx-auto px-4 py-16">
