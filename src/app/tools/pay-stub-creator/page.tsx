@@ -196,8 +196,21 @@ export default function PayStubCreatorPage() {
   }, []);
 
   /* ------ print ------ */
-  const handlePrint = useCallback(() => {
-    window.print();
+  const handlePrint = useCallback(async () => {
+    const element = document.getElementById("paystub-print-area");
+    if (!element) return;
+    // @ts-expect-error html2pdf.js has no types
+    const html2pdf = (await import("html2pdf.js")).default;
+    html2pdf()
+      .set({
+        margin: [10, 10, 10, 10],
+        filename: `paystub.pdf`,
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+      })
+      .from(element)
+      .save();
   }, []);
 
   /* ------ shared input classes ------ */
