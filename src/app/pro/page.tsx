@@ -220,7 +220,7 @@ export default function ProPage() {
               <div className="mt-10">
                 <a
                   id="pro-subscribe-btn"
-                  href="#subscribe-placeholder"
+                  href="https://buy.stripe.com/eVq6oIgtm9HF96c9Mm0x200"
                   className="group relative block w-full overflow-hidden rounded-xl bg-primary px-8 py-4 text-center text-lg font-bold text-white shadow-xl shadow-primary/25 transition-all hover:bg-primary-light hover:shadow-2xl hover:shadow-primary/35 hover:-translate-y-0.5"
                 >
                   {/* Button shimmer effect */}
@@ -334,7 +334,7 @@ export default function ProPage() {
           {/* CTA under table */}
           <div className="mt-8 text-center">
             <a
-              href="#subscribe-placeholder"
+              href="https://buy.stripe.com/eVq6oIgtm9HF96c9Mm0x200"
               className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-8 py-3.5 text-base font-semibold text-white shadow-xl shadow-primary/20 transition-all hover:bg-primary-light hover:shadow-2xl hover:shadow-primary/30 hover:-translate-y-0.5"
             >
               Get Pro Now
@@ -439,7 +439,7 @@ export default function ProPage() {
           </p>
           <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <a
-              href="#subscribe-placeholder"
+              href="https://buy.stripe.com/eVq6oIgtm9HF96c9Mm0x200"
               className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-8 py-3.5 text-base font-semibold text-white shadow-xl shadow-primary/20 transition-all hover:bg-primary-light hover:shadow-2xl hover:shadow-primary/30 hover:-translate-y-0.5"
             >
               Subscribe to Pro &mdash; $9/mo
