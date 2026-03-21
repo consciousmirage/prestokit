@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Social Media Content Planner</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #08080e;
+    --surface: #0f0f19;
+    --surface-2: #171728;
+    --surface-3: #1e1e34;
+    --border: #252540;
+    --text: #e6e6f2;
+    --text-muted: #7a7a9a;
+    --accent: #ec4899;
+    --accent-light: #f472b6;
+    --accent-glow: rgba(236, 72, 153, 0.1);
+    --blue: #3b82f6;
+    --green: #10b981;
+    --purple: #8b5cf6;
+    --orange: #f59e0b;
+    --cyan: #06b6d4;
+    --red: #ef4444;
+    --lime: #84cc16;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  @media print {
+    body { background: #fff; color: #111; font-size: 10px; }
+    .hero { background: #111 !important; padding: 24px; }
+    .hero::before { display: none; }
+    .section-block { break-inside: avoid; border: 1px solid #ddd; }
+    .calendar-grid { font-size: 9px; }
+    .day-cell { padding: 4px; min-height: 60px; }
+    .nav-tabs { display: none; }
+    .container { padding: 10px; }
+  }
+
+  .hero {
+    background: linear-gradient(135deg, #08080e 0%, #1a0a1a 50%, #08080e 100%);
+    padding: 80px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 40%, rgba(236,72,153,0.06) 0%, transparent 60%);
+  }
+
+  .hero-content { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+
+  .hero-badge {
+    display: inline-block;
+    background: var(--accent-glow);
+    border: 1px solid rgba(236,72,153,0.3);
+    color: var(--accent-light);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 50px;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #fff 0%, var(--accent-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero p { font-size: 1.1rem; color: var(--text-muted); max-width: 560px; margin: 0 auto; }
+
+  .container { max-width: 1000px; margin: 0 auto; padding: 48px 24px; }
+
+  .nav-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 40px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+
+  .nav-tab {
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+
+  .nav-tab:hover { border-color: var(--accent); color: var(--text); }
+  .nav-tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  .section-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 36px;
+    margin-bottom: 32px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  .section-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+
+  .section-header h2 { font-size: 1.4rem; font-weight: 700; }
+  .section-header .sub { font-size: 0.78rem; color: var(--text-muted); font-weight: 400; }
+
+  /* CALENDAR */
+  .calendar-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .calendar-month {
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+  }
+
+  .day-header {
+    text-align: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    padding: 8px 0;
+  }
+
+  .day-cell {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    min-height: 90px;
+    padding: 8px;
+    transition: all 0.15s;
+    cursor: default;
+    position: relative;
+  }
+
+  .day-cell:hover { border-color: var(--accent); }
+
+  .day-num {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+
+  .day-cell.empty { background: transparent; border-color: transparent; min-height: auto; }
+  .day-cell.empty:hover { border-color: transparent; }
+
+  .day-note {
+    font-size: 0.65rem;
+    line-height: 1.4;
+    color: var(--text);
+    padding: 3px 6px;
+    border-radius: 4px;
+    margin-bottom: 2px;
+  }
+
+  .note-content { background: rgba(236,72,153,0.12); color: var(--accent-light); }
+  .note-engage { background: rgba(59,130,246,0.12); color: var(--blue); }
+  .note-promo { background: rgba(245,158,11,0.12); color: var(--orange); }
+  .note-story { background: rgba(16,185,129,0.12); color: var(--green); }
+  .note-rest { background: rgba(139,92,246,0.12); color: var(--purple); }
+
+  .legend {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+  }
+
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  /* PLATFORM PLANS */
+  .platform-card {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+
+  .platform-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    cursor: pointer;
+  }
+
+  .platform-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+
+  .pl-instagram { background: linear-gradient(135deg, #833AB4, #FD1D1D, #F77737); color: #fff; }
+  .pl-tiktok { background: #111; color: #fff; border: 1px solid #333; }
+  .pl-linkedin { background: #0077B5; color: #fff; }
+  .pl-facebook { background: #1877F2; color: #fff; }
+  .pl-twitter { background: #111; color: #fff; border: 1px solid #333; }
+
+  .platform-name { font-size: 1rem; font-weight: 700; }
+  .platform-freq { font-size: 0.78rem; color: var(--text-muted); }
+
+  .week-plan { margin-bottom: 16px; }
+  .week-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--accent-light);
+    margin-bottom: 8px;
+  }
+
+  .day-plan {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-bottom: 4px;
+    background: var(--surface-3);
+  }
+
+  .day-plan-day {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    min-width: 36px;
+    text-transform: uppercase;
+  }
+
+  .day-plan-content {
+    font-size: 0.82rem;
+    color: var(--text);
+    flex: 1;
+  }
+
+  .day-plan-format {
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--accent-light);
+    background: rgba(236,72,153,0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  /* CONTENT PILLARS */
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  .pillar-card {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    transition: all 0.2s;
+  }
+
+  .pillar-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+  .pillar-pct {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+
+  .pillar-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .pillar-desc {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .pillar-examples {
+    margin-top: 12px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-align: left;
+  }
+
+  .pillar-examples strong { color: var(--text); }
+
+  /* BEST TIMES */
+  .times-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 12px;
+  }
+
+  .time-card {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .time-platform {
+    font-size: 0.78rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--text);
+  }
+
+  .time-slot {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent-light);
+    margin-bottom: 4px;
+  }
+
+  .time-days {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+  }
+
+  /* POST IDEAS */
+  .ideas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 10px;
+  }
+
+  .idea-card {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 0.84rem;
+    line-height: 1.5;
+    transition: all 0.15s;
+  }
+
+  .idea-card:hover { border-color: var(--accent); }
+
+  .idea-num {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--accent-light);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .idea-tag {
+    display: inline-block;
+    font-size: 0.62rem;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-top: 6px;
+  }
+
+  .tag-edu { background: rgba(59,130,246,0.12); color: var(--blue); }
+  .tag-engage { background: rgba(16,185,129,0.12); color: var(--green); }
+  .tag-promo { background: rgba(245,158,11,0.12); color: var(--orange); }
+  .tag-bts { background: rgba(139,92,246,0.12); color: var(--purple); }
+  .tag-fun { background: rgba(236,72,153,0.12); color: var(--accent-light); }
+
+  .footer {
+    text-align: center;
+    padding: 48px 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 48px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 600px) {
+    .hero { padding: 48px 20px; }
+    .hero h1 { font-size: 2rem; }
+    .calendar-grid { font-size: 0.65rem; }
+    .day-cell { min-height: 60px; padding: 4px; }
+    .section-block { padding: 20px; }
+    .pillars-grid { grid-template-columns: 1fr; }
+    .ideas-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Calendar + Strategy + 50 Post Ideas</div>
+    <h1>Social Media Content Planner</h1>
+    <p>Your complete system for planning, creating, and posting consistent social media content that grows your business.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- MONTHLY CALENDAR -->
+  <div class="section-block">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(236,72,153,0.12)">&#128197;</div>
+      <div>
+        <h2>Monthly Content Calendar</h2>
+        <div class="sub">A printable template — fill in your content for each day</div>
+      </div>
+    </div>
+
+    <div class="calendar-controls">
+      <div class="calendar-month">Month: ________________ Year: ________</div>
+    </div>
+
+    <div class="calendar-grid">
+      <div class="day-header">Mon</div>
+      <div class="day-header">Tue</div>
+      <div class="day-header">Wed</div>
+      <div class="day-header">Thu</div>
+      <div class="day-header">Fri</div>
+      <div class="day-header">Sat</div>
+      <div class="day-header">Sun</div>
+
+      <!-- Week 1 -->
+      <div class="day-cell"><div class="day-num">1</div><div class="day-note note-content">Educational</div></div>
+      <div class="day-cell"><div class="day-num">2</div><div class="day-note note-engage">Engagement</div></div>
+      <div class="day-cell"><div class="day-num">3</div><div class="day-note note-content">Value Post</div></div>
+      <div class="day-cell"><div class="day-num">4</div><div class="day-note note-story">BTS / Story</div></div>
+      <div class="day-cell"><div class="day-num">5</div><div class="day-note note-promo">Soft Promo</div></div>
+      <div class="day-cell"><div class="day-num">6</div><div class="day-note note-rest">Light / Repurpose</div></div>
+      <div class="day-cell"><div class="day-num">7</div><div class="day-note note-rest">Rest / Batch Day</div></div>
+
+      <!-- Week 2 -->
+      <div class="day-cell"><div class="day-num">8</div><div class="day-note note-content">How-To / Tips</div></div>
+      <div class="day-cell"><div class="day-num">9</div><div class="day-note note-engage">Question / Poll</div></div>
+      <div class="day-cell"><div class="day-num">10</div><div class="day-note note-content">Listicle / Carousel</div></div>
+      <div class="day-cell"><div class="day-num">11</div><div class="day-note note-story">Customer Story</div></div>
+      <div class="day-cell"><div class="day-num">12</div><div class="day-note note-promo">Product Feature</div></div>
+      <div class="day-cell"><div class="day-num">13</div><div class="day-note note-rest">Repost / UGC</div></div>
+      <div class="day-cell"><div class="day-num">14</div><div class="day-note note-rest">Rest / Plan</div></div>
+
+      <!-- Week 3 -->
+      <div class="day-cell"><div class="day-num">15</div><div class="day-note note-content">Myth-Busting</div></div>
+      <div class="day-cell"><div class="day-num">16</div><div class="day-note note-engage">This or That</div></div>
+      <div class="day-cell"><div class="day-num">17</div><div class="day-note note-content">Tutorial / Demo</div></div>
+      <div class="day-cell"><div class="day-num">18</div><div class="day-note note-story">Personal / Origin</div></div>
+      <div class="day-cell"><div class="day-num">19</div><div class="day-note note-promo">Testimonial + CTA</div></div>
+      <div class="day-cell"><div class="day-num">20</div><div class="day-note note-rest">Trending / Fun</div></div>
+      <div class="day-cell"><div class="day-num">21</div><div class="day-note note-rest">Rest / Batch Day</div></div>
+
+      <!-- Week 4 -->
+      <div class="day-cell"><div class="day-num">22</div><div class="day-note note-content">Industry News</div></div>
+      <div class="day-cell"><div class="day-num">23</div><div class="day-note note-engage">AMA / Q&A</div></div>
+      <div class="day-cell"><div class="day-num">24</div><div class="day-note note-content">Checklist / Guide</div></div>
+      <div class="day-cell"><div class="day-num">25</div><div class="day-note note-story">BTS Process</div></div>
+      <div class="day-cell"><div class="day-num">26</div><div class="day-note note-promo">Direct CTA / Offer</div></div>
+      <div class="day-cell"><div class="day-num">27</div><div class="day-note note-rest">Community / Collab</div></div>
+      <div class="day-cell"><div class="day-num">28</div><div class="day-note note-rest">Rest / Review</div></div>
+
+      <!-- Remaining days -->
+      <div class="day-cell"><div class="day-num">29</div><div class="day-note note-content">Recap / Roundup</div></div>
+      <div class="day-cell"><div class="day-num">30</div><div class="day-note note-engage">Feedback / Survey</div></div>
+      <div class="day-cell"><div class="day-num">31</div><div class="day-note note-story">Month Wins</div></div>
+      <div class="day-cell empty"></div>
+      <div class="day-cell empty"></div>
+      <div class="day-cell empty"></div>
+      <div class="day-cell empty"></div>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:rgba(236,72,153,0.5)"></div>Educational / Value</div>
+      <div class="legend-item"><div class="legend-dot" style="background:rgba(59,130,246,0.5)"></div>Engagement</div>
+      <div class="legend-item"><div class="legend-dot" style="background:rgba(245,158,11,0.5)"></div>Promotional</div>
+      <div class="legend-item"><div class="legend-dot" style="background:rgba(16,185,129,0.5)"></div>Story / BTS</div>
+      <div class="legend-item"><div class="legend-dot" style="background:rgba(139,92,246,0.5)"></div>Light / Rest</div>
+    </div>
+  </div>
+
+  <!-- CONTENT PILLARS -->
+  <div class="section-block">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(139,92,246,0.12)">&#127919;</div>
+      <div>
+        <h2>Content Pillar Framework</h2>
+        <div class="sub">The 5 types of content every business needs — with the right mix</div>
+      </div>
+    </div>
+
+    <div class="pillars-grid">
+      <div class="pillar-card">
+        <div class="pillar-pct" style="color:var(--blue)">40%</div>
+        <div class="pillar-name">Educational / Value</div>
+        <div class="pillar-desc">Teach your audience something useful. Position yourself as the expert. This is the content that gets saved and shared.</div>
+        <div class="pillar-examples">
+          <strong>Examples:</strong> How-to guides, tips, tutorials, frameworks, checklists, myth-busting, industry insights
+        </div>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pillar-pct" style="color:var(--green)">20%</div>
+        <div class="pillar-name">Engagement / Community</div>
+        <div class="pillar-desc">Start conversations. Ask questions. Create polls. The algorithm rewards comments and shares over likes.</div>
+        <div class="pillar-examples">
+          <strong>Examples:</strong> Questions, polls, "this or that," AMAs, "what would you do?", hot takes, debate starters
+        </div>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pillar-pct" style="color:var(--purple)">15%</div>
+        <div class="pillar-name">Behind the Scenes</div>
+        <div class="pillar-desc">Show the human side. Process shots, day-in-the-life, team moments, your workspace, raw and real content.</div>
+        <div class="pillar-examples">
+          <strong>Examples:</strong> Origin story, work process, packing orders, team intros, workspace tour, "a day in my life"
+        </div>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pillar-pct" style="color:var(--orange)">15%</div>
+        <div class="pillar-name">Promotional</div>
+        <div class="pillar-desc">Sell your stuff. But make it feel natural by leading with the transformation, not the product.</div>
+        <div class="pillar-examples">
+          <strong>Examples:</strong> Product features, testimonials + CTA, before/after, limited offers, launch announcements
+        </div>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pillar-pct" style="color:var(--accent)">10%</div>
+        <div class="pillar-name">Entertaining / Trending</div>
+        <div class="pillar-desc">Jump on trends, share memes, make people smile. This expands your reach to new audiences.</div>
+        <div class="pillar-examples">
+          <strong>Examples:</strong> Trending audio, relatable humor, memes, pop culture references, light-hearted takes
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 30-DAY PLATFORM PLANS -->
+  <div class="section-block">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(59,130,246,0.12)">&#128240;</div>
+      <div>
+        <h2>30-Day Content Plans by Platform</h2>
+        <div class="sub">Tailored strategies for each platform's unique audience and format</div>
+      </div>
+    </div>
+
+    <!-- INSTAGRAM -->
+    <div class="platform-card">
+      <div class="platform-header">
+        <div class="platform-logo pl-instagram">IG</div>
+        <div><div class="platform-name">Instagram</div><div class="platform-freq">5x/week feed + daily stories</div></div>
+      </div>
+      <div class="week-plan">
+        <div class="week-label">Week 1 — Introduce & Educate</div>
+        <div class="day-plan"><span class="day-plan-day">Mon</span><span class="day-plan-content">"3 things I wish I knew before starting [business type]" — educational carousel</span><span class="day-plan-format">Carousel</span></div>
+        <div class="day-plan"><span class="day-plan-day">Tue</span><span class="day-plan-content">Behind-the-scenes of your daily routine / workspace</span><span class="day-plan-format">Reel</span></div>
+        <div class="day-plan"><span class="day-plan-day">Wed</span><span class="day-plan-content">"This or that" poll in your niche — drive comments</span><span class="day-plan-format">Story Poll</span></div>
+        <div class="day-plan"><span class="day-plan-day">Thu</span><span class="day-plan-content">Quick tip or hack — "Save this for later" style content</span><span class="day-plan-format">Single Image</span></div>
+        <div class="day-plan"><span class="day-plan-day">Fri</span><span class="day-plan-content">Product/service spotlight with customer testimonial overlay</span><span class="day-plan-format">Reel</span></div>
+      </div>
+      <div class="week-plan">
+        <div class="week-label">Week 2 — Build Trust & Engage</div>
+        <div class="day-plan"><span class="day-plan-day">Mon</span><span class="day-plan-content">"Common mistakes in [industry] and how to fix them" — value carousel</span><span class="day-plan-format">Carousel</span></div>
+        <div class="day-plan"><span class="day-plan-day">Tue</span><span class="day-plan-content">Your origin story — why you started this business</span><span class="day-plan-format">Reel</span></div>
+        <div class="day-plan"><span class="day-plan-day">Wed</span><span class="day-plan-content">AMA prompt in stories — answer top 5 questions in Reels later</span><span class="day-plan-format">Story Q&A</span></div>
+        <div class="day-plan"><span class="day-plan-day">Thu</span><span class="day-plan-content">Before/after transformation or case study result</span><span class="day-plan-format">Carousel</span></div>
+        <div class="day-plan"><span class="day-plan-day">Fri</span><span class="day-plan-content">Trending audio + industry-relevant take — relatable humor</span><span class="day-plan-format">Reel</span></div>
+      </div>
+      <div class="week-plan">
+        <div class="week-label">Week 3 — Social Proof & Authority</div>
+        <div class="day-plan"><span class="day-plan-day">Mon</span><span class="day-plan-content">"Step-by-step guide to [common problem your audience has]"</span><span class="day-plan-format">Carousel</span></div>
+        <div class="day-plan"><span class="day-plan-day">Tue</span><span class="day-plan-content">Customer spotlight / UGC repost with your commentary</span><span class="day-plan-format">Reel</span></div>
+        <div class="day-plan"><span class="day-plan-day">Wed</span><span class="day-plan-content">"Unpopular opinion in [industry]" — spark debate in comments</span><span class="day-plan-format">Single Image</span></div>
+        <div class="day-plan"><span class="day-plan-day">Thu</span><span class="day-plan-content">Process video — "How we make/do [your product/service]"</span><span class="day-plan-format">Reel</span></div>
+        <div class="day-plan"><span class="day-plan-day">Fri</span><span class="day-plan-content">Limited offer or new product announcement with urgency</span><span class="day-plan-format">Single Image + Stories</span></div>
+      </div>
+      <div class="week-plan">
+        <div class="week-label">Week 4 — Convert & Celebrate</div>
+        <div class="day-plan"><span class="day-plan-day">Mon</span><span class="day-plan-content">"[Number] things you need to [achieve result] — checklist format"</span><span class="day-plan-format">Carousel</span></div>
+        <div class="day-plan"><span class="day-plan-day">Tue</span><span class="day-plan-content">Day-in-the-life Reel showing real behind-the-scenes work</span><span class="day-plan-format">Reel</span></div>
+        <div class="day-plan"><span class="day-plan-day">Wed</span><span class="day-plan-content">"What would you choose?" engagement post with 2 options</span><span class="day-plan-format">Story Poll</span></div>
+        <div class="day-plan"><span class="day-plan-day">Thu</span><span class="day-plan-content">Monthly wins recap — share results, growth, gratitude</span><span class="day-plan-format">Carousel</span></div>
+        <div class="day-plan"><span class="day-plan-day">Fri</span><span class="day-plan-content">Direct CTA — "Here's how to work with me" or product push</span><span class="day-plan-format">Reel</span></div>
+      </div>
+    </div>
+
+    <!-- TIKTOK -->
+    <div class="platform-card">
+      <div class="platform-header">
+        <div class="platform-logo pl-tiktok">TT</div>
+        <div><div class="platform-name">TikTok</div><div class="platform-freq">5-7x/week — short-form video</div></div>
+      </div>
+      <div class="week-plan">
+        <div class="week-label">Week 1-2 Sample</div>
+        <div class="day-plan"><span class="day-plan-day">Mon</span><span class="day-plan-content">"Things they don't tell you about [your industry]" — talking head with text overlay</span><span class="day-plan-format">15-30s</span></div>
+        <div class="day-plan"><span class="day-plan-day">Tue</span><span class="day-plan-content">Trending sound adaptation — "put a finger down if you own a business"</span><span class="day-plan-format">15s Trend</span></div>
+        <div class="day-plan"><span class="day-plan-day">Wed</span><span class="day-plan-content">"How to [achieve result] in 30 seconds" — fast-paced tutorial</span><span class="day-plan-format">30s How-To</span></div>
+        <div class="day-plan"><span class="day-plan-day">Thu</span><span class="day-plan-content">POV: A customer's reaction to [your product/service]</span><span class="day-plan-format">15-30s</span></div>
+        <div class="day-plan"><span class="day-plan-day">Fri</span><span class="day-plan-content">"What I spend in a week running a small business" — real numbers</span><span class="day-plan-format">30-60s</span></div>
+        <div class="day-plan"><span class="day-plan-day">Sat</span><span class="day-plan-content">GRWM (Get Ready With Me) while talking about business lessons</span><span class="day-plan-format">60s</span></div>
+      </div>
+      <div class="week-plan">
+        <div class="week-label">Week 3-4 Sample</div>
+        <div class="day-plan"><span class="day-plan-day">Mon</span><span class="day-plan-content">"Replying to a comment" — address a common question/myth</span><span class="day-plan-format">15-30s Reply</span></div>
+        <div class="day-plan"><span class="day-plan-day">Tue</span><span class="day-plan-content">Packing an order / delivering a service — ASMR-style satisfying content</span><span class="day-plan-format">30s BTS</span></div>
+        <div class="day-plan"><span class="day-plan-day">Wed</span><span class="day-plan-content">"3 tools every [your niche] business needs" — listicle format</span><span class="day-plan-format">30s Tips</span></div>
+        <div class="day-plan"><span class="day-plan-day">Thu</span><span class="day-plan-content">"I tried [industry thing] so you don't have to" — review/test content</span><span class="day-plan-format">30-60s</span></div>
+        <div class="day-plan"><span class="day-plan-day">Fri</span><span class="day-plan-content">Monthly recap / "What went right and wrong this month"</span><span class="day-plan-format">60s Recap</span></div>
+      </div>
+    </div>
+
+    <!-- LINKEDIN -->
+    <div class="platform-card">
+      <div class="platform-header">
+        <div class="platform-logo pl-linkedin">in</div>
+        <div><div class="platform-name">LinkedIn</div><div class="platform-freq">3-5x/week — text posts + carousels</div></div>
+      </div>
+      <div class="week-plan">
+        <div class="week-label">Weekly Template (Repeat Monthly)</div>
+        <div class="day-plan"><span class="day-plan-day">Mon</span><span class="day-plan-content">Personal story + business lesson — "Last week I learned..." format with strong hook</span><span class="day-plan-format">Text Post</span></div>
+        <div class="day-plan"><span class="day-plan-day">Tue</span><span class="day-plan-content">Contrarian take — "[Popular belief] is wrong. Here's why..." — drives comments</span><span class="day-plan-format">Text Post</span></div>
+        <div class="day-plan"><span class="day-plan-day">Wed</span><span class="day-plan-content">"[X] steps to [achieve result]" — educational carousel document</span><span class="day-plan-format">Document/Carousel</span></div>
+        <div class="day-plan"><span class="day-plan-day">Thu</span><span class="day-plan-content">Industry insight or data-driven observation — position as thought leader</span><span class="day-plan-format">Text Post</span></div>
+        <div class="day-plan"><span class="day-plan-day">Fri</span><span class="day-plan-content">Celebration post — client win, milestone, team shoutout, or weekly reflection</span><span class="day-plan-format">Image + Text</span></div>
+      </div>
+    </div>
+
+    <!-- FACEBOOK -->
+    <div class="platform-card">
+      <div class="platform-header">
+        <div class="platform-logo pl-facebook">f</div>
+        <div><div class="platform-name">Facebook</div><div class="platform-freq">3-4x/week — mix of video + images</div></div>
+      </div>
+      <div class="week-plan">
+        <div class="week-label">Weekly Template (Repeat Monthly)</div>
+        <div class="day-plan"><span class="day-plan-day">Mon</span><span class="day-plan-content">Share a blog post or longer-form educational content with a compelling preview</span><span class="day-plan-format">Link Post</span></div>
+        <div class="day-plan"><span class="day-plan-day">Wed</span><span class="day-plan-content">Community question or poll — "What's your biggest challenge with [topic]?"</span><span class="day-plan-format">Text + Image</span></div>
+        <div class="day-plan"><span class="day-plan-day">Fri</span><span class="day-plan-content">Behind-the-scenes video or customer testimonial video</span><span class="day-plan-format">Video</span></div>
+        <div class="day-plan"><span class="day-plan-day">Sun</span><span class="day-plan-content">Inspirational or personal story post — weekend relaxed tone</span><span class="day-plan-format">Photo + Caption</span></div>
+      </div>
+    </div>
+
+    <!-- TWITTER/X -->
+    <div class="platform-card">
+      <div class="platform-header">
+        <div class="platform-logo pl-twitter">X</div>
+        <div><div class="platform-name">Twitter / X</div><div class="platform-freq">1-3x/day — threads + quick takes</div></div>
+      </div>
+      <div class="week-plan">
+        <div class="week-label">Weekly Template (Repeat Monthly)</div>
+        <div class="day-plan"><span class="day-plan-day">Mon</span><span class="day-plan-content">Thread: "Everything I learned about [topic] in [timeframe] — a thread" (8-12 tweets)</span><span class="day-plan-format">Thread</span></div>
+        <div class="day-plan"><span class="day-plan-day">Tue</span><span class="day-plan-content">Hot take or contrarian one-liner about your industry</span><span class="day-plan-format">Tweet</span></div>
+        <div class="day-plan"><span class="day-plan-day">Wed</span><span class="day-plan-content">Quick actionable tip: "Here's a free hack for [audience]: [tip]"</span><span class="day-plan-format">Tweet</span></div>
+        <div class="day-plan"><span class="day-plan-day">Thu</span><span class="day-plan-content">Retweet/QT a relevant industry post with your added insight</span><span class="day-plan-format">Quote Tweet</span></div>
+        <div class="day-plan"><span class="day-plan-day">Fri</span><span class="day-plan-content">Thread: Case study or client story broken into tweet-sized insights</span><span class="day-plan-format">Thread</span></div>
+        <div class="day-plan"><span class="day-plan-day">Daily</span><span class="day-plan-content">Reply to 5-10 relevant accounts in your niche — genuine, insightful comments</span><span class="day-plan-format">Engagement</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BEST POSTING TIMES -->
+  <div class="section-block">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(245,158,11,0.12)">&#9200;</div>
+      <div>
+        <h2>Best Posting Times Reference</h2>
+        <div class="sub">General guidelines — always check YOUR analytics for your specific audience</div>
+      </div>
+    </div>
+
+    <div class="times-grid">
+      <div class="time-card">
+        <div class="time-platform">Instagram</div>
+        <div class="time-slot">6-9 AM</div>
+        <div class="time-slot">12-2 PM</div>
+        <div class="time-slot">5-7 PM</div>
+        <div class="time-days">Best days: Tue, Wed, Thu</div>
+      </div>
+
+      <div class="time-card">
+        <div class="time-platform">TikTok</div>
+        <div class="time-slot">7-9 AM</div>
+        <div class="time-slot">12-3 PM</div>
+        <div class="time-slot">7-11 PM</div>
+        <div class="time-days">Best days: Tue, Thu, Fri</div>
+      </div>
+
+      <div class="time-card">
+        <div class="time-platform">LinkedIn</div>
+        <div class="time-slot">7-8 AM</div>
+        <div class="time-slot">12 PM</div>
+        <div class="time-slot">5-6 PM</div>
+        <div class="time-days">Best days: Tue, Wed, Thu</div>
+      </div>
+
+      <div class="time-card">
+        <div class="time-platform">Facebook</div>
+        <div class="time-slot">9-11 AM</div>
+        <div class="time-slot">1-3 PM</div>
+        <div class="time-days">Best days: Wed, Thu, Fri</div>
+      </div>
+
+      <div class="time-card">
+        <div class="time-platform">Twitter / X</div>
+        <div class="time-slot">8-10 AM</div>
+        <div class="time-slot">12-1 PM</div>
+        <div class="time-slot">5-6 PM</div>
+        <div class="time-days">Best days: Mon, Tue, Wed</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 50 POST IDEAS -->
+  <div class="section-block">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(16,185,129,0.12)">&#128161;</div>
+      <div>
+        <h2>50 Post Ideas for Small Businesses</h2>
+        <div class="sub">Never run out of content again — each idea works on any platform</div>
+      </div>
+    </div>
+
+    <div class="ideas-grid">
+      <div class="idea-card"><div class="idea-num">#1</div>Share your origin story — why you started this business<span class="idea-tag tag-bts">Behind the Scenes</span></div>
+      <div class="idea-card"><div class="idea-num">#2</div>3 myths about your industry that need to die<span class="idea-tag tag-edu">Educational</span></div>
+      <div class="idea-card"><div class="idea-num">#3</div>"A day in my life running [business]" — vlog or photo series<span class="idea-tag tag-bts">Behind the Scenes</span></div>
+      <div class="idea-card"><div class="idea-num">#4</div>Before and after transformation / results showcase<span class="idea-tag tag-promo">Promotional</span></div>
+      <div class="idea-card"><div class="idea-num">#5</div>"The biggest mistake I made in business was..." — honest story<span class="idea-tag tag-engage">Engagement</span></div>
+      <div class="idea-card"><div class="idea-num">#6</div>Step-by-step tutorial teaching something valuable for free<span class="idea-tag tag-edu">Educational</span></div>
+      <div class="idea-card"><div class="idea-num">#7</div>Customer testimonial quote on a branded graphic<span class="idea-tag tag-promo">Promotional</span></div>
+      <div class="idea-card"><div class="idea-num">#8</div>"What's your biggest challenge with [topic]?" — question post<span class="idea-tag tag-engage">Engagement</span></div>
+      <div class="idea-card"><div class="idea-num">#9</div>Your favorite tools and apps for running your business<span class="idea-tag tag-edu">Educational</span></div>
+      <div class="idea-card"><div class="idea-num">#10</div>Packing / making / preparing an order — satisfying process content<span class="idea-tag tag-bts">Behind the Scenes</span></div>
+
+      <div class="idea-card"><div class="idea-num">#11</div>"If I had to start over with $0, here's what I'd do"<span class="idea-tag tag-edu">Educational</span></div>
+      <div class="idea-card"><div class="idea-num">#12</div>This or that poll related to your industry<span class="idea-tag tag-engage">Engagement</span></div>
+      <div class="idea-card"><div class="idea-num">#13</div>Introduce your team (or yourself if solo) — personal facts<span class="idea-tag tag-bts">Behind the Scenes</span></div>
+      <div class="idea-card"><div class="idea-num">#14</div>"5 signs you need [your product/service]"<span class="idea-tag tag-promo">Promotional</span></div>
+      <div class="idea-card"><div class="idea-num">#15</div>Respond to a trending topic or meme in your niche<span class="idea-tag tag-fun">Fun / Trending</span></div>
+      <div class="idea-card"><div class="idea-num">#16</div>Share a book or podcast that changed your business<span class="idea-tag tag-edu">Educational</span></div>
+      <div class="idea-card"><div class="idea-num">#17</div>"What [your product/service] costs vs. NOT having it"<span class="idea-tag tag-promo">Promotional</span></div>
+      <div class="idea-card"><div class="idea-num">#18</div>Fill in the blank: "My business would be nowhere without ___"<span class="idea-tag tag-engage">Engagement</span></div>
+      <div class="idea-card"><div class="idea-num">#19</div>Quick tip that saves your customer time or money<span class="idea-tag tag-edu">Educational</span></div>
+      <div class="idea-card"><div class="idea-num">#20</div>Celebrate a milestone — revenue, customers, time in business<span class="idea-tag tag-bts">Behind the Scenes</span></div>
+
+      <div class="idea-card"><div class="idea-num">#21</div>"Questions I get asked every day" — FAQ-style content<span class="idea-tag tag-edu">Educational</span></div>
+      <div class="idea-card"><div class="idea-num">#22</div>Show your workspace and explain your setup<span class="idea-tag tag-bts">Behind the Scenes</span></div>
+      <div class="idea-card"><div class="idea-num">#23</div>Client/customer case study — the story, not just the numbers<span class="idea-tag tag-promo">Promotional</span></div>
+      <div class="idea-card"><div class="idea-num">#24</div>"What nobody tells you about [your industry]"<span class="idea-tag tag-engage">Engagement</span></div>
+      <div class="idea-card"><div class="idea-num">#25</div>Industry news + your hot take on what it means<span class="idea-tag tag-edu">Educational</span></div>
+      <div class="idea-card"><div class="idea-num">#26</div>Run a contest or giveaway with simple entry rules<span class="idea-tag tag-engage">Engagement</span></div>
+      <div class="idea-card"><div class="idea-num">#27</div>"How [product] is made" — raw materials to finished product<span class="idea-tag tag-bts">Behind the Scenes</span></div>
+      <div class="idea-card"><div class="idea-num">#28</div>Comparison post: "What people think I do vs. what I actually do"<span class="idea-tag tag-fun">Fun / Trending</span></div>
+      <div class="idea-card"><div class="idea-num">#29</div>Share a failure and what you learned from it<span class="idea-tag tag-engage">Engagement</span></div>
+      <div class="idea-card"><div class="idea-num">#30</div>Product/service demo in real-time — show it working<span class="idea-tag tag-promo">Promotional</span></div>
+
+      <div class="idea-card"><div class="idea-num">#31</div>"Things I'd tell my past self about starting a business"<span class="idea-tag tag-edu">Educational</span></div>
+      <div class="idea-card"><div class="idea-num">#32</div>React to or stitch a trending video with your expertise<span class="idea-tag tag-fun">Fun / Trending</span></div>
+      <div class="idea-card"><div class="idea-num">#33</div>Your morning routine that sets up a productive day<span class="idea-tag tag-bts">Behind the Scenes</span></div>
+      <div class="idea-card"><div class="idea-num">#34</div>"Rate my [something in your industry]" — engagement bait that works<span class="idea-tag tag-engage">Engagement</span></div>
+      <div class="idea-card"><div class="idea-num">#35</div>Unboxing or first-look at new inventory/tools you bought<span class="idea-tag tag-bts">Behind the Scenes</span></div>
+      <div class="idea-card"><div class="idea-num">#36</div>A checklist your audience can screenshot and use<span class="idea-tag tag-edu">Educational</span></div>
+      <div class="idea-card"><div class="idea-num">#37</div>Limited-time flash sale or exclusive offer announcement<span class="idea-tag tag-promo">Promotional</span></div>
+      <div class="idea-card"><div class="idea-num">#38</div>"What's the one thing you'd change about [industry]?" — debate<span class="idea-tag tag-engage">Engagement</span></div>
+      <div class="idea-card"><div class="idea-num">#39</div>Share your business numbers (revenue, expenses, lessons)<span class="idea-tag tag-bts">Behind the Scenes</span></div>
+      <div class="idea-card"><div class="idea-num">#40</div>"[Industry] starter pack" — relatable meme format<span class="idea-tag tag-fun">Fun / Trending</span></div>
+
+      <div class="idea-card"><div class="idea-num">#41</div>Repost user-generated content with your commentary<span class="idea-tag tag-promo">Promotional</span></div>
+      <div class="idea-card"><div class="idea-num">#42</div>Your top 3 predictions for [industry] this year<span class="idea-tag tag-edu">Educational</span></div>
+      <div class="idea-card"><div class="idea-num">#43</div>A side-by-side comparison: cheap option vs. yours (value framing)<span class="idea-tag tag-promo">Promotional</span></div>
+      <div class="idea-card"><div class="idea-num">#44</div>"Ask me anything" — live or story-based Q&A session<span class="idea-tag tag-engage">Engagement</span></div>
+      <div class="idea-card"><div class="idea-num">#45</div>Throwback to where you started vs. where you are now<span class="idea-tag tag-bts">Behind the Scenes</span></div>
+      <div class="idea-card"><div class="idea-num">#46</div>Free template, download, or resource your audience will love<span class="idea-tag tag-edu">Educational</span></div>
+      <div class="idea-card"><div class="idea-num">#47</div>Collaboration or shoutout to a complementary business<span class="idea-tag tag-engage">Engagement</span></div>
+      <div class="idea-card"><div class="idea-num">#48</div>"The real cost of [your product/service]" — value breakdown<span class="idea-tag tag-promo">Promotional</span></div>
+      <div class="idea-card"><div class="idea-num">#49</div>"If you remember this [nostalgic thing], you [funny connection]"<span class="idea-tag tag-fun">Fun / Trending</span></div>
+      <div class="idea-card"><div class="idea-num">#50</div>Month-end wins, gratitude, and what's coming next<span class="idea-tag tag-bts">Behind the Scenes</span></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p><strong>Social Media Content Planner</strong></p>
+  <p>Print this, bookmark it, and never stare at a blank screen again.</p>
+  <p style="margin-top: 16px; font-size: 0.75rem; color: #555;">Created with care. Not for redistribution.</p>
+</div>
+
+</body>
+</html>

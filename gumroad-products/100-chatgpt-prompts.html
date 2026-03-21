@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>100 ChatGPT Prompts for Small Business</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --surface-2: #1a1a28;
+    --border: #2a2a3d;
+    --text: #e8e8f0;
+    --text-muted: #8888a0;
+    --accent: #6c5ce7;
+    --accent-light: #a29bfe;
+    --accent-glow: rgba(108, 92, 231, 0.15);
+    --green: #00cec9;
+    --orange: #fdcb6e;
+    --pink: #fd79a8;
+    --blue: #74b9ff;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  @media print {
+    body { background: #fff; color: #111; }
+    .hero { background: #111 !important; }
+    .prompt-card { break-inside: avoid; border: 1px solid #ddd; background: #f9f9f9; }
+    .prompt-text { color: #111; }
+    .category-header { color: #111; }
+    .copy-btn { display: none; }
+    .toc { break-after: page; }
+  }
+
+  .hero {
+    background: linear-gradient(135deg, #0a0a1a 0%, #1a1035 50%, #0a0a1a 100%);
+    padding: 80px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 50%, rgba(108,92,231,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 70% 50%, rgba(0,206,201,0.05) 0%, transparent 50%);
+    animation: drift 20s ease-in-out infinite alternate;
+  }
+
+  @keyframes drift {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-5%, 5%); }
+  }
+
+  .hero-content { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+  .hero-badge {
+    display: inline-block;
+    background: var(--accent-glow);
+    border: 1px solid rgba(108,92,231,0.3);
+    color: var(--accent-light);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 50px;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #fff 0%, var(--accent-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero p {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    max-width: 550px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+
+  .toc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px;
+    margin-bottom: 48px;
+  }
+
+  .toc h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: var(--text);
+  }
+
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+  }
+
+  .toc-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: var(--surface-2);
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.2s;
+    border: 1px solid transparent;
+  }
+
+  .toc-item:hover {
+    border-color: var(--accent);
+    background: var(--accent-glow);
+  }
+
+  .toc-count {
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .toc-label { font-size: 0.9rem; font-weight: 500; }
+
+  .category-section { margin-bottom: 56px; }
+
+  .category-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .category-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+
+  .cat-marketing .category-icon { background: rgba(108,92,231,0.15); }
+  .cat-sales .category-icon { background: rgba(0,206,201,0.15); }
+  .cat-customer .category-icon { background: rgba(253,203,110,0.15); }
+  .cat-content .category-icon { background: rgba(253,121,168,0.15); }
+  .cat-social .category-icon { background: rgba(116,185,255,0.15); }
+  .cat-operations .category-icon { background: rgba(85,239,196,0.15); }
+  .cat-finance .category-icon { background: rgba(255,159,67,0.15); }
+
+  .category-header h2 { font-size: 1.6rem; font-weight: 700; }
+  .category-header .cat-count {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    background: var(--surface-2);
+    padding: 4px 12px;
+    border-radius: 50px;
+  }
+
+  .prompt-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 12px;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .prompt-card:hover {
+    border-color: rgba(108,92,231,0.4);
+    box-shadow: 0 4px 24px rgba(108,92,231,0.06);
+  }
+
+  .prompt-number {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--accent-light);
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  .prompt-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--text);
+  }
+
+  .prompt-text {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    line-height: 1.75;
+    background: var(--surface-2);
+    padding: 16px 20px;
+    border-radius: 8px;
+    border-left: 3px solid var(--accent);
+    cursor: pointer;
+    position: relative;
+  }
+
+  .prompt-text:hover { background: rgba(108,92,231,0.06); }
+
+  .copy-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .prompt-card:hover .copy-btn { opacity: 1; }
+  .copy-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .copy-btn.copied { background: var(--green); color: #fff; border-color: var(--green); }
+
+  .footer {
+    text-align: center;
+    padding: 48px 24px;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+
+  .footer p { margin-bottom: 8px; }
+
+  @media (max-width: 600px) {
+    .hero { padding: 48px 20px; }
+    .hero h1 { font-size: 2rem; }
+    .toc { padding: 24px; }
+    .toc-grid { grid-template-columns: 1fr; }
+    .container { padding: 24px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">100 Copy-Paste Ready Prompts</div>
+    <h1>ChatGPT Prompts for Small Business</h1>
+    <p>The ultimate collection of AI prompts to automate your marketing, boost sales, streamline operations, and grow your business faster than ever.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="toc">
+    <h2>What's Inside</h2>
+    <div class="toc-grid">
+      <a href="#marketing" class="toc-item"><span class="toc-count">20</span><span class="toc-label">Marketing Prompts</span></a>
+      <a href="#sales" class="toc-item"><span class="toc-count">15</span><span class="toc-label">Sales Prompts</span></a>
+      <a href="#customer" class="toc-item"><span class="toc-count">15</span><span class="toc-label">Customer Service</span></a>
+      <a href="#content" class="toc-item"><span class="toc-count">15</span><span class="toc-label">Content Creation</span></a>
+      <a href="#social" class="toc-item"><span class="toc-count">15</span><span class="toc-label">Social Media</span></a>
+      <a href="#operations" class="toc-item"><span class="toc-count">10</span><span class="toc-label">Operations</span></a>
+      <a href="#finance" class="toc-item"><span class="toc-count">10</span><span class="toc-label">Finance</span></a>
+    </div>
+  </div>
+
+  <!-- ==================== MARKETING (20) ==================== -->
+  <div id="marketing" class="category-section cat-marketing">
+    <div class="category-header">
+      <div class="category-icon">&#127919;</div>
+      <div>
+        <h2>Marketing</h2>
+        <span class="cat-count">20 Prompts</span>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #1</div>
+      <div class="prompt-title">Ideal Customer Profile</div>
+      <div class="prompt-text">I run a [type of business] that sells [product/service] at [price range]. My current customers are mostly [describe demographics]. Create a detailed ideal customer profile including: demographics, psychographics, pain points, buying triggers, objections, where they hang out online, and the exact language they use to describe their problems. Format as a clear reference document I can share with my team.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #2</div>
+      <div class="prompt-title">Competitor Analysis</div>
+      <div class="prompt-text">Act as a marketing strategist. My business is [describe business]. My top 3 competitors are [list them]. Analyze what I can learn from their positioning, messaging, pricing, and marketing channels. Then identify 3 specific gaps or opportunities where I can differentiate myself. For each opportunity, give me a concrete action step I can implement this week.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #3</div>
+      <div class="prompt-title">Unique Value Proposition</div>
+      <div class="prompt-text">Help me craft a unique value proposition for my [type of business]. Here's what we do: [describe]. Here's what makes us different: [list differentiators]. Here's our target customer: [describe]. Generate 5 different value proposition statements, each under 15 words. Then pick the strongest one and explain why it works, and write 3 supporting statements I can use on my website homepage.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #4</div>
+      <div class="prompt-title">Google Business Profile Optimization</div>
+      <div class="prompt-text">I own a [type of business] located in [city/area]. Help me fully optimize my Google Business Profile. Write: (1) A keyword-rich business description (750 characters max), (2) A list of 10 services/products I should add with descriptions, (3) 5 Google Posts I can publish this month (mix of offers, updates, and events), (4) A strategy for getting more 5-star reviews including 3 ways to ask customers and a follow-up message template.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #5</div>
+      <div class="prompt-title">Email Marketing Funnel</div>
+      <div class="prompt-text">Design a complete 7-email welcome sequence for my [type of business]. My lead magnet is [describe]. My main offer is [describe product/service at price]. Write each email with: subject line (under 50 characters), preview text, full body copy, and CTA. The sequence should follow this arc: deliver value, build trust, introduce offer, handle objections, create urgency, final pitch, soft follow-up. Keep each email under 200 words.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #6</div>
+      <div class="prompt-title">Landing Page Copy</div>
+      <div class="prompt-text">Write high-converting landing page copy for my [product/service] priced at [price]. Target audience: [describe]. Main benefit: [describe]. Write each section: (1) Hero headline + subheadline + CTA, (2) Problem section — 3 pain points, (3) Solution section — how my product solves each pain point, (4) 3 feature blocks with benefits, (5) Social proof section framework, (6) FAQ — 5 common objections answered, (7) Final CTA with urgency. Use conversational, benefit-driven language.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #7</div>
+      <div class="prompt-title">30-Day Marketing Calendar</div>
+      <div class="prompt-text">Create a 30-day marketing calendar for my [type of business]. My monthly marketing budget is [amount]. My main channels are [list channels]. My upcoming promotions/events: [list any]. For each day, specify: the channel, content type, topic/theme, and goal (awareness, engagement, or conversion). Include a mix of promotional (20%), educational (40%), entertaining (20%), and community-building (20%) content. Format as a clean table.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #8</div>
+      <div class="prompt-title">Referral Program Design</div>
+      <div class="prompt-text">Design a referral program for my [type of business]. My average customer value is [amount]. My product/service is [describe]. Create: (1) The referral incentive structure (what both referrer and referred person get), (2) 3 email templates to ask for referrals at different stages, (3) Social media share copy customers can use, (4) Landing page copy for the referral program, (5) A tracking system I can set up without special software. Make the incentives compelling but profitable.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #9</div>
+      <div class="prompt-title">Local SEO Content Strategy</div>
+      <div class="prompt-text">I run a [type of business] in [city/region]. Create a local SEO content strategy with: (1) 15 blog post titles targeting "near me" and local intent keywords, (2) 5 location-specific landing page outlines, (3) A list of 10 local directories I should be listed on, (4) 5 community partnership ideas that could earn backlinks, (5) A monthly content calendar focused on local topics. For each blog title, include the target keyword and estimated search intent.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #10</div>
+      <div class="prompt-title">Facebook/Instagram Ad Copy</div>
+      <div class="prompt-text">Write 5 Facebook/Instagram ad variations for my [product/service] targeting [audience]. Price: [amount]. For each ad, write: (1) Primary text (125 characters visible, up to 250 total), (2) Headline (under 40 characters), (3) Description (under 30 characters), (4) CTA button choice. Create variations: one pain-point focused, one benefit-focused, one social-proof style, one urgency/scarcity, and one storytelling approach. Include image/video direction for each.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #11</div>
+      <div class="prompt-title">Brand Voice Guide</div>
+      <div class="prompt-text">Create a brand voice guide for my [type of business]. Our brand personality is [describe in 3-5 adjectives]. Our audience is [describe]. Build a guide that covers: (1) Voice characteristics — 4 pillars with "we are / we are not" examples, (2) Tone spectrum — how our voice shifts across channels (social media, email, website, customer support), (3) Vocabulary — 20 words we love, 20 words we avoid, (4) 5 sample sentences rewritten in our voice, (5) Grammar and style rules.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #12</div>
+      <div class="prompt-title">Partnership & Collaboration Pitches</div>
+      <div class="prompt-text">I want to partner with complementary businesses to grow my [type of business]. My ideal partner businesses are [describe types]. Write: (1) A list of 10 creative partnership ideas beyond basic cross-promotion, (2) 3 outreach email templates — cold intro, warm intro, and follow-up, (3) A one-page partnership proposal template I can customize, (4) 5 co-marketing campaign concepts we could execute together. Each idea should clearly benefit both parties.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #13</div>
+      <div class="prompt-title">Customer Testimonial System</div>
+      <div class="prompt-text">Build me a system to collect powerful customer testimonials for my [type of business]. Create: (1) A 5-question testimonial request form that extracts specific, compelling stories, (2) 3 different email templates to request testimonials (post-purchase, post-milestone, annual), (3) A template to turn raw testimonials into polished case studies, (4) 10 places I should display testimonials for maximum impact, (5) A video testimonial question script. Make the questions draw out specific results and emotional transformation.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #14</div>
+      <div class="prompt-title">Seasonal Marketing Campaigns</div>
+      <div class="prompt-text">Plan 4 seasonal marketing campaigns for my [type of business] for the upcoming quarter [specify months]. For each campaign include: (1) Theme and hook that ties to the season naturally, (2) Promotional offer details, (3) 2-week launch timeline with daily tasks, (4) Email sequence (3 emails), (5) 5 social media posts, (6) One creative guerrilla marketing idea. My budget per campaign is [amount]. Make each campaign feel fresh — no generic "Spring Sale!" vibes.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #15</div>
+      <div class="prompt-title">Lead Magnet Ideas & Creation</div>
+      <div class="prompt-text">I need a high-converting lead magnet for my [type of business]. My target audience struggles with [describe pain point]. Generate: (1) 10 lead magnet ideas ranked by ease of creation and expected conversion rate, (2) For the top 3 ideas, outline the full content, (3) A landing page headline and 5 bullet points for each, (4) A 3-email delivery and nurture sequence, (5) 3 places to promote it organically. The lead magnet should be completable in under 15 minutes by the user and deliver a quick win.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #16</div>
+      <div class="prompt-title">Pricing Page Optimization</div>
+      <div class="prompt-text">Help me optimize the pricing page for my [product/service]. I currently offer [describe tiers/pricing]. My target customer is [describe]. Rewrite my pricing page with: (1) A compelling headline that frames price as investment, (2) Restructured tier names that create desire, (3) Feature lists rewritten as benefits, (4) Strategic use of anchoring and decoy pricing, (5) An FAQ section addressing price objections, (6) Social proof placement strategy, (7) Urgency elements that feel authentic, not pushy.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #17</div>
+      <div class="prompt-title">Event Marketing Plan</div>
+      <div class="prompt-text">I'm hosting a [type of event — webinar/workshop/launch party/pop-up] for my [type of business] on [date]. Expected attendance: [number]. Create a complete event marketing plan: (1) 4-week promotional timeline, (2) Event description copy for the registration page, (3) 5 promotional social media posts, (4) 3-email invitation sequence, (5) Day-of engagement plan, (6) Post-event follow-up email with offer, (7) Strategy to repurpose event content into 5 pieces of marketing material.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #18</div>
+      <div class="prompt-title">Brand Storytelling Framework</div>
+      <div class="prompt-text">Help me craft my brand story for [business name]. Here's my journey: [brief background — why you started, challenges faced, mission]. Using the StoryBrand framework, write: (1) My origin story (300 words) for the About page, (2) A 60-second elevator pitch, (3) A 3-sentence brand story for social media bios, (4) The "founder's letter" version for email subscribers, (5) Key story beats I should reference in content marketing. Make it authentic and emotionally compelling — not corporate.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #19</div>
+      <div class="prompt-title">Google Ads Campaign Setup</div>
+      <div class="prompt-text">I want to run Google Ads for my [type of business] in [location]. My monthly budget is [amount]. My main offering is [describe with price]. Create: (1) 20 target keywords organized by intent (informational, commercial, transactional), (2) 15 negative keywords to exclude, (3) 3 responsive search ad variations with 15 headlines and 4 descriptions each, (4) Recommended campaign structure and bid strategy, (5) Landing page recommendations for each ad group. Optimize for a [target CPA/ROAS].</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #20</div>
+      <div class="prompt-title">Marketing Audit Checklist</div>
+      <div class="prompt-text">Act as a CMO auditing my small business marketing. My business is [describe]. My current marketing includes: [list channels and activities]. Monthly budget: [amount]. Current results: [any metrics you know]. Perform a comprehensive audit: (1) Grade each channel A-F with specific feedback, (2) Identify the 3 biggest leaks in my marketing funnel, (3) Rank my channels by ROI potential, (4) Give me a prioritized 90-day action plan with quick wins first, (5) One thing I should stop doing immediately and why.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+  </div>
+
+  <!-- ==================== SALES (15) ==================== -->
+  <div id="sales" class="category-section cat-sales">
+    <div class="category-header">
+      <div class="category-icon">&#128176;</div>
+      <div>
+        <h2>Sales</h2>
+        <span class="cat-count">15 Prompts</span>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #21</div>
+      <div class="prompt-title">Sales Script for Discovery Calls</div>
+      <div class="prompt-text">Write a natural-sounding sales script for a 30-minute discovery call for my [product/service] priced at [amount]. My prospect is typically [describe]. Structure the script with: (1) Rapport-building opener (2 min), (2) Qualifying questions to uncover pain and budget (8 min), (3) Presentation framework that ties features to their specific pain (10 min), (4) Objection handling for the 5 most common objections, (5) Close with 3 different closing techniques based on buyer type, (6) Next steps and follow-up protocol. Make it conversational, not robotic.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #22</div>
+      <div class="prompt-title">Objection Handling Playbook</div>
+      <div class="prompt-text">Create an objection handling playbook for my [type of business] selling [product/service] at [price]. Generate the top 15 objections my prospects likely raise, then for each one provide: (1) Why they really say this (the underlying fear), (2) A "feel, felt, found" response, (3) A question-based redirect response, (4) A direct response with proof/data, (5) When to walk away vs. push through. Common objections include price, timing, need to think about it, competitor comparison, and trust. Make responses sound human, not salesy.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #23</div>
+      <div class="prompt-title">Proposal Template</div>
+      <div class="prompt-text">Create a winning proposal template for my [type of business/service]. My average project is [describe scope and price range]. Build a professional proposal with these sections: (1) Executive summary that restates their problem, (2) Our understanding of your needs, (3) Proposed solution with clear deliverables, (4) Timeline with milestones, (5) Investment section (not "pricing") with 3 package options, (6) Why us — 3 differentiators, (7) Case study summary, (8) Next steps with deadline. Write sample copy I can customize. Keep it to 3 pages max.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #24</div>
+      <div class="prompt-title">Follow-Up Email Sequence After No Response</div>
+      <div class="prompt-text">Write a 5-email follow-up sequence for prospects who went silent after [receiving a proposal / having a demo / initial conversation] for my [product/service]. Space them: Day 2, Day 5, Day 10, Day 21, Day 45. Each email should: be under 100 words, have a compelling subject line, provide a different angle or value add, not sound desperate or pushy. Include a "break-up email" as the final one. The goal is to restart the conversation without damaging the relationship.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #25</div>
+      <div class="prompt-title">Upsell and Cross-Sell Strategy</div>
+      <div class="prompt-text">Design an upsell and cross-sell strategy for my [type of business]. My main product/service is [describe with price]. My additional offerings are [list them]. Create: (1) A product/service ladder from lowest to highest price point, (2) Natural upsell moments in the customer journey with exact scripts, (3) 3 bundle offers with pricing psychology, (4) Post-purchase email sequence that introduces the next offer, (5) An "order bump" offer concept, (6) A loyalty/VIP tier structure. Target a 30% increase in average order value.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #26</div>
+      <div class="prompt-title">Cold Outreach Strategy</div>
+      <div class="prompt-text">Build a cold outreach campaign for my [type of business] targeting [ideal client type]. My service is [describe with price]. Create: (1) How to build a targeted prospect list of 100 contacts, (2) A 3-touchpoint LinkedIn outreach sequence (connection request + 2 follow-ups), (3) A parallel 3-email cold email sequence, (4) Subject lines A/B test variations for each email, (5) A personalization framework I can use at scale. Each message should be under 75 words, lead with value, and never pitch in the first message.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #27</div>
+      <div class="prompt-title">Sales Page Long-Form Copy</div>
+      <div class="prompt-text">Write long-form sales page copy for my [product/service] at [price point]. Target customer: [describe with pain points]. Follow this proven structure: attention-grabbing headline, identify the problem and agitate, introduce the solution, explain how it works, list benefits (not features), add social proof placeholders, handle the top 5 objections, stack the value, present the price as a no-brainer, risk reversal (guarantee), create urgency, final CTA. Write in a conversational, empathetic tone. Make it 1500-2000 words.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #28</div>
+      <div class="prompt-title">Win-Back Campaign for Lost Deals</div>
+      <div class="prompt-text">Create a win-back campaign for prospects who said no or chose a competitor for my [product/service]. Typical reasons they left: [list if known]. Build: (1) A 3-email re-engagement sequence spaced over 60 days, (2) A "what's new" update template for when I add features/offerings, (3) A special "come back" offer structure with limited-time incentive, (4) A survey email to understand why they left (5 questions), (5) Response templates for each common reason they chose someone else. Tone: confident, not desperate.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #29</div>
+      <div class="prompt-title">Case Study Template</div>
+      <div class="prompt-text">Create a case study template for my [type of business] that I can reuse. Then write a sample case study based on this scenario: [describe a client success story or make one up based on typical results]. Structure: (1) Compelling title with specific result, (2) Client snapshot (industry, size, challenge), (3) The situation — paint the "before" picture, (4) The solution — what we did step by step, (5) The results — specific metrics and quotes, (6) Key takeaway. Keep it to 500 words. Include pull-quote formatting and a visual layout suggestion.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #30</div>
+      <div class="prompt-title">Pricing Negotiation Responses</div>
+      <div class="prompt-text">I sell [product/service] at [price] and prospects often try to negotiate. Create response scripts for these 10 scenarios: (1) "Can you do it cheaper?", (2) "Your competitor charges less", (3) "We only have budget for X", (4) "Can we start smaller?", (5) "What's the best you can do?", (6) "We need to think about it", (7) "Can we get a trial first?", (8) "Let me run it by my boss", (9) "We'll revisit next quarter", (10) "Just send us the proposal and we'll decide." For each, give a confident response that protects my price and moves the sale forward.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #31</div>
+      <div class="prompt-title">Sales Qualification Framework</div>
+      <div class="prompt-text">Create a lead qualification framework for my [type of business]. I sell [product/service] to [target market] at [price range]. Build: (1) A scoring rubric (1-10) based on BANT (Budget, Authority, Need, Timeline) with specific criteria for each score, (2) 12 qualifying questions I can ask naturally in conversation, (3) Red flags that signal a bad-fit prospect, (4) Green flags that signal a high-probability close, (5) A simple spreadsheet-friendly tracking template, (6) An auto-response system: what to do with hot, warm, and cold leads.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #32</div>
+      <div class="prompt-title">Webinar Sales Presentation</div>
+      <div class="prompt-text">Create a 45-minute webinar script that sells my [product/service] at [price]. Topic that attracts my audience: [suggest or specify]. Structure: (1) Hook + credibility — first 3 minutes, (2) Teach valuable content — 20 minutes of real value organized in 3 key lessons, (3) Transition to pitch — bridge the gap between free content and paid solution, (4) Present the offer with value stacking, (5) Handle objections live, (6) Close with urgency + bonuses, (7) Q&A framework. Include slide-by-slide notes and talk track. Target a 10%+ conversion rate.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #33</div>
+      <div class="prompt-title">Testimonial Request That Gets Results</div>
+      <div class="prompt-text">Write 3 different testimonial request messages I can send to happy customers of my [type of business]. Version 1: Email for recent customers (within 7 days). Version 2: Text/DM for long-term customers. Version 3: In-person script for face-to-face. Each should: (1) Express genuine gratitude, (2) Make the ask easy (give them a framework), (3) Include 5 specific questions that draw out results and emotions, (4) Offer an incentive naturally, (5) Give them the option to do written, video, or voice memo. Include a follow-up message for non-responders.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #34</div>
+      <div class="prompt-title">Guarantee and Risk Reversal Strategy</div>
+      <div class="prompt-text">Help me design a powerful guarantee for my [product/service] at [price point]. Current refund rate: [percentage or unknown]. Create: (1) 5 different guarantee options (money-back, results-based, satisfaction, try-before-you-buy, conditional), (2) For each, the exact wording to use on my sales page, (3) The terms and conditions in plain English, (4) How to position the guarantee so it increases sales without increasing refunds, (5) Fulfillment process for each guarantee type. Help me pick the best one for my specific business model and explain why.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #35</div>
+      <div class="prompt-title">Referral Ask Scripts</div>
+      <div class="prompt-text">Write natural referral request scripts for my [type of business]. I want to ask at 5 different moments: (1) Right after delivering results, (2) During a check-in call, (3) In a post-project survey follow-up, (4) At an annual review/renewal, (5) When a customer gives unsolicited praise. For each moment: write the exact words to say (in-person version and email version), include how to respond if they say "let me think about it," and a follow-up template. Also create a simple referral tracking system I can run in a spreadsheet.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+  </div>
+
+  <!-- ==================== CUSTOMER SERVICE (15) ==================== -->
+  <div id="customer" class="category-section cat-customer">
+    <div class="category-header">
+      <div class="category-icon">&#128588;</div>
+      <div>
+        <h2>Customer Service</h2>
+        <span class="cat-count">15 Prompts</span>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #36</div>
+      <div class="prompt-title">Customer Service Response Templates</div>
+      <div class="prompt-text">Create 10 customer service email response templates for my [type of business]. Cover these situations: (1) Product/service inquiry, (2) Pricing question, (3) Complaint about quality, (4) Shipping/delivery issue, (5) Refund request, (6) Positive feedback response, (7) Feature/product request, (8) Technical issue report, (9) Billing dispute, (10) Service cancellation. Each template should: acknowledge the customer's feeling, address the issue, provide a solution, and end with a warm close. Keep each under 150 words. Tone: empathetic, professional, solution-focused.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #37</div>
+      <div class="prompt-title">FAQ Page Content</div>
+      <div class="prompt-text">Write a comprehensive FAQ page for my [type of business]. I sell [product/service] at [price]. Create 25 frequently asked questions and answers organized by category: General (5), Product/Service (5), Pricing & Payment (5), Shipping/Delivery (5), Returns & Refunds (5). Each answer should: be 2-4 sentences, preemptively handle objections, include a subtle CTA where appropriate, and use a conversational but professional tone. Also suggest 5 questions I should add based on common customer anxieties in my industry.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #38</div>
+      <div class="prompt-title">Angry Customer De-escalation Scripts</div>
+      <div class="prompt-text">Write de-escalation scripts for handling angry customers at my [type of business]. Cover 8 scenarios: (1) Customer received wrong item/service, (2) Long wait time complaint, (3) Rude experience with staff, (4) Product didn't meet expectations, (5) Customer wants to speak to manager, (6) Customer threatening a bad review, (7) Repeat issue not getting resolved, (8) Customer requesting unreasonable compensation. For each: provide the opening line, key phrases to use, phrases to avoid, resolution options from least to most costly, and a follow-up action. DEFUSE method framework throughout.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #39</div>
+      <div class="prompt-title">Customer Onboarding Sequence</div>
+      <div class="prompt-text">Design a customer onboarding sequence for new buyers of my [product/service]. The goal is to reduce buyer's remorse, increase product usage, and set up for repeat purchases. Create: (1) Immediate post-purchase confirmation message, (2) Day 1: Welcome + quick start guide email, (3) Day 3: Check-in + tips for getting the most value, (4) Day 7: Feature highlight or advanced usage, (5) Day 14: Success check-in + testimonial request, (6) Day 30: Upsell/cross-sell offer. Write full copy for each touchpoint. Include subject lines and SMS versions for key messages.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #40</div>
+      <div class="prompt-title">Review Response Templates</div>
+      <div class="prompt-text">Write response templates for online reviews of my [type of business]. Create 3 templates for each star rating: 5-star (gracious + encourage referrals), 4-star (thank + address the "but"), 3-star (acknowledge + offer to improve), 2-star (empathize + take offline), 1-star (apologize + resolve publicly). That's 15 templates total. Each should: use the reviewer's language style, include business owner's name signature, feel personal not templated, address specific common themes. Also write guidelines for response timing and what never to say publicly.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #41</div>
+      <div class="prompt-title">Customer Feedback Survey</div>
+      <div class="prompt-text">Design a customer satisfaction survey for my [type of business] that actually gets completed. Create: (1) A short version (5 questions, under 2 minutes) for post-purchase, (2) A detailed version (15 questions, under 5 minutes) for quarterly check-ins, (3) An NPS survey with follow-up questions, (4) The email invitation for each survey with subject lines, (5) A system for categorizing and acting on feedback, (6) Response templates for each NPS category (promoters, passives, detractors). Make questions specific, use a mix of scale and open-ended, and avoid leading questions.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #42</div>
+      <div class="prompt-title">Returns & Refund Policy</div>
+      <div class="prompt-text">Write a customer-friendly returns and refund policy for my [type of business]. My products/services: [describe]. Current policy: [describe or "none yet"]. Create: (1) A clear, jargon-free policy page (cover timeframes, conditions, process, exceptions), (2) A simplified version for product pages (3 bullet points), (3) An email template for approving returns, (4) An email template for denying returns gracefully, (5) A step-by-step return process guide for customers, (6) Internal guidelines for when to bend the policy. The policy should build trust and reduce purchase anxiety while protecting the business.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #43</div>
+      <div class="prompt-title">Live Chat Scripts</div>
+      <div class="prompt-text">Write live chat scripts for my [type of business] website. Create responses for the 12 most common chat inquiries: (1) Greeting/welcome, (2) Product recommendation, (3) Pricing inquiry, (4) Availability check, (5) Shipping information, (6) Discount request, (7) Technical support, (8) Complaint, (9) Comparison question, (10) Custom order request, (11) Business hours/location, (12) Handoff to human agent. Each script should: be under 50 words per message, include 2-3 follow-up paths, and end with a CTA. Also create 5 proactive chat triggers based on user behavior.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #44</div>
+      <div class="prompt-title">Customer Retention Email Campaign</div>
+      <div class="prompt-text">Design a customer retention email campaign for my [type of business]. My average customer lifespan is [duration]. Create a 12-email annual retention sequence: (1) Month 1: Thank you + value reinforcement, (2) Month 2: Tips & best practices, (3) Month 3: Exclusive offer, (4) Month 4: Behind the scenes / story, (5) Month 5: Feedback request, (6) Month 6: Milestone celebration, (7) Month 7: VIP early access, (8) Month 8: User-generated content feature, (9) Month 9: Loyalty reward, (10) Month 10: Annual recap, (11) Month 11: Renewal/reorder reminder, (12) Month 12: Anniversary appreciation. Write full emails for each.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #45</div>
+      <div class="prompt-title">Service Recovery Protocol</div>
+      <div class="prompt-text">Create a service recovery protocol for my [type of business]. When things go wrong, I want to turn unhappy customers into loyal advocates. Build: (1) A severity classification system (levels 1-4 with examples), (2) Response time standards for each level, (3) Compensation guidelines by severity (what to offer), (4) Communication templates for each level (first response, update, resolution), (5) Escalation procedures and decision-making authority, (6) A root cause analysis template to prevent repeat issues, (7) A follow-up sequence to verify satisfaction. Include real-world scenarios specific to my industry.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #46</div>
+      <div class="prompt-title">Phone Script for Inbound Calls</div>
+      <div class="prompt-text">Write a professional phone script for handling inbound calls at my [type of business]. Cover: (1) Greeting that's warm and branded, (2) Qualifying the caller's needs with open-ended questions, (3) Putting callers on hold gracefully, (4) Transferring calls with proper introduction, (5) Taking messages with all essential info, (6) Handling "just checking pricing" calls into sales conversations, (7) Scheduling appointments/callbacks, (8) Closing the call with next steps, (9) Voicemail greeting script, (10) After-hours auto-attendant script. Make it sound natural, not like a call center. Include do's and don'ts.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #47</div>
+      <div class="prompt-title">Customer Loyalty Program</div>
+      <div class="prompt-text">Design a customer loyalty program for my [type of business]. My average purchase value is [amount] and frequency is [how often]. Create: (1) Program structure (points, tiers, or punch-card — recommend best fit), (2) Reward tiers with specific perks at each level, (3) Points earning and redemption rules, (4) Program launch announcement email, (5) Monthly loyalty update email template, (6) Tier upgrade congratulations message, (7) "You're close to a reward" nudge email, (8) Program terms in plain language, (9) ROI projection for the first year. Make it simple enough to manage without expensive software.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #48</div>
+      <div class="prompt-title">Customer Win-Back Emails</div>
+      <div class="prompt-text">Create a win-back email sequence for inactive customers of my [type of business]. Define "inactive" as no purchase in [timeframe]. Write a 4-email sequence: (1) "We miss you" — warm, personal, no hard sell, (2) "Here's what's new" — highlight improvements and new offerings, (3) "Special offer just for you" — exclusive comeback incentive, (4) "Last chance" — final attempt with strongest offer + honesty about removing from list. Include subject lines, preview text, and full body copy. Also create an SMS version of the strongest email.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #49</div>
+      <div class="prompt-title">Chatbot Decision Tree</div>
+      <div class="prompt-text">Design a chatbot conversation flow for my [type of business] website. Create decision trees for the 5 most common visitor intents: (1) Learning about products/services, (2) Checking pricing, (3) Getting support, (4) Making a purchase, (5) Contacting a human. For each tree: map out 4-5 levels of conversation branching, write the exact bot messages (under 40 words each), include button/quick-reply options, define when to hand off to a human, and specify what data to collect. Format as a clear flowchart I can give to a developer or plug into a chatbot tool.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #50</div>
+      <div class="prompt-title">Customer Communication Style Guide</div>
+      <div class="prompt-text">Create a customer communication style guide for my [type of business] that any team member can follow. Include: (1) Our brand voice in customer interactions (4 attributes with examples), (2) Approved greetings and sign-offs for email, chat, phone, and social media, (3) Words and phrases we always use vs. never use (15 each), (4) Formatting standards (response length, paragraph structure, emoji policy), (5) Escalation language — how to say "I need to check with my manager" professionally, (6) Cultural sensitivity guidelines, (7) 10 example before/after rewrites of common responses.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+  </div>
+
+  <!-- ==================== CONTENT CREATION (15) ==================== -->
+  <div id="content" class="category-section cat-content">
+    <div class="category-header">
+      <div class="category-icon">&#9999;&#65039;</div>
+      <div>
+        <h2>Content Creation</h2>
+        <span class="cat-count">15 Prompts</span>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #51</div>
+      <div class="prompt-title">Blog Post from Scratch</div>
+      <div class="prompt-text">Write a 1500-word blog post for my [type of business] website. Topic: [topic]. Target keyword: [keyword]. Target audience: [describe]. The post should: (1) Open with a hook that creates curiosity, (2) Include an SEO-optimized H1 title and meta description, (3) Use H2 and H3 subheadings strategically, (4) Include 3-5 actionable takeaways, (5) Have a conversational yet authoritative tone, (6) End with a CTA related to my [product/service], (7) Include suggestions for 2-3 internal link placements, (8) Suggest an image for each section. Format with proper heading hierarchy.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #52</div>
+      <div class="prompt-title">Content Repurposing System</div>
+      <div class="prompt-text">I have a [blog post / podcast episode / video] about [topic]. Help me repurpose it into 15 pieces of content: (1) 5 social media posts (one for each platform: Instagram, LinkedIn, Twitter/X, Facebook, TikTok), (2) An email newsletter version, (3) 3 short-form video scripts (under 60 seconds each), (4) An infographic outline, (5) 3 quote graphics with text, (6) A Twitter/X thread version, (7) A carousel post outline for Instagram/LinkedIn. For each piece, adapt the format, tone, and length to the platform's best practices. Maximize reach from one core piece.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #53</div>
+      <div class="prompt-title">YouTube Video Script</div>
+      <div class="prompt-text">Write a YouTube video script for my [type of business] channel. Topic: [topic]. Target length: [8-12 minutes]. Structure: (1) Hook — first 15 seconds that stops the scroll, (2) Intro — establish credibility + promise value (30 sec), (3) Content — 5 main points with transitions and B-roll suggestions, (4) Each point: key insight + example + actionable tip, (5) CTA — subscribe + lead magnet, (6) Outro — recap + tease next video. Include: on-screen text suggestions, timestamp markers, thumbnail title options (3), and an SEO-optimized title and description with keywords.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #54</div>
+      <div class="prompt-title">Newsletter Content Strategy</div>
+      <div class="prompt-text">Design a 12-week email newsletter strategy for my [type of business]. My audience is [describe]. My goal is [grow list / drive sales / build authority]. For each week provide: (1) Subject line, (2) Theme/topic, (3) A 3-section format (story/lesson, actionable tip, CTA), (4) Full draft of the newsletter (300-400 words each). Alternate between these content pillars: educational (40%), behind-the-scenes (20%), promotional (20%), curated/industry news (10%), community spotlight (10%). Include open rate optimization tips for each.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #55</div>
+      <div class="prompt-title">Podcast Episode Planning</div>
+      <div class="prompt-text">Plan 12 podcast episodes for my [type of business / industry] podcast. For each episode provide: (1) Episode title (compelling, keyword-rich), (2) 3-sentence episode description, (3) Detailed outline with timestamps, (4) 5 key talking points with data or examples, (5) 3 questions if it's an interview format, (6) Intro and outro script, (7) Show notes template, (8) 3 social media teasers. Mix formats: 4 solo episodes, 4 interviews (suggest guest types), 4 Q&A / case study episodes. Also write the podcast description and suggest 5 podcast directories to submit to.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #56</div>
+      <div class="prompt-title">Website About Page</div>
+      <div class="prompt-text">Write the About page for my [type of business] website. Business name: [name]. Founded: [year]. Founder story: [brief background]. Mission: [describe]. What we sell: [describe]. Write: (1) A compelling headline that isn't "About Us", (2) The founder's story told as a narrative arc (problem, journey, solution), (3) Our mission and values section (3-4 values with descriptions), (4) "By the numbers" section (suggest 4 impressive metrics to feature), (5) Team section framework, (6) CTA section. Total: 600-800 words. Tone: authentic, confident, relatable. Make the reader feel something.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #57</div>
+      <div class="prompt-title">Product Descriptions That Sell</div>
+      <div class="prompt-text">Write 5 product descriptions for my [type of business]. Products: [list with basic details]. For each product write: (1) A benefit-driven headline (not just the product name), (2) A 2-sentence hook that creates desire, (3) Feature list reframed as benefits (5-7 bullets), (4) A mini "who it's for" section, (5) Sensory/emotional language that helps the reader imagine using it, (6) A micro-CTA. Each description: 150-200 words. Include SEO keywords naturally. Also write the meta description for each product page (under 155 characters).</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #58</div>
+      <div class="prompt-title">eBook Outline & First Chapter</div>
+      <div class="prompt-text">Create a lead magnet eBook outline for my [type of business]. Topic: [topic that solves a problem for my audience]. Target reader: [describe]. Create: (1) 5 title options with subtitle, (2) Table of contents (8-10 chapters), (3) 2-paragraph introduction, (4) Detailed outline for each chapter (key points, examples, actionable exercises), (5) Write Chapter 1 in full (800-1000 words), (6) Design notes (color scheme, layout suggestions, image ideas per chapter), (7) Back cover copy, (8) CTA page at the end driving to my [product/service]. The eBook should be substantial enough to justify an email opt-in.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #59</div>
+      <div class="prompt-title">Press Release Template</div>
+      <div class="prompt-text">Write a press release for my [type of business] announcing [new product launch / milestone / event / partnership]. Business details: [name, location, what you do]. The announcement: [describe]. Write in proper AP style press release format: (1) Compelling headline + subheadline, (2) Dateline + lead paragraph (who, what, when, where, why), (3) Supporting details with quotes from the founder (write 2 quotes), (4) Background/boilerplate section, (5) Contact information section, (6) ### end marker. Keep it to one page. Also provide: a list of 10 relevant media outlets to send it to and a pitch email template for journalists.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #60</div>
+      <div class="prompt-title">Content Pillar Strategy</div>
+      <div class="prompt-text">Build a content pillar strategy for my [type of business]. My expertise areas: [list 3-5 topics]. My audience cares about: [describe interests/pain points]. Create: (1) 5 content pillars with descriptions, (2) For each pillar: 10 specific content ideas (50 total), (3) A content matrix mapping pillars to formats (blog, video, social, email, podcast), (4) A quarterly content calendar using these pillars, (5) Pillar page outlines for my website (2000-word comprehensive guides on each pillar), (6) Internal linking strategy between pillar pages and supporting content. This should be my content roadmap for the next 6 months.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #61</div>
+      <div class="prompt-title">Video Ad Script (30 Seconds)</div>
+      <div class="prompt-text">Write 5 different 30-second video ad scripts for my [product/service] at [price]. Target audience: [describe]. Each script should follow a different proven formula: (1) Problem-Agitate-Solve, (2) Before-After-Bridge, (3) Testimonial/Story-based, (4) Demo/How-it-works, (5) Curiosity/Pattern-interrupt. For each script include: visual direction shot by shot, on-screen text, voiceover script with timing (keep under 80 words), music mood suggestion, and CTA. Optimize for the first 3 seconds — that's the make-or-break hook. Format clearly so I can hand this to a videographer.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #62</div>
+      <div class="prompt-title">SEO Keyword Strategy</div>
+      <div class="prompt-text">Create a comprehensive SEO keyword strategy for my [type of business] in [location/market]. My main offerings: [list products/services]. Current website pages: [list or describe]. Build: (1) 30 target keywords organized by intent (10 informational, 10 commercial, 10 transactional), (2) For each keyword: estimated difficulty, suggested content type, and title tag, (3) 10 long-tail keywords I can rank for quickly, (4) 10 local SEO keywords, (5) Content gap analysis — topics my competitors cover that I don't, (6) A 12-week SEO content calendar prioritized by impact and difficulty.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #63</div>
+      <div class="prompt-title">Infographic Content</div>
+      <div class="prompt-text">Create the content for an infographic about [topic relevant to my business]. My audience: [describe]. Create: (1) 3 title options that are shareable, (2) The data/content organized in a visual-friendly flow (top to bottom), (3) Section-by-section content with: headers, statistics, short explanations (under 20 words each), (4) 8-10 data points with sources I can verify, (5) A concluding CTA, (6) Layout description for a designer (sections, suggested icons, color flow), (7) Alt text and a blog post introduction to accompany the infographic. Suggest the best social platforms to share it on with post copy for each.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #64</div>
+      <div class="prompt-title">Case Study Blog Series</div>
+      <div class="prompt-text">Create a 4-part case study blog series template for my [type of business]. Each post should follow this format: (1) Attention-grabbing title with specific results, (2) Client background (150 words), (3) The challenge they faced (200 words), (4) Our approach and solution (300 words), (5) The results with specific metrics (200 words), (6) Key lessons anyone can apply (150 words), (7) CTA to work with us. Write the first case study in full based on this scenario: [describe a typical client success story]. Include pull quotes, sidebar stats, and image suggestions.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #65</div>
+      <div class="prompt-title">Micro-Content for Short Attention Spans</div>
+      <div class="prompt-text">Create 20 pieces of micro-content for my [type of business] that I can post anywhere in under 2 minutes. Mix of: (1) 5 one-liner tips/truths about [industry], (2) 5 "Did you know?" facts with a twist, (3) 5 fill-in-the-blank engagement prompts, (4) 5 hot takes or contrarian opinions about [industry]. Each piece should: be under 280 characters, spark engagement (saves, shares, or comments), position me as an authority, and work on any platform. Also create 5 "this or that" poll ideas and 5 "myth vs. reality" post concepts.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+  </div>
+
+  <!-- ==================== SOCIAL MEDIA (15) ==================== -->
+  <div id="social" class="category-section cat-social">
+    <div class="category-header">
+      <div class="category-icon">&#128241;</div>
+      <div>
+        <h2>Social Media</h2>
+        <span class="cat-count">15 Prompts</span>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #66</div>
+      <div class="prompt-title">Instagram Content Strategy</div>
+      <div class="prompt-text">Create a 30-day Instagram content strategy for my [type of business]. Followers: [current count]. Goal: [growth / engagement / sales]. Create: (1) 30 post ideas with format (Reel, Carousel, Single image, Story), (2) Caption for each post (with hooks, body, CTA, and 5 relevant hashtags), (3) 5 Reel scripts under 30 seconds each, (4) 3 carousel templates (educational, storytelling, listicle), (5) Daily Story ideas for each day, (6) Bio optimization with keywords and CTA, (7) Highlight cover categories and names. Follow the 80/20 rule: 80% value, 20% promotion. Include best posting times and engagement strategy.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #67</div>
+      <div class="prompt-title">LinkedIn Authority Building</div>
+      <div class="prompt-text">Create a 4-week LinkedIn content strategy to establish me as a thought leader in [industry]. My role: [title] at [company]. Create: (1) 20 post ideas (5 per week: Mon-Fri), (2) Full post text for each (150-300 words), (3) 5 different post frameworks I can reuse (story, contrarian take, how-to, data-driven, personal reflection), (4) Comment strategy — 10 insightful comment templates for engaging on others' posts, (5) Connection request message templates (3 versions), (6) Profile headline and summary rewrite, (7) 2 LinkedIn article outlines (long-form). Each post should have a strong opening hook (first 2 lines visible before "see more").</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #68</div>
+      <div class="prompt-title">TikTok Video Ideas & Scripts</div>
+      <div class="prompt-text">Create 20 TikTok video concepts for my [type of business]. My niche: [describe]. Current followers: [count]. For each video: (1) Hook (first 2 seconds — the viewer-stopping line), (2) Full script (15-60 seconds), (3) Visual direction and transitions, (4) On-screen text overlays, (5) Trending sound/music suggestion or original audio direction, (6) Hashtags (5-7 mix of trending and niche), (7) Caption with CTA. Mix: 5 educational, 5 behind-the-scenes, 5 trending format adaptations, 5 storytelling. Optimize for the For You Page algorithm — high watch time and shares.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #69</div>
+      <div class="prompt-title">Social Media Bio Optimization</div>
+      <div class="prompt-text">Rewrite my social media bios across all platforms for my [type of business]. Current bio: [paste or describe]. Target audience: [describe]. Create optimized bios for: (1) Instagram (150 chars, with line breaks and emoji strategy), (2) TikTok (80 chars), (3) LinkedIn (headline 220 chars + 2600 char summary), (4) Twitter/X (160 chars), (5) Facebook page (About section), (6) YouTube (channel description). Each bio should: include a keyword, communicate what I do and who I help, include a CTA, and feel authentic to my brand. Also suggest link-in-bio tool setup with 5 recommended links.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #70</div>
+      <div class="prompt-title">Hashtag Strategy</div>
+      <div class="prompt-text">Build a comprehensive hashtag strategy for my [type of business] on Instagram and TikTok. Create: (1) 30 niche-specific hashtags (under 500K posts), (2) 15 medium-competition hashtags (500K-5M posts), (3) 10 broad hashtags (5M+ posts), (4) 5 branded hashtag options for my business, (5) 5 community hashtags to build engagement, (6) 5 hashtag sets of 20-30 each for different content types (educational, promotional, behind-the-scenes, user-generated content, trending). Also explain: how many to use per post, where to place them, and how to rotate them. Include banned/spammy hashtags to avoid.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #71</div>
+      <div class="prompt-title">Social Media Engagement Playbook</div>
+      <div class="prompt-text">Create a daily social media engagement playbook for my [type of business]. I can spend [X minutes] per day on engagement. Build: (1) A morning routine checklist (10 min), (2) A midday engagement routine (10 min), (3) An evening engagement routine (10 min), (4) 20 comment templates for engaging with followers' content, (5) 10 DM conversation starters that lead to sales naturally, (6) Response templates for common DMs (inquiry, collab request, spam), (7) A weekly engagement challenge to boost community, (8) Metrics to track and target benchmarks for my follower count.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #72</div>
+      <div class="prompt-title">Pinterest Strategy for Business</div>
+      <div class="prompt-text">Create a Pinterest marketing strategy for my [type of business]. My products/services: [describe]. Website: [URL]. Create: (1) 10 board ideas with descriptions and keywords, (2) 30 pin titles and descriptions (SEO-optimized), (3) Pin design guidelines (dimensions, text overlay rules, branding), (4) A pinning schedule — how many pins per day and best times, (5) 10 idea pin (story pin) concepts, (6) Rich pin setup instructions, (7) A strategy for driving website traffic from Pinterest. Include keyword research for pin descriptions and explain how to use Pinterest Trends for content planning.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #73</div>
+      <div class="prompt-title">Social Media Crisis Plan</div>
+      <div class="prompt-text">Create a social media crisis management plan for my [type of business]. Prepare for these scenarios: (1) Negative viral post about my business, (2) Customer complaint going public, (3) Employee social media mistake, (4) Product/service failure exposed online, (5) Fake review attack. For each scenario: write the first response template (within 1 hour), a follow-up statement, internal team communication, an escalation decision tree, and a recovery content plan for the following week. Also create: social media guidelines for employees and a monitoring checklist for early detection.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #74</div>
+      <div class="prompt-title">User-Generated Content Campaign</div>
+      <div class="prompt-text">Design a user-generated content (UGC) campaign for my [type of business]. My product/service: [describe]. Create: (1) A branded hashtag and campaign name, (2) Campaign launch post with rules and incentive, (3) 5 creative prompts to inspire customer content, (4) Email template asking customers to participate, (5) Rights/permission request template, (6) A system for collecting, organizing, and reposting UGC, (7) 10 ways to repurpose UGC across marketing channels, (8) Legal disclaimer text. Also write 5 captions for reposting customer content. Goal: build social proof and community while generating free content.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #75</div>
+      <div class="prompt-title">Twitter/X Thread Strategy</div>
+      <div class="prompt-text">Write 5 Twitter/X threads for my [type of business] that are designed to go viral and grow my following. Thread topics should relate to [industry/expertise]. For each thread: (1) Hook tweet (under 280 chars, pattern-interrupting), (2) 8-12 tweets building on the topic, (3) Each tweet under 280 characters with clear value, (4) Final tweet with CTA (follow, newsletter, product), (5) The "reply with a quote tweet" version for resharing. Formats to include: a how-to thread, a myth-busting thread, a personal story thread, a data-driven thread, and a contrarian opinion thread.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #76</div>
+      <div class="prompt-title">Instagram Reels Batch Content</div>
+      <div class="prompt-text">Create a batch of 10 Instagram Reels for my [type of business] that I can film in one afternoon. For each Reel: (1) Concept and hook, (2) Full script (15-30 seconds), (3) Shot list (what to film), (4) Text overlay copy, (5) Audio direction (trending sound or voiceover), (6) Caption with hashtags and CTA. Content types: 3 educational tips, 2 behind-the-scenes, 2 trending audio adaptations, 1 transformation/before-after, 1 myth-busting, 1 day-in-the-life. Include a filming setup guide — lighting, angles, and props needed.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #77</div>
+      <div class="prompt-title">Social Proof Content Calendar</div>
+      <div class="prompt-text">Create a 30-day social proof content calendar for my [type of business]. Generate 30 social proof posts using these formats: (1) Customer testimonial quotes (6), (2) Before/after results (4), (3) Behind-the-scenes of serving clients (4), (4) Milestone celebrations (3), (5) Media mentions or features (3), (6) Team expertise spotlights (3), (7) Customer story mini-case studies (4), (8) Awards/certifications (3). For each: write the full caption, suggest the visual, and include a CTA. Even if I don't have all this proof yet, tell me how to create or collect it.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #78</div>
+      <div class="prompt-title">Facebook Group Growth Strategy</div>
+      <div class="prompt-text">Create a strategy to grow and monetize a Facebook Group for my [type of business]. Group topic: [describe]. Create: (1) Group name, description, and 3 membership questions, (2) Welcome post template for new members, (3) Group rules (10 rules, community-focused), (4) A weekly content calendar (themed days for each day of the week), (5) 20 discussion prompts that drive engagement, (6) A strategy for growing from 0 to 1000 members in 90 days, (7) How to subtly promote my [product/service] without being spammy, (8) A monthly "value post" template that positions me as the expert.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #79</div>
+      <div class="prompt-title">Social Media Analytics Review</div>
+      <div class="prompt-text">Act as a social media strategist reviewing my analytics. Here's my data: Platform: [name], Followers: [count], Average engagement rate: [%], Top-performing post: [describe], Worst-performing post: [describe], Posting frequency: [how often], Best times: [if known]. Analyze and provide: (1) What the data tells me about my audience, (2) 5 specific changes to make based on trends, (3) Content types to do more of and less of, (4) A testing plan for the next 30 days, (5) Benchmark comparison for my industry, (6) 3 new content experiments to try, (7) Monthly KPIs I should track in a simple spreadsheet.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #80</div>
+      <div class="prompt-title">Influencer Collaboration Outreach</div>
+      <div class="prompt-text">Create an influencer marketing strategy for my [type of business] with a budget of [amount]. My target audience: [describe]. Create: (1) Criteria for identifying the right micro-influencers (1K-50K followers), (2) 10 types of influencers to target in my niche, (3) A cold DM outreach template, (4) A formal email pitch template, (5) 3 collaboration ideas beyond sponsored posts (takeovers, co-created products, challenges), (6) A contract checklist of terms to include, (7) Deliverables template and timeline, (8) How to measure ROI from influencer partnerships. Focus on micro-influencers for best ROI.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+  </div>
+
+  <!-- ==================== OPERATIONS (10) ==================== -->
+  <div id="operations" class="category-section cat-operations">
+    <div class="category-header">
+      <div class="category-icon">&#9881;&#65039;</div>
+      <div>
+        <h2>Operations</h2>
+        <span class="cat-count">10 Prompts</span>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #81</div>
+      <div class="prompt-title">Standard Operating Procedures</div>
+      <div class="prompt-text">Create standard operating procedures (SOPs) for my [type of business]. Write detailed SOPs for these 5 core processes: (1) [process 1 — e.g., customer onboarding], (2) [process 2 — e.g., order fulfillment], (3) [process 3 — e.g., quality control], (4) [process 4 — e.g., customer support ticket handling], (5) [process 5 — e.g., social media posting]. Each SOP should include: purpose, scope, responsible parties, step-by-step instructions with screenshots/checklist format, quality standards, exception handling, and review schedule. Format so I can hand these to a new hire on day one.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #82</div>
+      <div class="prompt-title">Tech Stack Recommendation</div>
+      <div class="prompt-text">Recommend the ideal tech stack for my [type of business] at my current stage: [startup / growing / established]. Monthly tech budget: [amount]. Current tools: [list any]. I need solutions for: (1) CRM and customer management, (2) Email marketing, (3) Project management, (4) Accounting and invoicing, (5) Website and e-commerce, (6) Social media management, (7) Communication (team + customers), (8) File storage and collaboration. For each category: recommend a primary tool and a budget alternative, explain why, list key features I need, and estimate monthly cost. Also show how they integrate with each other. Total should stay under my budget.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #83</div>
+      <div class="prompt-title">Hiring Job Post & Interview Guide</div>
+      <div class="prompt-text">I'm hiring a [job title] for my [type of business]. Budget: [salary/hourly range]. Help me with: (1) A compelling job posting that attracts A-players (not corporate boring), (2) 5 places to post the job beyond Indeed, (3) A resume screening checklist with must-haves vs. nice-to-haves, (4) Phone screen questions (10 min — 5 questions), (5) Interview guide with 15 behavioral questions and what good answers look like, (6) A skills assessment or test project, (7) Reference check questions (5 that actually reveal truth), (8) Offer letter template, (9) First-week onboarding checklist.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #84</div>
+      <div class="prompt-title">Weekly Business Review Template</div>
+      <div class="prompt-text">Create a weekly business review system for my [type of business]. Build: (1) A one-page weekly dashboard template with KPIs I should track (suggest 10 metrics), (2) A 30-minute weekly review agenda with questions to ask myself, (3) A quarterly review template with deeper analysis, (4) An annual review and planning framework, (5) Benchmarks for what "good" looks like for each KPI at my business stage, (6) A simple scoring system to grade each week (A-F), (7) A template for documenting lessons learned and action items. Make it practical — something I'll actually use, not an MBA exercise.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #85</div>
+      <div class="prompt-title">Automation Opportunities Audit</div>
+      <div class="prompt-text">Audit my [type of business] operations for automation opportunities. My daily/weekly tasks include: [list your recurring tasks]. Current tools: [list]. For each task I listed: (1) Can it be automated? (Yes/Partial/No), (2) Recommended tool or method, (3) Setup difficulty (Easy/Medium/Hard), (4) Time saved per week, (5) Cost of the automation tool. Then: prioritize the top 5 automations by impact (time saved per dollar spent), give me step-by-step setup instructions for the top 3, and estimate total hours saved per month. Also suggest 5 automations I probably haven't thought of based on my business type.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #86</div>
+      <div class="prompt-title">Client Contract Template</div>
+      <div class="prompt-text">Draft a professional client contract template for my [type of business/service]. My typical engagement: [describe scope, duration, price]. Include these sections: (1) Scope of work with deliverables, (2) Timeline and milestones, (3) Payment terms and schedule, (4) Revision/change request policy, (5) Intellectual property rights, (6) Confidentiality, (7) Termination clause (both parties), (8) Limitation of liability, (9) Force majeure, (10) Dispute resolution. Write in plain English, not legalese. Include blanks I can fill in. Add a note that I should have a lawyer review before using. Also create a simplified 1-page agreement version for smaller projects.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #87</div>
+      <div class="prompt-title">Delegation Framework</div>
+      <div class="prompt-text">Help me figure out what to delegate in my [type of business]. I currently do everything myself and work [X hours/week]. List everything I probably do, then categorize each task into: (1) Only I can do this (keep), (2) Someone else could do this with training (delegate with SOP), (3) This could be automated (automate), (4) This doesn't need to be done at all (eliminate). For the "delegate" category: recommend whether to hire a VA, contractor, part-time employee, or agency for each task, estimated cost, and where to find them. Create a 90-day delegation roadmap starting with the highest-impact tasks.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #88</div>
+      <div class="prompt-title">Project Management Setup</div>
+      <div class="prompt-text">Set up a project management system for my [type of business]. Team size: [number]. Main project types: [describe]. I'm using [tool — or recommend one]. Create: (1) A project template with standard phases and tasks, (2) A client-facing project timeline template, (3) A team workflow — who does what and when, (4) Communication protocols (when to use email vs. chat vs. meeting), (5) File naming and organization conventions, (6) A weekly standup agenda template (15 min max), (7) Status report template for clients, (8) A "project kickoff" checklist, (9) A "project closeout" checklist. Keep everything as simple as possible.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #89</div>
+      <div class="prompt-title">Business Continuity Plan</div>
+      <div class="prompt-text">Create a simple business continuity plan for my [type of business]. I'm a small business with [number] employees. Cover: (1) Critical business functions ranked by priority, (2) "If I get sick for 2 weeks" — who does what (delegation plan), (3) Password and access management system recommendation, (4) Data backup strategy (what, where, how often), (5) Key contact list template (suppliers, clients, partners, professionals), (6) Emergency communication plan for customers, (7) Insurance checklist — types I should have, (8) Financial reserves target and plan to build them. Make it practical — something I can actually implement this week.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #90</div>
+      <div class="prompt-title">Vendor/Supplier Negotiation</div>
+      <div class="prompt-text">Help me negotiate better deals with my vendors and suppliers. My business: [type]. Key vendors: [list categories — e.g., shipping, raw materials, software, services]. Create: (1) A pre-negotiation research checklist, (2) 10 negotiation tactics specific to small business vendor relationships, (3) Email templates: requesting a price review, asking for bulk discount, renegotiating an annual contract, threatening to switch (professionally), (4) Phone script for live negotiation, (5) A vendor comparison spreadsheet framework, (6) When to walk away — red lines and alternatives, (7) Long-term partnership proposal template that incentivizes better rates.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+  </div>
+
+  <!-- ==================== FINANCE (10) ==================== -->
+  <div id="finance" class="category-section cat-finance">
+    <div class="category-header">
+      <div class="category-icon">&#128200;</div>
+      <div>
+        <h2>Finance</h2>
+        <span class="cat-count">10 Prompts</span>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #91</div>
+      <div class="prompt-title">Pricing Strategy Analysis</div>
+      <div class="prompt-text">Help me optimize pricing for my [type of business]. Currently I charge [prices for products/services]. My costs: [describe]. Competitors charge: [range]. Analyze my pricing and: (1) Evaluate if I'm underpricing, overpricing, or well-positioned, (2) Calculate my actual profit margins, (3) Suggest 3 alternative pricing models (e.g., value-based, tiered, subscription, bundle), (4) Show me how a 10% price increase would affect revenue with scenario modeling, (5) Create a price increase communication email for existing customers, (6) Design a pricing page layout with strategic anchoring, (7) Recommend when and how to raise prices annually.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #92</div>
+      <div class="prompt-title">Financial Dashboard KPIs</div>
+      <div class="prompt-text">Create a financial dashboard for my [type of business]. Monthly revenue: approximately [amount]. Help me track the right numbers: (1) List the 15 most important financial KPIs for my business type with formulas and definitions, (2) Create a monthly financial review checklist, (3) Build a simple cash flow projection template for the next 12 months, (4) Define healthy benchmarks for each KPI in my industry, (5) Create alert thresholds — when should I be worried? (6) Design a one-page monthly financial summary I can review in 10 minutes, (7) Explain each metric in plain English with a real example from my type of business.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #93</div>
+      <div class="prompt-title">Revenue Diversification Strategy</div>
+      <div class="prompt-text">My [type of business] currently makes money from [describe revenue streams]. Revenue: approximately [amount/month]. Help me diversify: (1) Brainstorm 10 additional revenue streams that leverage my existing expertise and assets, (2) For each: estimate startup cost, time to first revenue, monthly revenue potential, and effort level, (3) Rank them by ROI and ease of implementation, (4) Create a 90-day launch plan for the top 3, (5) Identify which ones create recurring revenue, (6) Calculate how each would affect my overall revenue mix, (7) Warning signs that a new revenue stream is a distraction vs. a genuine opportunity.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #94</div>
+      <div class="prompt-title">Tax Deduction Checklist</div>
+      <div class="prompt-text">Create a comprehensive tax deduction checklist for my [type of business] (in the US). I'm structured as a [sole prop / LLC / S-Corp / C-Corp]. Create: (1) A categorized list of every potential business deduction with descriptions, (2) Home office deduction calculation worksheet, (3) Vehicle/mileage deduction tracker, (4) Quarterly tax payment schedule and estimation method, (5) Year-end tax planning checklist (things to do before December 31), (6) Receipt and documentation requirements for each deduction type, (7) Red flags that trigger audits to avoid, (8) Questions to ask my accountant at our next meeting. Include a disclaimer that this is educational, not tax advice.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #95</div>
+      <div class="prompt-title">Expense Reduction Audit</div>
+      <div class="prompt-text">Audit my business expenses and find savings. My [type of business] has these monthly expenses: [list categories and approximate amounts — e.g., software $500, rent $2000, advertising $1000, etc.]. For each expense: (1) Is this essential, important, or nice-to-have? (2) Cheaper alternatives that maintain quality, (3) Can it be negotiated down? If yes, what to say, (4) Can it be eliminated or reduced in scope? (5) Estimated monthly savings. Then: calculate my total potential savings, create a 30-day expense reduction action plan, and identify expenses I'm probably forgetting about. Target a 15-20% reduction.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #96</div>
+      <div class="prompt-title">Invoice & Payment System</div>
+      <div class="prompt-text">Set up a professional invoicing and payment collection system for my [type of business]. I bill [hourly / project / subscription]. Average invoice: [amount]. Current late payment rate: [% or "high/low"]. Create: (1) A professional invoice template with all required elements, (2) Payment terms language I should use, (3) An automatic payment reminder sequence (before due, on due date, 7 days late, 14 days late, 30 days late), (4) Late payment penalty policy, (5) A polite but firm collections email for seriously overdue invoices, (6) Tool recommendations for invoicing and auto-follow-up, (7) Strategy to move clients to autopay/subscription billing. Goal: reduce late payments by 50%.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #97</div>
+      <div class="prompt-title">Business Budget Template</div>
+      <div class="prompt-text">Create a comprehensive annual business budget for my [type of business]. Monthly revenue: approximately [amount]. Create: (1) Revenue projections by month (with seasonal adjustments for my industry), (2) Fixed expenses list with amounts, (3) Variable expenses as percentage of revenue, (4) One-time expenses and investments for the year, (5) Emergency fund target and building plan, (6) Profit targets by quarter, (7) "If revenue drops 30%" contingency plan, (8) Monthly budget review checklist, (9) Variance analysis template — budget vs. actual. Present in a clean format I can copy into a spreadsheet. Include formulas in description.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #98</div>
+      <div class="prompt-title">Profit Margin Optimization</div>
+      <div class="prompt-text">Help me improve profit margins for my [type of business]. Current revenue: [amount/month]. Current profit margin: [% or "I don't know"]. My main costs are: [list]. Analyze and provide: (1) How to calculate my true profit margin (not just revenue minus obvious costs), (2) Industry benchmark comparison, (3) 10 specific strategies to increase margins without raising prices, (4) 5 strategies involving strategic price increases, (5) Pricing psychology tactics to capture more value, (6) A "profit first" system adapted to my business, (7) Monthly margin tracking template, (8) The one change that would have the biggest impact on profitability.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #99</div>
+      <div class="prompt-title">Funding & Capital Options</div>
+      <div class="prompt-text">Evaluate funding options for my [type of business] at its current stage. I need approximately [amount] for [purpose]. Current revenue: [amount]. Time in business: [duration]. Credit score: [range]. Research and present: (1) All funding options available to me ranked by fit, (2) For each: requirements, typical terms, pros/cons, and application process, (3) Bootstrap strategies to self-fund the growth, (4) A business plan one-pager for lenders/investors, (5) Financial projections template they'll want to see, (6) Pitch deck outline if seeking investors, (7) SBA loan checklist, (8) Alternative funding sources most people overlook. Be honest about what I realistically qualify for.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt #100</div>
+      <div class="prompt-title">Financial Goal Setting & Tracking</div>
+      <div class="prompt-text">Help me set and track financial goals for my [type of business]. Current monthly revenue: [amount]. Current monthly expenses: [amount]. My big goals: [describe — e.g., hit $10K/month, hire first employee, buy equipment]. Create: (1) SMART financial goals for the next 12 months (quarterly milestones), (2) The specific revenue targets needed to hit each goal, (3) Reverse-engineered daily/weekly activity targets (how many leads, sales, etc.), (4) A monthly tracking scorecard, (5) Leading indicators I should watch weekly, (6) An accountability system I can use solo, (7) Celebration milestones along the way, (8) A "what if I hit 150% of my goal" stretch plan with investment priorities.</div>
+      <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p><strong>100 ChatGPT Prompts for Small Business</strong></p>
+  <p>Replace all [bracketed text] with your specific business details for best results.</p>
+  <p style="margin-top: 16px; font-size: 0.75rem; color: #555;">Created with care. Not for redistribution.</p>
+</div>
+
+<script>
+function copyPrompt(btn) {
+  const text = btn.parentElement.querySelector('.prompt-text').textContent.trim();
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+</script>
+
+</body>
+</html>

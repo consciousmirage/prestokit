@@ -141,6 +141,70 @@ const tools: Tool[] = [
     href: "/tools/markdown-to-html",
     color: "#69f0ae",
   },
+  {
+    name: "Image Compressor",
+    icon: "\uD83D\uDDBC\uFE0F",
+    description:
+      "Compress images in your browser. No upload needed, 100% private.",
+    href: "/tools/image-compressor",
+    color: "#ff7043",
+  },
+  {
+    name: "Unit Converter",
+    icon: "\uD83D\uDD04",
+    description:
+      "Convert between units of length, weight, temperature, volume, and more.",
+    href: "/tools/unit-converter",
+    color: "#7986cb",
+  },
+  {
+    name: "Tip Calculator",
+    icon: "\uD83D\uDCB5",
+    description:
+      "Calculate tips and split bills between any number of people.",
+    href: "/tools/tip-calculator",
+    color: "#4db6ac",
+  },
+  {
+    name: "Date Calculator",
+    icon: "\uD83D\uDCC5",
+    description:
+      "Calculate days between dates, add/subtract days, and countdown timers.",
+    href: "/tools/date-calculator",
+    color: "#f06292",
+  },
+  {
+    name: "Mortgage Calculator",
+    icon: "\uD83C\uDFE0",
+    description:
+      "Calculate monthly mortgage payments with amortization schedule.",
+    href: "/tools/mortgage-calculator",
+    color: "#aed581",
+  },
+  {
+    name: "BMI Calculator",
+    icon: "\u2696\uFE0F",
+    description:
+      "Calculate your Body Mass Index with Imperial or Metric units.",
+    href: "/tools/bmi-calculator",
+    color: "#4fc3f7",
+  },
+  {
+    name: "Salary Calculator",
+    icon: "\uD83D\uDCB0",
+    description:
+      "Convert between salary, hourly, daily, and monthly rates with tax estimates.",
+    href: "/tools/salary-calculator",
+    color: "#fff176",
+  },
+  {
+    name: "Random Number Generator",
+    icon: "\uD83C\uDFB2",
+    description:
+      "Generate random numbers, roll dice, flip coins, and pick from lists.",
+    href: "/tools/random-number-generator",
+    color: "#ce93d8",
+  },
 ];
 
 const valueProps = [
@@ -280,7 +344,7 @@ export default function Home() {
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
               </span>
               <span className="text-muted-light">
-                <span className="font-semibold text-white">16</span> free tools
+                <span className="font-semibold text-white">24</span> free tools
                 &mdash; zero signup
               </span>
             </div>
@@ -335,7 +399,7 @@ export default function Home() {
                 <span>{tools.length} Tools</span>
               </div>
               <h2 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                16 Free Tools, Zero Signup
+                24 Free Tools, Zero Signup
               </h2>
               <p className="mx-auto mt-3 max-w-2xl text-muted-light">
                 Professional-grade business tools, completely free. Pick one and

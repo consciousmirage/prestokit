@@ -2,6 +2,14 @@ import { MetadataRoute } from "next";
 
 const BASE_URL = "https://prestokit.com";
 
+const guidePages = [
+  "/guides",
+  "/guides/how-to-create-invoice",
+  "/guides/how-to-start-business",
+  "/guides/freelancing-guide",
+  "/guides/qr-code-guide",
+];
+
 const toolPages = [
   "/tools/invoice-generator",
   "/tools/qr-code-generator",
@@ -19,6 +27,14 @@ const toolPages = [
   "/tools/color-palette-generator",
   "/tools/json-formatter",
   "/tools/markdown-to-html",
+  "/tools/image-compressor",
+  "/tools/unit-converter",
+  "/tools/tip-calculator",
+  "/tools/date-calculator",
+  "/tools/mortgage-calculator",
+  "/tools/bmi-calculator",
+  "/tools/salary-calculator",
+  "/tools/random-number-generator",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -40,5 +56,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...home, ...tools];
+  const guides: MetadataRoute.Sitemap = guidePages.map((path) => ({
+    url: `${BASE_URL}${path}`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
+  return [...home, ...tools, ...guides];
 }

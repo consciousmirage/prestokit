@@ -1,0 +1,1846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>50 Email Templates for Business</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #08080e;
+    --surface: #101018;
+    --surface-2: #181828;
+    --border: #252540;
+    --text: #e8e8f2;
+    --text-muted: #7e7e9a;
+    --accent: #f59e0b;
+    --accent-light: #fbbf24;
+    --accent-glow: rgba(245, 158, 11, 0.1);
+    --blue: #3b82f6;
+    --green: #10b981;
+    --pink: #ec4899;
+    --purple: #8b5cf6;
+    --cyan: #06b6d4;
+    --red: #ef4444;
+    --lime: #84cc16;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  @media print {
+    body { background: #fff; color: #111; font-size: 10px; line-height: 1.4; }
+    .hero { background: #111 !important; padding: 30px; }
+    .email-card { break-inside: avoid; border: 1px solid #ccc; background: #fff; }
+    .copy-all-btn { display: none; }
+    .hero::before { display: none; }
+  }
+
+  .hero {
+    background: linear-gradient(135deg, #08080e 0%, #1a1008 50%, #08080e 100%);
+    padding: 80px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 30%, rgba(245,158,11,0.06) 0%, transparent 60%);
+  }
+
+  .hero-content { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+  .hero-badge {
+    display: inline-block;
+    background: var(--accent-glow);
+    border: 1px solid rgba(245,158,11,0.3);
+    color: var(--accent-light);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 50px;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #fff 0%, var(--accent-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero p { font-size: 1.1rem; color: var(--text-muted); max-width: 550px; margin: 0 auto; }
+
+  .container { max-width: 880px; margin: 0 auto; padding: 40px 24px; }
+
+  .toc {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    margin-bottom: 48px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+  }
+
+  .toc-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--surface-2);
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+  }
+
+  .toc-item:hover { border-color: var(--accent); }
+  .toc-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .category-section { margin-bottom: 56px; }
+
+  .category-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .cat-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+
+  .category-header h2 { font-size: 1.4rem; font-weight: 700; }
+  .cat-count {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    background: var(--surface-2);
+    padding: 3px 10px;
+    border-radius: 50px;
+  }
+
+  .email-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: all 0.2s;
+  }
+
+  .email-card:hover { border-color: rgba(245,158,11,0.3); }
+
+  .email-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 24px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .email-header:hover { background: rgba(255,255,255,0.01); }
+
+  .email-num {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--accent-light);
+    letter-spacing: 0.05em;
+    margin-right: 14px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .email-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    flex: 1;
+  }
+
+  .email-toggle {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    transition: transform 0.2s;
+  }
+
+  .email-card.open .email-toggle { transform: rotate(180deg); }
+
+  .email-body {
+    display: none;
+    padding: 0 24px 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .email-card.open .email-body { display: block; }
+
+  .email-field {
+    margin-top: 16px;
+  }
+
+  .field-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+
+  .field-content {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    font-size: 0.88rem;
+    color: var(--text);
+    line-height: 1.75;
+    position: relative;
+    white-space: pre-wrap;
+  }
+
+  .field-content p { margin-bottom: 12px; }
+  .field-content p:last-child { margin-bottom: 0; }
+
+  .copy-all-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.15s;
+  }
+
+  .copy-all-btn:hover { background: var(--accent); color: #000; border-color: var(--accent); }
+  .copy-all-btn.copied { background: var(--green); color: #fff; border-color: var(--green); }
+
+  .cta-tag {
+    display: inline-block;
+    background: rgba(245,158,11,0.1);
+    border: 1px solid rgba(245,158,11,0.2);
+    color: var(--accent-light);
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-top: 8px;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 48px 24px;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 600px) {
+    .hero { padding: 48px 20px; }
+    .hero h1 { font-size: 2rem; }
+    .toc { grid-template-columns: 1fr 1fr; padding: 16px; }
+    .email-header { padding: 14px 16px; }
+    .email-body { padding: 0 16px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">50 Ready-to-Send Templates</div>
+    <h1>Email Templates for Business</h1>
+    <p>Professional, copy-paste email templates for every business situation. Each includes subject line, body copy, and a clear call-to-action.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="toc">
+    <a href="#welcome" class="toc-item"><span class="toc-dot" style="background:var(--accent)"></span>Welcome (5)</a>
+    <a href="#sales" class="toc-item"><span class="toc-dot" style="background:var(--blue)"></span>Sales (10)</a>
+    <a href="#followup" class="toc-item"><span class="toc-dot" style="background:var(--green)"></span>Follow-Up (10)</a>
+    <a href="#cold" class="toc-item"><span class="toc-dot" style="background:var(--purple)"></span>Cold Outreach (10)</a>
+    <a href="#newsletter" class="toc-item"><span class="toc-dot" style="background:var(--cyan)"></span>Newsletter (5)</a>
+    <a href="#reengagement" class="toc-item"><span class="toc-dot" style="background:var(--pink)"></span>Re-engagement (5)</a>
+    <a href="#thankyou" class="toc-item"><span class="toc-dot" style="background:var(--lime)"></span>Thank You (5)</a>
+  </div>
+
+  <!-- ==================== WELCOME SEQUENCE (5) ==================== -->
+  <div id="welcome" class="category-section">
+    <div class="category-header">
+      <div class="cat-icon" style="background:rgba(245,158,11,0.12)">&#128075;</div>
+      <div>
+        <h2>Welcome Sequence</h2>
+        <span class="cat-count">5 Templates</span>
+      </div>
+    </div>
+
+    <div class="email-card open">
+      <div class="email-header" onclick="toggleCard(this)">
+        <span class="email-num">#1</span>
+        <span class="email-title">Instant Welcome — Deliver the Lead Magnet</span>
+        <span class="email-toggle">&#9660;</span>
+      </div>
+      <div class="email-body">
+        <div class="email-field">
+          <div class="field-label">Subject Line</div>
+          <div class="field-content">Here's your [Lead Magnet Name] — let's get started!<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div>
+        </div>
+        <div class="email-field">
+          <div class="field-label">Email Body</div>
+          <div class="field-content">Hey [First Name],
+
+Welcome! You just made a great decision.
+
+Here's your [Lead Magnet Name] as promised: [LINK]
+
+Here's how to get the most out of it:
+1. [Quick action step #1]
+2. [Quick action step #2]
+3. [Quick action step #3]
+
+A little about me — I'm [Your Name], founder of [Business Name]. I help [target audience] [achieve specific result]. I started this because [one-sentence origin story].
+
+Over the next few days, I'll share some of my best insights on [topic]. No fluff — just stuff that works.
+
+If you ever have questions, just hit reply. I read every message.
+
+Talk soon,
+[Your Name]
+
+P.S. If you want to skip ahead and see how I can help you [specific result], check out [Product/Service Link].<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div>
+        </div>
+        <span class="cta-tag">CTA: Download lead magnet + soft product mention</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)">
+        <span class="email-num">#2</span>
+        <span class="email-title">Day 2 — Build Trust with a Quick Win</span>
+        <span class="email-toggle">&#9660;</span>
+      </div>
+      <div class="email-body">
+        <div class="email-field">
+          <div class="field-label">Subject Line</div>
+          <div class="field-content">The #1 mistake [audience] make with [topic]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div>
+        </div>
+        <div class="email-field">
+          <div class="field-label">Email Body</div>
+          <div class="field-content">Hey [First Name],
+
+Quick question — have you ever [describe common frustrating experience]?
+
+You're not alone. Most [target audience] make this one mistake:
+
+[Describe the mistake clearly — 2-3 sentences]
+
+The fix is actually simple:
+
+[Share a genuine, actionable tip that delivers an immediate result — 3-5 sentences]
+
+Try this today. It takes less than 10 minutes and the difference is noticeable.
+
+Tomorrow, I'll share [tease next email topic] — it's one of those things that sounds obvious but almost nobody does it right.
+
+Talk soon,
+[Your Name]
+
+P.S. Did you get a chance to check out [Lead Magnet Name]? If you have any questions about it, just reply to this email.<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div>
+        </div>
+        <span class="cta-tag">CTA: Implement the tip + engage via reply</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)">
+        <span class="email-num">#3</span>
+        <span class="email-title">Day 4 — Share Your Story & Build Connection</span>
+        <span class="email-toggle">&#9660;</span>
+      </div>
+      <div class="email-body">
+        <div class="email-field">
+          <div class="field-label">Subject Line</div>
+          <div class="field-content">Why I started [Business Name] (honest version)<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div>
+        </div>
+        <div class="email-field">
+          <div class="field-label">Email Body</div>
+          <div class="field-content">Hey [First Name],
+
+I want to share something personal today.
+
+[Tell your origin story — the struggle, the turning point, and why you do what you do. Be authentic. 4-6 sentences.]
+
+That experience taught me [key lesson].
+
+And that's exactly why [Business Name] exists — to help [target audience] [achieve result] without [the hard way / the mistake you made].
+
+Since then, I've helped [number] of [clients/customers] [specific achievement].
+
+Here's what [Client Name] said: "[Short powerful testimonial]"
+
+I share this because I want you to know — I've been where you are. And I know what works.
+
+Tomorrow, I'm going to share [tease valuable content]. It's probably the most valuable email in this sequence.
+
+[Your Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div>
+        </div>
+        <span class="cta-tag">CTA: Build emotional connection + social proof</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)">
+        <span class="email-num">#4</span>
+        <span class="email-title">Day 6 — High-Value Content + Soft Pitch</span>
+        <span class="email-toggle">&#9660;</span>
+      </div>
+      <div class="email-body">
+        <div class="email-field">
+          <div class="field-label">Subject Line</div>
+          <div class="field-content">The [X]-step framework I use for [desirable result]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div>
+        </div>
+        <div class="email-field">
+          <div class="field-label">Email Body</div>
+          <div class="field-content">Hey [First Name],
+
+I promised you something valuable today. Here it is.
+
+After [years/months] of [doing what you do], I've boiled [achieving result] down to [X] steps:
+
+Step 1: [Name] — [1-2 sentence explanation]
+Step 2: [Name] — [1-2 sentence explanation]
+Step 3: [Name] — [1-2 sentence explanation]
+Step 4: [Name] — [1-2 sentence explanation]
+
+This is the exact framework I use with my [clients/customers].
+
+Now, I can teach you the steps, but I know from experience that having support along the way makes the difference between "knowing" and "doing."
+
+That's why I created [Product/Service Name]. It's designed to [explain what it does in one sentence].
+
+If you're interested, here's more info: [LINK]
+
+No pressure at all. Either way, I'll keep sharing useful stuff.
+
+[Your Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div>
+        </div>
+        <span class="cta-tag">CTA: Check out product/service page</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)">
+        <span class="email-num">#5</span>
+        <span class="email-title">Day 8 — The Direct Offer</span>
+        <span class="email-toggle">&#9660;</span>
+      </div>
+      <div class="email-body">
+        <div class="email-field">
+          <div class="field-label">Subject Line</div>
+          <div class="field-content">Ready to [achieve desired result]?<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div>
+        </div>
+        <div class="email-field">
+          <div class="field-label">Email Body</div>
+          <div class="field-content">Hey [First Name],
+
+Over the past week, I've shared:
+- [Recap tip from email 2]
+- [Recap story/lesson from email 3]
+- [Recap framework from email 4]
+
+If you've been implementing, you should already be seeing [early results].
+
+But here's the truth: going at it alone is slow.
+
+[Product/Service Name] is the fastest way to [achieve the big result]. Here's what you get:
+
+- [Benefit 1 — what it does for them]
+- [Benefit 2 — what it does for them]
+- [Benefit 3 — what it does for them]
+- [Benefit 4 — what it does for them]
+
+[Price] | [Guarantee/Risk Reversal]
+
+[Client Name] said: "[Testimonial about specific result]"
+
+[CTA BUTTON TEXT: Get Started / Book a Call / Buy Now] — [LINK]
+
+If you have any questions before deciding, reply to this email. I'm here to help.
+
+[Your Name]
+
+P.S. [Urgency or bonus — e.g., "I'm including a bonus [thing] for anyone who joins this week."]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div>
+        </div>
+        <span class="cta-tag">CTA: Purchase product / Book a call</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SALES EMAILS (10) ==================== -->
+  <div id="sales" class="category-section">
+    <div class="category-header">
+      <div class="cat-icon" style="background:rgba(59,130,246,0.12)">&#128176;</div>
+      <div>
+        <h2>Sales Emails</h2>
+        <span class="cat-count">10 Templates</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)">
+        <span class="email-num">#6</span>
+        <span class="email-title">Product Launch Announcement</span>
+        <span class="email-toggle">&#9660;</span>
+      </div>
+      <div class="email-body">
+        <div class="email-field">
+          <div class="field-label">Subject Line</div>
+          <div class="field-content">It's here: [Product Name] is live<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div>
+        </div>
+        <div class="email-field">
+          <div class="field-label">Email Body</div>
+          <div class="field-content">Hey [First Name],
+
+The wait is over.
+
+[Product Name] is officially live — and it's everything I've been hinting at.
+
+In short: it helps you [primary benefit] in [timeframe] without [common pain point].
+
+Here's what's inside:
+- [Feature → Benefit]
+- [Feature → Benefit]
+- [Feature → Benefit]
+- [Feature → Benefit]
+
+Launch price: [Price] (regular price will be [Higher Price])
+
+And because you're on this list, you get first access.
+
+[CTA: Get It Now] → [LINK]
+
+This launch price won't last — it goes up on [date].
+
+[Your Name]
+
+P.S. Still on the fence? Here's what [Beta User] said: "[Testimonial]"<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div>
+        </div>
+        <span class="cta-tag">CTA: Purchase at launch price</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)">
+        <span class="email-num">#7</span>
+        <span class="email-title">Limited-Time Offer / Flash Sale</span>
+        <span class="email-toggle">&#9660;</span>
+      </div>
+      <div class="email-body">
+        <div class="email-field">
+          <div class="field-label">Subject Line</div>
+          <div class="field-content">[X]% off everything — [X] hours only<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div>
+        </div>
+        <div class="email-field">
+          <div class="field-label">Email Body</div>
+          <div class="field-content">Hey [First Name],
+
+I don't do this often, but today's special.
+
+For the next [X hours], everything in [store/catalog/service menu] is [X]% off.
+
+No code needed — the discount is applied automatically.
+
+Here's what people are grabbing:
+- [Popular item #1] — now [sale price]
+- [Popular item #2] — now [sale price]
+- [Popular item #3] — now [sale price]
+
+[CTA: Shop the Sale] → [LINK]
+
+This ends at [specific time + timezone]. No extensions, no exceptions.
+
+[Your Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div>
+        </div>
+        <span class="cta-tag">CTA: Shop with discount before deadline</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)">
+        <span class="email-num">#8</span>
+        <span class="email-title">Abandoned Cart Recovery</span>
+        <span class="email-toggle">&#9660;</span>
+      </div>
+      <div class="email-body">
+        <div class="email-field">
+          <div class="field-label">Subject Line</div>
+          <div class="field-content">You left something behind...<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div>
+        </div>
+        <div class="email-field">
+          <div class="field-label">Email Body</div>
+          <div class="field-content">Hey [First Name],
+
+I noticed you were checking out [Product Name] but didn't finish your order.
+
+No worries — it happens. Your cart is still saved.
+
+Just in case you had questions:
+
+Q: [Common question/objection #1]
+A: [Reassuring answer]
+
+Q: [Common question/objection #2]
+A: [Reassuring answer]
+
+Plus, every order comes with [guarantee — e.g., "a 30-day money-back guarantee. Zero risk."]
+
+[CTA: Complete Your Order] → [LINK]
+
+Need help deciding? Just reply to this email and I'll personally answer any questions.
+
+[Your Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div>
+        </div>
+        <span class="cta-tag">CTA: Complete purchase</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)">
+        <span class="email-num">#9</span>
+        <span class="email-title">Price Increase Warning</span>
+        <span class="email-toggle">&#9660;</span>
+      </div>
+      <div class="email-body">
+        <div class="email-field">
+          <div class="field-label">Subject Line</div>
+          <div class="field-content">Price going up on [date] — lock in today's rate<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div>
+        </div>
+        <div class="email-field">
+          <div class="field-label">Email Body</div>
+          <div class="field-content">Hey [First Name],
+
+Heads up — the price of [Product/Service] is increasing from [current price] to [new price] on [date].
+
+Here's why: [Brief honest reason — added features, increased costs, reflecting true value, etc.]
+
+If you've been thinking about it, now is the time.
+
+Quick recap of what you get:
+- [Benefit 1]
+- [Benefit 2]
+- [Benefit 3]
+
+Current price: [Amount] → New price after [Date]: [Amount]
+
+[CTA: Lock In Current Price] → [LINK]
+
+After [date], this price is gone for good.
+
+[Your Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div>
+        </div>
+        <span class="cta-tag">CTA: Purchase before price increase</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)">
+        <span class="email-num">#10</span>
+        <span class="email-title">Case Study / Social Proof Email</span>
+        <span class="email-toggle">&#9660;</span>
+      </div>
+      <div class="email-body">
+        <div class="email-field">
+          <div class="field-label">Subject Line</div>
+          <div class="field-content">How [Client Name] [achieved specific result]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div>
+        </div>
+        <div class="email-field">
+          <div class="field-label">Email Body</div>
+          <div class="field-content">Hey [First Name],
+
+I want to introduce you to [Client Name/Type].
+
+Before: [Describe their struggle — make it relatable to the reader]
+
+They tried: [What they did before that didn't work]
+
+Then they [started using / joined / hired] [Your Product/Service].
+
+After [timeframe]: [Specific measurable results]
+
+Here's what they said:
+
+"[Detailed testimonial quote — specific results + emotional transformation]"
+
+The best part? Their situation before was probably a lot like yours.
+
+If you're ready for similar results, here's how to get started:
+
+[CTA: Start Now / Book a Call / Learn More] → [LINK]
+
+[Your Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div>
+        </div>
+        <span class="cta-tag">CTA: Convert via social proof</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)">
+        <span class="email-num">#11</span>
+        <span class="email-title">Objection-Handling Sales Email</span>
+        <span class="email-toggle">&#9660;</span>
+      </div>
+      <div class="email-body">
+        <div class="email-field">
+          <div class="field-label">Subject Line</div>
+          <div class="field-content">"Is [Product/Service] right for me?"<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div>
+        </div>
+        <div class="email-field">
+          <div class="field-label">Email Body</div>
+          <div class="field-content">Hey [First Name],
+
+I get this question a lot: "Is [Product/Service] actually right for someone like me?"
+
+Let me be straight with you.
+
+[Product/Service] IS for you if:
+✓ You're [situation 1]
+✓ You struggle with [pain point]
+✓ You've tried [alternative] and it didn't work
+✓ You want [desired result] in [timeframe]
+
+[Product/Service] is NOT for you if:
+✗ You're looking for [unrealistic expectation]
+✗ You're not willing to [required commitment]
+✗ You [disqualifying trait]
+
+If you're in the first group, here's why this works:
+
+[2-3 sentences explaining your unique approach and why it gets results]
+
+[Price] | [Guarantee]
+
+[CTA: I'm Ready] → [LINK]
+
+Still unsure? Reply with your specific situation and I'll give you an honest answer.
+
+[Your Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div>
+        </div>
+        <span class="cta-tag">CTA: Self-qualify and purchase</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)">
+        <span class="email-num">#12</span>
+        <span class="email-title">Seasonal / Holiday Promotion</span>
+        <span class="email-toggle">&#9660;</span>
+      </div>
+      <div class="email-body">
+        <div class="email-field">
+          <div class="field-label">Subject Line</div>
+          <div class="field-content">Our biggest [Season/Holiday] deal ever<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div>
+        </div>
+        <div class="email-field">
+          <div class="field-label">Email Body</div>
+          <div class="field-content">Hey [First Name],
+
+[Season/Holiday] is here, and I wanted to do something special for our community.
+
+For this week only:
+
+[Deal details — percentage off, bonus, bundle, etc.]
+
+Why now? Because [tie the offer to the season naturally — new year goals, fresh start, gift giving, etc.]
+
+Best sellers to check out:
+1. [Product/Service 1] — [One-line benefit] → [price]
+2. [Product/Service 2] — [One-line benefit] → [price]
+3. [Product/Service 3] — [One-line benefit] → [price]
+
+Use code [CODE] at checkout — or just click here for the discount to apply automatically:
+
+[CTA: Shop the [Holiday] Sale] → [LINK]
+
+Ends [specific date/time].
+
+Happy [holiday],
+[Your Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div>
+        </div>
+        <span class="cta-tag">CTA: Shop seasonal promotion</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)">
+        <span class="email-num">#13</span>
+        <span class="email-title">Urgency / Last Chance Email</span>
+        <span class="email-toggle">&#9660;</span>
+      </div>
+      <div class="email-body">
+        <div class="email-field">
+          <div class="field-label">Subject Line</div>
+          <div class="field-content">Final call — [offer] ends tonight<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div>
+        </div>
+        <div class="email-field">
+          <div class="field-label">Email Body</div>
+          <div class="field-content">Hey [First Name],
+
+Last email about this — I promise.
+
+[Offer description] ends tonight at [time + timezone].
+
+After that, it's gone. No extensions, no "oops I forgot" exceptions.
+
+Here's the quick version:
+- What you get: [1 sentence]
+- What it costs: [price]
+- What happens if you wait: [consequence — higher price, missed opportunity]
+
+[Number] people have already grabbed this. If you've been on the fence, this is your moment.
+
+[CTA: Claim Your Spot / Get It Now] → [LINK]
+
+See you on the other side,
+[Your Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div>
+        </div>
+        <span class="cta-tag">CTA: Purchase before deadline</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)">
+        <span class="email-num">#14</span>
+        <span class="email-title">Bundle / Package Offer</span>
+        <span class="email-toggle">&#9660;</span>
+      </div>
+      <div class="email-body">
+        <div class="email-field">
+          <div class="field-label">Subject Line</div>
+          <div class="field-content">Get [X items] for the price of [Y] (this week only)<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div>
+        </div>
+        <div class="email-field">
+          <div class="field-label">Email Body</div>
+          <div class="field-content">Hey [First Name],
+
+I put together something special — a bundle that gives you everything you need to [achieve result].
+
+The [Bundle Name] includes:
+
+✓ [Product/Feature 1] (valued at [amount])
+✓ [Product/Feature 2] (valued at [amount])
+✓ [Product/Feature 3] (valued at [amount])
+✓ [Bonus item] (valued at [amount])
+
+Total value: [sum of all items]
+Bundle price: [significantly lower amount]
+
+You save [amount/percentage].
+
+Why a bundle? Because I've seen that [these things work best together / most people need all of these / this is the complete solution].
+
+[CTA: Get the Bundle] → [LINK]
+
+Available until [date] — then each item goes back to individual pricing.
+
+[Your Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div>
+        </div>
+        <span class="cta-tag">CTA: Purchase bundle deal</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)">
+        <span class="email-num">#15</span>
+        <span class="email-title">Free Consultation / Discovery Call Invite</span>
+        <span class="email-toggle">&#9660;</span>
+      </div>
+      <div class="email-body">
+        <div class="email-field">
+          <div class="field-label">Subject Line</div>
+          <div class="field-content">Free [X]-minute strategy session — limited spots<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div>
+        </div>
+        <div class="email-field">
+          <div class="field-label">Email Body</div>
+          <div class="field-content">Hey [First Name],
+
+I'm opening up [X] free [X]-minute strategy sessions this month.
+
+No pitch. No pressure. Just a focused conversation about your [area of expertise] and a custom action plan you can start using immediately.
+
+On the call, we'll cover:
+- Where you are now vs. where you want to be
+- The biggest bottleneck holding you back
+- 2-3 specific next steps tailored to your situation
+
+I only have [X] spots this month, and they fill up fast.
+
+[CTA: Book Your Free Session] → [LINK]
+
+If we're a good fit to work together beyond the call, I'll mention it. If not, you'll still walk away with a clear plan.
+
+Fair enough?
+
+[Your Name]
+
+P.S. These sessions are genuinely valuable — [Client] booked one last month and [specific quick result].<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div>
+        </div>
+        <span class="cta-tag">CTA: Book discovery call</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== FOLLOW-UPS (10) ==================== -->
+  <div id="followup" class="category-section">
+    <div class="category-header">
+      <div class="cat-icon" style="background:rgba(16,185,129,0.12)">&#128172;</div>
+      <div>
+        <h2>Follow-Up Emails</h2>
+        <span class="cat-count">10 Templates</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)"><span class="email-num">#16</span><span class="email-title">After a Meeting / Call</span><span class="email-toggle">&#9660;</span></div>
+      <div class="email-body">
+        <div class="email-field"><div class="field-label">Subject Line</div><div class="field-content">Great chatting — here's what we discussed<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <div class="email-field"><div class="field-label">Email Body</div><div class="field-content">Hey [Name],
+
+Thanks for taking the time to chat today. I really enjoyed learning about [something specific they mentioned].
+
+Here's a quick recap of what we covered:
+- [Key point 1]
+- [Key point 2]
+- [Key point 3]
+
+Next steps:
+- [Action item — you]: [What you'll do + by when]
+- [Action item — them]: [What they need to do + by when]
+
+I'll [next action] by [date]. In the meantime, here's [relevant resource] that might be helpful.
+
+Looking forward to [next meeting/milestone].
+
+Best,
+[Your Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <span class="cta-tag">CTA: Confirm next steps</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)"><span class="email-num">#17</span><span class="email-title">After Sending a Proposal — No Response (Day 3)</span><span class="email-toggle">&#9660;</span></div>
+      <div class="email-body">
+        <div class="email-field"><div class="field-label">Subject Line</div><div class="field-content">Quick question about the proposal<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <div class="email-field"><div class="field-label">Email Body</div><div class="field-content">Hey [Name],
+
+Just checking in on the proposal I sent over on [date].
+
+I know things get busy — no rush at all. I just wanted to make sure it didn't get lost in the shuffle.
+
+A couple of quick questions:
+1. Does the scope match what you had in mind?
+2. Any questions about the [pricing/timeline/deliverables]?
+
+Happy to jump on a quick 10-minute call if that's easier than going back and forth over email.
+
+[Your Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <span class="cta-tag">CTA: Reply or schedule call</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)"><span class="email-num">#18</span><span class="email-title">After Sending a Proposal — Still No Response (Day 8)</span><span class="email-toggle">&#9660;</span></div>
+      <div class="email-body">
+        <div class="email-field"><div class="field-label">Subject Line</div><div class="field-content">[Name] — still interested?<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <div class="email-field"><div class="field-label">Email Body</div><div class="field-content">Hey [Name],
+
+I wanted to circle back one more time on the [project type] proposal.
+
+I completely understand if the timing isn't right or if you've decided to go a different direction — just let me know so I can plan accordingly.
+
+If the budget was a concern, I have a couple of scaled-down options that might work better.
+
+A quick "yes," "no," or "not yet" would be really helpful. No hard feelings either way.
+
+[Your Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <span class="cta-tag">CTA: Get a definitive response</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)"><span class="email-num">#19</span><span class="email-title">After a Networking Event</span><span class="email-toggle">&#9660;</span></div>
+      <div class="email-body">
+        <div class="email-field"><div class="field-label">Subject Line</div><div class="field-content">Great meeting you at [Event Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <div class="email-field"><div class="field-label">Email Body</div><div class="field-content">Hey [Name],
+
+It was great meeting you at [Event] yesterday. I really enjoyed our conversation about [specific topic you discussed].
+
+As I mentioned, I [what you do — one sentence]. I'd love to learn more about [their business/project].
+
+Here's that [resource/article/contact] I mentioned: [LINK]
+
+Would you be open to grabbing a coffee or a quick Zoom call in the next week or two? I think there could be some interesting ways we could [collaborate / help each other / swap ideas].
+
+No pressure — just thought the connection was worth following up on.
+
+Best,
+[Your Name]
+[LinkedIn profile link]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <span class="cta-tag">CTA: Schedule a follow-up meeting</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)"><span class="email-num">#20</span><span class="email-title">Post-Purchase Check-In (Day 7)</span><span class="email-toggle">&#9660;</span></div>
+      <div class="email-body">
+        <div class="email-field"><div class="field-label">Subject Line</div><div class="field-content">How's everything going with [Product/Service]?<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <div class="email-field"><div class="field-label">Email Body</div><div class="field-content">Hey [First Name],
+
+It's been about a week since you got [Product/Service] — just wanted to check in.
+
+How's it going? Have you had a chance to [key action they should have taken]?
+
+A quick tip that most people miss: [Useful tip that improves their experience]
+
+If you're running into any issues or have questions, just reply to this email. I personally read and respond to every message.
+
+Your experience matters to me. Seriously.
+
+[Your Name]
+
+P.S. Loving it so far? I'd be incredibly grateful if you left a quick review here: [LINK]. It takes 30 seconds and helps more than you know.<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <span class="cta-tag">CTA: Reply with feedback or leave review</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)"><span class="email-num">#21</span><span class="email-title">After Being Ghosted — The Break-Up Email</span><span class="email-toggle">&#9660;</span></div>
+      <div class="email-body">
+        <div class="email-field"><div class="field-label">Subject Line</div><div class="field-content">Should I close your file?<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <div class="email-field"><div class="field-label">Email Body</div><div class="field-content">Hey [Name],
+
+I've reached out a few times and haven't heard back, so I want to be respectful of your time.
+
+I'm going to assume the timing isn't right and close out your file on my end.
+
+If things change in the future, my door is always open. Just reply to this email whenever you're ready.
+
+Wishing you the best with [their business/project].
+
+[Your Name]
+
+P.S. For what it's worth — this email has a 40%+ response rate. People appreciate the honesty.<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <span class="cta-tag">CTA: Re-engage or get closure</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)"><span class="email-num">#22</span><span class="email-title">Referral Request After Positive Experience</span><span class="email-toggle">&#9660;</span></div>
+      <div class="email-body">
+        <div class="email-field"><div class="field-label">Subject Line</div><div class="field-content">Know anyone who needs [result you deliver]?<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <div class="email-field"><div class="field-label">Email Body</div><div class="field-content">Hey [Name],
+
+I'm so glad [positive result they experienced]. Working with you has been a highlight.
+
+I have a favor to ask — do you know 1-2 other [type of people — business owners, entrepreneurs, etc.] who might benefit from [what you do]?
+
+No pressure at all. But if someone comes to mind, you can:
+- Forward them this email with a quick intro, or
+- Send me their name/email and I'll reach out personally
+
+As a thank you, [incentive — e.g., I'll give you $50 credit / a free month / a gift card].
+
+Either way, thank you for being an amazing [client/customer]. I truly appreciate you.
+
+[Your Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <span class="cta-tag">CTA: Make a referral introduction</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)"><span class="email-num">#23</span><span class="email-title">Quote/Estimate Follow-Up</span><span class="email-toggle">&#9660;</span></div>
+      <div class="email-body">
+        <div class="email-field"><div class="field-label">Subject Line</div><div class="field-content">Your [service] quote — any questions?<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <div class="email-field"><div class="field-label">Email Body</div><div class="field-content">Hey [Name],
+
+Following up on the quote I sent for [project/service description].
+
+To make your decision easier, here's a quick summary:
+
+Scope: [1-sentence summary]
+Investment: [Price]
+Timeline: [Duration]
+What's included: [2-3 key deliverables]
+
+I have availability to start on [date]. After that, the next opening is [later date].
+
+Any questions I can answer to help you decide? I'm happy to jump on a quick call — here's my calendar: [Link]
+
+[Your Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <span class="cta-tag">CTA: Schedule call or approve quote</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)"><span class="email-num">#24</span><span class="email-title">Event/Webinar Follow-Up</span><span class="email-toggle">&#9660;</span></div>
+      <div class="email-body">
+        <div class="email-field"><div class="field-label">Subject Line</div><div class="field-content">[Event Name] replay + your action plan<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <div class="email-field"><div class="field-label">Email Body</div><div class="field-content">Hey [First Name],
+
+Thank you for attending [Event/Webinar Name]! Here's everything you need:
+
+Replay link: [LINK] (available for [X] days)
+Slides/Resources: [LINK]
+
+The 3 biggest takeaways:
+1. [Key point 1] — action step: [what to do]
+2. [Key point 2] — action step: [what to do]
+3. [Key point 3] — action step: [what to do]
+
+During the session, I mentioned [Product/Service] — the [one-sentence description].
+
+If you're ready to [take the next step / implement what you learned], here's the link: [LINK]
+
+[Special offer for attendees — discount code, bonus, or deadline]
+
+Have questions about anything from the session? Just reply.
+
+[Your Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <span class="cta-tag">CTA: Access replay + purchase offer</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)"><span class="email-num">#25</span><span class="email-title">Value-Add Follow-Up (No Ask)</span><span class="email-toggle">&#9660;</span></div>
+      <div class="email-body">
+        <div class="email-field"><div class="field-label">Subject Line</div><div class="field-content">Thought you'd find this useful<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <div class="email-field"><div class="field-label">Email Body</div><div class="field-content">Hey [Name],
+
+I came across [article/tool/resource] and immediately thought of you — given our conversation about [topic].
+
+Here's the link: [LINK]
+
+The key takeaway: [One sentence summarizing why it's relevant to them]
+
+Hope business is going well. If you ever need anything [related to your expertise], don't hesitate to reach out.
+
+Best,
+[Your Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <span class="cta-tag">CTA: No direct ask — relationship building</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== COLD OUTREACH (10) ==================== -->
+  <div id="cold" class="category-section">
+    <div class="category-header">
+      <div class="cat-icon" style="background:rgba(139,92,246,0.12)">&#127919;</div>
+      <div>
+        <h2>Cold Outreach</h2>
+        <span class="cat-count">10 Templates</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)"><span class="email-num">#26</span><span class="email-title">The Compliment Opener</span><span class="email-toggle">&#9660;</span></div>
+      <div class="email-body">
+        <div class="email-field"><div class="field-label">Subject Line</div><div class="field-content">Loved your [specific thing] — quick idea<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <div class="email-field"><div class="field-label">Email Body</div><div class="field-content">Hey [Name],
+
+I came across your [website / LinkedIn post / podcast episode / article] about [topic] — really impressive stuff, especially [specific detail that proves you actually consumed it].
+
+I noticed [observation about their business or an opportunity you spotted]. I help [type of businesses] with [what you do], and I had a quick idea that could [specific benefit].
+
+Would you be open to a 15-minute call this week? No pitch — just want to share the idea and see if it resonates.
+
+[Your Name]
+[One-line credibility — "I've helped X businesses do Y" or "Featured in Z"]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <span class="cta-tag">CTA: Book a 15-minute call</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)"><span class="email-num">#27</span><span class="email-title">The Problem Identifier</span><span class="email-toggle">&#9660;</span></div>
+      <div class="email-body">
+        <div class="email-field"><div class="field-label">Subject Line</div><div class="field-content">[Name], noticed something on your [website/profile]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <div class="email-field"><div class="field-label">Email Body</div><div class="field-content">Hey [Name],
+
+I was checking out [their business] and noticed [specific problem or missed opportunity — be genuinely helpful, not critical].
+
+This is actually really common in [their industry]. The good news is it's a quick fix that typically [quantifiable improvement — "increases conversions by X%" or "saves Y hours/week"].
+
+I put together a quick 2-minute screen recording showing exactly what I mean: [Loom link or offer to create one]
+
+If you'd like help fixing it, that's what I do at [Your Business]. If not, the video should help you or your team handle it.
+
+Either way, hope it's useful.
+
+[Your Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <span class="cta-tag">CTA: Watch the screen recording + reply</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)"><span class="email-num">#28</span><span class="email-title">The Mutual Connection</span><span class="email-toggle">&#9660;</span></div>
+      <div class="email-body">
+        <div class="email-field"><div class="field-label">Subject Line</div><div class="field-content">[Mutual Contact] suggested I reach out<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <div class="email-field"><div class="field-label">Email Body</div><div class="field-content">Hey [Name],
+
+[Mutual Contact's Name] mentioned that you're [looking for / working on / dealing with] [relevant situation] and suggested we connect.
+
+I help [type of business] [achieve specific result]. Recently, I helped [similar company] [specific achievement with numbers].
+
+[Mutual Contact] thought there might be a good fit. Would you be open to a quick 15-minute chat to explore?
+
+If so, here are some times that work for me: [2-3 options] — or feel free to grab a time here: [scheduling link]
+
+Looking forward to it,
+[Your Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <span class="cta-tag">CTA: Schedule an intro call</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)"><span class="email-num">#29</span><span class="email-title">The Case Study Teaser</span><span class="email-toggle">&#9660;</span></div>
+      <div class="email-body">
+        <div class="email-field"><div class="field-label">Subject Line</div><div class="field-content">How [similar company] [achieved result] in [timeframe]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <div class="email-field"><div class="field-label">Email Body</div><div class="field-content">Hey [Name],
+
+Last quarter, I worked with [similar company/role] who had a similar challenge to what I imagine you're facing: [describe the challenge].
+
+In [timeframe], we helped them:
+- [Specific result #1 with numbers]
+- [Specific result #2 with numbers]
+
+I'm not sure if you're experiencing the same thing, but if you are, I'd love to share exactly how we did it.
+
+Worth a 15-minute conversation?
+
+[Your Name]
+[Your Business Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <span class="cta-tag">CTA: Reply to hear the full case study</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)"><span class="email-num">#30</span><span class="email-title">The Quick Question</span><span class="email-toggle">&#9660;</span></div>
+      <div class="email-body">
+        <div class="email-field"><div class="field-label">Subject Line</div><div class="field-content">Quick question, [Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <div class="email-field"><div class="field-label">Email Body</div><div class="field-content">Hey [Name],
+
+I'll keep this short.
+
+Who handles [area of business you can help with — e.g., marketing / website / hiring / operations] at [Their Company]?
+
+I have an idea that could [specific benefit — e.g., "cut your ad spend by 20% while keeping the same results"] and I'd love to share it with the right person.
+
+Thanks,
+[Your Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <span class="cta-tag">CTA: Get routed to the decision maker</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)"><span class="email-num">#31</span><span class="email-title">The Free Value Upfront</span><span class="email-toggle">&#9660;</span></div>
+      <div class="email-body">
+        <div class="email-field"><div class="field-label">Subject Line</div><div class="field-content">Made this for you (no strings attached)<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <div class="email-field"><div class="field-label">Email Body</div><div class="field-content">Hey [Name],
+
+I spent 20 minutes looking at your [website / social media / marketing / operations] and put together [a quick audit / 3 specific suggestions / a mockup / a content plan].
+
+Here it is: [attachment or link]
+
+No catch — I just thought it might be useful, and it's the kind of thing I love doing.
+
+If any of the suggestions resonate and you'd like help implementing them, I'd be happy to chat. If not, hope it gives you some ideas.
+
+[Your Name]
+[What you do, in one line]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <span class="cta-tag">CTA: Review the free work + reply</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)"><span class="email-num">#32</span><span class="email-title">The Industry Insight</span><span class="email-toggle">&#9660;</span></div>
+      <div class="email-body">
+        <div class="email-field"><div class="field-label">Subject Line</div><div class="field-content">[Industry] trend that could affect [their company]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <div class="email-field"><div class="field-label">Email Body</div><div class="field-content">Hey [Name],
+
+I've been tracking a trend in [industry] that I think [Their Company] should know about:
+
+[Describe trend or shift in 2-3 sentences — use data if possible]
+
+Companies that are adapting early are seeing [positive result]. Those that aren't are [consequence].
+
+I've been helping [type of businesses] navigate this shift — specifically by [your approach in one sentence].
+
+Curious if this is on your radar? I'd love to hear your take.
+
+[Your Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <span class="cta-tag">CTA: Start a conversation about the trend</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)"><span class="email-num">#33</span><span class="email-title">Cold Outreach Follow-Up #1 (Day 3)</span><span class="email-toggle">&#9660;</span></div>
+      <div class="email-body">
+        <div class="email-field"><div class="field-label">Subject Line</div><div class="field-content">Re: [Original subject line]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <div class="email-field"><div class="field-label">Email Body</div><div class="field-content">Hey [Name],
+
+Just bumping this up in case it got buried. I know inboxes are brutal.
+
+The short version: I help [type of business] [achieve result], and I think there's an opportunity for [Their Company].
+
+15 minutes — that's all I'm asking. If it's not a fit, I'll say so honestly.
+
+[CTA: Pick a time here] → [Scheduling link]
+
+[Your Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <span class="cta-tag">CTA: Book a call via scheduling link</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)"><span class="email-num">#34</span><span class="email-title">Cold Outreach Follow-Up #2 (Day 7)</span><span class="email-toggle">&#9660;</span></div>
+      <div class="email-body">
+        <div class="email-field"><div class="field-label">Subject Line</div><div class="field-content">[Relevant resource] for [their company]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <div class="email-field"><div class="field-label">Email Body</div><div class="field-content">Hey [Name],
+
+I just published [article / guide / case study] about [topic relevant to their business].
+
+Thought you might find it useful: [LINK]
+
+The key insight: [One sentence summarizing the value]
+
+If after reading it you'd like to discuss how this applies to [Their Company], I'm here.
+
+[Your Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <span class="cta-tag">CTA: Read resource + reply to discuss</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)"><span class="email-num">#35</span><span class="email-title">Cold Outreach Final Follow-Up (Day 14)</span><span class="email-toggle">&#9660;</span></div>
+      <div class="email-body">
+        <div class="email-field"><div class="field-label">Subject Line</div><div class="field-content">Not a fit?<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <div class="email-field"><div class="field-label">Email Body</div><div class="field-content">Hey [Name],
+
+I've sent a couple of notes and haven't heard back — no worries at all.
+
+Usually when that happens, it means one of three things:
+1. The timing isn't right (totally fair)
+2. You're not the right person to talk to
+3. You've been chased by a pack of angry geese and can't reach your laptop
+
+If it's #1, I'll check back in a few months. If it's #2, could you point me in the right direction? And if it's #3, I hope you're okay.
+
+All the best,
+[Your Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <span class="cta-tag">CTA: Get any response / keep door open</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== NEWSLETTER (5) ==================== -->
+  <div id="newsletter" class="category-section">
+    <div class="category-header">
+      <div class="cat-icon" style="background:rgba(6,182,212,0.12)">&#128240;</div>
+      <div>
+        <h2>Newsletter Templates</h2>
+        <span class="cat-count">5 Templates</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)"><span class="email-num">#36</span><span class="email-title">Educational / How-To Newsletter</span><span class="email-toggle">&#9660;</span></div>
+      <div class="email-body">
+        <div class="email-field"><div class="field-label">Subject Line</div><div class="field-content">How to [achieve specific result] (step-by-step)<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <div class="email-field"><div class="field-label">Email Body</div><div class="field-content">Hey [First Name],
+
+This week's topic: [How to achieve specific result]
+
+I've been [doing this / teaching this / observing this] for [time period], and here's what I've learned works:
+
+Step 1: [Name]
+[2-3 sentence explanation with a specific example]
+
+Step 2: [Name]
+[2-3 sentence explanation with a specific example]
+
+Step 3: [Name]
+[2-3 sentence explanation with a specific example]
+
+The key insight most people miss: [Counter-intuitive takeaway in 1-2 sentences]
+
+Your homework: [One specific action they can take today]
+
+If you try this, reply and let me know how it goes. I read every response.
+
+Until next week,
+[Your Name]
+
+P.S. [Soft plug for product/service that relates to this topic with link]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <span class="cta-tag">CTA: Implement + reply with results</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)"><span class="email-num">#37</span><span class="email-title">Story-Based Newsletter</span><span class="email-toggle">&#9660;</span></div>
+      <div class="email-body">
+        <div class="email-field"><div class="field-label">Subject Line</div><div class="field-content">The [unexpected thing] that changed how I [business activity]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <div class="email-field"><div class="field-label">Email Body</div><div class="field-content">Hey [First Name],
+
+Last [week/month], something happened that completely changed how I think about [topic].
+
+[Tell the story — set the scene, build tension, reveal the turning point. 3-4 short paragraphs. Be specific and personal.]
+
+The lesson: [Distill the story into one powerful insight]
+
+Why this matters for you: [Connect it to their business/life in 2 sentences]
+
+Here's what I'd do differently now:
+1. [Actionable takeaway]
+2. [Actionable takeaway]
+3. [Actionable takeaway]
+
+Have you experienced something similar? Hit reply — I'd love to hear your version.
+
+[Your Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <span class="cta-tag">CTA: Reply and share their experience</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)"><span class="email-num">#38</span><span class="email-title">Curated Resources Newsletter</span><span class="email-toggle">&#9660;</span></div>
+      <div class="email-body">
+        <div class="email-field"><div class="field-label">Subject Line</div><div class="field-content">5 things I found this week that are actually useful<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <div class="email-field"><div class="field-label">Email Body</div><div class="field-content">Hey [First Name],
+
+Here are 5 things from my week that I think you'll love:
+
+1. [Article/Resource Title] — [One-sentence summary of why it's great] → [LINK]
+
+2. [Tool/App Name] — [What it does + why it's useful for them] → [LINK]
+
+3. [Quote or Tweet] — "[The quote]" — [Who said it]. [One-sentence commentary]
+
+4. [Podcast/Video] — [Topic + key insight] → [LINK]
+
+5. [Quick tip from your own experience] — [2-3 sentence actionable tip]
+
+Bonus: [Something fun, personal, or unexpected]
+
+What should I feature next week? Reply with your best find.
+
+[Your Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <span class="cta-tag">CTA: Explore links + reply with suggestions</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)"><span class="email-num">#39</span><span class="email-title">Behind-the-Scenes Newsletter</span><span class="email-toggle">&#9660;</span></div>
+      <div class="email-body">
+        <div class="email-field"><div class="field-label">Subject Line</div><div class="field-content">Here's what really happened this month<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <div class="email-field"><div class="field-label">Email Body</div><div class="field-content">Hey [First Name],
+
+Monthly transparency report — here's what's really going on behind the scenes:
+
+What went well:
+- [Win #1 — be specific with numbers if possible]
+- [Win #2]
+
+What didn't go well:
+- [Honest struggle or failure — what you learned]
+
+What I'm working on:
+- [Project/initiative and why it matters to them]
+
+By the numbers:
+- Revenue: [amount or growth %]
+- Customers served: [number]
+- [Relevant metric]: [number]
+
+The biggest lesson this month: [One insight in 2-3 sentences]
+
+What I'd love your input on: [Ask a question — make them feel like insiders]
+
+Reply and let me know what you think.
+
+[Your Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <span class="cta-tag">CTA: Reply with input/feedback</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)"><span class="email-num">#40</span><span class="email-title">Promotional Newsletter (With Value)</span><span class="email-toggle">&#9660;</span></div>
+      <div class="email-body">
+        <div class="email-field"><div class="field-label">Subject Line</div><div class="field-content">Something new (+ a lesson that'll save you hours)<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <div class="email-field"><div class="field-label">Email Body</div><div class="field-content">Hey [First Name],
+
+Quick lesson before I share some news:
+
+[Teach something valuable in 3-4 sentences — a tip, framework, or insight they can use immediately]
+
+Try that this week. It works.
+
+Now the news: I just launched [Product/Service Name].
+
+It's for [who it's for] who want to [achieve result] without [pain point].
+
+What's inside:
+- [Benefit 1]
+- [Benefit 2]
+- [Benefit 3]
+
+[Price] → [LINK]
+
+To celebrate the launch, I'm offering [incentive — discount, bonus, or early bird pricing] for the next [timeframe].
+
+[CTA: Check It Out] → [LINK]
+
+And regardless of whether you grab it, I hope that tip at the top saves you some time this week.
+
+[Your Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <span class="cta-tag">CTA: Check out new product</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== RE-ENGAGEMENT (5) ==================== -->
+  <div id="reengagement" class="category-section">
+    <div class="category-header">
+      <div class="cat-icon" style="background:rgba(236,72,153,0.12)">&#128140;</div>
+      <div>
+        <h2>Re-Engagement Emails</h2>
+        <span class="cat-count">5 Templates</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)"><span class="email-num">#41</span><span class="email-title">The "We Miss You" Email</span><span class="email-toggle">&#9660;</span></div>
+      <div class="email-body">
+        <div class="email-field"><div class="field-label">Subject Line</div><div class="field-content">It's been a while, [First Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <div class="email-field"><div class="field-label">Email Body</div><div class="field-content">Hey [First Name],
+
+I noticed it's been [timeframe] since we last connected. Just wanted to check in and see how things are going.
+
+A lot has happened on our end since you were last around:
+- [New thing #1 — product, feature, content]
+- [New thing #2]
+- [New thing #3]
+
+I'd love to have you back. Is there anything I can help with?
+
+Just hit reply — I'm here.
+
+[Your Name]
+
+P.S. If you'd rather not hear from me, you can unsubscribe below. But I hope you'll stick around — the best stuff is coming.<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <span class="cta-tag">CTA: Reply or re-engage with new content</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)"><span class="email-num">#42</span><span class="email-title">The "Here's What You Missed" Email</span><span class="email-toggle">&#9660;</span></div>
+      <div class="email-body">
+        <div class="email-field"><div class="field-label">Subject Line</div><div class="field-content">You missed some good stuff<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <div class="email-field"><div class="field-label">Email Body</div><div class="field-content">Hey [First Name],
+
+I get it — inboxes are overwhelming. Here's a quick catch-up of the best things from the past [month/quarter]:
+
+Most popular post: [Title + link]
+Most useful resource: [Title + link]
+Biggest announcement: [One sentence + link]
+
+And coming up next: [Tease something exciting]
+
+Pick one — read it in 5 minutes — and you're all caught up.
+
+Welcome back,
+[Your Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <span class="cta-tag">CTA: Click through to catch up</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)"><span class="email-num">#43</span><span class="email-title">The Exclusive Come-Back Offer</span><span class="email-toggle">&#9660;</span></div>
+      <div class="email-body">
+        <div class="email-field"><div class="field-label">Subject Line</div><div class="field-content">A little something for being a loyal subscriber<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <div class="email-field"><div class="field-label">Email Body</div><div class="field-content">Hey [First Name],
+
+I wanted to say thanks. Even though it's been a minute since we connected, you've stayed on this list — and that means something to me.
+
+As a thank you, I want to offer you something exclusive:
+
+[Special offer — discount, free resource, bonus, or early access]
+
+This isn't available publicly — just for subscribers who've been here from the early days.
+
+[CTA: Claim Your Offer] → [LINK]
+
+Valid for [timeframe]. Because you've earned it.
+
+Gratefully,
+[Your Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <span class="cta-tag">CTA: Redeem exclusive offer</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)"><span class="email-num">#44</span><span class="email-title">The Preference Check Email</span><span class="email-toggle">&#9660;</span></div>
+      <div class="email-body">
+        <div class="email-field"><div class="field-label">Subject Line</div><div class="field-content">What do you actually want to hear about?<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <div class="email-field"><div class="field-label">Email Body</div><div class="field-content">Hey [First Name],
+
+I noticed you haven't opened my last few emails. No judgment — I want to make sure I'm sending you stuff you actually care about.
+
+Quick favor? Click the topic that interests you most:
+
+→ [Topic A] — [Link tagged for Topic A]
+→ [Topic B] — [Link tagged for Topic B]
+→ [Topic C] — [Link tagged for Topic C]
+→ Less email, please — [Link to frequency preferences]
+→ None of the above — I'd rather unsubscribe — [Unsubscribe link]
+
+Your one click helps me send you better emails. Deal?
+
+[Your Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <span class="cta-tag">CTA: Click to update preferences</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)"><span class="email-num">#45</span><span class="email-title">The Final "Stay or Go" Email</span><span class="email-toggle">&#9660;</span></div>
+      <div class="email-body">
+        <div class="email-field"><div class="field-label">Subject Line</div><div class="field-content">Should I stop emailing you?<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <div class="email-field"><div class="field-label">Email Body</div><div class="field-content">Hey [First Name],
+
+I'm cleaning up my email list to make sure I'm only writing to people who want to hear from me.
+
+You haven't opened an email in a while, so I wanted to ask directly:
+
+Do you still want to be on this list?
+
+→ Yes, keep me! [Link that confirms subscription]
+→ No thanks, I'm good [Unsubscribe link]
+
+If I don't hear from you in the next 7 days, I'll go ahead and remove you — no hard feelings.
+
+If you do stay, here's what's coming up: [Tease 1-2 exciting things]
+
+Either way, I appreciate you.
+
+[Your Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <span class="cta-tag">CTA: Confirm subscription or unsubscribe</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== THANK YOU (5) ==================== -->
+  <div id="thankyou" class="category-section">
+    <div class="category-header">
+      <div class="cat-icon" style="background:rgba(132,204,22,0.12)">&#128154;</div>
+      <div>
+        <h2>Thank You Emails</h2>
+        <span class="cat-count">5 Templates</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)"><span class="email-num">#46</span><span class="email-title">Post-Purchase Thank You</span><span class="email-toggle">&#9660;</span></div>
+      <div class="email-body">
+        <div class="email-field"><div class="field-label">Subject Line</div><div class="field-content">You're in! Here's what happens next<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <div class="email-field"><div class="field-label">Email Body</div><div class="field-content">Hey [First Name],
+
+Thank you so much for purchasing [Product/Service Name]. You just made my day.
+
+Here's what happens next:
+1. [Step 1 — e.g., check your inbox for access / shipping confirmation]
+2. [Step 2 — e.g., start with this guide / expect delivery by date]
+3. [Step 3 — e.g., if you need anything, contact us at...]
+
+Your order details:
+- [Product/Service]: [Name]
+- [Amount paid]: [Price]
+- [Order #]: [Number]
+
+One quick tip to get the most out of your purchase: [Useful first step]
+
+If you have ANY questions, reply to this email. I'm a real person and I respond fast.
+
+Welcome to the family,
+[Your Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <span class="cta-tag">CTA: Start using the product</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)"><span class="email-num">#47</span><span class="email-title">Thank You for the Referral</span><span class="email-toggle">&#9660;</span></div>
+      <div class="email-body">
+        <div class="email-field"><div class="field-label">Subject Line</div><div class="field-content">You're amazing — thank you for the referral<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <div class="email-field"><div class="field-label">Email Body</div><div class="field-content">Hey [Name],
+
+I just wanted to take a moment to say THANK YOU for referring [Referred Person's Name].
+
+Word of mouth is the lifeblood of my business, and the fact that you trust me enough to recommend me to [them] — that means the world.
+
+I've already reached out, and I'll take exceptional care of them. You have my word.
+
+As a small thank you, [describe the referral reward — e.g., here's a $50 credit toward your next purchase / I'm sending you a gift card / your next month is free].
+
+Thank you for being the kind of person who goes out of their way to help others.
+
+Truly grateful,
+[Your Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <span class="cta-tag">CTA: Feel appreciated + continue referring</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)"><span class="email-num">#48</span><span class="email-title">Thank You for the Review</span><span class="email-toggle">&#9660;</span></div>
+      <div class="email-body">
+        <div class="email-field"><div class="field-label">Subject Line</div><div class="field-content">Your review made my week<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <div class="email-field"><div class="field-label">Email Body</div><div class="field-content">Hey [Name],
+
+I just saw your review and had to reach out personally.
+
+"[Quote a specific line from their review]" — reading that honestly made my [day/week].
+
+As a small business, reviews are incredibly powerful. Yours will help other [target customers] find us and feel confident choosing us.
+
+As a thank you, I'd love to offer you [small gift — discount code, freebie, exclusive access].
+
+Here it is: [Code or Link]
+
+Thank you for taking the time. It means more than you know.
+
+[Your Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <span class="cta-tag">CTA: Redeem thank you gift</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)"><span class="email-num">#49</span><span class="email-title">Thank You for Attending Event</span><span class="email-toggle">&#9660;</span></div>
+      <div class="email-body">
+        <div class="email-field"><div class="field-label">Subject Line</div><div class="field-content">Thanks for showing up — here's everything from [Event]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <div class="email-field"><div class="field-label">Email Body</div><div class="field-content">Hey [First Name],
+
+Thank you for attending [Event Name]! Having you there made it special.
+
+As promised, here's everything from the event:
+- Replay: [LINK]
+- Slides: [LINK]
+- Resources mentioned: [LINK]
+
+The #1 takeaway: [One sentence summary of the biggest insight]
+
+Your action item: [One specific thing they should do this week based on the event]
+
+Was there something I didn't cover that you wanted to ask? Reply and I'll answer personally.
+
+[If relevant: mention upcoming events, products, or next steps]
+
+Thanks again for investing your time,
+[Your Name]<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <span class="cta-tag">CTA: Access resources + implement action item</span>
+      </div>
+    </div>
+
+    <div class="email-card">
+      <div class="email-header" onclick="toggleCard(this)"><span class="email-num">#50</span><span class="email-title">Customer Anniversary / Milestone Thank You</span><span class="email-toggle">&#9660;</span></div>
+      <div class="email-body">
+        <div class="email-field"><div class="field-label">Subject Line</div><div class="field-content">Happy [1 year / 6 months] — we're celebrating YOU<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <div class="email-field"><div class="field-label">Email Body</div><div class="field-content">Hey [First Name],
+
+Today marks [timeframe] since you [became a customer / joined / started with us].
+
+I just want to say: thank you. Seriously.
+
+In that time, you've [achievement or usage stat if available — e.g., completed X projects, placed Y orders, been part of Z community moments].
+
+You're not just a customer — you're part of what makes [Business Name] special.
+
+To celebrate, here's a little something:
+
+[Anniversary gift — special discount, free item, exclusive access, or heartfelt handwritten note]
+
+[CTA: Claim Your Anniversary Gift] → [LINK]
+
+Here's to many more,
+[Your Name]
+
+P.S. If there's ever anything I can do better, I'm all ears. Reply anytime.<button class="copy-all-btn" onclick="copyField(this)">Copy</button></div></div>
+        <span class="cta-tag">CTA: Claim anniversary reward</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p><strong>50 Email Templates for Business</strong></p>
+  <p>Replace all [bracketed text] with your specific business details.</p>
+  <p style="margin-top:16px;font-size:0.75rem;color:#555;">Created with care. Not for redistribution.</p>
+</div>
+
+<script>
+function toggleCard(header) {
+  header.closest('.email-card').classList.toggle('open');
+}
+
+function copyField(btn) {
+  const content = btn.parentElement;
+  const text = content.textContent.replace('Copy','').replace('Copied!','').trim();
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+</script>
+
+</body>
+</html>
