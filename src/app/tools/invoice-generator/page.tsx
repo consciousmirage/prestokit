@@ -797,7 +797,7 @@ export default function InvoiceGeneratorPage() {
             name: "50 Email Templates Bundle",
             price: "$12",
             description: "Professional email templates for invoicing, follow-ups, payment reminders, and client communication. Copy, paste, and send.",
-            url: "https://consciousmirage.gumroad.com/l/email-templates-bundle",
+            url: "/products/email-templates-bundle.html",
           }}
         />
         <PromoBar

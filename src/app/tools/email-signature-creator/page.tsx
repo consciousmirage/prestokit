@@ -588,7 +588,7 @@ export default function EmailSignatureCreatorPage() {
           name: "100 ChatGPT Prompts for Business",
           price: "$7",
           description: "Ready-to-use prompts for emails, marketing copy, social media, customer service, and more. Save hours every week.",
-          url: "https://consciousmirage.gumroad.com/l/chatgpt-prompts-business",
+          url: "/products/100-chatgpt-prompts.html",
         }}
       />
       <PromoBar

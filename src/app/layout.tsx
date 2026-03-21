@@ -67,6 +67,7 @@ export const metadata: Metadata = {
 
 const navLinks = [
   { label: "Tools", href: "/#tools" },
+  { label: "Resources", href: "/products" },
   { label: "Why PrestoKit?", href: "/#why" },
   { label: "Pro", href: "/pro" },
 ];

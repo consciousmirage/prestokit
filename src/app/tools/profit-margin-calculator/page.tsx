@@ -683,7 +683,7 @@ export default function ProfitMarginCalculatorPage() {
                 name: "Freelancer Pricing Calculator",
                 price: "$9",
                 description: "Spreadsheet tool that calculates your ideal hourly rate, project pricing, and profit margins based on your expenses and income goals.",
-                url: "https://consciousmirage.gumroad.com/l/freelancer-pricing-calculator",
+                url: "/products/freelancer-pricing-calculator.html",
               }}
             />
             <PromoBar
