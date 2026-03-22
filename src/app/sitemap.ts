@@ -44,6 +44,11 @@ const toolPages = [
   "/tools/paycheck-calculator",
   "/tools/business-card-generator",
   "/tools/privacy-policy-generator",
+  "/tools/age-calculator",
+  "/tools/gpa-calculator",
+  "/tools/discount-calculator",
+  "/tools/loan-calculator",
+  "/tools/character-counter",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

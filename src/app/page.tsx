@@ -277,6 +277,46 @@ const tools: Tool[] = [
     href: "/tools/privacy-policy-generator",
     color: "#5c6bc0",
   },
+  {
+    name: "Age Calculator",
+    icon: "\uD83C\uDF82",
+    description:
+      "Calculate your exact age in years, months, days, hours. Birthday countdown included.",
+    href: "/tools/age-calculator",
+    color: "#f48fb1",
+  },
+  {
+    name: "GPA Calculator",
+    icon: "\uD83C\uDF93",
+    description:
+      "Calculate weighted and unweighted GPA with multiple grading scales.",
+    href: "/tools/gpa-calculator",
+    color: "#9575cd",
+  },
+  {
+    name: "Discount Calculator",
+    icon: "\uD83D\uDCB2",
+    description:
+      "Calculate sale prices, savings, and percent off. Stack discounts and add tax.",
+    href: "/tools/discount-calculator",
+    color: "#e57373",
+  },
+  {
+    name: "Loan Calculator",
+    icon: "\uD83C\uDFE6",
+    description:
+      "Calculate monthly loan payments, total interest, and view amortization schedule.",
+    href: "/tools/loan-calculator",
+    color: "#4db6ac",
+  },
+  {
+    name: "Character Counter",
+    icon: "\uD83D\uDD24",
+    description:
+      "Count characters with limits for Twitter, Instagram, YouTube, LinkedIn, and more.",
+    href: "/tools/character-counter",
+    color: "#7986cb",
+  },
 ];
 
 const valueProps = [
@@ -416,7 +456,7 @@ export default function Home() {
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
               </span>
               <span className="text-muted-light">
-                <span className="font-semibold text-white">33</span> free tools
+                <span className="font-semibold text-white">38</span> free tools
                 &mdash; zero signup
               </span>
             </div>
@@ -471,7 +511,7 @@ export default function Home() {
                 <span>{tools.length} Tools</span>
               </div>
               <h2 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                33 Free Tools, Zero Signup
+                38 Free Tools, Zero Signup
               </h2>
               <p className="mx-auto mt-3 max-w-2xl text-muted-light">
                 Professional-grade business tools, completely free. Pick one and
