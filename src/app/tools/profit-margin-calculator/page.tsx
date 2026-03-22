@@ -808,6 +808,48 @@ export default function ProfitMarginCalculatorPage() {
             </div>
           </section>
 
+          {/* ==================== RECOMMENDED TOOLS ==================== */}
+          <section className="max-w-4xl mx-auto px-4 pt-16 pb-0">
+            <h2 className="text-2xl font-bold text-center mb-2">
+              Level Up Your <span className="text-[#7c6cf0]">Workflow</span>
+            </h2>
+            <p className="text-[#8888a0] text-center mb-10 max-w-xl mx-auto">
+              Want to track your margins automatically? These tools make it easy.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+              {[
+                {
+                  name: "QuickBooks",
+                  desc: "Track profits, expenses, and margins automatically with real-time financial reports.",
+                  href: "https://quickbooks.intuit.com",
+                },
+                {
+                  name: "Bench",
+                  desc: "Expert bookkeeping for small businesses — get clear profit and loss statements every month.",
+                  href: "https://bench.co",
+                },
+              ].map((tool) => (
+                <a
+                  key={tool.name}
+                  href={tool.href}
+                  target="_blank"
+                  rel="noopener noreferrer nofollow sponsored"
+                  className="group rounded-2xl border border-[#1e1e2e] bg-[#12121a]/60 backdrop-blur-sm p-6 hover:border-[#7c6cf0]/40 hover:shadow-[0_0_24px_rgba(124,108,240,0.08)] transition-all"
+                >
+                  <h3 className="text-white font-semibold text-base mb-2 group-hover:text-[#9d90f5] transition-colors">
+                    {tool.name}
+                  </h3>
+                  <p className="text-[#8888a0] text-sm leading-relaxed">
+                    {tool.desc}
+                  </p>
+                  <span className="inline-block mt-3 text-xs text-[#7c6cf0] font-medium">
+                    Learn more &rarr;
+                  </span>
+                </a>
+              ))}
+            </div>
+          </section>
+
           {/* ==================== FAQ SCHEMA (JSON-LD) ==================== */}
           <script
             type="application/ld+json"

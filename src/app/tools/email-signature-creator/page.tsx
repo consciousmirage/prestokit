@@ -692,6 +692,48 @@ export default function EmailSignatureCreatorPage() {
         </div>
       </section>
 
+      {/* ============================== RECOMMENDED TOOLS ============================== */}
+      <section className="max-w-5xl mx-auto px-4 py-16 border-t border-brand-border">
+        <h2 className="text-2xl font-bold text-center mb-2">
+          Level Up Your <span className="text-primary">Workflow</span>
+        </h2>
+        <p className="text-muted text-center mb-10 max-w-xl mx-auto">
+          Pair your new signature with professional email and marketing tools.
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+          {[
+            {
+              name: "Google Workspace",
+              desc: "Professional email, cloud storage, and collaboration tools for your business.",
+              href: "https://workspace.google.com",
+            },
+            {
+              name: "Mailchimp",
+              desc: "All-in-one email marketing platform — build campaigns, grow your list, and track results.",
+              href: "https://mailchimp.com",
+            },
+          ].map((tool) => (
+            <a
+              key={tool.name}
+              href={tool.href}
+              target="_blank"
+              rel="noopener noreferrer nofollow sponsored"
+              className="group rounded-2xl border border-brand-border bg-brand-card p-6 hover:border-primary/40 hover:shadow-[0_0_24px_rgba(124,108,240,0.08)] transition-all"
+            >
+              <h3 className="text-white font-semibold text-base mb-2 group-hover:text-primary transition-colors">
+                {tool.name}
+              </h3>
+              <p className="text-muted-dark text-sm leading-relaxed">
+                {tool.desc}
+              </p>
+              <span className="inline-block mt-3 text-xs text-primary font-medium">
+                Learn more &rarr;
+              </span>
+            </a>
+          ))}
+        </div>
+      </section>
+
       {/* ============================== FAQ SCHEMA (JSON-LD) ============================== */}
       <script
         type="application/ld+json"

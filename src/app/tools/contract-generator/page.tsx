@@ -720,6 +720,48 @@ export default function ContractGeneratorPage() {
             ))}
           </div>
         </section>
+
+        {/* ==================== RECOMMENDED TOOLS ==================== */}
+        <section className="mx-auto max-w-7xl px-4 py-16 border-t border-white/5">
+          <h2 className="text-2xl font-bold text-center mb-2">
+            Level Up Your <span className="text-[#7c6cf0]">Workflow</span>
+          </h2>
+          <p className="text-gray-400 text-center mb-10 max-w-xl mx-auto">
+            Need legal review or digital signatures? These services can help.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+            {[
+              {
+                name: "LegalZoom",
+                desc: "Business legal services — formation, contracts, trademarks, and ongoing legal support.",
+                href: "https://www.legalzoom.com",
+              },
+              {
+                name: "HelloSign",
+                desc: "Send contracts for legally binding eSignatures — fast, simple, and secure.",
+                href: "https://www.hellosign.com",
+              },
+            ].map((tool) => (
+              <a
+                key={tool.name}
+                href={tool.href}
+                target="_blank"
+                rel="noopener noreferrer nofollow sponsored"
+                className="group rounded-2xl border border-white/5 bg-[#1a1a26] p-6 hover:border-[#7c6cf0]/40 hover:shadow-[0_0_24px_rgba(124,108,240,0.08)] transition-all"
+              >
+                <h3 className="text-white font-semibold text-base mb-2 group-hover:text-[#9d90f5] transition-colors">
+                  {tool.name}
+                </h3>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  {tool.desc}
+                </p>
+                <span className="inline-block mt-3 text-xs text-[#7c6cf0] font-medium">
+                  Learn more &rarr;
+                </span>
+              </a>
+            ))}
+          </div>
+        </section>
       </div>
     </>
   );

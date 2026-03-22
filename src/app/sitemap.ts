@@ -39,6 +39,11 @@ const toolPages = [
   "/tools/contract-generator",
   "/tools/timezone-converter",
   "/tools/roi-calculator",
+  "/tools/tax-calculator",
+  "/tools/compound-interest-calculator",
+  "/tools/paycheck-calculator",
+  "/tools/business-card-generator",
+  "/tools/privacy-policy-generator",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

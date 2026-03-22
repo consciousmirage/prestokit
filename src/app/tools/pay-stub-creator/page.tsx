@@ -1294,6 +1294,48 @@ export default function PayStubCreatorPage() {
           </div>
         </section>
 
+        {/* ==================== RECOMMENDED TOOLS ==================== */}
+        <section className="mx-auto max-w-7xl px-4 pt-16 pb-0">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2 text-center">
+            Level Up Your <span className="text-[#7c6cf0]">Workflow</span>
+          </h2>
+          <p className="text-gray-400 text-center mb-10 max-w-xl mx-auto">
+            Ready to automate payroll? These platforms handle it all — taxes, direct deposit, and compliance.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+            {[
+              {
+                name: "Gusto",
+                desc: "Full-service payroll made simple — automatic tax filing, direct deposit, and benefits management.",
+                href: "https://gusto.com",
+              },
+              {
+                name: "ADP",
+                desc: "Industry-leading payroll and HR solutions for businesses of every size.",
+                href: "https://www.adp.com",
+              },
+            ].map((tool) => (
+              <a
+                key={tool.name}
+                href={tool.href}
+                target="_blank"
+                rel="noopener noreferrer nofollow sponsored"
+                className="group rounded-2xl border border-white/5 bg-[#1a1a26] p-6 hover:border-[#7c6cf0]/40 hover:shadow-[0_0_24px_rgba(124,108,240,0.08)] transition-all"
+              >
+                <h3 className="text-white font-semibold text-base mb-2 group-hover:text-[#9d90f5] transition-colors">
+                  {tool.name}
+                </h3>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  {tool.desc}
+                </p>
+                <span className="inline-block mt-3 text-xs text-[#7c6cf0] font-medium">
+                  Learn more &rarr;
+                </span>
+              </a>
+            ))}
+          </div>
+        </section>
+
         {/* ==================== FAQ SCHEMA (JSON-LD) ==================== */}
         <script
           type="application/ld+json"
