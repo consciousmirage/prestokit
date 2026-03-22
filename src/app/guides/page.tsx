@@ -37,6 +37,60 @@ const guides = [
     color: "#00e676",
     readTime: "11 min read",
   },
+  {
+    title: "How to Calculate Compound Interest",
+    description:
+      "Understand the compound interest formula, walk through real examples, and learn how to maximize your savings and investment growth.",
+    href: "/guides/how-to-calculate-compound-interest",
+    icon: "\uD83D\uDCB0",
+    color: "#4caf50",
+    readTime: "9 min read",
+  },
+  {
+    title: "How to Write a Privacy Policy",
+    description:
+      "Step-by-step guide to writing a privacy policy that complies with GDPR, CCPA, and other regulations. Protect your business and build user trust.",
+    href: "/guides/how-to-write-privacy-policy",
+    icon: "\uD83D\uDD12",
+    color: "#7c4dff",
+    readTime: "10 min read",
+  },
+  {
+    title: "How to Calculate Your Paycheck After Taxes",
+    description:
+      "Break down every deduction between your gross pay and take-home pay. Covers federal tax, FICA, state tax, and common payroll deductions.",
+    href: "/guides/how-to-calculate-paycheck-after-taxes",
+    icon: "\uD83D\uDCB5",
+    color: "#00bcd4",
+    readTime: "10 min read",
+  },
+  {
+    title: "How to File Taxes as a Freelancer",
+    description:
+      "Everything freelancers need to know: quarterly estimated payments, Schedule C, self-employment tax, and deductions that save you money.",
+    href: "/guides/how-to-file-taxes-freelancer",
+    icon: "\uD83D\uDCCA",
+    color: "#ff9800",
+    readTime: "11 min read",
+  },
+  {
+    title: "How to Create a Professional Business Card",
+    description:
+      "Design a business card that makes a lasting impression. Covers layout, typography, essential information, and printing tips.",
+    href: "/guides/how-to-create-business-card",
+    icon: "\uD83C\uDFB4",
+    color: "#e91e63",
+    readTime: "9 min read",
+  },
+  {
+    title: "How to Calculate a Loan Payment",
+    description:
+      "Learn the monthly payment formula, understand amortization, and calculate the true cost of any mortgage, auto loan, or personal loan.",
+    href: "/guides/how-to-calculate-loan-payment",
+    icon: "\uD83C\uDFE0",
+    color: "#2196f3",
+    readTime: "10 min read",
+  },
 ];
 
 export default function GuidesIndex() {

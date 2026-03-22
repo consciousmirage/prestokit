@@ -8,6 +8,12 @@ const guidePages = [
   "/guides/how-to-start-business",
   "/guides/freelancing-guide",
   "/guides/qr-code-guide",
+  "/guides/how-to-calculate-compound-interest",
+  "/guides/how-to-write-privacy-policy",
+  "/guides/how-to-calculate-paycheck-after-taxes",
+  "/guides/how-to-file-taxes-freelancer",
+  "/guides/how-to-create-business-card",
+  "/guides/how-to-calculate-loan-payment",
 ];
 
 const toolPages = [
