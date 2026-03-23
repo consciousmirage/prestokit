@@ -6,6 +6,9 @@ const products = [
   {
     name: "100 ChatGPT Prompts for Small Business",
     originalPrice: "$7",
+    price: "$0+",
+    buttonText: "Get It Now",
+    gumroadUrl: "https://miragecraft7.gumroad.com/l/ztftb",
     description:
       "Ready-to-use prompts for emails, marketing copy, social media, customer service, and more. Save hours every week with AI-powered shortcuts.",
     previewUrl: "/products/100-chatgpt-prompts.html",
@@ -30,6 +33,9 @@ const products = [
   {
     name: "Business Launch Checklist (155 Steps)",
     originalPrice: "$5",
+    price: "$0+",
+    buttonText: "Get It Now",
+    gumroadUrl: "https://miragecraft7.gumroad.com/l/sfznf",
     description:
       "Step-by-step checklist covering LLC formation, branding, domain setup, social media, and everything you need to launch your business the right way.",
     previewUrl: "/products/business-launch-checklist.html",
@@ -54,6 +60,9 @@ const products = [
   {
     name: "50 Email Templates for Business",
     originalPrice: "$12",
+    price: "$7",
+    buttonText: "Get for $7",
+    gumroadUrl: "https://miragecraft7.gumroad.com/l/nopzpi",
     description:
       "Professional email templates for invoicing, follow-ups, payment reminders, client communication, cold outreach, and more. Copy, paste, and send.",
     previewUrl: "/products/email-templates-bundle.html",
@@ -78,6 +87,9 @@ const products = [
   {
     name: "Freelancer Pricing Calculator & Guide",
     originalPrice: "$9",
+    price: "$0+",
+    buttonText: "Get It Now",
+    gumroadUrl: "https://miragecraft7.gumroad.com/l/chegc",
     description:
       "Spreadsheet tool that calculates your ideal hourly rate, project pricing, and profit margins based on your expenses and income goals.",
     previewUrl: "/products/freelancer-pricing-calculator.html",
@@ -102,6 +114,9 @@ const products = [
   {
     name: "Social Media Content Planner",
     originalPrice: "$7",
+    price: "$0+",
+    buttonText: "Get It Now",
+    gumroadUrl: "https://miragecraft7.gumroad.com/l/oaroqo",
     description:
       "Plan, organize, and schedule your social media content across all platforms. Includes content calendar, post templates, and hashtag strategy guide.",
     previewUrl: "/products/social-media-planner.html",
@@ -157,31 +172,15 @@ export default function ProductsPage() {
           </nav>
 
           <div className="text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-4 py-1.5 text-sm font-medium text-accent mb-6">
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"
-                />
-              </svg>
-              All resources are 100% FREE
-            </div>
             <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
-              Free Business{" "}
+              Business{" "}
               <span className="bg-gradient-to-r from-primary to-primary-light bg-clip-text text-transparent">
                 Resources
               </span>
             </h1>
             <p className="text-lg text-muted-light max-w-2xl mx-auto">
-              Premium digital products we are giving away for free to help you
-              launch, grow, and run your business. No signup. No catch.
+              Premium digital products to help you launch, grow, and run your
+              business. Affordable tools that deliver real results.
             </p>
           </div>
         </div>
@@ -218,8 +217,8 @@ export default function ProductsPage() {
                   <span className="text-muted-dark line-through text-sm">
                     {product.originalPrice}
                   </span>
-                  <span className="inline-flex items-center rounded-full bg-accent/15 px-2.5 py-0.5 text-sm font-bold text-accent">
-                    FREE
+                  <span className="inline-flex items-center rounded-full bg-primary/15 px-2.5 py-0.5 text-sm font-bold text-primary-light">
+                    {product.price}
                   </span>
                 </div>
 
@@ -231,7 +230,7 @@ export default function ProductsPage() {
                 {/* Buttons */}
                 <div className="flex gap-3">
                   <a
-                    href={product.previewUrl}
+                    href={product.gumroadUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-accent hover:bg-accent-light text-brand-dark font-semibold py-2.5 px-4 text-sm transition-all shadow-lg shadow-accent/20 hover:shadow-accent/30"
@@ -246,10 +245,10 @@ export default function ProductsPage() {
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"
+                        d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
                       />
                     </svg>
-                    Get It Free
+                    {product.buttonText}
                   </a>
                   <a
                     href={product.previewUrl}

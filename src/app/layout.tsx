@@ -153,8 +153,40 @@ export default function RootLayout({
           </nav>
         </header>
 
+        {/* ─── Promo Banner ─── */}
+        <div className="fixed top-[73px] left-0 right-0 z-40 bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600">
+          <div className="mx-auto flex max-w-7xl items-center justify-center gap-x-3 px-4 py-2 text-sm text-white/90">
+            <span className="font-semibold text-white">NEW:</span>
+            <span className="hidden sm:inline">Get our</span>
+            <a
+              href="https://miragecraft7.gumroad.com/l/nopzpi"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-white underline underline-offset-2 decoration-white/40 hover:decoration-white transition-colors"
+            >
+              50 Email Templates Bundle
+            </a>
+            <span className="hidden sm:inline">— professional copy-paste templates for $7</span>
+            <a
+              href="https://miragecraft7.gumroad.com/l/nopzpi"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-1 rounded-md bg-white/20 px-3 py-0.5 text-xs font-bold text-white backdrop-blur-sm hover:bg-white/30 transition-colors"
+            >
+              Get It Now
+            </a>
+            <span className="text-white/60 hidden md:inline">or</span>
+            <Link
+              href="/pro"
+              className="hidden md:inline font-medium text-white/80 underline underline-offset-2 decoration-white/30 hover:text-white hover:decoration-white/60 transition-colors"
+            >
+              go Pro for $9/mo
+            </Link>
+          </div>
+        </div>
+
         {/* ─── Main ─── */}
-        <main className="pt-[73px]">{children}</main>
+        <main className="pt-[113px]">{children}</main>
 
         {/* ─── Footer ─── */}
         <footer className="border-t border-brand-border bg-brand-darker">
