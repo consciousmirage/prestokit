@@ -3,14 +3,14 @@
 @tailwind utilities;
 
 :root {
-  --background: #0a0a0f;
-  --foreground: #f0f0f5;
-  --primary: #7c6cf0;
-  --primary-light: #9d90f5;
-  --accent: #00e676;
-  --card-bg: #12121a;
-  --card-border: #1e1e2e;
-  --muted: #8888a0;
+  --background: #0B1120;
+  --foreground: #F1F5F9;
+  --primary: #FF6B4A;
+  --primary-light: #FF8A6A;
+  --accent: #2DD4BF;
+  --card-bg: #131B2E;
+  --card-border: #1E2D4A;
+  --muted: #94A3B8;
 }
 
 /* Force dark theme always */
@@ -28,12 +28,12 @@ body {
 
 /* Custom selection */
 ::selection {
-  background: rgba(124, 108, 240, 0.35);
+  background: rgba(255, 107, 74, 0.35);
   color: #ffffff;
 }
 
 ::-moz-selection {
-  background: rgba(124, 108, 240, 0.35);
+  background: rgba(255, 107, 74, 0.35);
   color: #ffffff;
 }
 
@@ -43,16 +43,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #06060a;
+  background: #080D1A;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #2a2a3e;
+  background: #1E2D4A;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #3a3a4e;
+  background: #2A3F65;
 }
 
 /* Smooth focus outlines */
@@ -68,30 +68,30 @@ body {
   }
 
   .text-gradient-primary {
-    background: linear-gradient(135deg, #7c6cf0 0%, #9d90f5 50%, #c4b5fd 100%);
+    background: linear-gradient(135deg, #FF6B4A 0%, #FF8A6A 40%, #F59E0B 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .text-gradient-accent {
-    background: linear-gradient(135deg, #00e676 0%, #66ffa6 100%);
+    background: linear-gradient(135deg, #2DD4BF 0%, #5EEAD4 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .glass-card {
-    background: rgba(18, 18, 26, 0.6);
+    background: rgba(19, 27, 46, 0.6);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(30, 30, 46, 0.8);
+    border: 1px solid rgba(30, 45, 74, 0.8);
   }
 
   .glow-primary {
-    box-shadow: 0 0 40px rgba(124, 108, 240, 0.1), 0 0 80px rgba(124, 108, 240, 0.05);
+    box-shadow: 0 0 40px rgba(255, 107, 74, 0.1), 0 0 80px rgba(255, 107, 74, 0.05);
   }
 
   .glow-accent {
-    box-shadow: 0 0 40px rgba(0, 230, 118, 0.1), 0 0 80px rgba(0, 230, 118, 0.05);
+    box-shadow: 0 0 40px rgba(45, 212, 191, 0.1), 0 0 80px rgba(45, 212, 191, 0.05);
   }
 }

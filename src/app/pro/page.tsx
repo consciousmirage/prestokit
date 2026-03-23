@@ -74,7 +74,7 @@ export default function ProPage() {
           className="pointer-events-none absolute inset-0 -z-10"
           style={{
             background:
-              "radial-gradient(ellipse 60% 50% at 50% -20%, rgba(124, 108, 240, 0.15), transparent)",
+              "radial-gradient(ellipse 60% 50% at 50% -20%, rgba(255, 107, 74, 0.15), transparent)",
           }}
         />
         <div
@@ -82,7 +82,7 @@ export default function ProPage() {
           className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[600px] w-[900px] -translate-x-1/2 -translate-y-1/3 rounded-full blur-[120px] animate-hero-glow"
           style={{
             background:
-              "radial-gradient(circle, rgba(124, 108, 240, 0.12) 0%, rgba(157, 144, 245, 0.06) 50%, transparent 100%)",
+              "radial-gradient(circle, rgba(255, 107, 74, 0.12) 0%, rgba(245, 158, 11, 0.06) 50%, transparent 100%)",
           }}
         />
         <div
@@ -90,16 +90,16 @@ export default function ProPage() {
           className="pointer-events-none absolute right-1/4 top-1/3 -z-10 h-[350px] w-[350px] rounded-full blur-[100px] animate-hero-glow-alt"
           style={{
             background:
-              "radial-gradient(circle, rgba(0, 230, 118, 0.08) 0%, transparent 70%)",
+              "radial-gradient(circle, rgba(45, 212, 191, 0.08) 0%, transparent 70%)",
           }}
         />
-        {/* Extra gold glow for premium feel */}
+        {/* Extra warm glow for premium feel */}
         <div
           aria-hidden="true"
           className="pointer-events-none absolute left-1/4 top-1/2 -z-10 h-[250px] w-[250px] rounded-full blur-[100px] animate-hero-glow"
           style={{
             background:
-              "radial-gradient(circle, rgba(255, 215, 0, 0.06) 0%, transparent 70%)",
+              "radial-gradient(circle, rgba(245, 158, 11, 0.06) 0%, transparent 70%)",
           }}
         />
 
@@ -123,7 +123,7 @@ export default function ProPage() {
             <span
               style={{
                 background:
-                  "linear-gradient(135deg, #7c6cf0 0%, #9d90f5 30%, #c4b5fd 60%, #e0d4ff 100%)",
+                  "linear-gradient(135deg, #FF6B4A 0%, #FF8A6A 30%, #F59E0B 60%, #FBBF24 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
@@ -149,7 +149,7 @@ export default function ProPage() {
               className="pointer-events-none absolute -right-20 -top-20 h-60 w-60 rounded-full blur-[80px]"
               style={{
                 background:
-                  "radial-gradient(circle, rgba(124, 108, 240, 0.2) 0%, transparent 70%)",
+                  "radial-gradient(circle, rgba(255, 107, 74, 0.2) 0%, transparent 70%)",
               }}
             />
             <div
@@ -157,7 +157,7 @@ export default function ProPage() {
               className="pointer-events-none absolute -bottom-20 -left-20 h-60 w-60 rounded-full blur-[80px]"
               style={{
                 background:
-                  "radial-gradient(circle, rgba(0, 230, 118, 0.08) 0%, transparent 70%)",
+                  "radial-gradient(circle, rgba(45, 212, 191, 0.08) 0%, transparent 70%)",
               }}
             />
             {/* Shimmering border top */}
@@ -166,7 +166,7 @@ export default function ProPage() {
               className="absolute top-0 left-0 right-0 h-[2px]"
               style={{
                 background:
-                  "linear-gradient(90deg, transparent 0%, #7c6cf0 20%, #9d90f5 50%, #7c6cf0 80%, transparent 100%)",
+                  "linear-gradient(90deg, transparent 0%, #FF6B4A 20%, #F59E0B 50%, #FF6B4A 80%, transparent 100%)",
               }}
             />
 
@@ -366,7 +366,7 @@ export default function ProPage() {
               className="pointer-events-none absolute inset-0 -z-10"
               style={{
                 background:
-                  "radial-gradient(circle at center, rgba(0, 230, 118, 0.06) 0%, transparent 70%)",
+                  "radial-gradient(circle at center, rgba(45, 212, 191, 0.06) 0%, transparent 70%)",
               }}
             />
             <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-accent/10">

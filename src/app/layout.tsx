@@ -154,7 +154,7 @@ export default function RootLayout({
         </header>
 
         {/* ─── Promo Banner ─── */}
-        <div className="fixed top-[73px] left-0 right-0 z-40 bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600">
+        <div className="fixed top-[73px] left-0 right-0 z-40" style={{ background: "linear-gradient(to right, #FF6B4A, #E5543A, #F59E0B)" }}>
           <div className="mx-auto flex max-w-7xl items-center justify-center gap-x-3 px-4 py-2 text-sm text-white/90">
             <span className="font-semibold text-white">NEW:</span>
             <span className="hidden sm:inline">Get our</span>

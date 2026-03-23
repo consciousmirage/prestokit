@@ -480,12 +480,14 @@ export default function Home() {
           />
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/3 rounded-full bg-primary/5 blur-[120px] animate-hero-glow"
+            className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/3 rounded-full blur-[120px] animate-hero-glow"
+            style={{ background: "radial-gradient(circle, rgba(255, 107, 74, 0.10) 0%, rgba(245, 158, 11, 0.05) 50%, transparent 100%)" }}
           />
           {/* Secondary glow orb */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute right-1/4 top-1/3 -z-10 h-[300px] w-[300px] rounded-full bg-accent/5 blur-[100px] animate-hero-glow-alt"
+            className="pointer-events-none absolute right-1/4 top-1/3 -z-10 h-[300px] w-[300px] rounded-full blur-[100px] animate-hero-glow-alt"
+            style={{ background: "radial-gradient(circle, rgba(45, 212, 191, 0.06) 0%, transparent 70%)" }}
           />
 
           <div className="mx-auto max-w-5xl px-6 pb-8 pt-10 text-center sm:pt-12 lg:pt-14">
