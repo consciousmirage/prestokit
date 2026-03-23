@@ -166,7 +166,7 @@ export default function RootLayout({
             >
               50 Email Templates Bundle
             </a>
-            <span className="hidden sm:inline">— professional copy-paste templates for $7</span>
+            <span className="hidden sm:inline">— professional copy-paste templates for $12</span>
             <a
               href="https://miragecraft7.gumroad.com/l/nopzpi"
               target="_blank"

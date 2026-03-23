@@ -5,9 +5,9 @@ import Link from "next/link";
 const products = [
   {
     name: "100 ChatGPT Prompts for Small Business",
-    originalPrice: "$7",
-    price: "$0+",
-    buttonText: "Get It Now",
+    originalPrice: "$14",
+    price: "$7",
+    buttonText: "Get for $7",
     gumroadUrl: "https://miragecraft7.gumroad.com/l/ztftb",
     description:
       "Ready-to-use prompts for emails, marketing copy, social media, customer service, and more. Save hours every week with AI-powered shortcuts.",
@@ -32,9 +32,9 @@ const products = [
   },
   {
     name: "Business Launch Checklist (155 Steps)",
-    originalPrice: "$5",
-    price: "$0+",
-    buttonText: "Get It Now",
+    originalPrice: "$10",
+    price: "$5",
+    buttonText: "Get for $5",
     gumroadUrl: "https://miragecraft7.gumroad.com/l/sfznf",
     description:
       "Step-by-step checklist covering LLC formation, branding, domain setup, social media, and everything you need to launch your business the right way.",
@@ -59,9 +59,9 @@ const products = [
   },
   {
     name: "50 Email Templates for Business",
-    originalPrice: "$12",
-    price: "$7",
-    buttonText: "Get for $7",
+    originalPrice: "$24",
+    price: "$12",
+    buttonText: "Get for $12",
     gumroadUrl: "https://miragecraft7.gumroad.com/l/nopzpi",
     description:
       "Professional email templates for invoicing, follow-ups, payment reminders, client communication, cold outreach, and more. Copy, paste, and send.",
@@ -86,9 +86,9 @@ const products = [
   },
   {
     name: "Freelancer Pricing Calculator & Guide",
-    originalPrice: "$9",
-    price: "$0+",
-    buttonText: "Get It Now",
+    originalPrice: "$18",
+    price: "$9",
+    buttonText: "Get for $9",
     gumroadUrl: "https://miragecraft7.gumroad.com/l/chegc",
     description:
       "Spreadsheet tool that calculates your ideal hourly rate, project pricing, and profit margins based on your expenses and income goals.",
@@ -113,9 +113,9 @@ const products = [
   },
   {
     name: "Social Media Content Planner",
-    originalPrice: "$7",
-    price: "$0+",
-    buttonText: "Get It Now",
+    originalPrice: "$14",
+    price: "$7",
+    buttonText: "Get for $7",
     gumroadUrl: "https://miragecraft7.gumroad.com/l/oaroqo",
     description:
       "Plan, organize, and schedule your social media content across all platforms. Includes content calendar, post templates, and hashtag strategy guide.",
