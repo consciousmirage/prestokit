@@ -55,6 +55,11 @@ const toolPages = [
   "/tools/discount-calculator",
   "/tools/loan-calculator",
   "/tools/character-counter",
+  "/tools/hashtag-generator",
+  "/tools/resume-builder",
+  "/tools/fuel-cost-calculator",
+  "/tools/screen-resolution-checker",
+  "/tools/regex-tester",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

@@ -317,6 +317,46 @@ const tools: Tool[] = [
     href: "/tools/character-counter",
     color: "#7986cb",
   },
+  {
+    name: "Hashtag Generator",
+    icon: "#\uFE0F\u20E3",
+    description:
+      "Generate trending hashtags for Instagram, TikTok, and Twitter by topic.",
+    href: "/tools/hashtag-generator",
+    color: "#e040fb",
+  },
+  {
+    name: "Resume Builder",
+    icon: "\uD83D\uDCC4",
+    description:
+      "Build a professional resume with live preview. Print or save as PDF instantly.",
+    href: "/tools/resume-builder",
+    color: "#42a5f5",
+  },
+  {
+    name: "Fuel Cost Calculator",
+    icon: "\u26FD",
+    description:
+      "Calculate gas cost for any trip by distance, MPG, and fuel price.",
+    href: "/tools/fuel-cost-calculator",
+    color: "#66bb6a",
+  },
+  {
+    name: "Screen Resolution Checker",
+    icon: "\uD83D\uDDA5\uFE0F",
+    description:
+      "Check your screen resolution, DPI, aspect ratio, and device pixel ratio.",
+    href: "/tools/screen-resolution-checker",
+    color: "#29b6f6",
+  },
+  {
+    name: "Regex Tester",
+    icon: "\uD83D\uDD0D",
+    description:
+      "Test regular expressions with live matching, highlighting, and capture groups.",
+    href: "/tools/regex-tester",
+    color: "#ff7043",
+  },
 ];
 
 const valueProps = [
@@ -456,7 +496,7 @@ export default function Home() {
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
               </span>
               <span className="text-muted-light">
-                <span className="font-semibold text-white">38</span> free tools
+                <span className="font-semibold text-white">43</span> free tools
                 &mdash; zero signup
               </span>
             </div>
@@ -511,7 +551,7 @@ export default function Home() {
                 <span>{tools.length} Tools</span>
               </div>
               <h2 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                38 Free Tools, Zero Signup
+                43 Free Tools, Zero Signup
               </h2>
               <p className="mx-auto mt-3 max-w-2xl text-muted-light">
                 Professional-grade business tools, completely free. Pick one and
