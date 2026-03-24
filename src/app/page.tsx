@@ -661,6 +661,48 @@ const tools: Tool[] = [
     href: "/tools/regex-tester",
     color: "#ff7043",
   },
+  {
+    name: "Sales Tax Calculator",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <path d="M4 7V4h16v3" />
+        <path d="M9 20h6" />
+        <path d="M12 4v16" />
+        <path d="M5 11h3l2 2 4-4 2 2h3" />
+      </svg>
+    ),
+    description:
+      "Calculate sales tax by state. 50 US state presets with quick comparison table.",
+    href: "/tools/sales-tax-calculator",
+    color: "#ef5350",
+  },
+  {
+    name: "Self-Employment Tax Calculator",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M17 11l2 2 4-4" />
+      </svg>
+    ),
+    description:
+      "Calculate self-employment tax for freelancers and 1099 workers with quarterly estimates.",
+    href: "/tools/self-employment-tax-calculator",
+    color: "#ff9800",
+  },
+  {
+    name: "Hourly to Salary Converter",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <circle cx="12" cy="12" r="10" />
+        <polyline points="12 6 12 12 16 14" />
+      </svg>
+    ),
+    description:
+      "Convert hourly rate to annual salary, monthly, biweekly, and weekly pay instantly.",
+    href: "/tools/hourly-to-salary",
+    color: "#66bb6a",
+  },
 ];
 
 const valueProps = [
@@ -802,7 +844,7 @@ export default function Home() {
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
               </span>
               <span className="text-muted-light">
-                <span className="font-semibold text-white">43</span> free tools
+                <span className="font-semibold text-white">46</span> free tools
                 &mdash; zero signup
               </span>
             </div>
@@ -857,7 +899,7 @@ export default function Home() {
                 <span>{tools.length} Tools</span>
               </div>
               <h2 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                43 Free Tools, Zero Signup
+                46 Free Tools, Zero Signup
               </h2>
               <p className="mx-auto mt-3 max-w-2xl text-muted-light">
                 Professional-grade business tools, completely free. Pick one and
