@@ -9,42 +9,63 @@ export const metadata: Metadata = {
 
 /* ──────────────────── Data ──────────────────── */
 
-const downloads = [
-  {
-    name: "Premium Invoice Template Pack",
-    description: "10 professionally designed invoice templates for any business",
-    icon: "\uD83E\uDDFE",
-    href: "#download-invoice-pack",
-  },
+const downloads: { name: string; description: string; icon: React.ReactNode; href: string }[] = [
   {
     name: "100 ChatGPT Business Prompts",
     description: "AI prompts for marketing, sales, operations, and more",
-    icon: "\uD83E\uDD16",
-    href: "#download-chatgpt-prompts",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+        <path d="M8 9h8" /><path d="M8 13h4" />
+      </svg>
+    ),
+    href: "https://miragecraft7.gumroad.com/l/ztftb",
   },
   {
     name: "50 Email Templates",
     description: "Cold outreach, follow-ups, client communication, and more",
-    icon: "\u2709\uFE0F",
-    href: "#download-email-templates",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <rect x="2" y="4" width="20" height="16" rx="2" />
+        <polyline points="22 7 12 13 2 7" />
+      </svg>
+    ),
+    href: "https://miragecraft7.gumroad.com/l/nopzpi",
   },
   {
     name: "Business Launch Checklist",
-    description: "Step-by-step guide to launching your business the right way",
-    icon: "\uD83D\uDE80",
-    href: "#download-launch-checklist",
+    description: "155-step guide to launching your business the right way",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <path d="M9 11l3 3L22 4" />
+        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+      </svg>
+    ),
+    href: "https://miragecraft7.gumroad.com/l/sfznf",
   },
   {
     name: "Social Media Planner",
     description: "30-day content calendar with post ideas and scheduling",
-    icon: "\uD83D\uDCC5",
-    href: "#download-social-planner",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <rect x="3" y="4" width="18" height="18" rx="2" />
+        <line x1="16" y1="2" x2="16" y2="6" />
+        <line x1="8" y1="2" x2="8" y2="6" />
+        <line x1="3" y1="10" x2="21" y2="10" />
+      </svg>
+    ),
+    href: "https://miragecraft7.gumroad.com/l/oaroqo",
   },
   {
     name: "Freelancer Pricing Calculator",
     description: "Spreadsheet to calculate your ideal rates and project pricing",
-    icon: "\uD83D\uDCB0",
-    href: "#download-pricing-calculator",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <rect x="4" y="2" width="16" height="20" rx="2" />
+        <path d="M8 6h8" /><path d="M8 10h8" /><path d="M8 14h4" />
+      </svg>
+    ),
+    href: "https://miragecraft7.gumroad.com/l/chegc",
   },
 ];
 
@@ -142,7 +163,7 @@ export default function ProSuccessPage() {
                 />
 
                 <div className="relative flex items-start gap-4">
-                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-primary/10 text-2xl transition-transform group-hover:scale-110">
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary-light transition-transform group-hover:scale-110">
                     {item.icon}
                   </div>
                   <div className="flex-1">

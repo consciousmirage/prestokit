@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "PrestoKit Pro — Premium Tools & Templates for $9/mo",
+  title: "PrestoKit Pro — 53% Off Launch Special | $9/mo (was $19)",
   description:
-    "Upgrade to PrestoKit Pro for premium downloadable templates, exclusive tools, AI-powered features, and an ad-free experience. Cancel anytime.",
+    "Get PrestoKit Pro: 100 ChatGPT prompts, 50 email templates, business launch checklist, pricing calculator, social media planner — all included. $9/mo launch pricing. Cancel anytime.",
   openGraph: {
-    title: "PrestoKit Pro — Premium Tools & Templates for $9/mo",
+    title: "PrestoKit Pro — 53% Off Launch Special | $9/mo",
     description:
-      "Upgrade to PrestoKit Pro for premium downloadable templates, exclusive tools, AI-powered features, and an ad-free experience. Cancel anytime.",
+      "Get PrestoKit Pro: 100 ChatGPT prompts, 50 email templates, business launch checklist, and more. Over $50 in value for $9/mo. Cancel anytime.",
     url: "https://prestokit.com/pro",
     siteName: "PrestoKit",
     locale: "en_US",
