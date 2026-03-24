@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import Link from "next/link";
-import FloatingProCTA from "@/components/FloatingProCTA";
 import "./globals.css";
 
 const inter = Inter({
@@ -176,8 +175,6 @@ export default function RootLayout({
         {/* ─── Main ─── */}
         <main className="pt-[113px]">{children}</main>
 
-        {/* ─── Floating Pro CTA ─── */}
-        <FloatingProCTA />
 
         {/* ─── Footer ─── */}
         <footer className="border-t border-brand-border bg-brand-darker">
