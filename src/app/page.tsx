@@ -762,6 +762,100 @@ const tools: Tool[] = [
     href: "/tools/break-even-calculator",
     color: "#81c784",
   },
+  {
+    name: "Meta Tag Generator",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <polyline points="16 18 22 12 16 6" />
+        <polyline points="8 6 2 12 8 18" />
+        <path d="M12 2v4" /><path d="M12 18v4" />
+      </svg>
+    ),
+    description:
+      "Generate HTML meta tags, Open Graph, and Twitter Card tags. Preview your Google search result.",
+    href: "/tools/meta-tag-generator",
+    color: "#42a5f5",
+  },
+  {
+    name: "Color Contrast Checker",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 2v20" />
+        <path d="M12 2a10 10 0 0 1 0 20" fill="currentColor" opacity="0.3" />
+      </svg>
+    ),
+    description:
+      "Check WCAG color contrast ratios. Pass/fail for AA and AAA accessibility standards.",
+    href: "/tools/color-contrast-checker",
+    color: "#7e57c2",
+  },
+  {
+    name: "Electricity Cost Calculator",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+      </svg>
+    ),
+    description:
+      "Calculate electricity costs by wattage and usage. Compare appliance costs daily, monthly, yearly.",
+    href: "/tools/electricity-cost-calculator",
+    color: "#ffc107",
+  },
+  {
+    name: "URL Encoder / Decoder",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+      </svg>
+    ),
+    description:
+      "Encode and decode URLs with percent-encoding. Real-time conversion with copy button.",
+    href: "/tools/url-encoder",
+    color: "#26a69a",
+  },
+  {
+    name: "HTML Entity Encoder",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <polyline points="16 18 22 12 16 6" />
+        <polyline points="8 6 2 12 8 18" />
+      </svg>
+    ),
+    description:
+      "Encode and decode HTML entities. Handle &amp; &lt; &gt; and all special characters.",
+    href: "/tools/html-entity-encoder",
+    color: "#ef6c00",
+  },
+  {
+    name: "Unix Timestamp Converter",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <circle cx="12" cy="12" r="10" />
+        <polyline points="12 6 12 12 16 14" />
+        <path d="M2 12h2" /><path d="M20 12h2" />
+      </svg>
+    ),
+    description:
+      "Convert Unix timestamps to dates and back. Live current timestamp with auto-update.",
+    href: "/tools/timestamp-converter",
+    color: "#78909c",
+  },
+  {
+    name: "CSS Gradient Generator",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <rect x="3" y="3" width="18" height="18" rx="2" />
+        <path d="M3 3l18 18" />
+        <path d="M21 3L3 21" />
+      </svg>
+    ),
+    description:
+      "Create beautiful CSS gradients with color pickers, direction control, and preset gallery.",
+    href: "/tools/gradient-generator",
+    color: "#ec407a",
+  },
 ];
 
 const valueProps = [
@@ -903,7 +997,7 @@ export default function Home() {
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
               </span>
               <span className="text-muted-light">
-                <span className="font-semibold text-white">50</span> free tools
+                <span className="font-semibold text-white">57</span> free tools
                 &mdash; zero signup
               </span>
             </div>
@@ -958,7 +1052,7 @@ export default function Home() {
                 <span>{tools.length} Tools</span>
               </div>
               <h2 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                50 Free Tools, Zero Signup
+                57 Free Tools, Zero Signup
               </h2>
               <p className="mx-auto mt-3 max-w-2xl text-muted-light">
                 Professional-grade business tools, completely free. Pick one and
