@@ -706,6 +706,62 @@ const tools: Tool[] = [
     href: "/tools/hourly-to-salary",
     color: "#66bb6a",
   },
+  {
+    name: "Currency Converter",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M15 9.354a4 4 0 1 0 0 5.292" />
+        <path d="M9.5 7.5h5" /><path d="M9.5 16.5h5" />
+      </svg>
+    ),
+    description:
+      "Convert between 15 major world currencies with live approximate exchange rates.",
+    href: "/tools/currency-converter",
+    color: "#ffd740",
+  },
+  {
+    name: "Square Footage Calculator",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <rect x="3" y="3" width="18" height="18" rx="1" />
+        <path d="M3 9h18" /><path d="M9 3v18" />
+        <path d="M14 14h3v3" />
+      </svg>
+    ),
+    description:
+      "Calculate area for any shape — rectangle, triangle, circle, trapezoid. Convert to sq meters and acres.",
+    href: "/tools/square-footage-calculator",
+    color: "#a1887f",
+  },
+  {
+    name: "Base64 Encoder / Decoder",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <polyline points="16 18 22 12 16 6" />
+        <polyline points="8 6 2 12 8 18" />
+        <line x1="14" y1="4" x2="10" y2="20" />
+      </svg>
+    ),
+    description:
+      "Encode and decode Base64 strings instantly. Real-time conversion with copy button.",
+    href: "/tools/base64-encoder",
+    color: "#80cbc4",
+  },
+  {
+    name: "Break Even Calculator",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <path d="M3 3v18h18" />
+        <path d="M3 17l7-7 4 4 7-10" />
+        <circle cx="21" cy="4" r="2" />
+      </svg>
+    ),
+    description:
+      "Calculate your break-even point in units and revenue. Visualize profit at different volumes.",
+    href: "/tools/break-even-calculator",
+    color: "#81c784",
+  },
 ];
 
 const valueProps = [
@@ -847,7 +903,7 @@ export default function Home() {
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
               </span>
               <span className="text-muted-light">
-                <span className="font-semibold text-white">46</span> free tools
+                <span className="font-semibold text-white">50</span> free tools
                 &mdash; zero signup
               </span>
             </div>
@@ -902,7 +958,7 @@ export default function Home() {
                 <span>{tools.length} Tools</span>
               </div>
               <h2 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                46 Free Tools, Zero Signup
+                50 Free Tools, Zero Signup
               </h2>
               <p className="mx-auto mt-3 max-w-2xl text-muted-light">
                 Professional-grade business tools, completely free. Pick one and
