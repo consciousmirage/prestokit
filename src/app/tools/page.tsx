@@ -381,6 +381,450 @@ const tools: Tool[] = [
     category: "Calculators",
     tags: ["ROI", "return on investment", "ROAS", "marketing", "investment"],
   },
+  {
+    name: "Tax Calculator",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 21h18" />
+        <path d="M5 21V7l7-4 7 4v14" />
+        <path d="M9 21v-4h6v4" />
+        <line x1="9" y1="10" x2="9" y2="10.01" />
+        <line x1="15" y1="10" x2="15" y2="10.01" />
+        <line x1="9" y1="14" x2="9" y2="14.01" />
+        <line x1="15" y1="14" x2="15" y2="14.01" />
+      </svg>
+    ),
+    description:
+      "Estimate federal income tax by bracket. See effective and marginal tax rates.",
+    href: "/tools/tax-calculator",
+    color: "#ef5350",
+    category: "Calculators",
+    tags: ["tax", "income tax", "federal tax", "tax bracket", "IRS"],
+  },
+  {
+    name: "Compound Interest Calculator",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 3v18h18" />
+        <path d="M7 16l4-6 4 3 5-7" />
+      </svg>
+    ),
+    description:
+      "Calculate compound interest with contributions and visualize growth over time.",
+    href: "/tools/compound-interest-calculator",
+    color: "#ff9100",
+    category: "Calculators",
+    tags: ["compound interest", "investment", "savings", "growth", "finance"],
+  },
+  {
+    name: "Paycheck Calculator",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="1" y="4" width="22" height="16" rx="2" />
+        <line x1="1" y1="10" x2="23" y2="10" />
+        <line x1="5" y1="15" x2="9" y2="15" />
+        <line x1="13" y1="15" x2="15" y2="15" />
+      </svg>
+    ),
+    description:
+      "Estimate take-home pay after federal, state, Social Security, and Medicare taxes.",
+    href: "/tools/paycheck-calculator",
+    color: "#26c6da",
+    category: "Calculators",
+    tags: ["paycheck", "take-home pay", "net pay", "withholding", "taxes"],
+  },
+  {
+    name: "Tip Calculator",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="8" cy="18" r="3" />
+        <circle cx="16" cy="18" r="3" />
+        <line x1="12" y1="2" x2="12" y2="9" />
+        <path d="M9 6h6" />
+        <circle cx="12" cy="12" r="2" />
+      </svg>
+    ),
+    description:
+      "Calculate tips and split bills between any number of people.",
+    href: "/tools/tip-calculator",
+    color: "#4db6ac",
+    category: "Calculators",
+    tags: ["tip", "gratuity", "bill split", "restaurant", "dining"],
+  },
+  {
+    name: "Date Calculator",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="4" width="18" height="18" rx="2" />
+        <line x1="16" y1="2" x2="16" y2="6" />
+        <line x1="8" y1="2" x2="8" y2="6" />
+        <line x1="3" y1="10" x2="21" y2="10" />
+        <rect x="7" y="14" width="3" height="3" rx="0.5" />
+      </svg>
+    ),
+    description:
+      "Calculate days between dates, add/subtract days, and countdown timers.",
+    href: "/tools/date-calculator",
+    color: "#f06292",
+    category: "Calculators",
+    tags: ["date", "days between", "countdown", "calendar", "duration"],
+  },
+  {
+    name: "Mortgage Calculator",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+        <polyline points="9 22 9 12 15 12 15 22" />
+      </svg>
+    ),
+    description:
+      "Calculate monthly mortgage payments with amortization schedule.",
+    href: "/tools/mortgage-calculator",
+    color: "#aed581",
+    category: "Calculators",
+    tags: ["mortgage", "home loan", "amortization", "monthly payment", "housing"],
+  },
+  {
+    name: "BMI Calculator",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M16 2v4M8 2v4" />
+        <rect x="3" y="6" width="18" height="4" rx="1" />
+        <path d="M12 14v4" />
+        <path d="M8 22h8" />
+        <path d="M12 18h0" />
+      </svg>
+    ),
+    description:
+      "Calculate your Body Mass Index with Imperial or Metric units.",
+    href: "/tools/bmi-calculator",
+    color: "#4fc3f7",
+    category: "Calculators",
+    tags: ["BMI", "body mass index", "health", "weight", "fitness"],
+  },
+  {
+    name: "Salary Calculator",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="6" width="20" height="14" rx="2" />
+        <path d="M22 10H2" />
+        <path d="M17 14h2" />
+        <path d="M12 4v2" />
+        <circle cx="12" cy="16" r="0" />
+      </svg>
+    ),
+    description:
+      "Convert between salary, hourly, daily, and monthly rates with tax estimates.",
+    href: "/tools/salary-calculator",
+    color: "#fff176",
+    category: "Calculators",
+    tags: ["salary", "hourly rate", "annual pay", "wage", "compensation"],
+  },
+  {
+    name: "Loan Calculator",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 21h18" />
+        <path d="M3 7V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2" />
+        <line x1="3" y1="7" x2="21" y2="7" />
+        <path d="M6 7v14" />
+        <path d="M18 7v14" />
+        <path d="M10 11v2" />
+        <path d="M14 11v2" />
+      </svg>
+    ),
+    description:
+      "Calculate monthly loan payments, total interest, and view amortization schedule.",
+    href: "/tools/loan-calculator",
+    color: "#4db6ac",
+    category: "Calculators",
+    tags: ["loan", "interest", "amortization", "monthly payment", "debt"],
+  },
+  {
+    name: "Discount Calculator",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
+        <line x1="7" y1="7" x2="7.01" y2="7" />
+      </svg>
+    ),
+    description:
+      "Calculate sale prices, savings, and percent off. Stack discounts and add tax.",
+    href: "/tools/discount-calculator",
+    color: "#e57373",
+    category: "Calculators",
+    tags: ["discount", "sale", "percent off", "savings", "coupon"],
+  },
+  {
+    name: "Age Calculator",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M8 2v2" />
+        <path d="M12 2v2" />
+        <path d="M16 2v2" />
+        <rect x="4" y="6" width="16" height="16" rx="3" />
+        <path d="M8 14h.01" />
+        <path d="M12 14h.01" />
+        <path d="M16 14h.01" />
+        <path d="M8 10h8" />
+      </svg>
+    ),
+    description:
+      "Calculate your exact age in years, months, days, hours. Birthday countdown included.",
+    href: "/tools/age-calculator",
+    color: "#f48fb1",
+    category: "Calculators",
+    tags: ["age", "birthday", "countdown", "years old", "date of birth"],
+  },
+  {
+    name: "GPA Calculator",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+        <path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5" />
+      </svg>
+    ),
+    description:
+      "Calculate weighted and unweighted GPA with multiple grading scales.",
+    href: "/tools/gpa-calculator",
+    color: "#9575cd",
+    category: "Calculators",
+    tags: ["GPA", "grade point average", "college", "school", "grades"],
+  },
+  {
+    name: "Fuel Cost Calculator",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 22V6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16" />
+        <path d="M15 10h2a2 2 0 0 1 2 2v3a2 2 0 0 0 2 2v0" />
+        <path d="M21 7l-2 2" />
+        <rect x="5" y="8" width="8" height="5" rx="1" />
+        <line x1="3" y1="22" x2="15" y2="22" />
+      </svg>
+    ),
+    description:
+      "Calculate gas cost for any trip by distance, MPG, and fuel price.",
+    href: "/tools/fuel-cost-calculator",
+    color: "#66bb6a",
+    category: "Calculators",
+    tags: ["fuel", "gas", "trip cost", "MPG", "mileage"],
+  },
+  {
+    name: "Sales Tax Calculator",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 7V4h16v3" />
+        <path d="M9 20h6" />
+        <path d="M12 4v16" />
+        <path d="M5 11h3l2 2 4-4 2 2h3" />
+      </svg>
+    ),
+    description:
+      "Calculate sales tax by state. 50 US state presets with quick comparison table.",
+    href: "/tools/sales-tax-calculator",
+    color: "#ef5350",
+    category: "Calculators",
+    tags: ["sales tax", "state tax", "tax rate", "purchase tax", "US tax"],
+  },
+  {
+    name: "Self-Employment Tax Calculator",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M17 11l2 2 4-4" />
+      </svg>
+    ),
+    description:
+      "Calculate self-employment tax for freelancers and 1099 workers with quarterly estimates.",
+    href: "/tools/self-employment-tax-calculator",
+    color: "#ff9800",
+    category: "Calculators",
+    tags: ["self-employment", "freelance tax", "1099", "quarterly tax", "SE tax"],
+  },
+  {
+    name: "Random Number Generator",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="3" />
+        <circle cx="7.5" cy="7.5" r="1" />
+        <circle cx="16.5" cy="7.5" r="1" />
+        <circle cx="7.5" cy="16.5" r="1" />
+        <circle cx="16.5" cy="16.5" r="1" />
+        <circle cx="12" cy="12" r="1" />
+      </svg>
+    ),
+    description:
+      "Generate random numbers, roll dice, flip coins, and pick from lists.",
+    href: "/tools/random-number-generator",
+    color: "#ce93d8",
+    category: "Generators",
+    tags: ["random", "dice", "coin flip", "number", "lottery"],
+  },
+  {
+    name: "Business Card Generator",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="5" width="20" height="14" rx="2" />
+        <circle cx="8" cy="11" r="2" />
+        <path d="M14 10h4" />
+        <path d="M14 14h4" />
+        <path d="M5 16c0-1.1.9-2 2-2h2a2 2 0 0 1 2 2" />
+      </svg>
+    ),
+    description:
+      "Design professional business cards and download as high-resolution PNG.",
+    href: "/tools/business-card-generator",
+    color: "#ab47bc",
+    category: "Generators",
+    tags: ["business card", "card design", "networking", "print", "contact card"],
+  },
+  {
+    name: "Privacy Policy Generator",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        <path d="M9 12l2 2 4-4" />
+      </svg>
+    ),
+    description:
+      "Generate a privacy policy for your website covering GDPR, CCPA, and cookies.",
+    href: "/tools/privacy-policy-generator",
+    color: "#5c6bc0",
+    category: "Generators",
+    tags: ["privacy policy", "GDPR", "CCPA", "legal", "website policy"],
+  },
+  {
+    name: "Hashtag Generator",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M10 3L6 21" />
+        <path d="M18 3l-4 18" />
+        <path d="M4 9h18" />
+        <path d="M2 15h18" />
+        <circle cx="20" cy="5" r="2" fill="currentColor" />
+      </svg>
+    ),
+    description:
+      "Generate trending hashtags for Instagram, TikTok, and Twitter by topic.",
+    href: "/tools/hashtag-generator",
+    color: "#e040fb",
+    category: "Generators",
+    tags: ["hashtag", "Instagram", "TikTok", "Twitter", "social media"],
+  },
+  {
+    name: "Resume Builder",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+        <polyline points="14 2 14 8 20 8" />
+        <circle cx="12" cy="13" r="2" />
+        <path d="M8 18c0-1.66 1.79-3 4-3s4 1.34 4 3" />
+      </svg>
+    ),
+    description:
+      "Build a professional resume with live preview. Print or save as PDF instantly.",
+    href: "/tools/resume-builder",
+    color: "#42a5f5",
+    category: "Generators",
+    tags: ["resume", "CV", "job application", "career", "PDF resume"],
+  },
+  {
+    name: "Hourly to Salary Converter",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <polyline points="12 6 12 12 16 14" />
+      </svg>
+    ),
+    description:
+      "Convert hourly rate to annual salary, monthly, biweekly, and weekly pay instantly.",
+    href: "/tools/hourly-to-salary",
+    color: "#66bb6a",
+    category: "Generators",
+    tags: ["hourly to salary", "wage converter", "pay rate", "annual salary", "income"],
+  },
+  {
+    name: "Regex Tester",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="11" cy="11" r="8" />
+        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+      </svg>
+    ),
+    description:
+      "Test regular expressions with live matching, highlighting, and capture groups.",
+    href: "/tools/regex-tester",
+    color: "#ff7043",
+    category: "Developer Tools",
+    tags: ["regex", "regular expression", "pattern matching", "developer", "testing"],
+  },
+  {
+    name: "Screen Resolution Checker",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="3" width="20" height="14" rx="2" />
+        <line x1="8" y1="21" x2="16" y2="21" />
+        <line x1="12" y1="17" x2="12" y2="21" />
+      </svg>
+    ),
+    description:
+      "Check your screen resolution, DPI, aspect ratio, and device pixel ratio.",
+    href: "/tools/screen-resolution-checker",
+    color: "#29b6f6",
+    category: "Developer Tools",
+    tags: ["screen resolution", "DPI", "aspect ratio", "pixel ratio", "display"],
+  },
+  {
+    name: "Character Counter",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <line x1="4" y1="9" x2="20" y2="9" />
+        <line x1="4" y1="15" x2="20" y2="15" />
+        <line x1="10" y1="3" x2="8" y2="21" />
+        <line x1="16" y1="3" x2="14" y2="21" />
+      </svg>
+    ),
+    description:
+      "Count characters with limits for Twitter, Instagram, YouTube, LinkedIn, and more.",
+    href: "/tools/character-counter",
+    color: "#7986cb",
+    category: "Text Tools",
+    tags: ["character count", "Twitter limit", "social media", "text length", "writing"],
+  },
+  {
+    name: "Image Compressor",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="2" />
+        <circle cx="8.5" cy="8.5" r="1.5" />
+        <polyline points="21 15 16 10 5 21" />
+      </svg>
+    ),
+    description:
+      "Compress images in your browser. No upload needed, 100% private.",
+    href: "/tools/image-compressor",
+    color: "#ff7043",
+    category: "Generators",
+    tags: ["image compress", "optimize", "reduce size", "JPEG", "PNG"],
+  },
+  {
+    name: "Unit Converter",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="17 1 21 5 17 9" />
+        <path d="M3 5h18" />
+        <polyline points="7 15 3 19 7 23" />
+        <path d="M21 19H3" />
+      </svg>
+    ),
+    description:
+      "Convert between units of length, weight, temperature, volume, and more.",
+    href: "/tools/unit-converter",
+    color: "#7986cb",
+    category: "Calculators",
+    tags: ["unit converter", "length", "weight", "temperature", "volume"],
+  },
 ];
 
 /* ──────────────────── JSON-LD ──────────────────── */

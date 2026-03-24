@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Free Online Business Tools — No Signup Required | PrestoKit",
   description:
-    "Browse all 20+ free online business tools — invoice generator, contract templates, ROI calculator, time zone converter, QR codes, and more. No signup, no credit card, instant results. Professional-grade tools for freelancers and small businesses.",
+    "Browse all 46+ free online business tools — invoice generator, contract templates, ROI calculator, time zone converter, QR codes, and more. No signup, no credit card, instant results. Professional-grade tools for freelancers and small businesses.",
   keywords: [
     "free online tools",
     "free business tools",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Free Online Business Tools — No Signup Required | PrestoKit",
     description:
-      "Browse all 20+ free online business tools. Invoice generator, contracts, calculators, and more. No signup required.",
+      "Browse all 46+ free online business tools. Invoice generator, contracts, calculators, and more. No signup required.",
     type: "website",
     url: "https://prestokit.com/tools",
   },
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Free Online Business Tools — No Signup Required | PrestoKit",
     description:
-      "Browse all 16 free online business tools. Invoice generator, QR codes, calculators, and more. No signup required.",
+      "Browse all 46+ free online business tools. Invoice generator, QR codes, calculators, and more. No signup required.",
   },
 };
 
