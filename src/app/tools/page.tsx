@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import Script from "next/script";
 
@@ -17,7 +17,7 @@ type Category =
 interface Tool {
   name: string;
   description: string;
-  icon: string;
+  icon: React.ReactNode;
   href: string;
   color: string;
   category: Category;
@@ -45,7 +45,15 @@ const categoryColors: Record<Category, string> = {
 const tools: Tool[] = [
   {
     name: "Invoice Generator",
-    icon: "\uD83E\uDDFE",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" />
+        <path d="M14 2v6h6" />
+        <path d="M8 13h8" />
+        <path d="M8 17h8" />
+        <path d="M8 9h2" />
+      </svg>
+    ),
     description:
       "Create professional invoices in seconds. Add line items, tax, discounts, and download as PDF instantly.",
     href: "/tools/invoice-generator",
@@ -55,7 +63,14 @@ const tools: Tool[] = [
   },
   {
     name: "Receipt Maker",
-    icon: "\uD83C\uDFF7\uFE0F",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M2 2v20l3-2 3 2 3-2 3 2 3-2 3 2V2l-3 2-3-2-3 2-3-2-3 2-3-2Z" />
+        <path d="M7 8h10" />
+        <path d="M7 12h10" />
+        <path d="M7 16h6" />
+      </svg>
+    ),
     description:
       "Generate professional receipts for transactions and record-keeping. Download as PDF.",
     href: "/tools/receipt-maker",
@@ -65,7 +80,14 @@ const tools: Tool[] = [
   },
   {
     name: "Estimate Builder",
-    icon: "\uD83D\uDCCB",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="2" />
+        <path d="M8 7h8" />
+        <path d="M8 11h8" />
+        <path d="M8 15h5" />
+      </svg>
+    ),
     description:
       "Build detailed project estimates and quotes for your clients. Professional formatting included.",
     href: "/tools/estimate-builder",
@@ -75,7 +97,15 @@ const tools: Tool[] = [
   },
   {
     name: "Pay Stub Creator",
-    icon: "\uD83D\uDCB0",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="6" width="20" height="12" rx="2" />
+        <path d="M12 12h.01" />
+        <path d="M17 12h.01" />
+        <path d="M7 12h.01" />
+        <path d="M2 10h20" />
+      </svg>
+    ),
     description:
       "Create pay stubs for employees and contractors in minutes. All deductions calculated.",
     href: "/tools/pay-stub-creator",
@@ -85,7 +115,17 @@ const tools: Tool[] = [
   },
   {
     name: "QR Code Generator",
-    icon: "\uD83D\uDCF1",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="3" width="7" height="7" rx="1" />
+        <rect x="14" y="3" width="7" height="7" rx="1" />
+        <rect x="3" y="14" width="7" height="7" rx="1" />
+        <rect x="14" y="14" width="3" height="3" />
+        <rect x="18" y="14" width="3" height="3" />
+        <rect x="14" y="18" width="3" height="3" />
+        <rect x="18" y="18" width="3" height="3" />
+      </svg>
+    ),
     description:
       "Generate QR codes for URLs, text, WiFi, contacts, and more. Download as PNG or SVG.",
     href: "/tools/qr-code-generator",
@@ -95,7 +135,13 @@ const tools: Tool[] = [
   },
   {
     name: "Business Name Generator",
-    icon: "\uD83D\uDCA1",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M9 18h6" />
+        <path d="M10 22h4" />
+        <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7Z" />
+      </svg>
+    ),
     description:
       "AI-powered business name ideas with instant domain availability checks.",
     href: "/tools/business-name-generator",
@@ -105,7 +151,13 @@ const tools: Tool[] = [
   },
   {
     name: "Password Generator",
-    icon: "\uD83D\uDD10",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+        <circle cx="12" cy="16" r="1" />
+      </svg>
+    ),
     description:
       "Generate secure random passwords with custom length, complexity, and special characters.",
     href: "/tools/password-generator",
@@ -115,7 +167,12 @@ const tools: Tool[] = [
   },
   {
     name: "Lorem Ipsum Generator",
-    icon: "\uD83D\uDCDC",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M8 21h12a2 2 0 0 0 2-2v-2H10v2a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v3h4" />
+        <path d="M19 17V5a2 2 0 0 0-2-2H4" />
+      </svg>
+    ),
     description:
       "Generate placeholder text for your designs and mockups. Paragraphs, sentences, or words.",
     href: "/tools/lorem-ipsum-generator",
@@ -125,7 +182,16 @@ const tools: Tool[] = [
   },
   {
     name: "Color Palette Generator",
-    icon: "\uD83C\uDFA8",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="13.5" cy="6.5" r="2.5" />
+        <circle cx="6.5" cy="12" r="2.5" />
+        <circle cx="8" cy="21" r="2" />
+        <circle cx="19" cy="12" r="2.5" />
+        <circle cx="15" cy="19" r="2.5" />
+        <path d="M12 2a10 10 0 0 1 0 20 2 2 0 0 1 0-4 6 6 0 0 0 0-12 2 2 0 0 1 0-4Z" />
+      </svg>
+    ),
     description:
       "Generate beautiful color palettes with harmony modes, contrast checks, and CSS export.",
     href: "/tools/color-palette-generator",
@@ -135,7 +201,12 @@ const tools: Tool[] = [
   },
   {
     name: "Email Signature Creator",
-    icon: "\u2709\uFE0F",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="4" width="20" height="16" rx="2" />
+        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+      </svg>
+    ),
     description:
       "Build beautiful HTML email signatures for Gmail, Outlook, and Apple Mail. One-click copy.",
     href: "/tools/email-signature-creator",
@@ -145,7 +216,12 @@ const tools: Tool[] = [
   },
   {
     name: "Profit Margin Calculator",
-    icon: "\uD83D\uDCCA",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 3v18h18" />
+        <path d="M7 16l4-8 4 4 5-9" />
+      </svg>
+    ),
     description:
       "Calculate profit margins, markups, and break-even points instantly. Visual charts included.",
     href: "/tools/profit-margin-calculator",
@@ -155,7 +231,13 @@ const tools: Tool[] = [
   },
   {
     name: "Percentage Calculator",
-    icon: "\uD83D\uDCAF",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <line x1="19" y1="5" x2="5" y2="19" />
+        <circle cx="6.5" cy="6.5" r="2.5" />
+        <circle cx="17.5" cy="17.5" r="2.5" />
+      </svg>
+    ),
     description:
       "Calculate percentages, percentage change, increase, and decrease. Multiple calculation modes.",
     href: "/tools/percentage-calculator",
@@ -165,7 +247,12 @@ const tools: Tool[] = [
   },
   {
     name: "JSON Formatter",
-    icon: "\uD83D\uDCC4",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M16 18l6-6-6-6" />
+        <path d="M8 6l-6 6 6 6" />
+      </svg>
+    ),
     description:
       "Format, validate, and minify JSON with syntax highlighting. Detect errors instantly.",
     href: "/tools/json-formatter",
@@ -175,7 +262,14 @@ const tools: Tool[] = [
   },
   {
     name: "Markdown to HTML",
-    icon: "\u2B07\uFE0F",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M17 4H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Z" />
+        <path d="M12 8v8" />
+        <path d="M8 12h8" />
+        <path d="m9 16 3-3 3 3" />
+      </svg>
+    ),
     description:
       "Convert Markdown to clean HTML with live preview and instant copy. Supports GFM.",
     href: "/tools/markdown-to-html",
@@ -185,7 +279,14 @@ const tools: Tool[] = [
   },
   {
     name: "Text Case Converter",
-    icon: "\uD83D\uDD24",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 18h5l2-7 2 7h5" />
+        <path d="M5.5 12h5" />
+        <path d="M17 6v12" />
+        <path d="M14 6h6" />
+      </svg>
+    ),
     description:
       "Convert text between UPPER, lower, Title, camelCase, snake_case, kebab-case, and more.",
     href: "/tools/text-case-converter",
@@ -195,7 +296,13 @@ const tools: Tool[] = [
   },
   {
     name: "Word Counter",
-    icon: "\uD83D\uDCDD",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 7V4h16v3" />
+        <path d="M9 20h6" />
+        <path d="M12 4v16" />
+      </svg>
+    ),
     description:
       "Count words, characters, sentences, paragraphs, and get reading time estimates instantly.",
     href: "/tools/word-counter",
@@ -205,7 +312,20 @@ const tools: Tool[] = [
   },
   {
     name: "Invoice Templates",
-    icon: "\uD83D\uDCC3",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M16 2H8a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2Z" />
+        <path d="M4 6h1" />
+        <path d="M4 10h1" />
+        <path d="M4 14h1" />
+        <path d="M19 6h1" />
+        <path d="M19 10h1" />
+        <path d="M19 14h1" />
+        <path d="M9 6h6" />
+        <path d="M9 10h6" />
+        <path d="M9 14h4" />
+      </svg>
+    ),
     description:
       "Browse 10 professionally designed invoice templates. Preview, customize, and download as PDF.",
     href: "/tools/invoice-templates",
@@ -215,7 +335,14 @@ const tools: Tool[] = [
   },
   {
     name: "Contract Generator",
-    icon: "\uD83D\uDCDD",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" />
+        <path d="M14 2v6h6" />
+        <path d="M12 18c1.5-2 3-2 4-1" />
+        <path d="M8 18c1.5-2 3-2 4-1" />
+      </svg>
+    ),
     description:
       "Generate business contracts from professional templates. Freelance, NDA, contractor, and service agreements.",
     href: "/tools/contract-generator",
@@ -225,7 +352,13 @@ const tools: Tool[] = [
   },
   {
     name: "Time Zone Converter",
-    icon: "\uD83C\uDF0D",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M2 12h20" />
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z" />
+      </svg>
+    ),
     description:
       "Convert times between time zones instantly. Compare up to 4 zones at once with DST support.",
     href: "/tools/timezone-converter",
@@ -235,7 +368,12 @@ const tools: Tool[] = [
   },
   {
     name: "ROI Calculator",
-    icon: "\uD83D\uDCC8",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+        <polyline points="16 7 22 7 22 13" />
+      </svg>
+    ),
     description:
       "Calculate return on investment. Simple ROI, compound growth, and marketing ROI with ROAS.",
     href: "/tools/roi-calculator",
@@ -648,8 +786,8 @@ function ToolCard({ tool }: { tool: Tool }) {
 
       {/* Icon with colored background */}
       <div
-        className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl text-2xl transition-transform group-hover:scale-110"
-        style={{ backgroundColor: `${tool.color}15` }}
+        className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl transition-transform group-hover:scale-110"
+        style={{ backgroundColor: `${tool.color}15`, color: tool.color }}
       >
         {tool.icon}
       </div>

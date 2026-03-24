@@ -6,7 +6,7 @@ import Script from "next/script";
 interface Tool {
   name: string;
   description: string;
-  icon: string;
+  icon: React.ReactNode;
   href: string;
   color: string;
   comingSoon?: boolean;
@@ -15,7 +15,15 @@ interface Tool {
 const tools: Tool[] = [
   {
     name: "Invoice Generator",
-    icon: "\uD83E\uDDFE",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+        <polyline points="14 2 14 8 20 8" />
+        <line x1="8" y1="13" x2="16" y2="13" />
+        <line x1="8" y1="17" x2="16" y2="17" />
+        <line x1="8" y1="9" x2="10" y2="9" />
+      </svg>
+    ),
     description:
       "Create professional invoices in seconds. Download as PDF instantly.",
     href: "/tools/invoice-generator",
@@ -23,7 +31,19 @@ const tools: Tool[] = [
   },
   {
     name: "QR Code Generator",
-    icon: "\uD83D\uDCF1",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <rect x="2" y="2" width="8" height="8" rx="1" />
+        <rect x="14" y="2" width="8" height="8" rx="1" />
+        <rect x="2" y="14" width="8" height="8" rx="1" />
+        <rect x="14" y="14" width="4" height="4" rx="0.5" />
+        <line x1="22" y1="14" x2="22" y2="18" />
+        <line x1="18" y1="22" x2="22" y2="22" />
+        <rect x="5" y="5" width="2" height="2" />
+        <rect x="17" y="5" width="2" height="2" />
+        <rect x="5" y="17" width="2" height="2" />
+      </svg>
+    ),
     description:
       "Generate QR codes for URLs, text, WiFi, contacts, and more.",
     href: "/tools/qr-code-generator",
@@ -31,7 +51,12 @@ const tools: Tool[] = [
   },
   {
     name: "Email Signature Creator",
-    icon: "\u2709\uFE0F",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <rect x="2" y="4" width="20" height="16" rx="2" />
+        <polyline points="22 7 12 13 2 7" />
+      </svg>
+    ),
     description:
       "Build beautiful HTML email signatures for Gmail, Outlook, and Apple Mail.",
     href: "/tools/email-signature-creator",
@@ -39,7 +64,13 @@ const tools: Tool[] = [
   },
   {
     name: "Business Name Generator",
-    icon: "\uD83D\uDCA1",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <path d="M9 18h6" />
+        <path d="M10 22h4" />
+        <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
+      </svg>
+    ),
     description:
       "AI-powered business name ideas with instant domain availability checks.",
     href: "/tools/business-name-generator",
@@ -47,7 +78,14 @@ const tools: Tool[] = [
   },
   {
     name: "Profit Margin Calculator",
-    icon: "\uD83D\uDCCA",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <line x1="18" y1="20" x2="18" y2="10" />
+        <line x1="12" y1="20" x2="12" y2="4" />
+        <line x1="6" y1="20" x2="6" y2="14" />
+        <polyline points="4 10 12 4 20 8" />
+      </svg>
+    ),
     description:
       "Calculate profit margins, markups, and break-even points instantly.",
     href: "/tools/profit-margin-calculator",
@@ -55,7 +93,14 @@ const tools: Tool[] = [
   },
   {
     name: "Receipt Maker",
-    icon: "\uD83C\uDFF7\uFE0F",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <path d="M4 2v20l3-2 3 2 3-2 3 2 3-2 3 2V2l-3 2-3-2-3 2-3-2-3 2-3-2z" />
+        <line x1="8" y1="8" x2="16" y2="8" />
+        <line x1="8" y1="12" x2="16" y2="12" />
+        <line x1="8" y1="16" x2="12" y2="16" />
+      </svg>
+    ),
     description:
       "Generate professional receipts for transactions and record-keeping.",
     href: "/tools/receipt-maker",
@@ -63,7 +108,14 @@ const tools: Tool[] = [
   },
   {
     name: "Estimate Builder",
-    icon: "\uD83D\uDCCB",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+        <rect x="8" y="2" width="8" height="4" rx="1" />
+        <path d="M9 12l2 2 4-4" />
+        <line x1="9" y1="17" x2="15" y2="17" />
+      </svg>
+    ),
     description:
       "Build detailed project estimates and quotes for your clients.",
     href: "/tools/estimate-builder",
@@ -71,7 +123,14 @@ const tools: Tool[] = [
   },
   {
     name: "Pay Stub Creator",
-    icon: "\uD83D\uDCB0",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <rect x="2" y="6" width="20" height="12" rx="2" />
+        <line x1="2" y1="10" x2="22" y2="10" />
+        <line x1="6" y1="14" x2="10" y2="14" />
+        <line x1="14" y1="14" x2="18" y2="14" />
+      </svg>
+    ),
     description:
       "Create pay stubs for employees and contractors in minutes.",
     href: "/tools/pay-stub-creator",
@@ -79,7 +138,13 @@ const tools: Tool[] = [
   },
   {
     name: "Password Generator",
-    icon: "\uD83D\uDD10",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+        <circle cx="12" cy="16" r="1" />
+      </svg>
+    ),
     description:
       "Generate secure random passwords with custom length and complexity.",
     href: "/tools/password-generator",
@@ -87,7 +152,14 @@ const tools: Tool[] = [
   },
   {
     name: "Word Counter",
-    icon: "\uD83D\uDCDD",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+        <polyline points="14 2 14 8 20 8" />
+        <line x1="8" y1="13" x2="16" y2="13" />
+        <line x1="8" y1="17" x2="13" y2="17" />
+      </svg>
+    ),
     description:
       "Count words, characters, sentences, and get reading time estimates.",
     href: "/tools/word-counter",
@@ -95,7 +167,15 @@ const tools: Tool[] = [
   },
   {
     name: "Lorem Ipsum Generator",
-    icon: "\uD83D\uDCDC",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <path d="M8 21h12a2 2 0 0 0 2-2v-2H10v2a2 2 0 1 1-4 0V5a2 2 0 0 0-2-2H3" />
+        <path d="M19 17V5a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v2h12v2" />
+        <line x1="8" y1="7" x2="14" y2="7" />
+        <line x1="12" y1="11" x2="18" y2="11" />
+        <line x1="12" y1="15" x2="18" y2="15" />
+      </svg>
+    ),
     description:
       "Generate placeholder text for your designs and mockups instantly.",
     href: "/tools/lorem-ipsum-generator",
@@ -103,7 +183,13 @@ const tools: Tool[] = [
   },
   {
     name: "Percentage Calculator",
-    icon: "\uD83D\uDCAF",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <line x1="19" y1="5" x2="5" y2="19" />
+        <circle cx="6.5" cy="6.5" r="2.5" />
+        <circle cx="17.5" cy="17.5" r="2.5" />
+      </svg>
+    ),
     description:
       "Calculate percentages, percentage change, increase, and decrease.",
     href: "/tools/percentage-calculator",
@@ -111,7 +197,13 @@ const tools: Tool[] = [
   },
   {
     name: "Text Case Converter",
-    icon: "\uD83D\uDD24",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <polyline points="4 7 4 4 20 4 20 7" />
+        <line x1="9" y1="20" x2="15" y2="20" />
+        <line x1="12" y1="4" x2="12" y2="20" />
+      </svg>
+    ),
     description:
       "Convert text between UPPER, lower, Title, camelCase, snake_case, and more.",
     href: "/tools/text-case-converter",
@@ -119,7 +211,16 @@ const tools: Tool[] = [
   },
   {
     name: "Color Palette Generator",
-    icon: "\uD83C\uDFA8",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 2a10 10 0 0 1 0 20c-2.76 0-5-4.48-5-10S9.24 2 12 2z" />
+        <circle cx="7.5" cy="10" r="1.5" />
+        <circle cx="12" cy="7.5" r="1.5" />
+        <circle cx="16.5" cy="10" r="1.5" />
+        <circle cx="14.5" cy="15.5" r="1.5" />
+      </svg>
+    ),
     description:
       "Generate beautiful color palettes with harmony modes and CSS export.",
     href: "/tools/color-palette-generator",
@@ -127,7 +228,13 @@ const tools: Tool[] = [
   },
   {
     name: "JSON Formatter",
-    icon: "\uD83D\uDCC4",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <polyline points="16 18 22 12 16 6" />
+        <polyline points="8 6 2 12 8 18" />
+        <line x1="14" y1="4" x2="10" y2="20" />
+      </svg>
+    ),
     description:
       "Format, validate, and minify JSON with syntax highlighting.",
     href: "/tools/json-formatter",
@@ -135,7 +242,15 @@ const tools: Tool[] = [
   },
   {
     name: "Markdown to HTML",
-    icon: "\u2B07\uFE0F",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <path d="M17 3v6" />
+        <path d="M14 6h6" />
+        <path d="M12 12l-4 8" />
+        <path d="M8 12l4 8" />
+        <path d="M7 3l5 6 5-6" />
+      </svg>
+    ),
     description:
       "Convert Markdown to HTML with live preview and instant copy.",
     href: "/tools/markdown-to-html",
@@ -143,7 +258,13 @@ const tools: Tool[] = [
   },
   {
     name: "Image Compressor",
-    icon: "\uD83D\uDDBC\uFE0F",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <rect x="3" y="3" width="18" height="18" rx="2" />
+        <circle cx="8.5" cy="8.5" r="1.5" />
+        <polyline points="21 15 16 10 5 21" />
+      </svg>
+    ),
     description:
       "Compress images in your browser. No upload needed, 100% private.",
     href: "/tools/image-compressor",
@@ -151,7 +272,14 @@ const tools: Tool[] = [
   },
   {
     name: "Unit Converter",
-    icon: "\uD83D\uDD04",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <polyline points="17 1 21 5 17 9" />
+        <path d="M3 5h18" />
+        <polyline points="7 15 3 19 7 23" />
+        <path d="M21 19H3" />
+      </svg>
+    ),
     description:
       "Convert between units of length, weight, temperature, volume, and more.",
     href: "/tools/unit-converter",
@@ -159,7 +287,15 @@ const tools: Tool[] = [
   },
   {
     name: "Tip Calculator",
-    icon: "\uD83D\uDCB5",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <circle cx="8" cy="18" r="3" />
+        <circle cx="16" cy="18" r="3" />
+        <line x1="12" y1="2" x2="12" y2="9" />
+        <path d="M9 6h6" />
+        <circle cx="12" cy="12" r="2" />
+      </svg>
+    ),
     description:
       "Calculate tips and split bills between any number of people.",
     href: "/tools/tip-calculator",
@@ -167,7 +303,15 @@ const tools: Tool[] = [
   },
   {
     name: "Date Calculator",
-    icon: "\uD83D\uDCC5",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <rect x="3" y="4" width="18" height="18" rx="2" />
+        <line x1="16" y1="2" x2="16" y2="6" />
+        <line x1="8" y1="2" x2="8" y2="6" />
+        <line x1="3" y1="10" x2="21" y2="10" />
+        <rect x="7" y="14" width="3" height="3" rx="0.5" />
+      </svg>
+    ),
     description:
       "Calculate days between dates, add/subtract days, and countdown timers.",
     href: "/tools/date-calculator",
@@ -175,7 +319,12 @@ const tools: Tool[] = [
   },
   {
     name: "Mortgage Calculator",
-    icon: "\uD83C\uDFE0",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+        <polyline points="9 22 9 12 15 12 15 22" />
+      </svg>
+    ),
     description:
       "Calculate monthly mortgage payments with amortization schedule.",
     href: "/tools/mortgage-calculator",
@@ -183,7 +332,14 @@ const tools: Tool[] = [
   },
   {
     name: "BMI Calculator",
-    icon: "\u2696\uFE0F",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z" />
+        <path d="M12 7v5l3 3" />
+        <line x1="8" y1="21" x2="16" y2="21" />
+        <line x1="6" y1="3" x2="18" y2="3" />
+      </svg>
+    ),
     description:
       "Calculate your Body Mass Index with Imperial or Metric units.",
     href: "/tools/bmi-calculator",
@@ -191,7 +347,15 @@ const tools: Tool[] = [
   },
   {
     name: "Salary Calculator",
-    icon: "\uD83D\uDCB0",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <rect x="2" y="4" width="20" height="16" rx="2" />
+        <path d="M2 10h20" />
+        <path d="M12 4v16" />
+        <path d="M6 15h2" />
+        <path d="M16 15h2" />
+      </svg>
+    ),
     description:
       "Convert between salary, hourly, daily, and monthly rates with tax estimates.",
     href: "/tools/salary-calculator",
@@ -199,7 +363,16 @@ const tools: Tool[] = [
   },
   {
     name: "Random Number Generator",
-    icon: "\uD83C\uDFB2",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <rect x="2" y="2" width="20" height="20" rx="3" />
+        <circle cx="7.5" cy="7.5" r="1" />
+        <circle cx="16.5" cy="7.5" r="1" />
+        <circle cx="7.5" cy="16.5" r="1" />
+        <circle cx="16.5" cy="16.5" r="1" />
+        <circle cx="12" cy="12" r="1" />
+      </svg>
+    ),
     description:
       "Generate random numbers, roll dice, flip coins, and pick from lists.",
     href: "/tools/random-number-generator",
@@ -207,7 +380,13 @@ const tools: Tool[] = [
   },
   {
     name: "Invoice Templates",
-    icon: "\uD83D\uDCC3",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+        <polyline points="14 2 14 8 20 8" />
+        <path d="M9 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10" />
+      </svg>
+    ),
     description:
       "Browse 10 professional invoice template designs. Pick your style.",
     href: "/tools/invoice-templates",
@@ -215,7 +394,15 @@ const tools: Tool[] = [
   },
   {
     name: "Contract Generator",
-    icon: "\uD83D\uDCDD",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+        <polyline points="14 2 14 8 20 8" />
+        <path d="M12 18v-6" />
+        <path d="M9.5 15.5c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5" />
+        <line x1="8" y1="13" x2="16" y2="13" />
+      </svg>
+    ),
     description:
       "Generate freelance contracts, NDAs, and service agreements instantly.",
     href: "/tools/contract-generator",
@@ -223,7 +410,13 @@ const tools: Tool[] = [
   },
   {
     name: "Time Zone Converter",
-    icon: "\uD83C\uDF0D",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <circle cx="12" cy="12" r="10" />
+        <line x1="2" y1="12" x2="22" y2="12" />
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+      </svg>
+    ),
     description:
       "Convert times between 22 time zones. Compare up to 4 zones at once.",
     href: "/tools/timezone-converter",
@@ -231,7 +424,12 @@ const tools: Tool[] = [
   },
   {
     name: "ROI Calculator",
-    icon: "\uD83D\uDCC8",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+        <polyline points="16 7 22 7 22 13" />
+      </svg>
+    ),
     description:
       "Calculate return on investment, compound growth, and marketing ROI.",
     href: "/tools/roi-calculator",
@@ -239,7 +437,17 @@ const tools: Tool[] = [
   },
   {
     name: "Tax Calculator",
-    icon: "\uD83C\uDFE6",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <path d="M3 21h18" />
+        <path d="M5 21V7l7-4 7 4v14" />
+        <path d="M9 21v-4h6v4" />
+        <line x1="9" y1="10" x2="9" y2="10.01" />
+        <line x1="15" y1="10" x2="15" y2="10.01" />
+        <line x1="9" y1="14" x2="9" y2="14.01" />
+        <line x1="15" y1="14" x2="15" y2="14.01" />
+      </svg>
+    ),
     description:
       "Estimate federal income tax by bracket. See effective and marginal tax rates.",
     href: "/tools/tax-calculator",
@@ -247,7 +455,12 @@ const tools: Tool[] = [
   },
   {
     name: "Compound Interest Calculator",
-    icon: "\uD83D\uDCB9",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <path d="M3 3v18h18" />
+        <path d="M7 16l4-6 4 3 5-7" />
+      </svg>
+    ),
     description:
       "Calculate compound interest with contributions and visualize growth over time.",
     href: "/tools/compound-interest-calculator",
@@ -255,7 +468,14 @@ const tools: Tool[] = [
   },
   {
     name: "Paycheck Calculator",
-    icon: "\uD83D\uDCB8",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <rect x="1" y="4" width="22" height="16" rx="2" />
+        <line x1="1" y1="10" x2="23" y2="10" />
+        <line x1="5" y1="15" x2="9" y2="15" />
+        <line x1="13" y1="15" x2="15" y2="15" />
+      </svg>
+    ),
     description:
       "Estimate take-home pay after federal, state, Social Security, and Medicare taxes.",
     href: "/tools/paycheck-calculator",
@@ -263,7 +483,15 @@ const tools: Tool[] = [
   },
   {
     name: "Business Card Generator",
-    icon: "\uD83D\uDCBC",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <rect x="2" y="5" width="20" height="14" rx="2" />
+        <circle cx="8" cy="11" r="2" />
+        <path d="M14 10h4" />
+        <path d="M14 14h4" />
+        <path d="M5 16c0-1.1.9-2 2-2h2a2 2 0 0 1 2 2" />
+      </svg>
+    ),
     description:
       "Design professional business cards and download as high-resolution PNG.",
     href: "/tools/business-card-generator",
@@ -271,7 +499,12 @@ const tools: Tool[] = [
   },
   {
     name: "Privacy Policy Generator",
-    icon: "\uD83D\uDD12",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        <path d="M9 12l2 2 4-4" />
+      </svg>
+    ),
     description:
       "Generate a privacy policy for your website covering GDPR, CCPA, and cookies.",
     href: "/tools/privacy-policy-generator",
@@ -279,7 +512,18 @@ const tools: Tool[] = [
   },
   {
     name: "Age Calculator",
-    icon: "\uD83C\uDF82",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <path d="M8 2v2" />
+        <path d="M12 2v2" />
+        <path d="M16 2v2" />
+        <rect x="4" y="6" width="16" height="16" rx="3" />
+        <path d="M8 14h.01" />
+        <path d="M12 14h.01" />
+        <path d="M16 14h.01" />
+        <path d="M8 10h8" />
+      </svg>
+    ),
     description:
       "Calculate your exact age in years, months, days, hours. Birthday countdown included.",
     href: "/tools/age-calculator",
@@ -287,7 +531,12 @@ const tools: Tool[] = [
   },
   {
     name: "GPA Calculator",
-    icon: "\uD83C\uDF93",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+        <path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5" />
+      </svg>
+    ),
     description:
       "Calculate weighted and unweighted GPA with multiple grading scales.",
     href: "/tools/gpa-calculator",
@@ -295,7 +544,12 @@ const tools: Tool[] = [
   },
   {
     name: "Discount Calculator",
-    icon: "\uD83D\uDCB2",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
+        <line x1="7" y1="7" x2="7.01" y2="7" />
+      </svg>
+    ),
     description:
       "Calculate sale prices, savings, and percent off. Stack discounts and add tax.",
     href: "/tools/discount-calculator",
@@ -303,7 +557,17 @@ const tools: Tool[] = [
   },
   {
     name: "Loan Calculator",
-    icon: "\uD83C\uDFE6",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <path d="M3 21h18" />
+        <path d="M3 7V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2" />
+        <line x1="3" y1="7" x2="21" y2="7" />
+        <path d="M6 7v14" />
+        <path d="M18 7v14" />
+        <path d="M10 11v2" />
+        <path d="M14 11v2" />
+      </svg>
+    ),
     description:
       "Calculate monthly loan payments, total interest, and view amortization schedule.",
     href: "/tools/loan-calculator",
@@ -311,7 +575,14 @@ const tools: Tool[] = [
   },
   {
     name: "Character Counter",
-    icon: "\uD83D\uDD24",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <line x1="4" y1="9" x2="20" y2="9" />
+        <line x1="4" y1="15" x2="20" y2="15" />
+        <line x1="10" y1="3" x2="8" y2="21" />
+        <line x1="16" y1="3" x2="14" y2="21" />
+      </svg>
+    ),
     description:
       "Count characters with limits for Twitter, Instagram, YouTube, LinkedIn, and more.",
     href: "/tools/character-counter",
@@ -319,7 +590,14 @@ const tools: Tool[] = [
   },
   {
     name: "Hashtag Generator",
-    icon: "#\uFE0F\u20E3",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <line x1="4" y1="9" x2="20" y2="9" />
+        <line x1="4" y1="15" x2="20" y2="15" />
+        <line x1="10" y1="3" x2="8" y2="21" />
+        <line x1="16" y1="3" x2="14" y2="21" />
+      </svg>
+    ),
     description:
       "Generate trending hashtags for Instagram, TikTok, and Twitter by topic.",
     href: "/tools/hashtag-generator",
@@ -327,7 +605,14 @@ const tools: Tool[] = [
   },
   {
     name: "Resume Builder",
-    icon: "\uD83D\uDCC4",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+        <polyline points="14 2 14 8 20 8" />
+        <circle cx="12" cy="13" r="2" />
+        <path d="M8 18c0-1.66 1.79-3 4-3s4 1.34 4 3" />
+      </svg>
+    ),
     description:
       "Build a professional resume with live preview. Print or save as PDF instantly.",
     href: "/tools/resume-builder",
@@ -335,7 +620,15 @@ const tools: Tool[] = [
   },
   {
     name: "Fuel Cost Calculator",
-    icon: "\u26FD",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <path d="M3 22V6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16" />
+        <path d="M15 10h2a2 2 0 0 1 2 2v3a2 2 0 0 0 2 2v0" />
+        <path d="M21 7l-2 2" />
+        <rect x="5" y="8" width="8" height="5" rx="1" />
+        <line x1="3" y1="22" x2="15" y2="22" />
+      </svg>
+    ),
     description:
       "Calculate gas cost for any trip by distance, MPG, and fuel price.",
     href: "/tools/fuel-cost-calculator",
@@ -343,7 +636,13 @@ const tools: Tool[] = [
   },
   {
     name: "Screen Resolution Checker",
-    icon: "\uD83D\uDDA5\uFE0F",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <rect x="2" y="3" width="20" height="14" rx="2" />
+        <line x1="8" y1="21" x2="16" y2="21" />
+        <line x1="12" y1="17" x2="12" y2="21" />
+      </svg>
+    ),
     description:
       "Check your screen resolution, DPI, aspect ratio, and device pixel ratio.",
     href: "/tools/screen-resolution-checker",
@@ -351,7 +650,12 @@ const tools: Tool[] = [
   },
   {
     name: "Regex Tester",
-    icon: "\uD83D\uDD0D",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <circle cx="11" cy="11" r="8" />
+        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+      </svg>
+    ),
     description:
       "Test regular expressions with live matching, highlighting, and capture groups.",
     href: "/tools/regex-tester",
@@ -776,8 +1080,8 @@ function ToolCard({ tool }: { tool: Tool }) {
 
       {/* Icon with colored background */}
       <div
-        className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl text-2xl transition-transform group-hover:scale-110"
-        style={{ backgroundColor: `${tool.color}15` }}
+        className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl transition-transform group-hover:scale-110"
+        style={{ backgroundColor: `${tool.color}15`, color: tool.color }}
       >
         {tool.icon}
       </div>
