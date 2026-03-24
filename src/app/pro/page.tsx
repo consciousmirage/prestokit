@@ -3,13 +3,16 @@ import Link from "next/link";
 /* ──────────────────── Data ──────────────────── */
 
 const proFeatures = [
-  "All 24+ free tools (always free)",
+  "All 43+ free tools (always free)",
   "Premium downloadable templates (invoice packs, email templates, business docs)",
-  "Exclusive Pro-only tools (coming soon)",
-  "AI-powered features (coming soon)",
+  "100 ChatGPT Business Prompts ($7 value — included free)",
+  "50 Professional Email Templates ($12 value — included free)",
+  "Business Launch Checklist (155 steps)",
+  "Freelancer Pricing Calculator & Guide",
+  "Social Media Content Planner",
   "No ads, clean experience",
   "Priority support",
-  "New premium content monthly",
+  "New premium content added monthly",
 ];
 
 const comparisonRows = [
@@ -136,6 +139,15 @@ export default function ProPage() {
           <p className="mx-auto mt-5 max-w-2xl text-balance text-lg leading-relaxed text-muted-light sm:text-xl">
             Supercharge your workflow with premium tools and resources
           </p>
+
+          {/* Launch Special badge */}
+          <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-5 py-2 text-sm font-semibold text-accent">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12 6 12 12 16 14" />
+            </svg>
+            Launch Special — 53% off. Limited time only.
+          </div>
         </div>
       </section>
 
@@ -178,14 +190,20 @@ export default function ProPage() {
 
               {/* Price */}
               <div className="flex items-baseline gap-2">
+                <span className="text-2xl font-bold text-muted line-through sm:text-3xl">
+                  $19
+                </span>
                 <span className="text-6xl font-extrabold tracking-tight text-white sm:text-7xl">
                   $9
                 </span>
                 <span className="text-xl text-muted">/month</span>
               </div>
+              <div className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-accent/15 px-3 py-1 text-xs font-bold text-accent">
+                LAUNCH SPECIAL — SAVE 53%
+              </div>
 
               <p className="mt-3 text-muted-light">
-                Everything you need to level up your business workflow.
+                Over $50 in premium templates included free. Everything you need to level up your business workflow.
               </p>
 
               {/* Divider */}

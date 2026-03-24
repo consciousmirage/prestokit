@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import Link from "next/link";
+import FloatingProCTA from "@/components/FloatingProCTA";
 import "./globals.css";
 
 const inter = Inter({
@@ -156,37 +157,27 @@ export default function RootLayout({
         {/* ─── Promo Banner ─── */}
         <div className="fixed top-[73px] left-0 right-0 z-40" style={{ background: "linear-gradient(to right, #FF6B4A, #E5543A, #F59E0B)" }}>
           <div className="mx-auto flex max-w-7xl items-center justify-center gap-x-3 px-4 py-2 text-sm text-white/90">
-            <span className="font-semibold text-white">NEW:</span>
-            <span className="hidden sm:inline">Get our</span>
-            <a
-              href="https://miragecraft7.gumroad.com/l/nopzpi"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-semibold text-white underline underline-offset-2 decoration-white/40 hover:decoration-white transition-colors"
-            >
-              50 Email Templates Bundle
-            </a>
-            <span className="hidden sm:inline">— professional copy-paste templates for $12</span>
-            <a
-              href="https://miragecraft7.gumroad.com/l/nopzpi"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="ml-1 rounded-md bg-white/20 px-3 py-0.5 text-xs font-bold text-white backdrop-blur-sm hover:bg-white/30 transition-colors"
-            >
-              Get It Now
-            </a>
-            <span className="text-white/60 hidden md:inline">or</span>
+            <span className="font-semibold text-white">LAUNCH SPECIAL:</span>
+            <span className="hidden sm:inline">Get Pro for</span>
+            <span className="hidden sm:inline font-bold text-white line-through decoration-white/60">$19/mo</span>
+            <span className="font-bold text-white">$9/mo</span>
+            <span className="hidden sm:inline">— over $50 in premium templates included</span>
             <Link
               href="/pro"
-              className="hidden md:inline font-medium text-white/80 underline underline-offset-2 decoration-white/30 hover:text-white hover:decoration-white/60 transition-colors"
+              className="ml-1 rounded-md bg-white/25 px-3 py-0.5 text-xs font-bold text-white backdrop-blur-sm hover:bg-white/35 transition-colors"
             >
-              go Pro for $9/mo
+              Upgrade Now
             </Link>
+            <span className="text-white/60 hidden md:inline">|</span>
+            <span className="hidden md:inline text-white/70 text-xs">53% off — limited time</span>
           </div>
         </div>
 
         {/* ─── Main ─── */}
         <main className="pt-[113px]">{children}</main>
+
+        {/* ─── Floating Pro CTA ─── */}
+        <FloatingProCTA />
 
         {/* ─── Footer ─── */}
         <footer className="border-t border-brand-border bg-brand-darker">

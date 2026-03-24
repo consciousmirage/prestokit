@@ -632,7 +632,7 @@ export default function Home() {
                   >
                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                   </svg>
-                  Now Available
+                  Launch Special — 53% Off
                 </div>
 
                 <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
@@ -677,17 +677,23 @@ export default function Home() {
                 </ul>
 
                 <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-                  <div className="flex items-baseline gap-1">
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-xl font-bold text-muted line-through">
+                      $19
+                    </span>
                     <span className="text-4xl font-extrabold text-white">
                       $9
                     </span>
                     <span className="text-muted">/mo</span>
+                    <span className="rounded-full bg-accent/15 px-2 py-0.5 text-xs font-bold text-accent">
+                      53% OFF
+                    </span>
                   </div>
                   <Link
                     href="/pro"
                     className="rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-primary/20 transition-all hover:bg-primary-light hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5"
                   >
-                    Subscribe to Pro &mdash; $9/mo
+                    Get Pro — Launch Special $9/mo
                   </Link>
                 </div>
               </div>
