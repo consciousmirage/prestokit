@@ -91,6 +91,51 @@ const guides = [
     color: "#2196f3",
     readTime: "10 min read",
   },
+  {
+    title: "How to Write a Business Plan",
+    description:
+      "A complete guide to writing a business plan that works — executive summary, market analysis, financial projections, and a one-page template.",
+    href: "/guides/how-to-write-a-business-plan",
+    icon: "\uD83D\uDCCB",
+    color: "#7c6cf0",
+    readTime: "13 min read",
+  },
+  {
+    title: "How to Set Your Freelance Rate",
+    description:
+      "Use the bare-minimum formula and target income method to price yourself right. Includes rate ranges by category and a raise negotiation script.",
+    href: "/guides/how-to-set-freelance-rate",
+    icon: "\uD83D\uDCB8",
+    color: "#26a69a",
+    readTime: "11 min read",
+  },
+  {
+    title: "How to Register an LLC",
+    description:
+      "Step-by-step guide to forming an LLC in any US state — articles of organization, EIN, operating agreement, and filing costs by state.",
+    href: "/guides/how-to-register-an-llc",
+    icon: "\uD83C\uDFDB\uFE0F",
+    color: "#ff9100",
+    readTime: "12 min read",
+  },
+  {
+    title: "How to Track Business Expenses",
+    description:
+      "Set up a simple expense tracking system, learn which costs are deductible, and avoid the most common bookkeeping mistakes.",
+    href: "/guides/how-to-track-business-expenses",
+    icon: "\uD83D\uDCCA",
+    color: "#ef5350",
+    readTime: "10 min read",
+  },
+  {
+    title: "How to Negotiate Your Salary",
+    description:
+      "Word-for-word scripts, the three-number framework, and proven strategies to negotiate higher pay — both for new jobs and raises.",
+    href: "/guides/how-to-negotiate-salary",
+    icon: "\uD83E\uDD1D",
+    color: "#42a5f5",
+    readTime: "12 min read",
+  },
 ];
 
 export default function GuidesIndex() {
