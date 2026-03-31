@@ -85,6 +85,11 @@ const FAQ_DATA = [
       "Contribution margin is the amount each unit sale contributes toward covering fixed costs and eventually generating profit. It's calculated as Price Per Unit minus Variable Cost Per Unit. The contribution margin ratio (contribution margin divided by price) tells you what percentage of each dollar of revenue goes toward fixed costs and profit.",
   },
   {
+    question: "What is the margin of safety?",
+    answer:
+      "Margin of safety is the difference between your expected or target sales volume and the break-even point. It tells you how far sales can drop before you start losing money. A higher margin of safety means a more comfortable cushion. It's calculated as: (Target Units - Break-Even Units) / Target Units x 100, expressed as a percentage.",
+  },
+  {
     question: "How can I lower my break-even point?",
     answer:
       "You can lower your break-even point by: (1) Reducing fixed costs — negotiate lower rent, reduce overhead, automate processes. (2) Reducing variable costs — find cheaper suppliers, optimize production efficiency. (3) Increasing prices — if the market supports it. (4) Improving product mix — focus on higher-margin products. Any combination of these strategies will lower the number of units needed to break even.",
@@ -97,10 +102,10 @@ const FAQ_DATA = [
 ];
 
 /* ------------------------------------------------------------------ */
-/*  Profit/Loss Chart                                                   */
+/*  Break-Even SVG Chart                                               */
 /* ------------------------------------------------------------------ */
 
-function ProfitLossChart({
+function BreakEvenChart({
   fixedCosts,
   variableCostPerUnit,
   pricePerUnit,
@@ -113,138 +118,415 @@ function ProfitLossChart({
 }) {
   if (breakEvenUnits <= 0 || !isFinite(breakEvenUnits)) return null;
 
-  // Generate data points from 0 to 2x break-even
-  const maxUnits = Math.ceil(breakEvenUnits * 2);
-  const steps = 8;
-  const stepSize = Math.max(1, Math.ceil(maxUnits / steps));
-  const dataPoints: { units: number; revenue: number; totalCost: number; profit: number }[] = [];
+  const W = 520;
+  const H = 300;
+  const PAD_LEFT = 70;
+  const PAD_BOTTOM = 40;
+  const PAD_TOP = 20;
+  const PAD_RIGHT = 20;
 
-  for (let i = 0; i <= steps; i++) {
-    const units = i * stepSize;
-    const revenue = units * pricePerUnit;
-    const totalCost = fixedCosts + units * variableCostPerUnit;
-    const profit = revenue - totalCost;
-    dataPoints.push({ units, revenue, totalCost, profit });
+  const chartW = W - PAD_LEFT - PAD_RIGHT;
+  const chartH = H - PAD_BOTTOM - PAD_TOP;
+
+  // X domain: 0 to 2x break-even units
+  const maxUnits = breakEvenUnits * 2;
+  // Y domain: 0 to max(revenue, totalCost) at maxUnits
+  const maxRevenue = maxUnits * pricePerUnit;
+  const maxTotalCost = fixedCosts + maxUnits * variableCostPerUnit;
+  const maxY = Math.max(maxRevenue, maxTotalCost) * 1.05;
+
+  function xPx(units: number) {
+    return PAD_LEFT + (units / maxUnits) * chartW;
+  }
+  function yPx(dollars: number) {
+    return PAD_TOP + chartH - (dollars / maxY) * chartH;
   }
 
-  const maxValue = Math.max(
-    ...dataPoints.map((d) => Math.max(d.revenue, d.totalCost))
-  );
-  const minProfit = Math.min(...dataPoints.map((d) => d.profit));
-  const maxProfit = Math.max(...dataPoints.map((d) => d.profit));
-  const profitRange = Math.max(Math.abs(minProfit), Math.abs(maxProfit));
+  // Points for revenue line: (0, 0) to (maxUnits, maxRevenue)
+  const revPath = `M ${xPx(0)} ${yPx(0)} L ${xPx(maxUnits)} ${yPx(maxRevenue)}`;
 
-  const fmt = (n: number) =>
-    n.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+  // Points for total cost line: (0, fixedCosts) to (maxUnits, maxTotalCost)
+  const costPath = `M ${xPx(0)} ${yPx(fixedCosts)} L ${xPx(maxUnits)} ${yPx(maxTotalCost)}`;
+
+  // Fixed cost line: horizontal at y = fixedCosts
+  const fixedPath = `M ${xPx(0)} ${yPx(fixedCosts)} L ${xPx(maxUnits)} ${yPx(fixedCosts)}`;
+
+  // Break-even point
+  const bePx = xPx(breakEvenUnits);
+  const bePy = yPx(breakEvenUnits * pricePerUnit);
+
+  // Y-axis tick values
+  const yTicks = 5;
+  const yTickVals = Array.from({ length: yTicks + 1 }, (_, i) => (maxY / yTicks) * i);
+
+  // X-axis tick values
+  const xTicks = 4;
+  const xTickVals = Array.from({ length: xTicks + 1 }, (_, i) =>
+    Math.round((maxUnits / xTicks) * i)
+  );
+
+  function fmtShort(n: number): string {
+    if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(1)}M`;
+    if (n >= 1_000) return `$${(n / 1_000).toFixed(0)}K`;
+    return `$${Math.round(n)}`;
+  }
 
   return (
-    <div className="space-y-6">
-      {/* Revenue vs Cost Bars */}
-      <div>
-        <h3 className="text-sm font-semibold text-[#c0c0d0] mb-4">
-          Revenue vs. Total Cost by Volume
-        </h3>
-        <div className="space-y-3">
-          {dataPoints.map((d, i) => (
-            <div key={i} className="space-y-1">
-              <div className="flex items-center justify-between text-xs text-[#8888a0]">
-                <span>{fmt(d.units)} units</span>
-                <span
-                  className={
-                    d.profit >= 0 ? "text-[#00e676] font-semibold" : "text-[#ff5252] font-semibold"
-                  }
-                >
-                  {d.profit >= 0 ? "+" : ""}${fmt(d.profit)}
-                </span>
-              </div>
-              <div className="flex gap-1">
-                {/* Revenue bar */}
-                <div className="flex-1 h-5 bg-[#0a0a0f] rounded overflow-hidden relative">
-                  <div
-                    className="h-full rounded transition-all duration-500"
-                    style={{
-                      width: maxValue > 0 ? `${Math.max((d.revenue / maxValue) * 100, 1)}%` : "0%",
-                      background: "linear-gradient(90deg, #00e676, #00c853)",
-                    }}
-                  />
-                  <span className="absolute inset-0 flex items-center px-2 text-[10px] text-white font-medium drop-shadow-sm">
-                    Rev: ${fmt(d.revenue)}
-                  </span>
-                </div>
-              </div>
-              <div className="flex gap-1">
-                {/* Cost bar */}
-                <div className="flex-1 h-5 bg-[#0a0a0f] rounded overflow-hidden relative">
-                  <div
-                    className="h-full rounded transition-all duration-500"
-                    style={{
-                      width: maxValue > 0 ? `${Math.max((d.totalCost / maxValue) * 100, 1)}%` : "0%",
-                      background: "linear-gradient(90deg, #ff5252, #d32f2f)",
-                    }}
-                  />
-                  <span className="absolute inset-0 flex items-center px-2 text-[10px] text-white font-medium drop-shadow-sm">
-                    Cost: ${fmt(d.totalCost)}
-                  </span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+    <div className="w-full overflow-x-auto">
+      <svg
+        viewBox={`0 0 ${W} ${H}`}
+        className="w-full max-w-[520px] mx-auto"
+        style={{ minWidth: 280 }}
+      >
+        {/* Grid lines */}
+        {yTickVals.map((v, i) => (
+          <line
+            key={i}
+            x1={PAD_LEFT}
+            y1={yPx(v)}
+            x2={W - PAD_RIGHT}
+            y2={yPx(v)}
+            stroke="#1e1e2e"
+            strokeWidth={1}
+          />
+        ))}
 
-      {/* Profit/Loss Bars */}
-      <div>
-        <h3 className="text-sm font-semibold text-[#c0c0d0] mb-4">
-          Profit / Loss at Each Volume
-        </h3>
-        <div className="space-y-2">
-          {dataPoints.map((d, i) => {
-            const pct = profitRange > 0 ? (Math.abs(d.profit) / profitRange) * 50 : 0;
+        {/* Break-even vertical guide */}
+        <line
+          x1={bePx}
+          y1={PAD_TOP}
+          x2={bePx}
+          y2={H - PAD_BOTTOM}
+          stroke="#7c6cf0"
+          strokeWidth={1}
+          strokeDasharray="4 3"
+          opacity={0.5}
+        />
+
+        {/* Fixed cost line */}
+        <path d={fixedPath} stroke="#8888a0" strokeWidth={1.5} strokeDasharray="5 3" fill="none" />
+
+        {/* Revenue line */}
+        <path d={revPath} stroke="#00e676" strokeWidth={2} fill="none" />
+
+        {/* Total cost line */}
+        <path d={costPath} stroke="#ff5252" strokeWidth={2} fill="none" />
+
+        {/* Break-even dot */}
+        <circle cx={bePx} cy={bePy} r={5} fill="#7c6cf0" />
+        <circle cx={bePx} cy={bePy} r={9} fill="#7c6cf0" opacity={0.2} />
+
+        {/* Break-even label */}
+        <text
+          x={bePx + 10}
+          y={bePy - 8}
+          fill="#c0b0ff"
+          fontSize={10}
+          fontWeight="600"
+        >
+          Break-Even
+        </text>
+        <text
+          x={bePx + 10}
+          y={bePy + 4}
+          fill="#a090e0"
+          fontSize={9}
+        >
+          {Math.ceil(breakEvenUnits).toLocaleString()} units
+        </text>
+
+        {/* Axes */}
+        <line
+          x1={PAD_LEFT}
+          y1={PAD_TOP}
+          x2={PAD_LEFT}
+          y2={H - PAD_BOTTOM}
+          stroke="#2a2a3a"
+          strokeWidth={1.5}
+        />
+        <line
+          x1={PAD_LEFT}
+          y1={H - PAD_BOTTOM}
+          x2={W - PAD_RIGHT}
+          y2={H - PAD_BOTTOM}
+          stroke="#2a2a3a"
+          strokeWidth={1.5}
+        />
+
+        {/* Y-axis labels */}
+        {yTickVals.map((v, i) => (
+          <text
+            key={i}
+            x={PAD_LEFT - 6}
+            y={yPx(v) + 4}
+            fill="#555566"
+            fontSize={9}
+            textAnchor="end"
+          >
+            {fmtShort(v)}
+          </text>
+        ))}
+
+        {/* X-axis labels */}
+        {xTickVals.map((v, i) => (
+          <text
+            key={i}
+            x={xPx(v)}
+            y={H - PAD_BOTTOM + 14}
+            fill="#555566"
+            fontSize={9}
+            textAnchor="middle"
+          >
+            {v.toLocaleString()}
+          </text>
+        ))}
+
+        {/* Axis titles */}
+        <text
+          x={PAD_LEFT + chartW / 2}
+          y={H - 2}
+          fill="#555566"
+          fontSize={9}
+          textAnchor="middle"
+        >
+          Units Sold
+        </text>
+
+        {/* Legend */}
+        <g transform={`translate(${PAD_LEFT + 8}, ${PAD_TOP + 6})`}>
+          <line x1={0} y1={5} x2={16} y2={5} stroke="#00e676" strokeWidth={2} />
+          <text x={20} y={9} fill="#8888a0" fontSize={9}>
+            Revenue
+          </text>
+          <line x1={60} y1={5} x2={76} y2={5} stroke="#ff5252" strokeWidth={2} />
+          <text x={80} y={9} fill="#8888a0" fontSize={9}>
+            Total Cost
+          </text>
+          <line
+            x1={135}
+            y1={5}
+            x2={151}
+            y2={5}
+            stroke="#8888a0"
+            strokeWidth={1.5}
+            strokeDasharray="4 3"
+          />
+          <text x={155} y={9} fill="#8888a0" fontSize={9}>
+            Fixed Cost
+          </text>
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Sensitivity Analysis Table                                         */
+/* ------------------------------------------------------------------ */
+
+function SensitivityTable({
+  fixedCosts,
+  variableCostPerUnit,
+  pricePerUnit,
+  breakEvenUnits,
+}: {
+  fixedCosts: number;
+  variableCostPerUnit: number;
+  pricePerUnit: number;
+  breakEvenUnits: number;
+}) {
+  const variations = [-30, -20, -10, 0, 10, 20, 30];
+
+  const fmt = (n: number, dec = 0) =>
+    n.toLocaleString("en-US", {
+      minimumFractionDigits: dec,
+      maximumFractionDigits: dec,
+    });
+
+  return (
+    <div className="overflow-x-auto">
+      <table className="w-full text-sm">
+        <thead>
+          <tr className="border-b border-[#1e1e2e]">
+            <th className="text-left pb-3 text-xs text-[#8888a0] font-medium">
+              Price Change
+            </th>
+            <th className="text-right pb-3 text-xs text-[#8888a0] font-medium">
+              New Price
+            </th>
+            <th className="text-right pb-3 text-xs text-[#8888a0] font-medium">
+              Break-Even Units
+            </th>
+            <th className="text-right pb-3 text-xs text-[#8888a0] font-medium">
+              Change vs. Base
+            </th>
+            <th className="text-right pb-3 text-xs text-[#8888a0] font-medium">
+              Break-Even Revenue
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {variations.map((pct) => {
+            const newPrice = pricePerUnit * (1 + pct / 100);
+            const cm = newPrice - variableCostPerUnit;
+            const beUnits = cm > 0 ? fixedCosts / cm : Infinity;
+            const delta = beUnits - breakEvenUnits;
+            const beRev = beUnits * newPrice;
+            const isBase = pct === 0;
+            const isInfeasible = !isFinite(beUnits);
+
             return (
-              <div key={i} className="flex items-center gap-3">
-                <div className="w-20 text-right text-xs text-[#8888a0]">
-                  {fmt(d.units)} units
-                </div>
-                <div className="flex-1 h-6 relative">
-                  {/* Center line */}
-                  <div className="absolute left-1/2 top-0 bottom-0 w-px bg-[#1e1e2e]" />
-                  {d.profit >= 0 ? (
-                    <div
-                      className="absolute top-0 h-full rounded-r transition-all duration-500"
-                      style={{
-                        left: "50%",
-                        width: `${Math.max(pct, 1)}%`,
-                        background: "linear-gradient(90deg, #00e676, #00c853)",
-                      }}
-                    />
-                  ) : (
-                    <div
-                      className="absolute top-0 h-full rounded-l transition-all duration-500"
-                      style={{
-                        right: "50%",
-                        width: `${Math.max(pct, 1)}%`,
-                        background: "linear-gradient(270deg, #ff5252, #d32f2f)",
-                      }}
-                    />
-                  )}
-                </div>
-                <div
-                  className={`w-24 text-right text-xs font-semibold ${
-                    d.profit >= 0 ? "text-[#00e676]" : "text-[#ff5252]"
-                  }`}
+              <tr
+                key={pct}
+                className={`border-b border-[#1e1e2e]/60 last:border-0 ${
+                  isBase ? "bg-[#7c6cf0]/5" : ""
+                }`}
+              >
+                <td className="py-3">
+                  <span
+                    className={`inline-flex items-center gap-1 text-xs font-semibold rounded-full px-2 py-0.5 ${
+                      isBase
+                        ? "bg-[#7c6cf0]/20 text-[#7c6cf0]"
+                        : pct < 0
+                        ? "bg-[#ff5252]/10 text-[#ff5252]"
+                        : "bg-[#00e676]/10 text-[#00e676]"
+                    }`}
+                  >
+                    {pct === 0 ? "Base" : pct > 0 ? `+${pct}%` : `${pct}%`}
+                  </span>
+                </td>
+                <td className="py-3 text-right text-[#c0c0d0] tabular-nums">
+                  ${fmt(newPrice, 2)}
+                </td>
+                <td
+                  className="py-3 text-right font-semibold tabular-nums"
+                  style={{ color: isBase ? "#7c6cf0" : isInfeasible ? "#ff5252" : "#e0e0ea" }}
                 >
-                  {d.profit >= 0 ? "+" : ""}${fmt(d.profit)}
-                </div>
-              </div>
+                  {isInfeasible ? "Impossible" : fmt(Math.ceil(beUnits))}
+                </td>
+                <td
+                  className="py-3 text-right text-xs tabular-nums font-medium"
+                  style={{
+                    color: isBase ? "#8888a0" : delta < 0 ? "#00e676" : "#ff5252",
+                  }}
+                >
+                  {isBase
+                    ? "—"
+                    : isInfeasible
+                    ? "N/A"
+                    : delta < 0
+                    ? `${fmt(Math.ceil(delta))} units`
+                    : `+${fmt(Math.ceil(delta))} units`}
+                </td>
+                <td className="py-3 text-right text-[#8888a0] tabular-nums text-xs">
+                  {isInfeasible ? "—" : `$${fmt(Math.round(beRev))}`}
+                </td>
+              </tr>
             );
           })}
-        </div>
-        <div className="flex justify-between text-[10px] text-[#555566] mt-1 px-24">
-          <span>Loss</span>
-          <span>Break Even</span>
-          <span>Profit</span>
-        </div>
-      </div>
+        </tbody>
+      </table>
+      <p className="text-[10px] text-[#555566] mt-3">
+        Sensitivity analysis shows how break-even units shift when your selling price changes, holding
+        fixed costs and variable costs constant.
+      </p>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  What-If Scenarios                                                  */
+/* ------------------------------------------------------------------ */
+
+function WhatIfPanel({
+  fixedCosts,
+  variableCostPerUnit,
+  pricePerUnit,
+  breakEvenUnits,
+}: {
+  fixedCosts: number;
+  variableCostPerUnit: number;
+  pricePerUnit: number;
+  breakEvenUnits: number;
+}) {
+  const percentages = [50, 75, 100, 125, 150, 200];
+
+  const fmt = (n: number, dec = 0) =>
+    n.toLocaleString("en-US", {
+      minimumFractionDigits: dec,
+      maximumFractionDigits: dec,
+    });
+
+  return (
+    <div className="overflow-x-auto">
+      <table className="w-full text-sm">
+        <thead>
+          <tr className="border-b border-[#1e1e2e]">
+            <th className="text-left pb-3 text-xs text-[#8888a0] font-medium">
+              Volume
+            </th>
+            <th className="text-right pb-3 text-xs text-[#8888a0] font-medium">
+              Units Sold
+            </th>
+            <th className="text-right pb-3 text-xs text-[#8888a0] font-medium">
+              Revenue
+            </th>
+            <th className="text-right pb-3 text-xs text-[#8888a0] font-medium">
+              Total Cost
+            </th>
+            <th className="text-right pb-3 text-xs text-[#8888a0] font-medium">
+              Profit / Loss
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {percentages.map((pct) => {
+            const units = Math.ceil(breakEvenUnits * (pct / 100));
+            const rev = units * pricePerUnit;
+            const totalCost = fixedCosts + units * variableCostPerUnit;
+            const profit = rev - totalCost;
+            const isBreakEven = pct === 100;
+
+            return (
+              <tr
+                key={pct}
+                className={`border-b border-[#1e1e2e]/60 last:border-0 ${
+                  isBreakEven ? "bg-[#7c6cf0]/5" : ""
+                }`}
+              >
+                <td className="py-3">
+                  <span
+                    className={`inline-flex items-center gap-1 text-xs font-semibold rounded-full px-2 py-0.5 ${
+                      isBreakEven
+                        ? "bg-[#7c6cf0]/20 text-[#7c6cf0]"
+                        : pct < 100
+                        ? "bg-[#ff5252]/10 text-[#ff5252]"
+                        : "bg-[#00e676]/10 text-[#00e676]"
+                    }`}
+                  >
+                    {pct}% of BE
+                  </span>
+                </td>
+                <td className="py-3 text-right text-[#c0c0d0] tabular-nums">
+                  {fmt(units)}
+                </td>
+                <td className="py-3 text-right text-[#c0c0d0] tabular-nums">
+                  ${fmt(Math.round(rev))}
+                </td>
+                <td className="py-3 text-right text-[#c0c0d0] tabular-nums">
+                  ${fmt(Math.round(totalCost))}
+                </td>
+                <td
+                  className="py-3 text-right font-bold tabular-nums"
+                  style={{ color: profit >= 0 ? "#00e676" : "#ff5252" }}
+                >
+                  {profit >= 0 ? "+" : ""}${fmt(Math.round(profit))}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 }
@@ -257,16 +539,26 @@ export default function BreakEvenCalculatorPage() {
   const [fixedCosts, setFixedCosts] = useState("");
   const [variableCost, setVariableCost] = useState("");
   const [price, setPrice] = useState("");
+  const [targetUnits, setTargetUnits] = useState("");
 
   const results = useMemo(() => {
     const fc = parseFloat(fixedCosts) || 0;
     const vc = parseFloat(variableCost) || 0;
     const p = parseFloat(price) || 0;
+    const tu = parseFloat(targetUnits) || 0;
 
     const contributionMargin = p - vc;
     const contributionMarginRatio = p > 0 ? contributionMargin / p : 0;
     const breakEvenUnits = contributionMargin > 0 ? fc / contributionMargin : 0;
     const breakEvenRevenue = breakEvenUnits * p;
+
+    // Margin of Safety (only if target units entered and > break-even)
+    const marginOfSafetyUnits =
+      tu > 0 && breakEvenUnits > 0 ? tu - breakEvenUnits : null;
+    const marginOfSafetyPct =
+      marginOfSafetyUnits !== null && tu > 0
+        ? (marginOfSafetyUnits / tu) * 100
+        : null;
 
     return {
       fixedCosts: fc,
@@ -276,8 +568,11 @@ export default function BreakEvenCalculatorPage() {
       contributionMarginRatio,
       breakEvenUnits,
       breakEvenRevenue,
+      targetUnits: tu,
+      marginOfSafetyUnits,
+      marginOfSafetyPct,
     };
-  }, [fixedCosts, variableCost, price]);
+  }, [fixedCosts, variableCost, price, targetUnits]);
 
   const fmt = (n: number, decimals = 0) =>
     n.toLocaleString("en-US", {
@@ -290,7 +585,7 @@ export default function BreakEvenCalculatorPage() {
     "@type": "WebApplication",
     name: "Free Break Even Calculator",
     description:
-      "Calculate your break-even point in units and revenue. Enter fixed costs, variable cost per unit, and price per unit for instant break-even analysis.",
+      "Calculate your break-even point in units and revenue. Visual break-even chart, sensitivity analysis, and what-if scenarios. Enter fixed costs, variable cost per unit, and price per unit for instant analysis.",
     url: "https://prestokit.com/tools/break-even-calculator",
     applicationCategory: "FinanceApplication",
     operatingSystem: "Any",
@@ -313,6 +608,9 @@ export default function BreakEvenCalculatorPage() {
       },
     })),
   };
+
+  const hasResults =
+    results.contributionMargin > 0 && results.breakEvenUnits > 0;
 
   return (
     <>
@@ -338,9 +636,9 @@ export default function BreakEvenCalculatorPage() {
               </span>
             </h1>
             <p className="text-[#8888a0] text-base sm:text-lg max-w-2xl">
-              Calculate your break-even point in units and revenue. See how many
-              units you need to sell to cover all costs, plus a profit/loss chart
-              at different volumes.
+              Calculate your break-even point with a visual chart, sensitivity
+              analysis, and what-if scenarios. More powerful than any free
+              break-even tool available online.
             </p>
           </div>
 
@@ -420,6 +718,26 @@ export default function BreakEvenCalculatorPage() {
                   </div>
                 </div>
 
+                {/* Target Units (optional) */}
+                <div>
+                  <label className="block text-sm font-medium text-[#c0c0d0] mb-2">
+                    Target Sales Volume{" "}
+                    <span className="text-[#555566] font-normal">(optional)</span>
+                  </label>
+                  <p className="text-xs text-[#555566] mb-2">
+                    Enter expected units sold to calculate margin of safety
+                  </p>
+                  <input
+                    type="number"
+                    min="0"
+                    step="1"
+                    value={targetUnits}
+                    onChange={(e) => setTargetUnits(e.target.value)}
+                    placeholder="e.g. 600"
+                    className="w-full rounded-xl border border-[#1e1e2e] bg-[#0a0a0f] py-4 px-4 text-2xl text-white placeholder-[#555566] focus:outline-none focus:border-[#7c6cf0] transition-colors"
+                  />
+                </div>
+
                 {/* Warning if price <= variable cost */}
                 {results.price > 0 &&
                   results.variableCost > 0 &&
@@ -436,11 +754,11 @@ export default function BreakEvenCalculatorPage() {
 
             {/* Results Section */}
             <div className="space-y-4">
+              {/* Core Break-Even Results */}
               <div className="rounded-2xl border border-[#1e1e2e] bg-[#12121a]/60 backdrop-blur-sm p-6 sm:p-8">
                 <h2 className="text-sm font-semibold text-[#c0c0d0] mb-5">
                   Break-Even Analysis
                 </h2>
-
                 <div className="space-y-4">
                   <div className="rounded-xl border border-[#7c6cf0]/30 bg-[#7c6cf0]/5 p-5">
                     <div className="text-xs text-[#8888a0] uppercase tracking-wide mb-1">
@@ -489,52 +807,142 @@ export default function BreakEvenCalculatorPage() {
                       <div className="text-xs text-[#555566] mt-1">of revenue</div>
                     </div>
                   </div>
-
-                  {/* Profit at different volumes */}
-                  {results.contributionMargin > 0 && (
-                    <div className="rounded-xl border border-[#1e1e2e] bg-[#0a0a0f] p-4">
-                      <div className="text-xs text-[#8888a0] uppercase tracking-wide mb-3">
-                        Profit at Common Volumes
-                      </div>
-                      <div className="space-y-2 text-sm">
-                        {[0.5, 1, 1.5, 2, 3].map((multiplier) => {
-                          const units = Math.ceil(results.breakEvenUnits * multiplier);
-                          const profit =
-                            units * results.price -
-                            (results.fixedCosts + units * results.variableCost);
-                          return (
-                            <div
-                              key={multiplier}
-                              className="flex justify-between py-1 border-b border-[#1e1e2e]/60 last:border-0"
-                            >
-                              <span className="text-[#c0c0d0]">
-                                {fmt(units)} units
-                              </span>
-                              <span
-                                className={`font-semibold ${
-                                  profit >= 0 ? "text-[#00e676]" : "text-[#ff5252]"
-                                }`}
-                              >
-                                {profit >= 0 ? "+" : ""}${fmt(profit)}
-                              </span>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  )}
                 </div>
               </div>
+
+              {/* Unit Economics Summary */}
+              {hasResults && (
+                <div className="rounded-2xl border border-[#1e1e2e] bg-[#12121a]/60 backdrop-blur-sm p-6">
+                  <h2 className="text-sm font-semibold text-[#c0c0d0] mb-4">
+                    Unit Economics Summary
+                  </h2>
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center py-2 border-b border-[#1e1e2e]/60">
+                      <span className="text-xs text-[#8888a0]">Selling Price</span>
+                      <span className="text-sm font-semibold text-white">
+                        ${fmt(results.price, 2)} / unit
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center py-2 border-b border-[#1e1e2e]/60">
+                      <span className="text-xs text-[#8888a0]">Variable Cost</span>
+                      <span className="text-sm font-semibold text-[#ff5252]">
+                        −${fmt(results.variableCost, 2)} / unit
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center py-2 border-b border-[#1e1e2e]/60">
+                      <span className="text-xs text-[#8888a0]">Contribution Margin</span>
+                      <span className="text-sm font-bold text-[#00e676]">
+                        ${fmt(results.contributionMargin, 2)} / unit
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center py-2 border-b border-[#1e1e2e]/60">
+                      <span className="text-xs text-[#8888a0]">CM Ratio</span>
+                      <span className="text-sm font-semibold text-[#9d90f5]">
+                        {(results.contributionMarginRatio * 100).toFixed(2)}%
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center py-2 border-b border-[#1e1e2e]/60">
+                      <span className="text-xs text-[#8888a0]">Fixed Costs / Break-Even Unit</span>
+                      <span className="text-sm font-semibold text-white">
+                        ${fmt(results.fixedCosts / Math.max(results.breakEvenUnits, 1), 2)}
+                      </span>
+                    </div>
+                    {results.marginOfSafetyUnits !== null &&
+                      results.marginOfSafetyPct !== null && (
+                        <>
+                          <div className="flex justify-between items-center py-2 border-b border-[#1e1e2e]/60">
+                            <span className="text-xs text-[#8888a0]">Margin of Safety (Units)</span>
+                            <span
+                              className="text-sm font-bold"
+                              style={{
+                                color:
+                                  results.marginOfSafetyUnits >= 0
+                                    ? "#00e676"
+                                    : "#ff5252",
+                              }}
+                            >
+                              {results.marginOfSafetyUnits >= 0 ? "+" : ""}
+                              {fmt(Math.round(results.marginOfSafetyUnits))} units
+                            </span>
+                          </div>
+                          <div className="flex justify-between items-center py-2">
+                            <span className="text-xs text-[#8888a0]">
+                              Margin of Safety (%)
+                            </span>
+                            <span
+                              className="text-sm font-bold"
+                              style={{
+                                color:
+                                  results.marginOfSafetyPct >= 0
+                                    ? "#00e676"
+                                    : "#ff5252",
+                              }}
+                            >
+                              {results.marginOfSafetyPct.toFixed(1)}%
+                            </span>
+                          </div>
+                        </>
+                      )}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
-          {/* Profit/Loss Chart */}
-          {results.contributionMargin > 0 && results.breakEvenUnits > 0 && (
+          {/* Break-Even SVG Chart */}
+          {hasResults && (
             <div className="rounded-2xl border border-[#1e1e2e] bg-[#12121a]/60 backdrop-blur-sm p-6 sm:p-8 mb-6">
-              <h2 className="text-lg font-semibold text-white mb-6">
-                Profit / Loss Chart
+              <h2 className="text-lg font-semibold text-white mb-2">
+                Break-Even Chart
               </h2>
-              <ProfitLossChart
+              <p className="text-xs text-[#555566] mb-6">
+                Revenue line (green) crosses Total Cost line (red) at the break-even
+                point. Fixed Cost line (gray dashed) shows your floor cost.
+              </p>
+              <BreakEvenChart
+                fixedCosts={results.fixedCosts}
+                variableCostPerUnit={results.variableCost}
+                pricePerUnit={results.price}
+                breakEvenUnits={results.breakEvenUnits}
+              />
+            </div>
+          )}
+
+          {/* Sensitivity Analysis */}
+          {hasResults && (
+            <div className="rounded-2xl border border-[#1e1e2e] bg-[#12121a]/60 backdrop-blur-sm p-6 sm:p-8 mb-6">
+              <div className="mb-5">
+                <h2 className="text-lg font-semibold text-white mb-1">
+                  Price Sensitivity Analysis
+                </h2>
+                <p className="text-sm text-[#8888a0]">
+                  See how break-even units change as your selling price shifts
+                  ±30%. This analysis is not available on most free break-even
+                  calculators.
+                </p>
+              </div>
+              <SensitivityTable
+                fixedCosts={results.fixedCosts}
+                variableCostPerUnit={results.variableCost}
+                pricePerUnit={results.price}
+                breakEvenUnits={results.breakEvenUnits}
+              />
+            </div>
+          )}
+
+          {/* What-If Scenarios */}
+          {hasResults && (
+            <div className="rounded-2xl border border-[#1e1e2e] bg-[#12121a]/60 backdrop-blur-sm p-6 sm:p-8 mb-6">
+              <div className="mb-5">
+                <h2 className="text-lg font-semibold text-white mb-1">
+                  What-If Volume Scenarios
+                </h2>
+                <p className="text-sm text-[#8888a0]">
+                  What happens to your profit or loss if you sell more or less than
+                  your break-even volume?
+                </p>
+              </div>
+              <WhatIfPanel
                 fixedCosts={results.fixedCosts}
                 variableCostPerUnit={results.variableCost}
                 pricePerUnit={results.price}
@@ -567,9 +975,9 @@ export default function BreakEvenCalculatorPage() {
                 },
                 {
                   step: "3",
-                  title: "See Break-Even Results",
+                  title: "Explore Results",
                   description:
-                    "Instantly see how many units you need to sell to break even, plus a visual profit/loss chart at various sales volumes.",
+                    "See your break-even point, a visual chart, price sensitivity table, what-if scenarios, and full unit economics summary.",
                 },
               ].map((item) => (
                 <div
@@ -616,7 +1024,7 @@ export default function BreakEvenCalculatorPage() {
                 {
                   title: "ROI Calculator",
                   description:
-                    "Calculate return on investment for any project or business decision.",
+                    "Calculate return on investment for any project or business decision, with scenario comparison.",
                   href: "/tools/roi-calculator",
                 },
                 {

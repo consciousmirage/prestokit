@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import PromoBar from "@/components/PromoBar";
 
 /* ------------------------------------------------------------------ */
@@ -26,11 +26,11 @@ const INVOICE_FAQS = [
   },
   {
     q: "Can I customize the invoice with my logo?",
-    a: "The current version of our invoice generator creates clean, professional invoices with your business details. We are actively working on adding logo upload and additional template customization features. In the meantime, you can download the PDF and add your logo using any PDF editor or by pasting it into a document editor before sending.",
+    a: "Yes! The PrestoKit invoice generator supports logo upload directly in the tool. Simply click the logo upload area in the Your Business section, select a JPG or PNG file, and your logo will appear in the invoice preview and PDF download immediately. No third-party tools needed.",
   },
   {
     q: "What file format does the invoice download as?",
-    a: "When you click \"Download PDF,\" the invoice opens your browser's print dialog, which lets you save it as a PDF file. This is the most universally accepted format for invoices because PDFs maintain their formatting across all devices and operating systems. You can then email the PDF directly to your client or upload it to your invoicing system.",
+    a: "When you click \"Download PDF,\" the invoice is rendered and exported as a high-quality PDF using html2pdf.js, entirely in your browser. The PDF maintains all formatting, colors, and your uploaded logo. This is the most universally accepted format for invoices because PDFs maintain their formatting across all devices and operating systems.",
   },
   {
     q: "How do I send an invoice to a client?",
@@ -70,6 +70,30 @@ const RELATED_TOOLS_INVOICE = [
 ];
 
 /* ------------------------------------------------------------------ */
+/*  Currency Options                                                   */
+/* ------------------------------------------------------------------ */
+
+const CURRENCIES = [
+  { code: "USD", symbol: "$", label: "USD ($)" },
+  { code: "EUR", symbol: "€", label: "EUR (€)" },
+  { code: "GBP", symbol: "£", label: "GBP (£)" },
+  { code: "CAD", symbol: "C$", label: "CAD (C$)" },
+  { code: "AUD", symbol: "A$", label: "AUD (A$)" },
+];
+
+/* ------------------------------------------------------------------ */
+/*  Template Options                                                   */
+/* ------------------------------------------------------------------ */
+
+type TemplateId = "classic" | "modern" | "minimal";
+
+const TEMPLATES: { id: TemplateId; label: string; desc: string }[] = [
+  { id: "classic", label: "Classic", desc: "Clean lines, purple accent" },
+  { id: "modern", label: "Modern", desc: "Bold header bar, strong type" },
+  { id: "minimal", label: "Minimal", desc: "No borders, typography-first" },
+];
+
+/* ------------------------------------------------------------------ */
 /*  Types                                                              */
 /* ------------------------------------------------------------------ */
 
@@ -103,6 +127,8 @@ interface InvoiceData {
   /* Notes */
   notes: string;
 }
+
+const LS_BIZ_KEY = "prestokit_invoice_biz";
 
 /* ------------------------------------------------------------------ */
 /*  Helpers                                                            */
@@ -148,12 +174,12 @@ function formatDate(iso: string): string {
 /*  Defaults                                                           */
 /* ------------------------------------------------------------------ */
 
-function defaultData(): InvoiceData {
+function defaultData(saved?: Partial<InvoiceData>): InvoiceData {
   return {
-    businessName: "",
-    businessAddress: "",
-    businessEmail: "",
-    businessPhone: "",
+    businessName: saved?.businessName ?? "",
+    businessAddress: saved?.businessAddress ?? "",
+    businessEmail: saved?.businessEmail ?? "",
+    businessPhone: saved?.businessPhone ?? "",
     clientName: "",
     clientAddress: "",
     clientEmail: "",
@@ -169,12 +195,420 @@ function defaultData(): InvoiceData {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Component                                                          */
+/*  Invoice Preview Components (per template)                         */
+/* ------------------------------------------------------------------ */
+
+interface PreviewProps {
+  data: InvoiceData;
+  logo: string | null;
+  currencySymbol: string;
+  subtotal: number;
+  taxAmount: number;
+  discountAmount: number;
+  total: number;
+}
+
+/* --- Classic Template --- */
+function ClassicPreview({
+  data,
+  logo,
+  currencySymbol,
+  subtotal,
+  taxAmount,
+  discountAmount,
+  total,
+}: PreviewProps) {
+  return (
+    <div
+      style={{
+        fontFamily: "Arial, Helvetica, sans-serif",
+        background: "#ffffff",
+        padding: "40px",
+        color: "#1a1a1a",
+        fontSize: "13px",
+        lineHeight: "1.6",
+      }}
+    >
+      {/* Top row */}
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "32px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+          {logo ? (
+            <img
+              src={logo}
+              alt="Business Logo"
+              style={{ maxHeight: "64px", maxWidth: "160px", objectFit: "contain" }}
+            />
+          ) : (
+            <div style={{
+              width: "56px", height: "56px", borderRadius: "8px",
+              background: "#f0effe", display: "flex", alignItems: "center",
+              justifyContent: "center", flexShrink: 0,
+            }}>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#7c6cf0" strokeWidth="1.5">
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <path d="M3 9h18M9 21V9" />
+              </svg>
+            </div>
+          )}
+          <div>
+            <div style={{ fontSize: "22px", fontWeight: "800", color: "#7c6cf0", letterSpacing: "-0.5px" }}>INVOICE</div>
+            <div style={{ color: "#9ca3af", fontSize: "11px", marginTop: "2px" }}>{data.invoiceNumber}</div>
+          </div>
+        </div>
+        <div style={{ textAlign: "right", fontSize: "12px", color: "#6b7280" }}>
+          <div><span style={{ fontWeight: "600", color: "#374151" }}>Date:</span> {formatDate(data.invoiceDate)}</div>
+          <div><span style={{ fontWeight: "600", color: "#374151" }}>Due:</span> {formatDate(data.dueDate)}</div>
+          <div><span style={{ fontWeight: "600", color: "#374151" }}>Terms:</span> {data.paymentTerms}</div>
+        </div>
+      </div>
+
+      {/* From / To */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "32px", marginBottom: "32px" }}>
+        <div>
+          <div style={{ fontSize: "9px", textTransform: "uppercase", letterSpacing: "2px", color: "#9ca3af", marginBottom: "6px" }}>From</div>
+          <div style={{ fontWeight: "700", color: "#111827", fontSize: "14px" }}>{data.businessName || "Your Business"}</div>
+          {data.businessAddress && <div style={{ color: "#6b7280", fontSize: "12px" }}>{data.businessAddress}</div>}
+          {data.businessEmail && <div style={{ color: "#6b7280", fontSize: "12px" }}>{data.businessEmail}</div>}
+          {data.businessPhone && <div style={{ color: "#6b7280", fontSize: "12px" }}>{data.businessPhone}</div>}
+        </div>
+        <div>
+          <div style={{ fontSize: "9px", textTransform: "uppercase", letterSpacing: "2px", color: "#9ca3af", marginBottom: "6px" }}>Bill To</div>
+          <div style={{ fontWeight: "700", color: "#111827", fontSize: "14px" }}>{data.clientName || "Client Name"}</div>
+          {data.clientAddress && <div style={{ color: "#6b7280", fontSize: "12px" }}>{data.clientAddress}</div>}
+          {data.clientEmail && <div style={{ color: "#6b7280", fontSize: "12px" }}>{data.clientEmail}</div>}
+        </div>
+      </div>
+
+      {/* Line Items */}
+      <table style={{ width: "100%", borderCollapse: "collapse", marginBottom: "24px", fontSize: "12px" }}>
+        <thead>
+          <tr style={{ borderBottom: "2px solid #7c6cf0" }}>
+            <th style={{ padding: "8px 4px", textAlign: "left", fontWeight: "600", color: "#374151" }}>Description</th>
+            <th style={{ padding: "8px 4px", textAlign: "center", fontWeight: "600", color: "#374151", width: "60px" }}>Qty</th>
+            <th style={{ padding: "8px 4px", textAlign: "right", fontWeight: "600", color: "#374151", width: "90px" }}>Rate</th>
+            <th style={{ padding: "8px 4px", textAlign: "right", fontWeight: "600", color: "#374151", width: "90px" }}>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.lineItems.map((li, i) => (
+            <tr key={li.id} style={{ background: i % 2 === 0 ? "#f9fafb" : "#ffffff" }}>
+              <td style={{ padding: "9px 4px", color: "#374151" }}>{li.description || "—"}</td>
+              <td style={{ padding: "9px 4px", textAlign: "center", color: "#6b7280" }}>{li.quantity}</td>
+              <td style={{ padding: "9px 4px", textAlign: "right", color: "#6b7280" }}>{currencySymbol}{fmt(li.rate)}</td>
+              <td style={{ padding: "9px 4px", textAlign: "right", fontWeight: "600", color: "#111827" }}>{currencySymbol}{fmt(li.quantity * li.rate)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      {/* Totals */}
+      <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "32px" }}>
+        <div style={{ width: "220px", fontSize: "12px" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", padding: "4px 0", color: "#6b7280" }}>
+            <span>Subtotal</span><span>{currencySymbol}{fmt(subtotal)}</span>
+          </div>
+          {data.taxRate > 0 && (
+            <div style={{ display: "flex", justifyContent: "space-between", padding: "4px 0", color: "#6b7280" }}>
+              <span>Tax ({data.taxRate}%)</span><span>{currencySymbol}{fmt(taxAmount)}</span>
+            </div>
+          )}
+          {discountAmount > 0 && (
+            <div style={{ display: "flex", justifyContent: "space-between", padding: "4px 0", color: "#6b7280" }}>
+              <span>Discount</span><span>-{currencySymbol}{fmt(discountAmount)}</span>
+            </div>
+          )}
+          <div style={{ display: "flex", justifyContent: "space-between", padding: "10px 0 4px", borderTop: "2px solid #7c6cf0", fontWeight: "800", fontSize: "16px", color: "#111827" }}>
+            <span>Total</span><span>{currencySymbol}{fmt(total)}</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Notes */}
+      {data.notes && (
+        <div style={{ borderTop: "1px solid #e5e7eb", paddingTop: "16px" }}>
+          <div style={{ fontSize: "9px", textTransform: "uppercase", letterSpacing: "2px", color: "#9ca3af", marginBottom: "4px" }}>Notes / Terms</div>
+          <div style={{ color: "#6b7280", fontSize: "12px", whiteSpace: "pre-wrap" }}>{data.notes}</div>
+        </div>
+      )}
+
+      {/* Footer */}
+      <div style={{ textAlign: "center", marginTop: "40px", fontSize: "10px", color: "#d1d5db" }}>
+        Generated with PrestoKit &mdash; free business tools
+      </div>
+    </div>
+  );
+}
+
+/* --- Modern Template --- */
+function ModernPreview({
+  data,
+  logo,
+  currencySymbol,
+  subtotal,
+  taxAmount,
+  discountAmount,
+  total,
+}: PreviewProps) {
+  return (
+    <div style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", background: "#ffffff", color: "#1a1a1a", fontSize: "13px", lineHeight: "1.6" }}>
+      {/* Header bar */}
+      <div style={{ background: "linear-gradient(135deg, #4f3fce 0%, #7c6cf0 60%, #9b8ff5 100%)", padding: "32px 40px", marginBottom: "0" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+            {logo ? (
+              <img
+                src={logo}
+                alt="Business Logo"
+                style={{ maxHeight: "56px", maxWidth: "140px", objectFit: "contain", filter: "brightness(0) invert(1)" }}
+              />
+            ) : (
+              <div style={{ width: "48px", height: "48px", borderRadius: "8px", background: "rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" strokeWidth="1.5">
+                  <rect x="3" y="3" width="18" height="18" rx="2" />
+                  <path d="M3 9h18M9 21V9" />
+                </svg>
+              </div>
+            )}
+            <div>
+              <div style={{ color: "#fff", fontSize: "20px", fontWeight: "800", letterSpacing: "1px" }}>{data.businessName || "YOUR BUSINESS"}</div>
+              <div style={{ color: "rgba(255,255,255,0.7)", fontSize: "11px", marginTop: "2px" }}>{data.businessEmail}</div>
+            </div>
+          </div>
+          <div style={{ textAlign: "right" }}>
+            <div style={{ color: "rgba(255,255,255,0.8)", fontSize: "28px", fontWeight: "900", letterSpacing: "2px" }}>INVOICE</div>
+            <div style={{ color: "rgba(255,255,255,0.65)", fontSize: "11px" }}>{data.invoiceNumber}</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Sub-header band */}
+      <div style={{ background: "#1e1a3c", padding: "12px 40px", display: "flex", gap: "40px" }}>
+        <div style={{ color: "rgba(255,255,255,0.5)", fontSize: "10px" }}>
+          DATE <span style={{ color: "#fff", fontWeight: "600", marginLeft: "6px" }}>{formatDate(data.invoiceDate)}</span>
+        </div>
+        <div style={{ color: "rgba(255,255,255,0.5)", fontSize: "10px" }}>
+          DUE <span style={{ color: "#00e676", fontWeight: "700", marginLeft: "6px" }}>{formatDate(data.dueDate)}</span>
+        </div>
+        <div style={{ color: "rgba(255,255,255,0.5)", fontSize: "10px" }}>
+          TERMS <span style={{ color: "#fff", fontWeight: "600", marginLeft: "6px" }}>{data.paymentTerms}</span>
+        </div>
+      </div>
+
+      <div style={{ padding: "32px 40px" }}>
+        {/* From / To */}
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "32px", marginBottom: "32px" }}>
+          <div>
+            <div style={{ fontSize: "9px", textTransform: "uppercase", letterSpacing: "2px", color: "#7c6cf0", fontWeight: "700", marginBottom: "6px" }}>From</div>
+            <div style={{ fontWeight: "800", color: "#111827", fontSize: "15px" }}>{data.businessName || "Your Business"}</div>
+            {data.businessAddress && <div style={{ color: "#6b7280", fontSize: "12px" }}>{data.businessAddress}</div>}
+            {data.businessEmail && <div style={{ color: "#6b7280", fontSize: "12px" }}>{data.businessEmail}</div>}
+            {data.businessPhone && <div style={{ color: "#6b7280", fontSize: "12px" }}>{data.businessPhone}</div>}
+          </div>
+          <div>
+            <div style={{ fontSize: "9px", textTransform: "uppercase", letterSpacing: "2px", color: "#7c6cf0", fontWeight: "700", marginBottom: "6px" }}>Bill To</div>
+            <div style={{ fontWeight: "800", color: "#111827", fontSize: "15px" }}>{data.clientName || "Client Name"}</div>
+            {data.clientAddress && <div style={{ color: "#6b7280", fontSize: "12px" }}>{data.clientAddress}</div>}
+            {data.clientEmail && <div style={{ color: "#6b7280", fontSize: "12px" }}>{data.clientEmail}</div>}
+          </div>
+        </div>
+
+        {/* Line Items */}
+        <table style={{ width: "100%", borderCollapse: "collapse", marginBottom: "24px", fontSize: "12px" }}>
+          <thead>
+            <tr style={{ background: "#f5f3ff" }}>
+              <th style={{ padding: "10px 12px", textAlign: "left", fontWeight: "700", color: "#4f3fce", textTransform: "uppercase", fontSize: "10px", letterSpacing: "1px" }}>Description</th>
+              <th style={{ padding: "10px 12px", textAlign: "center", fontWeight: "700", color: "#4f3fce", textTransform: "uppercase", fontSize: "10px", letterSpacing: "1px", width: "60px" }}>Qty</th>
+              <th style={{ padding: "10px 12px", textAlign: "right", fontWeight: "700", color: "#4f3fce", textTransform: "uppercase", fontSize: "10px", letterSpacing: "1px", width: "90px" }}>Rate</th>
+              <th style={{ padding: "10px 12px", textAlign: "right", fontWeight: "700", color: "#4f3fce", textTransform: "uppercase", fontSize: "10px", letterSpacing: "1px", width: "90px" }}>Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.lineItems.map((li, i) => (
+              <tr key={li.id} style={{ borderBottom: "1px solid #f3f4f6", background: i % 2 === 0 ? "#fff" : "#fafafa" }}>
+                <td style={{ padding: "10px 12px", color: "#374151" }}>{li.description || "—"}</td>
+                <td style={{ padding: "10px 12px", textAlign: "center", color: "#6b7280" }}>{li.quantity}</td>
+                <td style={{ padding: "10px 12px", textAlign: "right", color: "#6b7280" }}>{currencySymbol}{fmt(li.rate)}</td>
+                <td style={{ padding: "10px 12px", textAlign: "right", fontWeight: "700", color: "#111827" }}>{currencySymbol}{fmt(li.quantity * li.rate)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        {/* Totals */}
+        <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "32px" }}>
+          <div style={{ width: "240px" }}>
+            <div style={{ background: "#f9f7ff", borderRadius: "8px", padding: "16px", fontSize: "12px" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", padding: "3px 0", color: "#6b7280" }}>
+                <span>Subtotal</span><span>{currencySymbol}{fmt(subtotal)}</span>
+              </div>
+              {data.taxRate > 0 && (
+                <div style={{ display: "flex", justifyContent: "space-between", padding: "3px 0", color: "#6b7280" }}>
+                  <span>Tax ({data.taxRate}%)</span><span>{currencySymbol}{fmt(taxAmount)}</span>
+                </div>
+              )}
+              {discountAmount > 0 && (
+                <div style={{ display: "flex", justifyContent: "space-between", padding: "3px 0", color: "#6b7280" }}>
+                  <span>Discount</span><span>-{currencySymbol}{fmt(discountAmount)}</span>
+                </div>
+              )}
+              <div style={{ display: "flex", justifyContent: "space-between", padding: "12px 0 0", marginTop: "8px", borderTop: "2px solid #7c6cf0", fontWeight: "900", fontSize: "18px", color: "#4f3fce" }}>
+                <span>TOTAL</span><span>{currencySymbol}{fmt(total)}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Notes */}
+        {data.notes && (
+          <div style={{ background: "#f9f7ff", borderLeft: "4px solid #7c6cf0", borderRadius: "0 8px 8px 0", padding: "12px 16px" }}>
+            <div style={{ fontSize: "9px", textTransform: "uppercase", letterSpacing: "2px", color: "#7c6cf0", fontWeight: "700", marginBottom: "4px" }}>Notes / Terms</div>
+            <div style={{ color: "#6b7280", fontSize: "12px", whiteSpace: "pre-wrap" }}>{data.notes}</div>
+          </div>
+        )}
+
+        <div style={{ textAlign: "center", marginTop: "40px", fontSize: "10px", color: "#d1d5db" }}>
+          Generated with PrestoKit &mdash; free business tools
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* --- Minimal Template --- */
+function MinimalPreview({
+  data,
+  logo,
+  currencySymbol,
+  subtotal,
+  taxAmount,
+  discountAmount,
+  total,
+}: PreviewProps) {
+  return (
+    <div style={{ fontFamily: "Georgia, 'Times New Roman', serif", background: "#ffffff", padding: "48px 52px", color: "#1a1a1a", fontSize: "13px", lineHeight: "1.7" }}>
+      {/* Header */}
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "48px", borderBottom: "1px solid #1a1a1a", paddingBottom: "24px" }}>
+        <div>
+          {logo ? (
+            <img
+              src={logo}
+              alt="Business Logo"
+              style={{ maxHeight: "52px", maxWidth: "140px", objectFit: "contain", marginBottom: "8px", display: "block" }}
+            />
+          ) : null}
+          <div style={{ fontSize: "22px", fontWeight: "700", color: "#1a1a1a", letterSpacing: "-0.5px" }}>{data.businessName || "Your Business"}</div>
+          {data.businessAddress && <div style={{ color: "#555", fontSize: "11px" }}>{data.businessAddress}</div>}
+          {data.businessEmail && <div style={{ color: "#555", fontSize: "11px" }}>{data.businessEmail}</div>}
+          {data.businessPhone && <div style={{ color: "#555", fontSize: "11px" }}>{data.businessPhone}</div>}
+        </div>
+        <div style={{ textAlign: "right" }}>
+          <div style={{ fontSize: "32px", fontWeight: "300", letterSpacing: "4px", color: "#111", textTransform: "uppercase" }}>Invoice</div>
+          <div style={{ color: "#888", fontSize: "12px", marginTop: "4px" }}>{data.invoiceNumber}</div>
+        </div>
+      </div>
+
+      {/* Meta + Bill To row */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "24px", marginBottom: "48px" }}>
+        <div>
+          <div style={{ fontSize: "9px", textTransform: "uppercase", letterSpacing: "2px", color: "#aaa", marginBottom: "6px" }}>Bill To</div>
+          <div style={{ fontWeight: "600", color: "#111", fontSize: "14px" }}>{data.clientName || "Client Name"}</div>
+          {data.clientAddress && <div style={{ color: "#555", fontSize: "12px" }}>{data.clientAddress}</div>}
+          {data.clientEmail && <div style={{ color: "#555", fontSize: "12px" }}>{data.clientEmail}</div>}
+        </div>
+        <div>
+          <div style={{ fontSize: "9px", textTransform: "uppercase", letterSpacing: "2px", color: "#aaa", marginBottom: "6px" }}>Invoice Date</div>
+          <div style={{ fontWeight: "600", color: "#111" }}>{formatDate(data.invoiceDate)}</div>
+          <div style={{ fontSize: "9px", textTransform: "uppercase", letterSpacing: "2px", color: "#aaa", marginBottom: "6px", marginTop: "12px" }}>Due Date</div>
+          <div style={{ fontWeight: "600", color: "#111" }}>{formatDate(data.dueDate)}</div>
+        </div>
+        <div>
+          <div style={{ fontSize: "9px", textTransform: "uppercase", letterSpacing: "2px", color: "#aaa", marginBottom: "6px" }}>Payment Terms</div>
+          <div style={{ fontWeight: "600", color: "#111" }}>{data.paymentTerms}</div>
+        </div>
+      </div>
+
+      {/* Line Items */}
+      <table style={{ width: "100%", borderCollapse: "collapse", marginBottom: "32px", fontSize: "12px" }}>
+        <thead>
+          <tr style={{ borderBottom: "1px solid #1a1a1a", borderTop: "1px solid #1a1a1a" }}>
+            <th style={{ padding: "10px 0", textAlign: "left", fontWeight: "400", color: "#888", fontSize: "10px", textTransform: "uppercase", letterSpacing: "1.5px" }}>Description</th>
+            <th style={{ padding: "10px 0", textAlign: "center", fontWeight: "400", color: "#888", fontSize: "10px", textTransform: "uppercase", letterSpacing: "1.5px", width: "60px" }}>Qty</th>
+            <th style={{ padding: "10px 0", textAlign: "right", fontWeight: "400", color: "#888", fontSize: "10px", textTransform: "uppercase", letterSpacing: "1.5px", width: "90px" }}>Rate</th>
+            <th style={{ padding: "10px 0", textAlign: "right", fontWeight: "400", color: "#888", fontSize: "10px", textTransform: "uppercase", letterSpacing: "1.5px", width: "90px" }}>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.lineItems.map((li) => (
+            <tr key={li.id} style={{ borderBottom: "1px solid #e5e5e5" }}>
+              <td style={{ padding: "12px 0", color: "#333" }}>{li.description || "—"}</td>
+              <td style={{ padding: "12px 0", textAlign: "center", color: "#777" }}>{li.quantity}</td>
+              <td style={{ padding: "12px 0", textAlign: "right", color: "#777" }}>{currencySymbol}{fmt(li.rate)}</td>
+              <td style={{ padding: "12px 0", textAlign: "right", fontWeight: "600", color: "#111" }}>{currencySymbol}{fmt(li.quantity * li.rate)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      {/* Totals */}
+      <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "40px" }}>
+        <div style={{ width: "200px", fontSize: "12px" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", padding: "4px 0", color: "#888" }}>
+            <span>Subtotal</span><span>{currencySymbol}{fmt(subtotal)}</span>
+          </div>
+          {data.taxRate > 0 && (
+            <div style={{ display: "flex", justifyContent: "space-between", padding: "4px 0", color: "#888" }}>
+              <span>Tax ({data.taxRate}%)</span><span>{currencySymbol}{fmt(taxAmount)}</span>
+            </div>
+          )}
+          {discountAmount > 0 && (
+            <div style={{ display: "flex", justifyContent: "space-between", padding: "4px 0", color: "#888" }}>
+              <span>Discount</span><span>-{currencySymbol}{fmt(discountAmount)}</span>
+            </div>
+          )}
+          <div style={{ display: "flex", justifyContent: "space-between", padding: "12px 0 0", marginTop: "8px", borderTop: "1px solid #1a1a1a", fontWeight: "700", fontSize: "16px", color: "#111" }}>
+            <span>Total</span><span>{currencySymbol}{fmt(total)}</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Notes */}
+      {data.notes && (
+        <div style={{ borderTop: "1px solid #e5e5e5", paddingTop: "16px" }}>
+          <div style={{ fontSize: "9px", textTransform: "uppercase", letterSpacing: "2px", color: "#aaa", marginBottom: "4px" }}>Notes / Terms</div>
+          <div style={{ color: "#555", fontSize: "12px", whiteSpace: "pre-wrap" }}>{data.notes}</div>
+        </div>
+      )}
+
+      <div style={{ textAlign: "center", marginTop: "48px", fontSize: "10px", color: "#ccc", letterSpacing: "1px" }}>
+        Generated with PrestoKit &mdash; free business tools
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Main Component                                                     */
 /* ------------------------------------------------------------------ */
 
 export default function InvoiceGeneratorPage() {
-  const [data, setData] = useState<InvoiceData>(defaultData);
+  const [data, setData] = useState<InvoiceData>(() => {
+    if (typeof window === "undefined") return defaultData();
+    try {
+      const saved = localStorage.getItem(LS_BIZ_KEY);
+      return defaultData(saved ? JSON.parse(saved) : undefined);
+    } catch {
+      return defaultData();
+    }
+  });
+
+  const [logo, setLogo] = useState<string | null>(null);
+  const [template, setTemplate] = useState<TemplateId>("classic");
+  const [currency, setCurrency] = useState("USD");
+  const [savedIndicator, setSavedIndicator] = useState(false);
+  const logoInputRef = useRef<HTMLInputElement>(null);
   const printRef = useRef<HTMLDivElement>(null);
+
+  const currencySymbol = CURRENCIES.find((c) => c.code === currency)?.symbol ?? "$";
 
   /* ------ derived values ------ */
   const subtotal = data.lineItems.reduce(
@@ -184,6 +618,52 @@ export default function InvoiceGeneratorPage() {
   const taxAmount = subtotal * (data.taxRate / 100);
   const discountAmount = data.discount;
   const total = subtotal + taxAmount - discountAmount;
+
+  /* ------ auto-save biz info ------ */
+  useEffect(() => {
+    const bizInfo = {
+      businessName: data.businessName,
+      businessAddress: data.businessAddress,
+      businessEmail: data.businessEmail,
+      businessPhone: data.businessPhone,
+    };
+    const timer = setTimeout(() => {
+      try {
+        localStorage.setItem(LS_BIZ_KEY, JSON.stringify(bizInfo));
+        if (
+          data.businessName ||
+          data.businessEmail ||
+          data.businessPhone ||
+          data.businessAddress
+        ) {
+          setSavedIndicator(true);
+          setTimeout(() => setSavedIndicator(false), 2000);
+        }
+      } catch {
+        // localStorage may be unavailable
+      }
+    }, 800);
+    return () => clearTimeout(timer);
+  }, [
+    data.businessName,
+    data.businessAddress,
+    data.businessEmail,
+    data.businessPhone,
+  ]);
+
+  /* ------ logo upload ------ */
+  const handleLogoUpload = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        setLogo(ev.target?.result as string);
+      };
+      reader.readAsDataURL(file);
+    },
+    []
+  );
 
   /* ------ updaters ------ */
   const set = useCallback(
@@ -227,6 +707,7 @@ export default function InvoiceGeneratorPage() {
 
   const resetForm = useCallback(() => {
     setData(defaultData());
+    setLogo(null);
   }, []);
 
   /* ------ download PDF ------ */
@@ -238,10 +719,10 @@ export default function InvoiceGeneratorPage() {
     const invoiceNum = data.invoiceNumber || "invoice";
     html2pdf()
       .set({
-        margin: [10, 10, 10, 10],
+        margin: [12, 12, 12, 12],
         filename: `${invoiceNum}.pdf`,
         image: { type: "jpeg", quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true },
+        html2canvas: { scale: 2, useCORS: true, allowTaint: true, logging: false },
         jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
       })
       .from(element)
@@ -253,6 +734,16 @@ export default function InvoiceGeneratorPage() {
     "w-full rounded-lg border border-white/10 bg-[#12121c] px-3 py-2 text-sm text-gray-100 placeholder-gray-500 outline-none focus:border-[#7c6cf0]/60 focus:ring-1 focus:ring-[#7c6cf0]/40 transition";
   const labelCls = "block text-xs font-medium text-gray-400 mb-1";
 
+  const previewProps: PreviewProps = {
+    data,
+    logo,
+    currencySymbol,
+    subtotal,
+    taxAmount,
+    discountAmount,
+    total,
+  };
+
   /* ================================================================ */
   /*  RENDER                                                           */
   /* ================================================================ */
@@ -263,7 +754,7 @@ export default function InvoiceGeneratorPage() {
       <title>Free Invoice Generator &mdash; PrestoKit</title>
       <meta
         name="description"
-        content="Create professional invoices for free. No sign-up required. Fill in your details and download a PDF invoice instantly — 100% in your browser."
+        content="Create professional invoices for free. Upload your logo, choose a template, and download a PDF invoice instantly — 100% in your browser. No sign-up required."
       />
 
       {/* ============================== PRINT STYLES ============================== */}
@@ -301,10 +792,57 @@ export default function InvoiceGeneratorPage() {
             Invoice Generator
           </h1>
           <p className="mt-2 text-gray-400 max-w-xl">
-            Create professional invoices in seconds. Everything runs in your
-            browser — nothing is uploaded.
+            Create professional invoices in seconds. Upload your logo, pick a
+            template, and download a polished PDF — everything runs in your
+            browser.
           </p>
         </header>
+
+        {/* ---------- template + currency bar ---------- */}
+        <div className="mx-auto max-w-7xl px-4 pb-6">
+          <div className="rounded-2xl border border-white/5 bg-[#1a1a26] p-4 flex flex-wrap gap-6 items-center justify-between">
+            {/* Template selector */}
+            <div className="flex items-center gap-3 flex-wrap">
+              <span className="text-xs font-medium text-gray-400 shrink-0">Template:</span>
+              {TEMPLATES.map((t) => (
+                <button
+                  key={t.id}
+                  onClick={() => setTemplate(t.id)}
+                  className={`group relative rounded-xl px-4 py-2 text-sm font-medium transition-all ${
+                    template === t.id
+                      ? "bg-[#7c6cf0] text-white shadow-lg shadow-[#7c6cf0]/30"
+                      : "border border-white/10 text-gray-400 hover:border-[#7c6cf0]/40 hover:text-gray-200"
+                  }`}
+                >
+                  <span>{t.label}</span>
+                  <span
+                    className={`ml-1.5 text-[10px] hidden sm:inline ${
+                      template === t.id ? "text-white/70" : "text-gray-600 group-hover:text-gray-500"
+                    }`}
+                  >
+                    {t.desc}
+                  </span>
+                </button>
+              ))}
+            </div>
+
+            {/* Currency selector */}
+            <div className="flex items-center gap-3">
+              <span className="text-xs font-medium text-gray-400 shrink-0">Currency:</span>
+              <select
+                value={currency}
+                onChange={(e) => setCurrency(e.target.value)}
+                className="rounded-lg border border-white/10 bg-[#12121c] px-3 py-2 text-sm text-gray-100 outline-none focus:border-[#7c6cf0]/60 focus:ring-1 focus:ring-[#7c6cf0]/40 transition"
+              >
+                {CURRENCIES.map((c) => (
+                  <option key={c.code} value={c.code}>
+                    {c.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+        </div>
 
         {/* ---------- main grid ---------- */}
         <main className="mx-auto max-w-7xl px-4 pb-20 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
@@ -312,9 +850,74 @@ export default function InvoiceGeneratorPage() {
           <div className="space-y-6">
             {/* --- Your Business --- */}
             <section className="rounded-2xl border border-white/5 bg-[#1a1a26] p-5">
-              <h2 className="text-lg font-semibold mb-4 text-gray-200">
-                Your Business
-              </h2>
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-lg font-semibold text-gray-200">Your Business</h2>
+                {savedIndicator && (
+                  <span className="text-[11px] text-[#00e676] font-medium flex items-center gap-1 animate-pulse">
+                    <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    Info saved
+                  </span>
+                )}
+              </div>
+
+              {/* Logo Upload */}
+              <div className="mb-5">
+                <label className={labelCls}>Business Logo</label>
+                <div
+                  onClick={() => logoInputRef.current?.click()}
+                  className="flex items-center gap-4 rounded-xl border border-dashed border-white/15 bg-[#12121c] px-4 py-4 cursor-pointer hover:border-[#7c6cf0]/50 hover:bg-[#16162a] transition group"
+                >
+                  {logo ? (
+                    <>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={logo}
+                        alt="Logo preview"
+                        className="h-12 max-w-[120px] object-contain rounded"
+                      />
+                      <div className="flex-1">
+                        <p className="text-sm text-gray-200 font-medium">Logo uploaded</p>
+                        <p className="text-xs text-gray-500 mt-0.5">Click to replace</p>
+                      </div>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setLogo(null);
+                          if (logoInputRef.current) logoInputRef.current.value = "";
+                        }}
+                        className="text-gray-600 hover:text-red-400 transition p-1"
+                        title="Remove logo"
+                      >
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <div className="h-12 w-12 rounded-lg bg-[#7c6cf0]/10 flex items-center justify-center shrink-0 group-hover:bg-[#7c6cf0]/20 transition">
+                        <svg className="h-6 w-6 text-[#7c6cf0]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-300 font-medium">Upload your logo</p>
+                        <p className="text-xs text-gray-500 mt-0.5">JPG or PNG, shown in invoice & PDF</p>
+                      </div>
+                    </>
+                  )}
+                </div>
+                <input
+                  ref={logoInputRef}
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp"
+                  className="hidden"
+                  onChange={handleLogoUpload}
+                />
+              </div>
+
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
                   <label className={labelCls}>Business Name</label>
@@ -452,7 +1055,7 @@ export default function InvoiceGeneratorPage() {
               <div className="hidden sm:grid sm:grid-cols-[1fr_80px_100px_100px_40px] gap-2 text-xs font-medium text-gray-500 mb-2 px-1">
                 <span>Description</span>
                 <span>Qty</span>
-                <span>Rate ($)</span>
+                <span>Rate ({currencySymbol})</span>
                 <span>Total</span>
                 <span />
               </div>
@@ -498,7 +1101,7 @@ export default function InvoiceGeneratorPage() {
                     }
                   />
                   <div className="flex items-center justify-center text-sm text-gray-300 bg-[#12121c] rounded-lg border border-white/10 py-2">
-                    ${fmt(li.quantity * li.rate)}
+                    {currencySymbol}{fmt(li.quantity * li.rate)}
                   </div>
                   <button
                     onClick={() => removeLineItem(li.id)}
@@ -565,7 +1168,7 @@ export default function InvoiceGeneratorPage() {
                   />
                 </div>
                 <div>
-                  <label className={labelCls}>Discount ($)</label>
+                  <label className={labelCls}>Discount ({currencySymbol})</label>
                   <input
                     className={inputCls}
                     type="number"
@@ -622,182 +1225,18 @@ export default function InvoiceGeneratorPage() {
 
           {/* ======================== RIGHT: LIVE PREVIEW ======================== */}
           <div className="sticky top-6">
-            <h2 className="text-sm font-medium text-gray-400 mb-3">
-              Live Preview
-            </h2>
-            <div className="rounded-2xl border border-white/5 bg-white overflow-hidden shadow-2xl shadow-black/40">
-              {/* This inner div IS the preview and also the print target */}
+            <div className="flex items-center justify-between mb-3">
+              <h2 className="text-sm font-medium text-gray-400">Live Preview</h2>
+              <span className="text-xs text-gray-600 capitalize">{template} template</span>
+            </div>
+            <div className="rounded-2xl border border-white/5 overflow-hidden shadow-2xl shadow-black/40">
               <div
                 id="invoice-print-area"
                 ref={printRef}
-                className="p-8 sm:p-10 text-gray-900 text-sm leading-relaxed"
-                style={{ fontFamily: "Arial, Helvetica, sans-serif" }}
               >
-                {/* top row: title + invoice meta */}
-                <div className="flex justify-between items-start mb-8">
-                  <div>
-                    <h2
-                      className="text-2xl font-bold tracking-tight"
-                      style={{ color: "#7c6cf0" }}
-                    >
-                      INVOICE
-                    </h2>
-                    <p className="text-gray-500 mt-1 text-xs">
-                      {data.invoiceNumber}
-                    </p>
-                  </div>
-                  <div className="text-right text-xs text-gray-500 space-y-0.5">
-                    <p>
-                      <span className="font-medium text-gray-700">Date:</span>{" "}
-                      {formatDate(data.invoiceDate)}
-                    </p>
-                    <p>
-                      <span className="font-medium text-gray-700">Due:</span>{" "}
-                      {formatDate(data.dueDate)}
-                    </p>
-                    <p>
-                      <span className="font-medium text-gray-700">Terms:</span>{" "}
-                      {data.paymentTerms}
-                    </p>
-                  </div>
-                </div>
-
-                {/* from / to */}
-                <div className="grid grid-cols-2 gap-8 mb-8">
-                  <div>
-                    <p className="text-[10px] uppercase tracking-widest text-gray-400 mb-1">
-                      From
-                    </p>
-                    <p className="font-semibold text-gray-900">
-                      {data.businessName || "Your Business"}
-                    </p>
-                    {data.businessAddress && (
-                      <p className="text-gray-600 text-xs">
-                        {data.businessAddress}
-                      </p>
-                    )}
-                    {data.businessEmail && (
-                      <p className="text-gray-600 text-xs">
-                        {data.businessEmail}
-                      </p>
-                    )}
-                    {data.businessPhone && (
-                      <p className="text-gray-600 text-xs">
-                        {data.businessPhone}
-                      </p>
-                    )}
-                  </div>
-                  <div>
-                    <p className="text-[10px] uppercase tracking-widest text-gray-400 mb-1">
-                      Bill To
-                    </p>
-                    <p className="font-semibold text-gray-900">
-                      {data.clientName || "Client Name"}
-                    </p>
-                    {data.clientAddress && (
-                      <p className="text-gray-600 text-xs">
-                        {data.clientAddress}
-                      </p>
-                    )}
-                    {data.clientEmail && (
-                      <p className="text-gray-600 text-xs">
-                        {data.clientEmail}
-                      </p>
-                    )}
-                  </div>
-                </div>
-
-                {/* line items table */}
-                <table className="w-full text-xs mb-6">
-                  <thead>
-                    <tr
-                      className="text-left"
-                      style={{ borderBottom: "2px solid #7c6cf0" }}
-                    >
-                      <th className="pb-2 font-semibold text-gray-700">
-                        Description
-                      </th>
-                      <th className="pb-2 font-semibold text-gray-700 text-center w-16">
-                        Qty
-                      </th>
-                      <th className="pb-2 font-semibold text-gray-700 text-right w-24">
-                        Rate
-                      </th>
-                      <th className="pb-2 font-semibold text-gray-700 text-right w-24">
-                        Amount
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {data.lineItems.map((li, i) => (
-                      <tr
-                        key={li.id}
-                        className={
-                          i % 2 === 0 ? "bg-gray-50" : "bg-white"
-                        }
-                      >
-                        <td className="py-2 px-1 text-gray-800">
-                          {li.description || "—"}
-                        </td>
-                        <td className="py-2 text-center text-gray-600">
-                          {li.quantity}
-                        </td>
-                        <td className="py-2 text-right text-gray-600">
-                          ${fmt(li.rate)}
-                        </td>
-                        <td className="py-2 text-right font-medium text-gray-900">
-                          ${fmt(li.quantity * li.rate)}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-
-                {/* totals */}
-                <div className="flex justify-end mb-8">
-                  <div className="w-56 text-xs space-y-1">
-                    <div className="flex justify-between text-gray-600">
-                      <span>Subtotal</span>
-                      <span>${fmt(subtotal)}</span>
-                    </div>
-                    {data.taxRate > 0 && (
-                      <div className="flex justify-between text-gray-600">
-                        <span>Tax ({data.taxRate}%)</span>
-                        <span>${fmt(taxAmount)}</span>
-                      </div>
-                    )}
-                    {discountAmount > 0 && (
-                      <div className="flex justify-between text-gray-600">
-                        <span>Discount</span>
-                        <span>-${fmt(discountAmount)}</span>
-                      </div>
-                    )}
-                    <div
-                      className="flex justify-between font-bold text-base pt-2 mt-2"
-                      style={{ borderTop: "2px solid #7c6cf0" }}
-                    >
-                      <span>Total</span>
-                      <span>${fmt(total)}</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* notes */}
-                {data.notes && (
-                  <div className="border-t border-gray-200 pt-4">
-                    <p className="text-[10px] uppercase tracking-widest text-gray-400 mb-1">
-                      Notes / Terms
-                    </p>
-                    <p className="text-gray-600 text-xs whitespace-pre-wrap">
-                      {data.notes}
-                    </p>
-                  </div>
-                )}
-
-                {/* footer */}
-                <p className="text-center text-[10px] text-gray-300 mt-10">
-                  Generated with PrestoKit &mdash; free business tools
-                </p>
+                {template === "classic" && <ClassicPreview {...previewProps} />}
+                {template === "modern" && <ModernPreview {...previewProps} />}
+                {template === "minimal" && <MinimalPreview {...previewProps} />}
               </div>
             </div>
           </div>
@@ -830,7 +1269,7 @@ export default function InvoiceGeneratorPage() {
               {
                 step: "1",
                 title: "Enter Your Details",
-                desc: "Fill in your business information, client details, and invoice specifics like date and payment terms.",
+                desc: "Fill in your business info, upload your logo, and choose a template. Your business info is auto-saved for next time.",
               },
               {
                 step: "2",
@@ -840,7 +1279,7 @@ export default function InvoiceGeneratorPage() {
               {
                 step: "3",
                 title: "Download Your Invoice",
-                desc: "Preview your invoice in real-time, then click Download PDF to save it. Send it to your client via email or print it.",
+                desc: "Preview your invoice in real-time with live template switching, then click Download PDF to save it.",
               },
             ].map((item) => (
               <div

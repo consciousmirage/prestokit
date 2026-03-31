@@ -76,6 +76,28 @@ const CURRENCIES = [
 ];
 
 /* ------------------------------------------------------------------ */
+/*  Industry benchmarks                                               */
+/* ------------------------------------------------------------------ */
+
+type Industry = {
+  key: string;
+  label: string;
+  low: number;
+  high: number;
+  midLabel: string;
+};
+
+const INDUSTRIES: Industry[] = [
+  { key: "saas", label: "SaaS / Software", low: 70, high: 80, midLabel: "70–80%" },
+  { key: "ecommerce", label: "E-commerce / Retail", low: 20, high: 50, midLabel: "20–50%" },
+  { key: "restaurant", label: "Restaurant / Food", low: 3, high: 9, midLabel: "3–9%" },
+  { key: "consulting", label: "Consulting / Services", low: 25, high: 40, midLabel: "25–40%" },
+  { key: "manufacturing", label: "Manufacturing", low: 10, high: 35, midLabel: "10–35%" },
+  { key: "healthcare", label: "Healthcare", low: 15, high: 25, midLabel: "15–25%" },
+  { key: "construction", label: "Construction", low: 2, high: 10, midLabel: "2–10%" },
+];
+
+/* ------------------------------------------------------------------ */
 /*  Helpers                                                            */
 /* ------------------------------------------------------------------ */
 
@@ -116,7 +138,7 @@ function Breadcrumb() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Visual Bar                                                         */
+/*  Visual Bar (cost vs profit)                                        */
 /* ------------------------------------------------------------------ */
 
 function ProfitBar({ cost, profit }: { cost: number; profit: number }) {
@@ -145,6 +167,469 @@ function ProfitBar({ cost, profit }: { cost: number; profit: number }) {
           style={{ width: `${profitPct}%` }}
         />
       </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  SVG Donut Chart                                                    */
+/* ------------------------------------------------------------------ */
+
+function DonutChart({
+  marginPct,
+  currency,
+  cost,
+  profit,
+}: {
+  marginPct: number;
+  currency: string;
+  cost: number;
+  profit: number;
+}) {
+  const clampedMargin = Math.max(0, Math.min(100, marginPct));
+  const size = 160;
+  const strokeWidth = 22;
+  const radius = (size - strokeWidth) / 2;
+  const circumference = 2 * Math.PI * radius;
+  const profitDash = (clampedMargin / 100) * circumference;
+  const costDash = circumference - profitDash;
+
+  const isNeg = profit < 0;
+  const profitColor = isNeg ? "#ef4444" : "#7c6cf0";
+
+  return (
+    <div className="flex flex-col items-center gap-4">
+      <div className="relative" style={{ width: size, height: size }}>
+        <svg width={size} height={size} className="rotate-[-90deg]">
+          {/* Background track */}
+          <circle
+            cx={size / 2}
+            cy={size / 2}
+            r={radius}
+            fill="none"
+            stroke="#1e1e2e"
+            strokeWidth={strokeWidth}
+          />
+          {/* Cost arc */}
+          <circle
+            cx={size / 2}
+            cy={size / 2}
+            r={radius}
+            fill="none"
+            stroke="#2a2a3e"
+            strokeWidth={strokeWidth}
+            strokeDasharray={`${costDash} ${profitDash}`}
+            strokeDashoffset={-profitDash}
+            strokeLinecap="butt"
+            style={{ transition: "stroke-dasharray 0.4s ease" }}
+          />
+          {/* Profit arc */}
+          <circle
+            cx={size / 2}
+            cy={size / 2}
+            r={radius}
+            fill="none"
+            stroke={profitColor}
+            strokeWidth={strokeWidth}
+            strokeDasharray={`${profitDash} ${costDash}`}
+            strokeDashoffset={0}
+            strokeLinecap="butt"
+            style={{ transition: "stroke-dasharray 0.4s ease" }}
+          />
+        </svg>
+        {/* Center label */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center">
+          <span
+            className="text-2xl font-bold"
+            style={{ color: isNeg ? "#ef4444" : "#7c6cf0" }}
+          >
+            {fmt(marginPct, 1)}%
+          </span>
+          <span className="text-xs text-[#8888a0] mt-0.5">margin</span>
+        </div>
+      </div>
+      {/* Legend */}
+      <div className="flex gap-5 text-xs text-[#a0a0b8]">
+        <div className="flex items-center gap-1.5">
+          <span
+            className="inline-block w-3 h-3 rounded-sm"
+            style={{ background: profitColor }}
+          />
+          <span>Profit ({fmtCur(profit, currency)})</span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <span className="inline-block w-3 h-3 rounded-sm bg-[#2a2a3e]" />
+          <span>Cost ({fmtCur(cost, currency)})</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Industry Benchmark Panel                                           */
+/* ------------------------------------------------------------------ */
+
+function IndustryBenchmarkPanel({
+  marginPct,
+  selectedIndustry,
+  onSelectIndustry,
+}: {
+  marginPct: number;
+  selectedIndustry: string;
+  onSelectIndustry: (key: string) => void;
+}) {
+  const active = INDUSTRIES.find((i) => i.key === selectedIndustry) ?? INDUSTRIES[0];
+
+  function getBenchmarkStatus(margin: number, ind: Industry): "above" | "at" | "below" {
+    if (margin >= ind.high) return "above";
+    if (margin >= ind.low) return "at";
+    return "below";
+  }
+
+  const status = getBenchmarkStatus(marginPct, active);
+
+  const statusConfig = {
+    above: {
+      label: "Above average",
+      color: "#00e676",
+      bg: "bg-[#00e676]/10",
+      border: "border-[#00e676]/30",
+      dot: "bg-[#00e676]",
+    },
+    at: {
+      label: "Within range",
+      color: "#f5c542",
+      bg: "bg-[#f5c542]/10",
+      border: "border-[#f5c542]/30",
+      dot: "bg-[#f5c542]",
+    },
+    below: {
+      label: "Below average",
+      color: "#ef4444",
+      bg: "bg-red-500/10",
+      border: "border-red-500/30",
+      dot: "bg-red-500",
+    },
+  };
+
+  const cfg = statusConfig[status];
+
+  return (
+    <div className="mt-8 rounded-2xl border border-[#1e1e2e] bg-[#12121a]/60 backdrop-blur-sm p-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div>
+          <h3 className="text-white font-semibold text-base mb-0.5">
+            How does your margin compare?
+          </h3>
+          <p className="text-xs text-[#8888a0]">
+            Select your industry to benchmark your margin
+          </p>
+        </div>
+        <select
+          value={selectedIndustry}
+          onChange={(e) => onSelectIndustry(e.target.value)}
+          className="rounded-xl border border-[#1e1e2e] bg-[#0a0a0f] text-sm text-white px-4 py-2.5 focus:outline-none focus:border-[#7c6cf0] transition-colors min-w-[200px]"
+        >
+          {INDUSTRIES.map((ind) => (
+            <option key={ind.key} value={ind.key}>
+              {ind.label}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Status badge */}
+      <div
+        className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium mb-6 border ${cfg.bg} ${cfg.border}`}
+        style={{ color: cfg.color }}
+      >
+        <span className={`w-2 h-2 rounded-full ${cfg.dot}`} />
+        {cfg.label} for {active.label} ({active.midLabel})
+      </div>
+
+      {/* All industry bars */}
+      <div className="space-y-3">
+        {INDUSTRIES.map((ind) => {
+          const isActive = ind.key === selectedIndustry;
+          const userInRange = marginPct >= ind.low && marginPct <= ind.high;
+          const userAbove = marginPct > ind.high;
+          const barMax = 100;
+          const lowPct = (ind.low / barMax) * 100;
+          const highPct = (ind.high / barMax) * 100;
+          const userPct = Math.min((marginPct / barMax) * 100, 100);
+
+          return (
+            <button
+              key={ind.key}
+              onClick={() => onSelectIndustry(ind.key)}
+              className={`w-full text-left rounded-xl px-4 py-3 border transition-all ${
+                isActive
+                  ? "border-[#7c6cf0]/40 bg-[#7c6cf0]/8"
+                  : "border-transparent hover:border-[#1e1e2e] hover:bg-[#1a1a26]/40"
+              }`}
+            >
+              <div className="flex items-center justify-between mb-2">
+                <span
+                  className={`text-xs font-medium ${
+                    isActive ? "text-[#9d90f5]" : "text-[#a0a0b8]"
+                  }`}
+                >
+                  {ind.label}
+                </span>
+                <span className="text-xs text-[#8888a0]">{ind.midLabel}</span>
+              </div>
+              <div className="relative w-full h-2.5 rounded-full bg-[#0a0a0f]">
+                {/* Industry range fill */}
+                <div
+                  className="absolute top-0 h-full rounded-full bg-[#2a2a3e]"
+                  style={{ left: `${lowPct}%`, width: `${highPct - lowPct}%` }}
+                />
+                {/* User margin marker — only shown on active row */}
+                {isActive && marginPct > 0 && (
+                  <div
+                    className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full border-2 border-[#0a0a0f] transition-all duration-300"
+                    style={{
+                      left: `calc(${userPct}% - 6px)`,
+                      background: userInRange
+                        ? "#f5c542"
+                        : userAbove
+                        ? "#00e676"
+                        : "#ef4444",
+                    }}
+                  />
+                )}
+              </div>
+            </button>
+          );
+        })}
+      </div>
+      <p className="text-xs text-[#555570] mt-4">
+        Industry averages are approximate ranges. Actual margins vary by company size, region, and business model.
+      </p>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Suggested Prices Row                                               */
+/* ------------------------------------------------------------------ */
+
+function SuggestedPrices({
+  cost,
+  currency,
+}: {
+  cost: number;
+  currency: string;
+}) {
+  if (!cost || cost <= 0 || !isFinite(cost)) return null;
+
+  const targets = [20, 30, 40, 50, 60];
+
+  return (
+    <div className="mt-6 rounded-xl border border-[#1e1e2e] bg-[#0a0a0f] p-5">
+      <h4 className="text-sm font-semibold text-[#c0c0d0] mb-3">
+        Suggested Prices to Hit Target Margins
+      </h4>
+      <div className="grid grid-cols-5 gap-2">
+        {targets.map((t) => {
+          const price = cost / (1 - t / 100);
+          return (
+            <div key={t} className="text-center rounded-lg border border-[#1e1e2e] bg-[#12121a] p-3">
+              <div className="text-xs text-[#8888a0] mb-1">{t}% margin</div>
+              <div className="text-sm font-bold text-[#9d90f5]">
+                {fmtCur(price, currency)}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Scenario Comparison                                                */
+/* ------------------------------------------------------------------ */
+
+function ScenarioComparison({
+  cost,
+  currency,
+}: {
+  cost: number;
+  currency: string;
+}) {
+  const [prices, setPrices] = useState(["", "", ""]);
+
+  const scenarios = prices.map((p, i) => {
+    const sell = parseNum(p);
+    if (!sell || sell <= 0) return null;
+    const profit = sell - cost;
+    const marginPct = sell !== 0 ? (profit / sell) * 100 : 0;
+    const markupPct = cost !== 0 ? (profit / cost) * 100 : 0;
+    return { label: `Scenario ${i + 1}`, sell, profit, marginPct, markupPct };
+  });
+
+  const hasAny = scenarios.some((s) => s !== null);
+
+  function setPrice(i: number, val: string) {
+    setPrices((prev) => {
+      const next = [...prev];
+      next[i] = val;
+      return next;
+    });
+  }
+
+  return (
+    <div className="mt-10 rounded-2xl border border-[#1e1e2e] bg-[#12121a]/60 backdrop-blur-sm p-6 sm:p-8">
+      <div className="mb-6">
+        <h3 className="text-white font-semibold text-lg mb-1">
+          Compare Pricing Scenarios
+        </h3>
+        <p className="text-sm text-[#8888a0]">
+          Enter up to 3 selling prices to see margins side-by-side.{" "}
+          {(!cost || cost <= 0) && (
+            <span className="text-[#7c6cf0]">Enter a cost price above first.</span>
+          )}
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+        {[0, 1, 2].map((i) => (
+          <div key={i}>
+            <label className="block text-xs font-medium text-[#8888a0] uppercase tracking-wide mb-2">
+              Scenario {i + 1} — Selling Price
+            </label>
+            <div className="relative">
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[#8888a0] text-sm pointer-events-none">
+                {currency}
+              </span>
+              <input
+                type="number"
+                step="any"
+                value={prices[i]}
+                onChange={(e) => setPrice(i, e.target.value)}
+                placeholder="0.00"
+                disabled={!cost || cost <= 0}
+                className="w-full rounded-xl border border-[#1e1e2e] bg-[#0a0a0f] py-3 pl-9 pr-4 text-sm text-white placeholder-[#555] focus:outline-none focus:border-[#7c6cf0] transition-colors disabled:opacity-40"
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {hasAny && (
+        <div className="overflow-x-auto rounded-xl border border-[#1e1e2e]">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-[#1e1e2e] bg-[#0a0a0f]">
+                <th className="text-left px-4 py-3 text-xs font-semibold text-[#8888a0] uppercase tracking-wide">
+                  Metric
+                </th>
+                {scenarios.map((s, i) =>
+                  s ? (
+                    <th
+                      key={i}
+                      className="text-center px-4 py-3 text-xs font-semibold text-[#9d90f5] uppercase tracking-wide"
+                    >
+                      {s.label}
+                    </th>
+                  ) : null
+                )}
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                {
+                  label: "Selling Price",
+                  get: (s: NonNullable<(typeof scenarios)[0]>) =>
+                    fmtCur(s.sell, currency),
+                  color: () => "text-white",
+                },
+                {
+                  label: "Cost",
+                  get: () => fmtCur(cost, currency),
+                  color: () => "text-[#a0a0b8]",
+                },
+                {
+                  label: "Profit",
+                  get: (s: NonNullable<(typeof scenarios)[0]>) =>
+                    fmtCur(s.profit, currency),
+                  color: (s: NonNullable<(typeof scenarios)[0]>) =>
+                    s.profit >= 0 ? "text-[#00e676]" : "text-red-400",
+                },
+                {
+                  label: "Margin %",
+                  get: (s: NonNullable<(typeof scenarios)[0]>) =>
+                    `${fmt(s.marginPct)}%`,
+                  color: (s: NonNullable<(typeof scenarios)[0]>) =>
+                    s.marginPct >= 0 ? "text-[#00e676]" : "text-red-400",
+                },
+                {
+                  label: "Markup %",
+                  get: (s: NonNullable<(typeof scenarios)[0]>) =>
+                    `${fmt(s.markupPct)}%`,
+                  color: () => "text-[#9d90f5]",
+                },
+              ].map((row) => (
+                <tr
+                  key={row.label}
+                  className="border-b border-[#1e1e2e] last:border-0 hover:bg-[#1a1a26]/40 transition-colors"
+                >
+                  <td className="px-4 py-3 text-[#8888a0] font-medium">
+                    {row.label}
+                  </td>
+                  {scenarios.map((s, i) =>
+                    s ? (
+                      <td
+                        key={i}
+                        className={`px-4 py-3 text-center font-semibold ${row.color(s)}`}
+                      >
+                        {row.get(s)}
+                      </td>
+                    ) : null
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {/* Visual margin bars for comparison */}
+      {hasAny && (
+        <div className="mt-6 space-y-3">
+          <h4 className="text-xs font-semibold text-[#8888a0] uppercase tracking-wide">
+            Margin Visual Comparison
+          </h4>
+          {scenarios.map((s, i) =>
+            s ? (
+              <div key={i}>
+                <div className="flex items-center justify-between text-xs text-[#a0a0b8] mb-1">
+                  <span>{s.label}</span>
+                  <span
+                    className={
+                      s.marginPct >= 0 ? "text-[#00e676]" : "text-red-400"
+                    }
+                  >
+                    {fmt(s.marginPct)}%
+                  </span>
+                </div>
+                <div className="w-full h-3 rounded-full bg-[#0a0a0f] overflow-hidden">
+                  <div
+                    className={`h-full rounded-full transition-all duration-500 ${
+                      s.marginPct >= 0 ? "bg-[#7c6cf0]" : "bg-red-500"
+                    }`}
+                    style={{
+                      width: `${Math.max(0, Math.min(100, s.marginPct))}%`,
+                    }}
+                  />
+                </div>
+              </div>
+            ) : null
+          )}
+        </div>
+      )}
     </div>
   );
 }
@@ -238,6 +723,7 @@ function InputField({
 export default function ProfitMarginCalculatorPage() {
   const [mode, setMode] = useState<CalcMode>("margin");
   const [currency, setCurrency] = useState("$");
+  const [selectedIndustry, setSelectedIndustry] = useState("ecommerce");
 
   // Margin mode
   const [costPrice, setCostPrice] = useState("");
@@ -311,6 +797,51 @@ export default function ProfitMarginCalculatorPage() {
     const revenue = units * sp;
     return { units, revenue, contribution };
   }, [fixedCosts, variableCost, beSellingPrice]);
+
+  /* ---- Derived active result for shared features ---- */
+  const activeResult: { marginPct: number; cost: number; profit: number } | null = useMemo(() => {
+    if (mode === "margin" && marginResults && (costPrice || sellingPrice)) {
+      return {
+        marginPct: marginResults.marginPct,
+        cost: marginResults.cost,
+        profit: marginResults.profit,
+      };
+    }
+    if (mode === "markup" && markupResults && (markupCost || markupPct)) {
+      return {
+        marginPct: markupResults.marginPct,
+        cost: markupResults.cost,
+        profit: markupResults.profit,
+      };
+    }
+    if (mode === "target" && targetResults && (targetCost || targetMarginPct)) {
+      return {
+        marginPct: targetResults.marginPct,
+        cost: targetResults.cost,
+        profit: targetResults.profit,
+      };
+    }
+    return null;
+  }, [
+    mode,
+    marginResults,
+    markupResults,
+    targetResults,
+    costPrice,
+    sellingPrice,
+    markupCost,
+    markupPct,
+    targetCost,
+    targetMarginPct,
+  ]);
+
+  /* Cost for scenario comparison and suggested prices */
+  const activeCost = useMemo(() => {
+    if (mode === "margin") return parseNum(costPrice);
+    if (mode === "markup") return parseNum(markupCost);
+    if (mode === "target") return parseNum(targetCost);
+    return 0;
+  }, [mode, costPrice, markupCost, targetCost]);
 
   /* ---- Shared select classes ---- */
   const inputSectionClasses =
@@ -417,10 +948,13 @@ export default function ProfitMarginCalculatorPage() {
                 Swap Cost &amp; Selling Price
               </button>
 
+              {/* Suggested Prices */}
+              <SuggestedPrices cost={parseNum(costPrice)} currency={currency} />
+
               {/* Results */}
               {marginResults && (costPrice || sellingPrice) && (
                 <>
-                  <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
+                  <div className="mt-6 grid grid-cols-2 sm:grid-cols-5 gap-3">
                     <ResultCard
                       label="Revenue"
                       value={fmtCur(marginResults.revenue, currency)}
@@ -449,6 +983,16 @@ export default function ProfitMarginCalculatorPage() {
                     cost={marginResults.cost}
                     profit={marginResults.profit}
                   />
+
+                  {/* Donut chart */}
+                  <div className="mt-8 flex justify-center">
+                    <DonutChart
+                      marginPct={marginResults.marginPct}
+                      currency={currency}
+                      cost={marginResults.cost}
+                      profit={marginResults.profit}
+                    />
+                  </div>
                 </>
               )}
             </div>
@@ -474,9 +1018,12 @@ export default function ProfitMarginCalculatorPage() {
                 />
               </div>
 
+              {/* Suggested Prices */}
+              <SuggestedPrices cost={parseNum(markupCost)} currency={currency} />
+
               {markupResults && (markupCost || markupPct) && (
                 <>
-                  <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
+                  <div className="mt-6 grid grid-cols-2 sm:grid-cols-5 gap-3">
                     <ResultCard
                       label="Selling Price"
                       value={fmtCur(markupResults.revenue, currency)}
@@ -506,6 +1053,16 @@ export default function ProfitMarginCalculatorPage() {
                     cost={markupResults.cost}
                     profit={markupResults.profit}
                   />
+
+                  {/* Donut chart */}
+                  <div className="mt-8 flex justify-center">
+                    <DonutChart
+                      marginPct={markupResults.marginPct}
+                      currency={currency}
+                      cost={markupResults.cost}
+                      profit={markupResults.profit}
+                    />
+                  </div>
                 </>
               )}
             </div>
@@ -531,9 +1088,12 @@ export default function ProfitMarginCalculatorPage() {
                 />
               </div>
 
+              {/* Suggested Prices */}
+              <SuggestedPrices cost={parseNum(targetCost)} currency={currency} />
+
               {targetResults && (targetCost || targetMarginPct) && (
                 <>
-                  <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
+                  <div className="mt-6 grid grid-cols-2 sm:grid-cols-5 gap-3">
                     <ResultCard
                       label="Required Price"
                       value={fmtCur(targetResults.revenue, currency)}
@@ -563,6 +1123,16 @@ export default function ProfitMarginCalculatorPage() {
                     cost={targetResults.cost}
                     profit={targetResults.profit}
                   />
+
+                  {/* Donut chart */}
+                  <div className="mt-8 flex justify-center">
+                    <DonutChart
+                      marginPct={targetResults.marginPct}
+                      currency={currency}
+                      cost={targetResults.cost}
+                      profit={targetResults.profit}
+                    />
+                  </div>
                 </>
               )}
             </div>
@@ -630,6 +1200,20 @@ export default function ProfitMarginCalculatorPage() {
                   </div>
                 )}
             </div>
+          )}
+
+          {/* ==================== INDUSTRY BENCHMARK PANEL ==================== */}
+          {activeResult && (
+            <IndustryBenchmarkPanel
+              marginPct={activeResult.marginPct}
+              selectedIndustry={selectedIndustry}
+              onSelectIndustry={setSelectedIndustry}
+            />
+          )}
+
+          {/* ==================== SCENARIO COMPARISON ==================== */}
+          {mode !== "breakeven" && (
+            <ScenarioComparison cost={activeCost} currency={currency} />
           )}
 
           {/* Margin vs Markup Explainer */}

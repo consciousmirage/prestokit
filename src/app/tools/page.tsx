@@ -11,7 +11,6 @@ type Category =
   | "Business Documents"
   | "Generators"
   | "Calculators"
-  | "Developer Tools"
   | "Text Tools";
 
 interface Tool {
@@ -29,7 +28,6 @@ const categories: Category[] = [
   "Business Documents",
   "Generators",
   "Calculators",
-  "Developer Tools",
   "Text Tools",
 ];
 
@@ -38,7 +36,6 @@ const categoryColors: Record<Category, string> = {
   "Business Documents": "#448aff",
   Generators: "#00e676",
   Calculators: "#18ffff",
-  "Developer Tools": "#40c4ff",
   "Text Tools": "#64ffda",
 };
 
@@ -166,21 +163,6 @@ const tools: Tool[] = [
     tags: ["password", "security", "random", "strong"],
   },
   {
-    name: "Lorem Ipsum Generator",
-    icon: (
-      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M8 21h12a2 2 0 0 0 2-2v-2H10v2a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v3h4" />
-        <path d="M19 17V5a2 2 0 0 0-2-2H4" />
-      </svg>
-    ),
-    description:
-      "Generate placeholder text for your designs and mockups. Paragraphs, sentences, or words.",
-    href: "/tools/lorem-ipsum-generator",
-    color: "#ffab91",
-    category: "Generators",
-    tags: ["lorem ipsum", "placeholder", "dummy text", "design"],
-  },
-  {
     name: "Color Palette Generator",
     icon: (
       <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -246,38 +228,6 @@ const tools: Tool[] = [
     tags: ["percentage", "percent", "math", "calculate"],
   },
   {
-    name: "JSON Formatter",
-    icon: (
-      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M16 18l6-6-6-6" />
-        <path d="M8 6l-6 6 6 6" />
-      </svg>
-    ),
-    description:
-      "Format, validate, and minify JSON with syntax highlighting. Detect errors instantly.",
-    href: "/tools/json-formatter",
-    color: "#40c4ff",
-    category: "Developer Tools",
-    tags: ["json", "format", "validate", "minify", "developer"],
-  },
-  {
-    name: "Markdown to HTML",
-    icon: (
-      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M17 4H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Z" />
-        <path d="M12 8v8" />
-        <path d="M8 12h8" />
-        <path d="m9 16 3-3 3 3" />
-      </svg>
-    ),
-    description:
-      "Convert Markdown to clean HTML with live preview and instant copy. Supports GFM.",
-    href: "/tools/markdown-to-html",
-    color: "#69f0ae",
-    category: "Developer Tools",
-    tags: ["markdown", "html", "convert", "preview", "developer"],
-  },
-  {
     name: "Text Case Converter",
     icon: (
       <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -291,7 +241,7 @@ const tools: Tool[] = [
       "Convert text between UPPER, lower, Title, camelCase, snake_case, kebab-case, and more.",
     href: "/tools/text-case-converter",
     color: "#b388ff",
-    category: "Developer Tools",
+    category: "Text Tools",
     tags: ["text", "case", "convert", "camelCase", "snake_case"],
   },
   {
@@ -382,6 +332,22 @@ const tools: Tool[] = [
     tags: ["ROI", "return on investment", "ROAS", "marketing", "investment"],
   },
   {
+    name: "Break-Even Calculator",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 3v18h18" />
+        <path d="M3 17l5-5 4 4 5-6" />
+        <path d="M21 9h-5v5" />
+      </svg>
+    ),
+    description:
+      "Find your break-even point with fixed costs, variable costs, and pricing. Includes visual chart and sensitivity analysis.",
+    href: "/tools/break-even-calculator",
+    color: "#ff6e40",
+    category: "Calculators",
+    tags: ["break-even", "fixed costs", "variable costs", "pricing", "profitability"],
+  },
+  {
     name: "Tax Calculator",
     icon: (
       <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -434,24 +400,6 @@ const tools: Tool[] = [
     tags: ["paycheck", "take-home pay", "net pay", "withholding", "taxes"],
   },
   {
-    name: "Tip Calculator",
-    icon: (
-      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="8" cy="18" r="3" />
-        <circle cx="16" cy="18" r="3" />
-        <line x1="12" y1="2" x2="12" y2="9" />
-        <path d="M9 6h6" />
-        <circle cx="12" cy="12" r="2" />
-      </svg>
-    ),
-    description:
-      "Calculate tips and split bills between any number of people.",
-    href: "/tools/tip-calculator",
-    color: "#4db6ac",
-    category: "Calculators",
-    tags: ["tip", "gratuity", "bill split", "restaurant", "dining"],
-  },
-  {
     name: "Date Calculator",
     icon: (
       <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -468,39 +416,6 @@ const tools: Tool[] = [
     color: "#f06292",
     category: "Calculators",
     tags: ["date", "days between", "countdown", "calendar", "duration"],
-  },
-  {
-    name: "Mortgage Calculator",
-    icon: (
-      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-        <polyline points="9 22 9 12 15 12 15 22" />
-      </svg>
-    ),
-    description:
-      "Calculate monthly mortgage payments with amortization schedule.",
-    href: "/tools/mortgage-calculator",
-    color: "#aed581",
-    category: "Calculators",
-    tags: ["mortgage", "home loan", "amortization", "monthly payment", "housing"],
-  },
-  {
-    name: "BMI Calculator",
-    icon: (
-      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M16 2v4M8 2v4" />
-        <rect x="3" y="6" width="18" height="4" rx="1" />
-        <path d="M12 14v4" />
-        <path d="M8 22h8" />
-        <path d="M12 18h0" />
-      </svg>
-    ),
-    description:
-      "Calculate your Body Mass Index with Imperial or Metric units.",
-    href: "/tools/bmi-calculator",
-    color: "#4fc3f7",
-    category: "Calculators",
-    tags: ["BMI", "body mass index", "health", "weight", "fitness"],
   },
   {
     name: "Salary Calculator",
@@ -556,60 +471,6 @@ const tools: Tool[] = [
     tags: ["discount", "sale", "percent off", "savings", "coupon"],
   },
   {
-    name: "Age Calculator",
-    icon: (
-      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M8 2v2" />
-        <path d="M12 2v2" />
-        <path d="M16 2v2" />
-        <rect x="4" y="6" width="16" height="16" rx="3" />
-        <path d="M8 14h.01" />
-        <path d="M12 14h.01" />
-        <path d="M16 14h.01" />
-        <path d="M8 10h8" />
-      </svg>
-    ),
-    description:
-      "Calculate your exact age in years, months, days, hours. Birthday countdown included.",
-    href: "/tools/age-calculator",
-    color: "#f48fb1",
-    category: "Calculators",
-    tags: ["age", "birthday", "countdown", "years old", "date of birth"],
-  },
-  {
-    name: "GPA Calculator",
-    icon: (
-      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
-        <path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5" />
-      </svg>
-    ),
-    description:
-      "Calculate weighted and unweighted GPA with multiple grading scales.",
-    href: "/tools/gpa-calculator",
-    color: "#9575cd",
-    category: "Calculators",
-    tags: ["GPA", "grade point average", "college", "school", "grades"],
-  },
-  {
-    name: "Fuel Cost Calculator",
-    icon: (
-      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M3 22V6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16" />
-        <path d="M15 10h2a2 2 0 0 1 2 2v3a2 2 0 0 0 2 2v0" />
-        <path d="M21 7l-2 2" />
-        <rect x="5" y="8" width="8" height="5" rx="1" />
-        <line x1="3" y1="22" x2="15" y2="22" />
-      </svg>
-    ),
-    description:
-      "Calculate gas cost for any trip by distance, MPG, and fuel price.",
-    href: "/tools/fuel-cost-calculator",
-    color: "#66bb6a",
-    category: "Calculators",
-    tags: ["fuel", "gas", "trip cost", "MPG", "mileage"],
-  },
-  {
     name: "Sales Tax Calculator",
     icon: (
       <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -641,25 +502,6 @@ const tools: Tool[] = [
     color: "#ff9800",
     category: "Calculators",
     tags: ["self-employment", "freelance tax", "1099", "quarterly tax", "SE tax"],
-  },
-  {
-    name: "Random Number Generator",
-    icon: (
-      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="2" y="2" width="20" height="20" rx="3" />
-        <circle cx="7.5" cy="7.5" r="1" />
-        <circle cx="16.5" cy="7.5" r="1" />
-        <circle cx="7.5" cy="16.5" r="1" />
-        <circle cx="16.5" cy="16.5" r="1" />
-        <circle cx="12" cy="12" r="1" />
-      </svg>
-    ),
-    description:
-      "Generate random numbers, roll dice, flip coins, and pick from lists.",
-    href: "/tools/random-number-generator",
-    color: "#ce93d8",
-    category: "Generators",
-    tags: ["random", "dice", "coin flip", "number", "lottery"],
   },
   {
     name: "Business Card Generator",
@@ -745,37 +587,6 @@ const tools: Tool[] = [
     tags: ["hourly to salary", "wage converter", "pay rate", "annual salary", "income"],
   },
   {
-    name: "Regex Tester",
-    icon: (
-      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="11" cy="11" r="8" />
-        <line x1="21" y1="21" x2="16.65" y2="16.65" />
-      </svg>
-    ),
-    description:
-      "Test regular expressions with live matching, highlighting, and capture groups.",
-    href: "/tools/regex-tester",
-    color: "#ff7043",
-    category: "Developer Tools",
-    tags: ["regex", "regular expression", "pattern matching", "developer", "testing"],
-  },
-  {
-    name: "Screen Resolution Checker",
-    icon: (
-      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="2" y="3" width="20" height="14" rx="2" />
-        <line x1="8" y1="21" x2="16" y2="21" />
-        <line x1="12" y1="17" x2="12" y2="21" />
-      </svg>
-    ),
-    description:
-      "Check your screen resolution, DPI, aspect ratio, and device pixel ratio.",
-    href: "/tools/screen-resolution-checker",
-    color: "#29b6f6",
-    category: "Developer Tools",
-    tags: ["screen resolution", "DPI", "aspect ratio", "pixel ratio", "display"],
-  },
-  {
     name: "Character Counter",
     icon: (
       <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -807,23 +618,6 @@ const tools: Tool[] = [
     color: "#ff7043",
     category: "Generators",
     tags: ["image compress", "optimize", "reduce size", "JPEG", "PNG"],
-  },
-  {
-    name: "Unit Converter",
-    icon: (
-      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <polyline points="17 1 21 5 17 9" />
-        <path d="M3 5h18" />
-        <polyline points="7 15 3 19 7 23" />
-        <path d="M21 19H3" />
-      </svg>
-    ),
-    description:
-      "Convert between units of length, weight, temperature, volume, and more.",
-    href: "/tools/unit-converter",
-    color: "#7986cb",
-    category: "Calculators",
-    tags: ["unit converter", "length", "weight", "temperature", "volume"],
   },
 ];
 
