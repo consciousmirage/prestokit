@@ -506,7 +506,7 @@ export default function HowToNegotiateSalaryPage() {
               </div>
 
               <div>
-                <h3 className="text-base font-semibold name="text-white mb-2">What if I have no competing offer?</h3>
+                <h3 className="text-base font-semibold text-white mb-2">What if I have no competing offer?</h3>
                 <p className="text-sm text-muted-light leading-relaxed">
                   You do not need a competing offer to negotiate. Market data is sufficient justification. &ldquo;Based on research into market rates for this role&rdquo; is a legitimate and common anchor for salary negotiations. A competing offer increases your leverage, but it is not required.
                 </p>
