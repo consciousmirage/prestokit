@@ -619,6 +619,63 @@ const tools: Tool[] = [
     category: "Generators",
     tags: ["image compress", "optimize", "reduce size", "JPEG", "PNG"],
   },
+  {
+    name: "Real Estate Commission Calculator",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+        <polyline points="9 22 9 12 15 12 15 22" />
+      </svg>
+    ),
+    description: "Calculate real estate agent commission and seller net proceeds instantly. See listing agent vs buyer's agent split at any rate.",
+    href: "/tools/real-estate-commission-calculator",
+    color: "#f59e0b",
+    category: "Calculators",
+    tags: ["real estate commission", "realtor commission", "agent fee", "home sale", "seller net"],
+  },
+  {
+    name: "Closing Cost Calculator",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="2" />
+        <path d="M3 9h18" />
+        <path d="M9 21V9" />
+      </svg>
+    ),
+    description: "Estimate buyer and seller closing costs by state. Includes title fees, transfer tax, escrow, loan origination, and more.",
+    href: "/tools/closing-cost-calculator",
+    color: "#f59e0b",
+    category: "Calculators",
+    tags: ["closing costs", "buyer closing costs", "seller closing costs", "title fees", "mortgage fees"],
+  },
+  {
+    name: "Home Sale Net Proceeds Calculator",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <line x1="12" y1="1" x2="12" y2="23" />
+        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+      </svg>
+    ),
+    description: "Calculate exactly how much you'll walk away with after selling your home — after mortgage payoff, commissions, and closing costs.",
+    href: "/tools/home-sale-net-proceeds-calculator",
+    color: "#f59e0b",
+    category: "Calculators",
+    tags: ["home sale proceeds", "seller net proceeds", "home sale profit", "what will I net", "after selling house"],
+  },
+  {
+    name: "Cap Rate Calculator",
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 3v18h18" />
+        <path d="M18 12l-5-5-4 4-3-3" />
+      </svg>
+    ),
+    description: "Calculate cap rate, gross yield, NOI, and cash-on-cash return for rental properties. Includes investment benchmarks.",
+    href: "/tools/cap-rate-calculator",
+    color: "#f59e0b",
+    category: "Calculators",
+    tags: ["cap rate", "capitalization rate", "NOI", "rental property", "real estate investment", "cash on cash"],
+  },
 ];
 
 /* ──────────────────── JSON-LD ──────────────────── */
